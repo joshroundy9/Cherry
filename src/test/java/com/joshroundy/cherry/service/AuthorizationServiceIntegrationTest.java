@@ -14,7 +14,7 @@ class AuthorizationServiceIntegrationTest {
     @Autowired AuthorizationService subject;
 
     @Test
-    void registerUser() {
+    void registerAndLoginUser() {
         var username = "joshroundy";
         var password = "password";
         var email = "joshroundy@gmail.com";
@@ -29,7 +29,9 @@ class AuthorizationServiceIntegrationTest {
                 .weight(weight)
                 .dateOfBirth(DOB)
                 .build();
-        var UserEntity = subject.registerUser(registrationDTO);
-        assertThat(UserEntity).isEqualToIgnoringGivenFields(UserEntity, "password","passwordHash", "userID");
+        var userEntity = subject.registerUser(registrationDTO);
+        assertThat(userEntity).isEqualToIgnoringGivenFields(userEntity, "password","passwordHash", "userID");
+        var loginResponse = subject.loginUser(username,password);
+        assertThat(loginResponse.getUser()).isEqualToIgnoringGivenFields(userEntity, "dateOfBirth");
     }
 }

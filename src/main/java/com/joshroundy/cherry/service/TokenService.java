@@ -2,6 +2,7 @@ package com.joshroundy.cherry.service;
 import java.time.Instant;
 import java.util.stream.Collectors;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -11,13 +12,12 @@ import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.stereotype.Service;
 
+@AllArgsConstructor
 @Service
 public class TokenService {
 
-    @Autowired
     private JwtEncoder jwtEncoder;
 
-    @Autowired
     private JwtDecoder jwtDecoder;
 
     public String generateJwt(Authentication auth){

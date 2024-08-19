@@ -28,6 +28,7 @@ public class AuthorizationService {
                 .username(registrationDTO.getUsername())
                 .passwordHash(passwordEncoder.encode(registrationDTO.getPassword()))
                 .dateOfBirth(registrationDTO.getDateOfBirth())
+                .email(registrationDTO.getEmail())
                 .height(registrationDTO.getHeight())
                 .weight(registrationDTO.getWeight()).build();
         return userRepository.save(userEntity);
