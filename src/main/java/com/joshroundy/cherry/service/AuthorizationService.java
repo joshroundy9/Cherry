@@ -4,6 +4,7 @@ import com.joshroundy.cherry.dataobject.entity.UserEntity;
 import com.joshroundy.cherry.dataobject.auth.LoginResponseDTO;
 import com.joshroundy.cherry.dataobject.auth.RegistrationDTO;
 import com.joshroundy.cherry.repository.UserRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,26 +16,20 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
+@AllArgsConstructor
 public class AuthorizationService {
-    @Autowired
     private UserRepository userRepository;
-
-    @Autowired
     private PasswordEncoder passwordEncoder;
-
-    @Autowired
     private AuthenticationManager authenticationManager;
-
-    @Autowired
     private TokenService tokenService;
 
     public UserEntity registerUser(RegistrationDTO registrationDTO){
         var userEntity = UserEntity.builder()
-                .Username(registrationDTO.getUsername())
-                .PasswordHash(passwordEncoder.encode(registrationDTO.getPassword()))
-                .DateOfBirth(registrationDTO.getDateOfBirth())
-                .Height(registrationDTO.getHeight())
-                .Weight(registrationDTO.getWeight()).build();
+                .username(registrationDTO.getUsername())
+                .passwordHash(passwordEncoder.encode(registrationDTO.getPassword()))
+                .dateOfBirth(registrationDTO.getDateOfBirth())
+                .height(registrationDTO.getHeight())
+                .weight(registrationDTO.getWeight()).build();
         return userRepository.save(userEntity);
     }
 
