@@ -1,21 +1,23 @@
 package com.joshroundy.cherry.dataobject.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 
 @Entity
+@Table(name = "date")
 @Getter
 @Setter
-@Table(name = "date")
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class DateEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer DateID;
+    Integer dateID;
     @Column(nullable = false)
-    Integer UserID;
-    Date Date;
-    Double DailyWeight;
+    Integer userID;
+    Date date;
+    Double dailyWeight;
 }

@@ -10,9 +10,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 public class MealItemDTO {
-    Integer MealID;
-    Integer DateID;
-    Integer UserID;
-    String ItemName;
-    String ItemCalories;
+    Integer mealID;
+    Integer dateID;
+    Integer userID;
+    String itemName;
+    Integer itemCalories;
 }
