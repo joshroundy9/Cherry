@@ -47,12 +47,12 @@ public class DataController {
         return dataService.updateDateWeight(dateID, weight);
     }
     @PostMapping("/meal")
-    public MealEntity createMeal(@RequestBody MealDTO body) {
+    public MealEntity updateMealTime(@RequestBody MealDTO body) {
         return dataService.createMeal(body);
     }
     @PostMapping("/meal/update-time")
-    public MealEntity createMeal(@RequestParam(value="mealid", required=true) Integer mealID,
-            @RequestParam(value="datetime", required=true) ZonedDateTime dateTime) {
+    public MealEntity updateMealTime(@RequestParam(value="mealid", required=true) Integer mealID,
+                                     @RequestParam(value="datetime", required=true) ZonedDateTime dateTime) {
         return dataService.updateMealTime(mealID, dateTime);
     }
     @DeleteMapping("/meal/delete")
