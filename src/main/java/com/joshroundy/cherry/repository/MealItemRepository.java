@@ -10,5 +10,5 @@ import java.util.Optional;
 
 @Repository
 public interface MealItemRepository extends JpaRepository<MealItemEntity, Integer> {
-    //Optional<List<MealItemEntity>> findByMealID(Integer mealID);
+    List<MealItemEntity> findByMealID(Integer mealID);
 }

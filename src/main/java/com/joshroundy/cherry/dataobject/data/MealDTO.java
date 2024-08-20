@@ -12,7 +12,7 @@ import java.time.ZonedDateTime;
 @AllArgsConstructor
 @Builder
 public class MealDTO {
-    Integer UserID;
-    Integer DateID;
-    ZonedDateTime DateTime;
+    Integer userID;
+    Integer dateID;
+    ZonedDateTime dateTime;
 }

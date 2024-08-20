@@ -12,7 +12,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 public class DateDTO {
-    Integer UserID;
-    Date Date;
-    Double DailyWeight;
+    Integer userID;
+    Date date;
+    Double dailyWeight;
 }

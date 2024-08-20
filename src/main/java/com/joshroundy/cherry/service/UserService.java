@@ -1,5 +1,6 @@
 package com.joshroundy.cherry.service;
 
+import com.joshroundy.cherry.dataobject.entity.UserEntity;
 import com.joshroundy.cherry.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ public class UserService implements UserDetailsService {
     private UserRepository userRepository;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Username is not valid"));
+    }
+    public UserEntity loadUserEntityByUsername(String username) {
         return userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Username is not valid"));
     }
 }
