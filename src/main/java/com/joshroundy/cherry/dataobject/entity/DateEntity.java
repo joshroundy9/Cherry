@@ -3,7 +3,7 @@ package com.joshroundy.cherry.dataobject.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Date;
+import java.sql.Date;
 
 @Entity
 @Table(name = "date")

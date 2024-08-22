@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.ZonedDateTime;
+import java.sql.Time;
 
 @Getter
 @Setter
@@ -14,5 +14,5 @@ import java.time.ZonedDateTime;
 public class MealDTO {
     Integer userID;
     Integer dateID;
-    ZonedDateTime dateTime;
+    Time time;
 }

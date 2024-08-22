@@ -3,7 +3,7 @@ package com.joshroundy.cherry.dataobject.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.ZonedDateTime;
+import java.sql.Time;
 
 @Entity
 @Getter
@@ -18,5 +18,5 @@ public class MealEntity {
     Integer mealID;
     Integer userID;
     Integer dateID;
-    ZonedDateTime dateTime;
+    Time time;
 }

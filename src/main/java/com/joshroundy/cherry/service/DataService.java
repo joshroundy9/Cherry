@@ -12,6 +12,8 @@ import com.joshroundy.cherry.repository.MealRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.sql.Time;
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -21,7 +23,6 @@ public class DataService {
     private final MealRepository mealRepository;
     private final MealItemRepository mealItemRepository;
     private final DateRepository dateRepository;
-
     /*Date methods*/
     public List<DateEntity> findDatesFromUserID(Integer userID) {
         return dateRepository.findByUserID(userID);
@@ -40,6 +41,11 @@ public class DataService {
         dateEntity.setDailyWeight(weight);
         return dateRepository.save(dateEntity);
     }
+    public DateEntity findDateByUserIDAndDate(Integer userID, Date date) {
+        return findDatesFromUserID(userID).stream().filter(
+                dateEntity -> date.equals(dateEntity.getDate())
+        ).findFirst().orElse(null);
+    }
     /*Meal methods*/
     public List<MealEntity> findMealsFromDateID(Integer dateID) {
         return mealRepository.findByDateID(dateID);
@@ -48,12 +54,12 @@ public class DataService {
         return mealRepository.save(MealEntity.builder()
                         .userID(mealDTO.getUserID())
                         .dateID(mealDTO.getDateID())
-                        .dateTime(mealDTO.getDateTime())
+                        .time(mealDTO.getTime())
                 .build());
     }
-    public MealEntity updateMealTime(Integer mealID, ZonedDateTime dateTime) {
+    public MealEntity updateMealTime(Integer mealID, Time time) {
         var mealEntity = mealRepository.findById(mealID).get();
-        mealEntity.setDateTime(dateTime);
+        mealEntity.setTime(time);
         return mealRepository.save(mealEntity);
     }
     public void deleteMeal(Integer mealID) {
