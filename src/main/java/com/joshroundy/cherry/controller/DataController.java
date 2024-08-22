@@ -10,6 +10,7 @@ import com.joshroundy.cherry.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -27,6 +28,11 @@ public class DataController {
     @GetMapping("/date")
     public List<DateEntity> getDates(@RequestParam(value="userid", required=true) Integer userID) {
         return dataService.findDatesFromUserID(userID);
+    }
+    @GetMapping("/date/from-user-and-date")
+    public DateEntity getDateFromUserIDAndDate(@RequestParam(value="userid", required=true) Integer userID,
+                                                     @RequestParam(value="date", required=true) Date date) {
+        return dataService.findDateByUserIDAndDate(userID, date);
     }
     @GetMapping("/meal")
     public List<MealEntity> getMeals(@RequestParam(value="dateid", required=true) Integer dateID) {

@@ -12,8 +12,10 @@ import com.joshroundy.cherry.repository.MealRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -21,7 +23,6 @@ public class DataService {
     private final MealRepository mealRepository;
     private final MealItemRepository mealItemRepository;
     private final DateRepository dateRepository;
-
     /*Date methods*/
     public List<DateEntity> findDatesFromUserID(Integer userID) {
         return dateRepository.findByUserID(userID);
@@ -39,6 +40,11 @@ public class DataService {
         var dateEntity = dateRepository.findById(dateID).get();
         dateEntity.setDailyWeight(weight);
         return dateRepository.save(dateEntity);
+    }
+    public DateEntity findDateByUserIDAndDate(Integer userID, Date date) {
+        return findDatesFromUserID(userID).stream().filter(
+                dateEntity -> date.equals(dateEntity.getDate())
+        ).findFirst().orElse(null);
     }
     /*Meal methods*/
     public List<MealEntity> findMealsFromDateID(Integer dateID) {

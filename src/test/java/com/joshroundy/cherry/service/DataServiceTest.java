@@ -79,6 +79,15 @@ public class DataServiceTest {
         assertThat(actual.size()).isEqualTo(1);
     }
     @Test
+    void findDateByUserIDAndDate() {
+        when(dateRepository.findByUserID(USER_ID))
+                .thenReturn(List.of(dateEntity, DateEntity.builder()
+                        .date(Date.valueOf("2005-04-21")).build()));
+        var actual = subject.findDateByUserIDAndDate(USER_ID, DATE);
+        assertThat(actual).isNotNull();
+        assertThat(actual).isEqualTo(dateEntity);
+    }
+    @Test
     void createDate() {
         var dateDTO = DateDTO.builder()
                 .date(DATE)
