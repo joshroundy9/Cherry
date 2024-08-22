@@ -16,6 +16,7 @@ import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -36,7 +37,7 @@ public class DataServiceTest {
     public static final String MEAL_ITEM_NAME = "Cheeseburger";
     public static final Integer MEAL_ITEM_CALORIES = 550;
     public static final Date DATE = Date.valueOf("2024-08-20");
-    public static final ZonedDateTime DATE_TIME = ZonedDateTime.of(LocalDateTime.now(), ZoneId.of("GMT"));
+    public static final Time TIME = Time.valueOf("09:30");
     private DateEntity dateEntity;
     private MealEntity mealEntity;
     private MealItemEntity mealItemEntity;
@@ -60,7 +61,7 @@ public class DataServiceTest {
                 .userID(USER_ID)
                 .mealID(MEAL_ID)
                 .dateID(DATE_ID)
-                .dateTime(DATE_TIME)
+                .time(TIME)
                 .build();
         mealItemEntity = MealItemEntity.builder()
                 .userID(USER_ID)
@@ -122,7 +123,7 @@ public class DataServiceTest {
         var mealDTO = MealDTO.builder()
                 .userID(mealEntity.getUserID())
                 .dateID(mealEntity.getDateID())
-                .dateTime(mealEntity.getDateTime())
+                .time(mealEntity.getTime())
                 .build();
         when(mealRepository.save(any(MealEntity.class)))
                 .then(functionCall ->
@@ -138,13 +139,13 @@ public class DataServiceTest {
     }
     @Test
     void updateMealTime() {
-        var newTime = DATE_TIME.plusHours(4);
+        var newTime = Time.valueOf("10:30");
         when(mealRepository.findById(any())).thenReturn(Optional.ofNullable(mealEntity));
         when(mealRepository.save(any(MealEntity.class)))
                 .thenAnswer(functionCall -> functionCall.getArguments()[0]);
         var actual = subject.updateMealTime(DATE_ID, newTime);
         assertThat(actual).isNotNull();
-        assertThat(actual.getDateTime()).isEqualTo(newTime);
+        assertThat(actual.getTime()).isEqualTo(newTime);
     }
     @Test
     void findMealItemsFromMealID() {

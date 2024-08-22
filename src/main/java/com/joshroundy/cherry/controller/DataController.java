@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -53,13 +54,13 @@ public class DataController {
         return dataService.updateDateWeight(dateID, weight);
     }
     @PostMapping("/meal")
-    public MealEntity updateMealTime(@RequestBody MealDTO body) {
+    public MealEntity createMeal(@RequestBody MealDTO body) {
         return dataService.createMeal(body);
     }
     @PostMapping("/meal/update-time")
     public MealEntity updateMealTime(@RequestParam(value="mealid", required=true) Integer mealID,
-                                     @RequestParam(value="datetime", required=true) ZonedDateTime dateTime) {
-        return dataService.updateMealTime(mealID, dateTime);
+                                     @RequestParam(value="time", required=true) Time time) {
+        return dataService.updateMealTime(mealID, time);
     }
     @DeleteMapping("/meal/delete")
     public void deleteMeal(@RequestParam(value="mealid", required=true) Integer mealID) {

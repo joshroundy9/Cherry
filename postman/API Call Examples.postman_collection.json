@@ -1,0 +1,2095 @@
+{
+	"info": {
+		"_postman_id": "8befa531-b7a3-4987-a9c9-fc6829f50ae9",
+		"name": "API Call Examples",
+		"description": "Here are mock calls and examples for every endpoint in the authorization and data APIs within Cherry's Spring Boot backend.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31073360"
+	},
+	"item": [
+		{
+			"name": "Authorization",
+			"item": [
+				{
+					"name": "RegisterUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"joshroundy10\",\r\n    \"email\":\"joshroundy9@gmail.com\",\r\n    \"password\":\"password\",\r\n    \"dateOfBirth\":\"2003-03-28\",\r\n    \"height\":\"70\",\r\n    \"weight\":\"178.4\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "RegisterUser",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\":\"joshroundy10\",\r\n    \"email\":\"joshroundy9@gmail.com\",\r\n    \"password\":\"password\",\r\n    \"dateOfBirth\":\"2003-03-28\",\r\n    \"height\":\"70\",\r\n    \"weight\":\"178.4\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/auth/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 22 Aug 2024 02:40:51 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"userID\": 2,\n    \"username\": \"joshroundy10\",\n    \"email\": \"joshroundy9@gmail.com\",\n    \"passwordHash\": \"$2a$10$Nm/zt6g/68GYRmvoRx7e4OLvgDfx2KK5Yyw.22EkOAxsYJdw6MS5u\",\n    \"dateOfBirth\": \"2003-03-28T00:00:00.000+00:00\",\n    \"height\": 70,\n    \"weight\": 178.4,\n    \"password\": \"$2a$10$Nm/zt6g/68GYRmvoRx7e4OLvgDfx2KK5Yyw.22EkOAxsYJdw6MS5u\",\n    \"authorities\": [],\n    \"enabled\": true,\n    \"accountNonExpired\": true,\n    \"credentialsNonExpired\": true,\n    \"accountNonLocked\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "LoginUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"joshroundy9\",\r\n    \"password\":\"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "LoginExample",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\":\"joshroundy9\",\r\n    \"password\":\"password\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 22 Aug 2024 02:40:04 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"user\": {\n        \"userID\": 1,\n        \"username\": \"joshroundy9\",\n        \"email\": \"joshroundy9@gmail.com\",\n        \"passwordHash\": \"$2a$10$mwJAcIXMnQatfzsYc.oEa.FYcoUO874Ms7wSakFn2sCue/qdMtzsq\",\n        \"dateOfBirth\": \"2003-03-28T00:00:00.000+00:00\",\n        \"height\": 70,\n        \"weight\": 178.4,\n        \"password\": \"$2a$10$mwJAcIXMnQatfzsYc.oEa.FYcoUO874Ms7wSakFn2sCue/qdMtzsq\",\n        \"authorities\": [],\n        \"enabled\": true,\n        \"accountNonExpired\": true,\n        \"credentialsNonExpired\": true,\n        \"accountNonLocked\": true\n    },\n    \"jwt\": \"eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiam9zaHJvdW5keTkiLCJpYXQiOjE3MjQyOTQ0MDQsInJvbGVzIjoiIn0.YTlQpX9AmlltaOelIv7sFPSKwLPKaCfqx6DW_fcio0nmJihZYD0eIix3uU5BLtdeHLtIoEa9RYLJh_oPH8xKOCftP764BbCkPUgGEX9IwtQRmw0AtjPuqjSaEcIHESAYzPJ0mOLzxxuDUrEhntr31AvP7g5-loz3HlpWXd8SoZcGe1Ugn8V2DnEKeUfImL8LPk_S342GtndPvxTau8NsvAdrjDJbAPKcI1UVOEJnCLKh-iNQtPgwP3H-mBoqrLSfp1mmRcfj8JvdWUxsYOvMC1eXlQui-QonnKEVVBWyptCXXU9ixU8n--2Z-exZ73uSjaIr_DB4-y2O2SgSxEnBrA\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "data",
+			"item": [
+				{
+					"name": "CreateDate",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiam9zaHJvdW5keTkiLCJpYXQiOjE3MjQyOTQ0MDQsInJvbGVzIjoiIn0.YTlQpX9AmlltaOelIv7sFPSKwLPKaCfqx6DW_fcio0nmJihZYD0eIix3uU5BLtdeHLtIoEa9RYLJh_oPH8xKOCftP764BbCkPUgGEX9IwtQRmw0AtjPuqjSaEcIHESAYzPJ0mOLzxxuDUrEhntr31AvP7g5-loz3HlpWXd8SoZcGe1Ugn8V2DnEKeUfImL8LPk_S342GtndPvxTau8NsvAdrjDJbAPKcI1UVOEJnCLKh-iNQtPgwP3H-mBoqrLSfp1mmRcfj8JvdWUxsYOvMC1eXlQui-QonnKEVVBWyptCXXU9ixU8n--2Z-exZ73uSjaIr_DB4-y2O2SgSxEnBrA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userID\":\"2\",\r\n    \"date\":\"2024-08-21\",\r\n    \"dailyWeight\":\"175.7\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/data/date",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"data",
+								"date"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "CreateDate",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userID\":\"1\",\r\n    \"date\":\"2024-08-21\",\r\n    \"dailyWeight\":\"174.9\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/data/date",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"data",
+										"date"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 22 Aug 2024 00:10:07 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"dateID\": 1,\n    \"userID\": 1,\n    \"date\": \"2024-08-21T00:00:00.000+00:00\",\n    \"dailyWeight\": 174.9\n}"
+						}
+					]
+				},
+				{
+					"name": "CreateMeal",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiam9zaHJvdW5keTkiLCJpYXQiOjE3MjQyOTQ0MDQsInJvbGVzIjoiIn0.YTlQpX9AmlltaOelIv7sFPSKwLPKaCfqx6DW_fcio0nmJihZYD0eIix3uU5BLtdeHLtIoEa9RYLJh_oPH8xKOCftP764BbCkPUgGEX9IwtQRmw0AtjPuqjSaEcIHESAYzPJ0mOLzxxuDUrEhntr31AvP7g5-loz3HlpWXd8SoZcGe1Ugn8V2DnEKeUfImL8LPk_S342GtndPvxTau8NsvAdrjDJbAPKcI1UVOEJnCLKh-iNQtPgwP3H-mBoqrLSfp1mmRcfj8JvdWUxsYOvMC1eXlQui-QonnKEVVBWyptCXXU9ixU8n--2Z-exZ73uSjaIr_DB4-y2O2SgSxEnBrA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userID\":\"1\",\r\n    \"dateID\":\"1\",\r\n    \"dateTime\":\"2007-12-03T10:15:30+01:00[Europe/Paris]\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/data/meal",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"data",
+								"meal"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "CreateMeal",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userID\":\"1\",\r\n    \"dateID\":\"1\",\r\n    \"dateTime\":\"2007-12-03T10:15:30+01:00[Europe/Paris]\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/data/meal",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"data",
+										"meal"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 22 Aug 2024 00:19:48 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"mealID\": 1,\n    \"userID\": 1,\n    \"dateID\": 1,\n    \"dateTime\": \"2007-12-03T09:15:30Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Meal-Item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiam9zaHJvdW5keTkiLCJpYXQiOjE3MjQyOTQ0MDQsInJvbGVzIjoiIn0.YTlQpX9AmlltaOelIv7sFPSKwLPKaCfqx6DW_fcio0nmJihZYD0eIix3uU5BLtdeHLtIoEa9RYLJh_oPH8xKOCftP764BbCkPUgGEX9IwtQRmw0AtjPuqjSaEcIHESAYzPJ0mOLzxxuDUrEhntr31AvP7g5-loz3HlpWXd8SoZcGe1Ugn8V2DnEKeUfImL8LPk_S342GtndPvxTau8NsvAdrjDJbAPKcI1UVOEJnCLKh-iNQtPgwP3H-mBoqrLSfp1mmRcfj8JvdWUxsYOvMC1eXlQui-QonnKEVVBWyptCXXU9ixU8n--2Z-exZ73uSjaIr_DB4-y2O2SgSxEnBrA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userID\":\"1\",\r\n    \"dateID\":\"1\",\r\n    \"mealID\":\"1\",\r\n    \"itemName\":\"Cheeseburger\",\r\n    \"itemCalories\":\"550\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/data/meal-item",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"data",
+								"meal-item"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "CreateMeal-Item",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userID\":\"1\",\r\n    \"dateID\":\"1\",\r\n    \"mealID\":\"1\",\r\n    \"itemName\":\"Cheeseburger\",\r\n    \"itemCalories\":\"550\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/data/meal-item",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"data",
+										"meal-item"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 22 Aug 2024 00:22:27 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"itemID\": 1,\n    \"mealID\": 1,\n    \"dateID\": 1,\n    \"userID\": 1,\n    \"itemName\": \"Cheeseburger\",\n    \"itemCalories\": 550\n}"
+						}
+					]
+				},
+				{
+					"name": "GetUser",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiam9zaHJvdW5keTkiLCJpYXQiOjE3MjQyOTQ0MDQsInJvbGVzIjoiIn0.YTlQpX9AmlltaOelIv7sFPSKwLPKaCfqx6DW_fcio0nmJihZYD0eIix3uU5BLtdeHLtIoEa9RYLJh_oPH8xKOCftP764BbCkPUgGEX9IwtQRmw0AtjPuqjSaEcIHESAYzPJ0mOLzxxuDUrEhntr31AvP7g5-loz3HlpWXd8SoZcGe1Ugn8V2DnEKeUfImL8LPk_S342GtndPvxTau8NsvAdrjDJbAPKcI1UVOEJnCLKh-iNQtPgwP3H-mBoqrLSfp1mmRcfj8JvdWUxsYOvMC1eXlQui-QonnKEVVBWyptCXXU9ixU8n--2Z-exZ73uSjaIr_DB4-y2O2SgSxEnBrA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"joshroundy9\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/data/user?username=joshroundy9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"data",
+								"user"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "joshroundy9"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GetUser",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\":\"joshroundy9\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/data/user?username=joshroundy9",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"data",
+										"user"
+									],
+									"query": [
+										{
+											"key": "username",
+											"value": "joshroundy9"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 22 Aug 2024 00:31:10 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"userID\": 1,\n    \"username\": \"joshroundy9\",\n    \"email\": \"joshroundy9@gmail.com\",\n    \"passwordHash\": \"$2a$10$Gavq5Dsbk6rg520pALnao.U9.VcsNZbxiME8MCpmXQX8qV5sBz7ne\",\n    \"dateOfBirth\": \"2003-03-28T00:00:00.000+00:00\",\n    \"height\": 70,\n    \"weight\": 178.4,\n    \"authorities\": [],\n    \"password\": \"$2a$10$Gavq5Dsbk6rg520pALnao.U9.VcsNZbxiME8MCpmXQX8qV5sBz7ne\",\n    \"enabled\": true,\n    \"accountNonExpired\": true,\n    \"credentialsNonExpired\": true,\n    \"accountNonLocked\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "GetDaysFromUser",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiam9zaHJvdW5keTkiLCJpYXQiOjE3MjQyOTQ0MDQsInJvbGVzIjoiIn0.YTlQpX9AmlltaOelIv7sFPSKwLPKaCfqx6DW_fcio0nmJihZYD0eIix3uU5BLtdeHLtIoEa9RYLJh_oPH8xKOCftP764BbCkPUgGEX9IwtQRmw0AtjPuqjSaEcIHESAYzPJ0mOLzxxuDUrEhntr31AvP7g5-loz3HlpWXd8SoZcGe1Ugn8V2DnEKeUfImL8LPk_S342GtndPvxTau8NsvAdrjDJbAPKcI1UVOEJnCLKh-iNQtPgwP3H-mBoqrLSfp1mmRcfj8JvdWUxsYOvMC1eXlQui-QonnKEVVBWyptCXXU9ixU8n--2Z-exZ73uSjaIr_DB4-y2O2SgSxEnBrA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/data/date?userid=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"data",
+								"date"
+							],
+							"query": [
+								{
+									"key": "userid",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GetDaysFromUser",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/data/date?userid=1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"data",
+										"date"
+									],
+									"query": [
+										{
+											"key": "userid",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 22 Aug 2024 01:44:19 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"dateID\": 1,\n        \"userID\": 1,\n        \"date\": \"2024-08-21T00:00:00.000+00:00\",\n        \"dailyWeight\": 174.9\n    },\n    {\n        \"dateID\": 2,\n        \"userID\": 1,\n        \"date\": \"2024-08-20T00:00:00.000+00:00\",\n        \"dailyWeight\": 174.3\n    },\n    {\n        \"dateID\": 3,\n        \"userID\": 1,\n        \"date\": \"2024-08-19T00:00:00.000+00:00\",\n        \"dailyWeight\": 173.6\n    },\n    {\n        \"dateID\": 5,\n        \"userID\": 1,\n        \"date\": \"2024-08-18T00:00:00.000+00:00\",\n        \"dailyWeight\": 175.7\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "GetDateUsingUserIDAndDate",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiam9zaHJvdW5keTkiLCJpYXQiOjE3MjQyOTQ0MDQsInJvbGVzIjoiIn0.YTlQpX9AmlltaOelIv7sFPSKwLPKaCfqx6DW_fcio0nmJihZYD0eIix3uU5BLtdeHLtIoEa9RYLJh_oPH8xKOCftP764BbCkPUgGEX9IwtQRmw0AtjPuqjSaEcIHESAYzPJ0mOLzxxuDUrEhntr31AvP7g5-loz3HlpWXd8SoZcGe1Ugn8V2DnEKeUfImL8LPk_S342GtndPvxTau8NsvAdrjDJbAPKcI1UVOEJnCLKh-iNQtPgwP3H-mBoqrLSfp1mmRcfj8JvdWUxsYOvMC1eXlQui-QonnKEVVBWyptCXXU9ixU8n--2Z-exZ73uSjaIr_DB4-y2O2SgSxEnBrA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/data/date/from-user-and-date?userid=1&date=2024-08-19",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"data",
+								"date",
+								"from-user-and-date"
+							],
+							"query": [
+								{
+									"key": "userid",
+									"value": "1"
+								},
+								{
+									"key": "date",
+									"value": "2024-08-19"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GetDateUsingUserIDAndDate",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/data/date/from-user-and-date?userid=1&date=2024-08-19",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"data",
+										"date",
+										"from-user-and-date"
+									],
+									"query": [
+										{
+											"key": "userid",
+											"value": "1"
+										},
+										{
+											"key": "date",
+											"value": "2024-08-19"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 22 Aug 2024 02:44:39 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"dateID\": 5,\n    \"userID\": 1,\n    \"date\": \"2024-08-19\",\n    \"dailyWeight\": 175.7\n}"
+						}
+					]
+				},
+				{
+					"name": "GetMealsFromDate",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiam9zaHJvdW5keTkiLCJpYXQiOjE3MjQyOTQ0MDQsInJvbGVzIjoiIn0.YTlQpX9AmlltaOelIv7sFPSKwLPKaCfqx6DW_fcio0nmJihZYD0eIix3uU5BLtdeHLtIoEa9RYLJh_oPH8xKOCftP764BbCkPUgGEX9IwtQRmw0AtjPuqjSaEcIHESAYzPJ0mOLzxxuDUrEhntr31AvP7g5-loz3HlpWXd8SoZcGe1Ugn8V2DnEKeUfImL8LPk_S342GtndPvxTau8NsvAdrjDJbAPKcI1UVOEJnCLKh-iNQtPgwP3H-mBoqrLSfp1mmRcfj8JvdWUxsYOvMC1eXlQui-QonnKEVVBWyptCXXU9ixU8n--2Z-exZ73uSjaIr_DB4-y2O2SgSxEnBrA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/data/meal?dateid=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"data",
+								"meal"
+							],
+							"query": [
+								{
+									"key": "dateid",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GetMealsFromDate",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/data/meal?dateid=1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"data",
+										"meal"
+									],
+									"query": [
+										{
+											"key": "dateid",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 22 Aug 2024 02:46:36 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"mealID\": 1,\n        \"userID\": 1,\n        \"dateID\": 1,\n        \"dateTime\": \"2007-12-03T09:15:30Z\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "GetMealItemsFromMeal",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiam9zaHJvdW5keTkiLCJpYXQiOjE3MjQyOTQ0MDQsInJvbGVzIjoiIn0.YTlQpX9AmlltaOelIv7sFPSKwLPKaCfqx6DW_fcio0nmJihZYD0eIix3uU5BLtdeHLtIoEa9RYLJh_oPH8xKOCftP764BbCkPUgGEX9IwtQRmw0AtjPuqjSaEcIHESAYzPJ0mOLzxxuDUrEhntr31AvP7g5-loz3HlpWXd8SoZcGe1Ugn8V2DnEKeUfImL8LPk_S342GtndPvxTau8NsvAdrjDJbAPKcI1UVOEJnCLKh-iNQtPgwP3H-mBoqrLSfp1mmRcfj8JvdWUxsYOvMC1eXlQui-QonnKEVVBWyptCXXU9ixU8n--2Z-exZ73uSjaIr_DB4-y2O2SgSxEnBrA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/data/meal-item?mealid=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"data",
+								"meal-item"
+							],
+							"query": [
+								{
+									"key": "mealid",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GetMealItemsFromMeal",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/data/meal-item?mealid=1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"data",
+										"meal-item"
+									],
+									"query": [
+										{
+											"key": "mealid",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 22 Aug 2024 02:48:29 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"itemID\": 1,\n        \"mealID\": 1,\n        \"dateID\": 1,\n        \"userID\": 1,\n        \"itemName\": \"Cheeseburger\",\n        \"itemCalories\": 550\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "UpdateMealTime",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiam9zaHJvdW5keTkiLCJpYXQiOjE3MjQyOTQ0MDQsInJvbGVzIjoiIn0.YTlQpX9AmlltaOelIv7sFPSKwLPKaCfqx6DW_fcio0nmJihZYD0eIix3uU5BLtdeHLtIoEa9RYLJh_oPH8xKOCftP764BbCkPUgGEX9IwtQRmw0AtjPuqjSaEcIHESAYzPJ0mOLzxxuDUrEhntr31AvP7g5-loz3HlpWXd8SoZcGe1Ugn8V2DnEKeUfImL8LPk_S342GtndPvxTau8NsvAdrjDJbAPKcI1UVOEJnCLKh-iNQtPgwP3H-mBoqrLSfp1mmRcfj8JvdWUxsYOvMC1eXlQui-QonnKEVVBWyptCXXU9ixU8n--2Z-exZ73uSjaIr_DB4-y2O2SgSxEnBrA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/data/meal/update-time?mealid=1&datetime=2008-12-03T09:15:30Z",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"data",
+								"meal",
+								"update-time"
+							],
+							"query": [
+								{
+									"key": "mealid",
+									"value": "1"
+								},
+								{
+									"key": "datetime",
+									"value": "2008-12-03T09:15:30Z"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "UpdateMealTime",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/data/meal/update-time?mealid=1&datetime=2008-12-03T09:15:30Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"data",
+										"meal",
+										"update-time"
+									],
+									"query": [
+										{
+											"key": "mealid",
+											"value": "1"
+										},
+										{
+											"key": "datetime",
+											"value": "2008-12-03T09:15:30Z"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 22 Aug 2024 03:10:15 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"mealID\": 1,\n    \"userID\": 1,\n    \"dateID\": 1,\n    \"dateTime\": \"2008-12-03T09:15:30Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "DeleteMeal",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiam9zaHJvdW5keTkiLCJpYXQiOjE3MjQyOTQ0MDQsInJvbGVzIjoiIn0.YTlQpX9AmlltaOelIv7sFPSKwLPKaCfqx6DW_fcio0nmJihZYD0eIix3uU5BLtdeHLtIoEa9RYLJh_oPH8xKOCftP764BbCkPUgGEX9IwtQRmw0AtjPuqjSaEcIHESAYzPJ0mOLzxxuDUrEhntr31AvP7g5-loz3HlpWXd8SoZcGe1Ugn8V2DnEKeUfImL8LPk_S342GtndPvxTau8NsvAdrjDJbAPKcI1UVOEJnCLKh-iNQtPgwP3H-mBoqrLSfp1mmRcfj8JvdWUxsYOvMC1eXlQui-QonnKEVVBWyptCXXU9ixU8n--2Z-exZ73uSjaIr_DB4-y2O2SgSxEnBrA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/data/meal/delete?mealid=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"data",
+								"meal",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "mealid",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "DeleteMeal",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/data/meal/delete?mealid=1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"data",
+										"meal",
+										"delete"
+									],
+									"query": [
+										{
+											"key": "mealid",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "0"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 22 Aug 2024 03:11:48 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "UpdateMealItemName",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiam9zaHJvdW5keTkiLCJpYXQiOjE3MjQyOTQ0MDQsInJvbGVzIjoiIn0.YTlQpX9AmlltaOelIv7sFPSKwLPKaCfqx6DW_fcio0nmJihZYD0eIix3uU5BLtdeHLtIoEa9RYLJh_oPH8xKOCftP764BbCkPUgGEX9IwtQRmw0AtjPuqjSaEcIHESAYzPJ0mOLzxxuDUrEhntr31AvP7g5-loz3HlpWXd8SoZcGe1Ugn8V2DnEKeUfImL8LPk_S342GtndPvxTau8NsvAdrjDJbAPKcI1UVOEJnCLKh-iNQtPgwP3H-mBoqrLSfp1mmRcfj8JvdWUxsYOvMC1eXlQui-QonnKEVVBWyptCXXU9ixU8n--2Z-exZ73uSjaIr_DB4-y2O2SgSxEnBrA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/data/meal-item/update-name?mealitemid=2&name=hamburger",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"data",
+								"meal-item",
+								"update-name"
+							],
+							"query": [
+								{
+									"key": "mealitemid",
+									"value": "2"
+								},
+								{
+									"key": "name",
+									"value": "hamburger"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "UpdateMealItemName",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/data/meal-item/update-name?mealitemid=2&name=hamburger",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"data",
+										"meal-item",
+										"update-name"
+									],
+									"query": [
+										{
+											"key": "mealitemid",
+											"value": "2"
+										},
+										{
+											"key": "name",
+											"value": "hamburger"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 22 Aug 2024 03:23:11 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"itemID\": 2,\n    \"mealID\": 1,\n    \"dateID\": 1,\n    \"userID\": 1,\n    \"itemName\": \"hamburger\",\n    \"itemCalories\": 550\n}"
+						}
+					]
+				},
+				{
+					"name": "UpdateMealItemCalories",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiam9zaHJvdW5keTkiLCJpYXQiOjE3MjQyOTQ0MDQsInJvbGVzIjoiIn0.YTlQpX9AmlltaOelIv7sFPSKwLPKaCfqx6DW_fcio0nmJihZYD0eIix3uU5BLtdeHLtIoEa9RYLJh_oPH8xKOCftP764BbCkPUgGEX9IwtQRmw0AtjPuqjSaEcIHESAYzPJ0mOLzxxuDUrEhntr31AvP7g5-loz3HlpWXd8SoZcGe1Ugn8V2DnEKeUfImL8LPk_S342GtndPvxTau8NsvAdrjDJbAPKcI1UVOEJnCLKh-iNQtPgwP3H-mBoqrLSfp1mmRcfj8JvdWUxsYOvMC1eXlQui-QonnKEVVBWyptCXXU9ixU8n--2Z-exZ73uSjaIr_DB4-y2O2SgSxEnBrA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/data/meal-item/update-calories?mealitemid=2&calories=400",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"data",
+								"meal-item",
+								"update-calories"
+							],
+							"query": [
+								{
+									"key": "mealitemid",
+									"value": "2"
+								},
+								{
+									"key": "calories",
+									"value": "400"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "UpdateMealItemCalories",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/data/meal-item/update-calories?mealitemid=2&calories=400",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"data",
+										"meal-item",
+										"update-calories"
+									],
+									"query": [
+										{
+											"key": "mealitemid",
+											"value": "2"
+										},
+										{
+											"key": "calories",
+											"value": "400"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 22 Aug 2024 03:24:41 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"itemID\": 2,\n    \"mealID\": 1,\n    \"dateID\": 1,\n    \"userID\": 1,\n    \"itemName\": \"hamburger\",\n    \"itemCalories\": 400\n}"
+						}
+					]
+				},
+				{
+					"name": "DeleteMealItem",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiam9zaHJvdW5keTkiLCJpYXQiOjE3MjQyOTQ0MDQsInJvbGVzIjoiIn0.YTlQpX9AmlltaOelIv7sFPSKwLPKaCfqx6DW_fcio0nmJihZYD0eIix3uU5BLtdeHLtIoEa9RYLJh_oPH8xKOCftP764BbCkPUgGEX9IwtQRmw0AtjPuqjSaEcIHESAYzPJ0mOLzxxuDUrEhntr31AvP7g5-loz3HlpWXd8SoZcGe1Ugn8V2DnEKeUfImL8LPk_S342GtndPvxTau8NsvAdrjDJbAPKcI1UVOEJnCLKh-iNQtPgwP3H-mBoqrLSfp1mmRcfj8JvdWUxsYOvMC1eXlQui-QonnKEVVBWyptCXXU9ixU8n--2Z-exZ73uSjaIr_DB4-y2O2SgSxEnBrA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/data/meal-item/delete?mealitemid=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"data",
+								"meal-item",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "mealitemid",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "DeleteMealItem",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/data/meal-item/delete?mealitemid=2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"data",
+										"meal-item",
+										"delete"
+									],
+									"query": [
+										{
+											"key": "mealitemid",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "0"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 22 Aug 2024 03:25:44 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			]
+		}
+	]
+}

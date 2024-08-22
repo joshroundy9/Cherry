@@ -13,9 +13,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -54,12 +54,12 @@ public class DataService {
         return mealRepository.save(MealEntity.builder()
                         .userID(mealDTO.getUserID())
                         .dateID(mealDTO.getDateID())
-                        .dateTime(mealDTO.getDateTime())
+                        .time(mealDTO.getTime())
                 .build());
     }
-    public MealEntity updateMealTime(Integer mealID, ZonedDateTime dateTime) {
+    public MealEntity updateMealTime(Integer mealID, Time time) {
         var mealEntity = mealRepository.findById(mealID).get();
-        mealEntity.setDateTime(dateTime);
+        mealEntity.setTime(time);
         return mealRepository.save(mealEntity);
     }
     public void deleteMeal(Integer mealID) {
