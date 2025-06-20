@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Login from './Login';
+import Register from "./Register";
 
 function App() {
   return (
@@ -10,8 +11,8 @@ function App() {
         <div className="App">
             <header className="Main-header">
                 <Link className="Logo-text" to="/">
-                    <h1>CHERRY</h1>
-                    <img src="/logo56.png" alt="Logo"/>
+                    CHERRY
+                    <img className="Logo-img" src="/logo56.png" alt="Logo"/>
                 </Link>
             </header>
             <Routes>
@@ -22,12 +23,15 @@ function App() {
                         Edit <code>src/App.js</code> and save to reload.
                       </p>
                       <Link className="App-link" to="/login">
-                        Go to Login
+                        Login
+                      </Link>
+                      <Link className="App-link" to="/register">
+                          Register
                       </Link>
                   </div>
               }/>
-              <Route path="/login" element={<Login onLogin={() => {
-              }}/>}/>
+              <Route path="/login" element={<Login onLogin={() => {}}/>}/>
+                <Route path="/register" element={<Register onRegister={() => {}}/>}/>
             </Routes>
         </div>
       </Router>
