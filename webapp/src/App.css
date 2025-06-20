@@ -28,6 +28,26 @@
   color: #61dafb;
 }
 
+.Main-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 10%;
+  background-color: #2D2D2D;
+}
+
+.Logo-text {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-family: 'Jomhuria', cursive;
+  font-size: x-large;
+  text-decoration: none;
+  cursor: pointer;
+  color: #FF0606;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
