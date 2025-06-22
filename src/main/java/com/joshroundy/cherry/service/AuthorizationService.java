@@ -35,17 +35,16 @@ public class AuthorizationService {
     }
 
     public LoginResponseDTO loginUser(String username, String password){
-
-        try{
-            Authentication auth = authenticationManager.authenticate(
+        try {
+            var authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(username, password)
             );
 
-            String token = tokenService.generateJwt(auth);
+            var jwtToken = tokenService.generateJwt(authentication);
 
-            return new LoginResponseDTO(userRepository.findByUsername(username).get(), token);
+            return new LoginResponseDTO(userRepository.findByUsername(username).get(), jwtToken);
 
-        } catch(AuthenticationException e){
+        } catch(AuthenticationException e) {
             return new LoginResponseDTO(null, "");
         }
     }
