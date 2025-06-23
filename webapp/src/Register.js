@@ -26,54 +26,75 @@ function Register({ onRegister }) {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <h2>Register</h2>
-            <input
-                type="text"
-                placeholder="Username"
-                value={username}
-                onChange={e => setUsername(e.target.value)}
-                required
-            />
-            <input
-                type="text"
-                placeholder="Email"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-                required
-            />
-            <input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-                required
-            />
-            <input
-                type="date"
-                placeholder="Date of Birth"
-                value={dateOfBirth}
-                onChange={e => setDateOfBirth(e.target.value)}
-                required
-            />
-            <input
-                type="number"
-                placeholder="Height in Inches"
-                value={height}
-                onChange={e => setHeight(e.target.value)}
-                min="0"
-                max="100"
-                required
-            />
-            <input
-                type="number"
-                placeholder="Weight (LBS)"
-                value={weight}
-                onChange={e => setWeight(e.target.value)}
-                required
-            />
-            <button type="submit">Login</button>
-        </form>
+        <div className={"Register-background"}>
+            <div className={"Register-form"}>
+                <p className={"Register-form-text"}>Welcome to <span className={"Logo-red"}>CHERRY</span>!</p>
+                <p className={"Register-form-text"}>Meeting your goals starts today.</p>
+                <p className={"Register-form-text"}>Register</p>
+                <form style={{marginTop: 0 + 'em'}} className={"Register-form"} onSubmit={handleSubmit}>
+                    <input className={"Auth-form-input"}
+                           type="text"
+                           placeholder="Username"
+                           value={username}
+                           onChange={e => setUsername(e.target.value)}
+                           required
+                    />
+                    <input className={"Auth-form-input"}
+                           type="text"
+                           placeholder="Email"
+                           value={email}
+                           onChange={e => setEmail(e.target.value)}
+                           required
+                    />
+                    <input className={"Auth-form-input"}
+                           type="text"
+                           placeholder="Confirm Email"
+                           required
+                    />
+                    <input className={"Auth-form-input"}
+                           type="password"
+                           placeholder="Password"
+                           value={password}
+                           onChange={e => setPassword(e.target.value)}
+                           required
+                    />
+                    <input className={"Auth-form-input"}
+                           type="text"
+                           placeholder="Confirm Password"
+                           required
+                    />
+                    <input className={"Auth-form-input"}
+                           type="date"
+                           placeholder="Date of Birth"
+                           value={dateOfBirth}
+                           onChange={e => setDateOfBirth(e.target.value)}
+                           required
+                    />
+                    <input className={"Auth-form-input"}
+                           type="number"
+                           placeholder="Height (IN)"
+                           value={height}
+                           onChange={e => setHeight(e.target.value)}
+                           min="0"
+                           max="100"
+                           required
+                    />
+                    <input className={"Auth-form-input"}
+                           type="number"
+                           placeholder="Weight (LBS)"
+                           value={weight}
+                           onChange={e => setWeight(e.target.value)}
+                           required
+                    />
+                    <button className={"Form-button"} type="submit">Register</button>
+                </form>
+            </div>
+            <div className={"Register-text"}>
+                <p className={"Register-text-header"}>Calorie tracking you can trust.</p>
+                <p className={"Register-text-body"}>Cherry provides everything you need for proper calorie tracking.</p>
+                <p className={"Register-text-body"}>All online, for free.</p>
+            </div>
+        </div>
     );
 }
 

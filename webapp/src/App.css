@@ -1,3 +1,7 @@
+/*
+* GENERAL STYLES
+*/
+
 .App {
   text-align: center;
   max-height: 100vh;
@@ -30,6 +34,10 @@
   color: #61dafb;
 }
 
+/*
+* SPECIFIC STYLES
+*/
+
 .Main-header {
   display: flex;
   flex-direction: row;
@@ -57,6 +65,85 @@
   width: auto;
   margin-top: -10px;
   margin-bottom: 0px;
+}
+
+.Register-background {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: #1E1E1E;
+  color: white;
+  font-family: 'Jomhuria', cursive;
+  height: 100vh;
+  min-height: 100vh;
+}
+
+.Register-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #2D2D2D;
+  color: white;
+  height: 70%;
+  width: 30vh;
+  align-self: center;
+}
+
+form.Register-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5em;
+
+}
+
+.Auth-form-input {
+  background-color: #1E1E1E;
+  color: white;
+  font-family: 'Jomhuria', cursive;
+  border-radius: 7px;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  width: 12em;
+}
+
+.Auth-form-input::placeholder {
+  color: white;
+  font-size: 3vh;
+}
+
+input[type="date"] {
+  font-size: 3vh;
+  width: 12em;
+}
+
+.Register-form-text {
+  font-size: 3.5vh;
+  margin-top: 0vh;
+  margin-bottom: 2vh;
+}
+
+.Register-text {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 50vh;
+}
+
+.Register-text-header {
+  font-size: 10vh;
+}
+
+.Register-text-body {
+  font-size: 6vh;
+}
+
+.Logo-red {
+  color: #FF0606;
 }
 
 @keyframes App-logo-spin {
