@@ -1,5 +1,6 @@
 // webapp/src/Register.js
 import React, { useState } from 'react';
+import {Link} from "react-router-dom";
 
 function Register({ onRegister }) {
     const [username, setUsername] = useState('');
@@ -30,8 +31,8 @@ function Register({ onRegister }) {
             <div className={"Register-form"}>
                 <p className={"Register-form-text"}>Welcome to <span className={"Logo-red"}>CHERRY</span>!</p>
                 <p className={"Register-form-text"}>Meeting your goals starts today.</p>
-                <p className={"Register-form-text"}>Register</p>
                 <form style={{marginTop: 0 + 'em'}} className={"Register-form"} onSubmit={handleSubmit}>
+                    <p className={"Register-form-text"}>Register</p>
                     <input className={"Auth-form-input"}
                            type="text"
                            placeholder="Username"
@@ -87,6 +88,9 @@ function Register({ onRegister }) {
                            required
                     />
                     <button className={"Form-button"} type="submit">Register</button>
+                    <div style={{display: 'flex', justifyContent: 'center', flexDirection: 'row', fontSize: '3vh'}}>
+                    Already signed up?&#32;<Link className="App-link" to="/login">Sign In</Link>
+                    </div>
                 </form>
             </div>
             <div className={"Register-text"}>

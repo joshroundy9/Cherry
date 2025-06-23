@@ -31,7 +31,8 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: #19A9FA;
+    text-decoration: none;
 }
 
 /*
@@ -87,14 +88,14 @@
   background-color: #2D2D2D;
   color: white;
   height: 70%;
-  width: 30vh;
+  width: 50vh;
   align-self: center;
 }
 
 form.Register-form {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: 0.5em;
 
 }
@@ -108,6 +109,16 @@ form.Register-form {
   outline: none;
   box-shadow: none;
   width: 12em;
+  font-size: 3vh;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px #1E1E1E inset !important;
+  -webkit-text-fill-color: white !important;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 .Auth-form-input::placeholder {
@@ -121,7 +132,7 @@ input[type="date"] {
 }
 
 .Register-form-text {
-  font-size: 3.5vh;
+  font-size: 4.5vh;
   margin-top: 0vh;
   margin-bottom: 2vh;
 }
@@ -131,19 +142,29 @@ input[type="date"] {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding-left: 50vh;
+  padding-left: 30vh;
 }
 
 .Register-text-header {
-  font-size: 10vh;
+  font-size: 9vh;
 }
 
 .Register-text-body {
-  font-size: 6vh;
+  font-size: 5vh;
 }
 
 .Logo-red {
   color: #FF0606;
+}
+
+.Form-button {
+  background-color: #19A9FA;
+  color: black;
+  font-family: 'Jomhuria', cursive;
+  font-size: 3.5vh;
+  border: none;
+  border-radius: 7px;
+  margin-top: 1.5vh;
 }
 
 @keyframes App-logo-spin {
