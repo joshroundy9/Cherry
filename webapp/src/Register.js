@@ -88,8 +88,8 @@ function Register({ onRegister }) {
                            required
                     />
                     <button className={"Form-button"} type="submit">Register</button>
-                    <div style={{display: 'flex', justifyContent: 'center', flexDirection: 'row', fontSize: '3vh'}}>
-                    Already signed up?&#32;<Link className="App-link" to="/login">Sign In</Link>
+                    <div style={{display: 'flex', justifyContent: 'center', flexDirection: 'row', fontSize: '3vh', gap: '0.1em'}}>
+                        <span>Already signed up?&#32;</span><Link className="App-link" to="/login">Sign In</Link>
                     </div>
                 </form>
             </div>

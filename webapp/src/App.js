@@ -4,6 +4,7 @@ import './App.css';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Login from './Login';
 import Register from "./Register";
+import Dashboard from "./Dashboard";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
               }/>
               <Route path="/login" element={<Login onLogin={() => {}}/>}/>
                 <Route path="/register" element={<Register onRegister={() => {}}/>}/>
+                <Route path="/dashboard" element={<Dashboard onDashboard={() => {}}/>}/>
             </Routes>
         </div>
       </Router>
