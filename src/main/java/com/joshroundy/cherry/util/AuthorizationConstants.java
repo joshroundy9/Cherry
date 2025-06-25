@@ -1,0 +1,10 @@
+package com.joshroundy.cherry.util;
+
+public class AuthorizationConstants {
+    public static final String USERNAME_REGEX = "^[a-zA-Z0-9]{3,11}$";
+    public static final String USERNAME_ERROR_MESSAGE = "Username must be alphanumeric and less than 12 characters";
+    public static final String EMAIL_REGEX = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+    public static final String EMAIL_ERROR_MESSAGE = "Email must be a valid email address";
+    public static final String PASSWORD_REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
+    public static final String PASSWORD_ERROR_MESSAGE = "Password must be at least 8 characters long and include uppercase, lowercase, number, and special character";
+}

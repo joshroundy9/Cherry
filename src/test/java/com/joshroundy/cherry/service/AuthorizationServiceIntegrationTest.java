@@ -1,5 +1,6 @@
 package com.joshroundy.cherry.service;
 
+import com.joshroundy.cherry.dataobject.auth.LoginRequestDTO;
 import com.joshroundy.cherry.dataobject.auth.RegistrationDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,10 @@ class AuthorizationServiceIntegrationTest {
     void registerAndLoginUser() {
         var username = "joshroundy";
         var password = "password";
+        var loginRequestDTO = LoginRequestDTO.builder()
+                .username(username)
+                .password(password)
+                .build();
         var email = "joshroundy@gmail.com";
         var weight = 196.3;
         var height = 69.7;
@@ -31,7 +36,7 @@ class AuthorizationServiceIntegrationTest {
                 .build();
         var userEntity = subject.registerUser(registrationDTO);
         assertThat(userEntity).isEqualToIgnoringGivenFields(userEntity, "password","passwordHash", "userID");
-        var loginResponse = subject.loginUser(username,password);
+        var loginResponse = subject.loginUser(loginRequestDTO);
         assertThat(loginResponse.getUser()).isEqualToIgnoringGivenFields(userEntity, "dateOfBirth");
     }
 }
