@@ -39,15 +39,15 @@ public class AuthorizationService {
         return userRepository.save(userEntity);
     }
 
-    public LoginResponseDTO loginUser(String username, String password){
+    public LoginResponseDTO loginUser(LoginRequestDTO loginRequestDTO){
         try {
             var authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(username, password)
+                    new UsernamePasswordAuthenticationToken(loginRequestDTO.getUsername(), loginRequestDTO.getPassword())
             );
 
             var jwtToken = tokenService.generateJwt(authentication);
 
-            return new LoginResponseDTO(userRepository.findByUsername(username).get(), jwtToken);
+            return new LoginResponseDTO(userRepository.findByUsername(loginRequestDTO.getUsername()).get(), jwtToken);
 
         } catch(AuthenticationException e) {
             return new LoginResponseDTO(null, "");
