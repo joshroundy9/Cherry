@@ -1,5 +1,6 @@
 package com.joshroundy.cherry.service;
 
+import com.joshroundy.cherry.dataobject.auth.LoginRequestDTO;
 import com.joshroundy.cherry.dataobject.auth.RegistrationDTO;
 import com.joshroundy.cherry.dataobject.entity.UserEntity;
 import com.joshroundy.cherry.repository.UserRepository;
@@ -36,6 +37,7 @@ public class AuthorizationServiceTest {
     String passwordHash;
     UserEntity userEntity;
     RegistrationDTO registrationDTO;
+    LoginRequestDTO loginRequestDTO;
     @BeforeEach
     void setUp() {
         passwordHash = "passwordHash";
@@ -55,6 +57,10 @@ public class AuthorizationServiceTest {
                 .dateOfBirth(registrationDTO.getDateOfBirth())
                 .email(registrationDTO.getEmail())
                 .build();
+        loginRequestDTO = LoginRequestDTO.builder()
+                .username("username")
+                .password("password")
+                .build();
     }
     @Test
     void registerUserTest() {
@@ -67,13 +73,13 @@ public class AuthorizationServiceTest {
         when(authenticationManager.authenticate(any())).thenReturn(null);
         when(tokenService.generateJwt(any())).thenReturn(uuid);
         when(userRepository.findByUsername(any())).thenReturn(Optional.ofNullable(userEntity));
-        var actual = subject.loginUser("username", "password");
+        var actual = subject.loginUser(loginRequestDTO);
         assertThat(actual.getUser()).isEqualTo(userEntity);
         assertThat(actual.getJwt()).isEqualTo(uuid);
     }
     @Test void loginUserTest_sadPath_throwsAuthenticationException() {
         when(authenticationManager.authenticate(any())).thenThrow(new AuthenticationCredentialsNotFoundException(""));
-        var actual = subject.loginUser("username", "password");
+        var actual = subject.loginUser(loginRequestDTO);
         assertThat(actual.getUser()).isNull();
         assertThat(actual.getJwt()).isEqualTo("");
         verifyNoInteractions(tokenService);
