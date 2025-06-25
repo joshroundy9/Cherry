@@ -37,7 +37,7 @@ public class DataServiceTest {
     public static final String MEAL_ITEM_NAME = "Cheeseburger";
     public static final Integer MEAL_ITEM_CALORIES = 550;
     public static final Date DATE = Date.valueOf("2024-08-20");
-    public static final Time TIME = Time.valueOf("09:30");
+    public static final Time TIME = Time.valueOf("09:30:00");
     private DateEntity dateEntity;
     private MealEntity mealEntity;
     private MealItemEntity mealItemEntity;
@@ -139,7 +139,7 @@ public class DataServiceTest {
     }
     @Test
     void updateMealTime() {
-        var newTime = Time.valueOf("10:30");
+        var newTime = Time.valueOf("10:30:00");
         when(mealRepository.findById(any())).thenReturn(Optional.ofNullable(mealEntity));
         when(mealRepository.save(any(MealEntity.class)))
                 .thenAnswer(functionCall -> functionCall.getArguments()[0]);
