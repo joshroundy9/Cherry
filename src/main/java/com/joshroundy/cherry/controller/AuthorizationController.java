@@ -1,5 +1,6 @@
 package com.joshroundy.cherry.controller;
 
+import com.joshroundy.cherry.dataobject.auth.LoginRequestDTO;
 import com.joshroundy.cherry.dataobject.auth.LoginResponseDTO;
 import com.joshroundy.cherry.dataobject.auth.RegistrationDTO;
 import com.joshroundy.cherry.dataobject.entity.UserEntity;
@@ -19,7 +20,7 @@ public class AuthorizationController {
     }
 
     @PostMapping("/login")
-    public LoginResponseDTO loginUser(@RequestBody RegistrationDTO body){
-        return authenticationService.loginUser(body.getUsername(), body.getPassword());
+    public LoginResponseDTO loginUser(@RequestBody LoginRequestDTO body){
+        return authenticationService.loginUser(body);
     }
 }

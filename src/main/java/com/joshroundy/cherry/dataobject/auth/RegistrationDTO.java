@@ -1,5 +1,6 @@
 package com.joshroundy.cherry.dataobject.auth;
 
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -7,13 +8,18 @@ import lombok.Setter;
 
 import java.util.Date;
 
+import static com.joshroundy.cherry.util.AuthorizationConstants.*;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @Builder
 public class RegistrationDTO {
+    @Pattern (regexp = USERNAME_REGEX, message = USERNAME_ERROR_MESSAGE)
     private String username;
+    @Pattern (regexp = EMAIL_REGEX, message = EMAIL_ERROR_MESSAGE)
     private String email;
+    @Pattern (regexp = PASSWORD_REGEX, message = PASSWORD_ERROR_MESSAGE)
     private String password;
     private Date dateOfBirth;
     private Double height;
