@@ -1,4 +1,4 @@
-package com.joshroundy.cherry.util;
+package com.joshroundy.cherry.constant;
 
 public class AuthorizationConstants {
     public static final String USERNAME_REGEX = "^[a-zA-Z0-9]{3,11}$";
