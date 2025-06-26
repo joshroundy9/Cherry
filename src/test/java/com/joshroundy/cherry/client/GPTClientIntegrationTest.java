@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class GPTClientIntegrationTest {
 
     private GPTClient subject;
-    private final String REGEX = "^(True|False) \"\\d+\" \"\\d+\"$";
+
     @BeforeEach
     void setUp() {
         subject = new GPTClient();
@@ -23,6 +23,8 @@ public class GPTClientIntegrationTest {
         var input = "One banana and two apples with two tablespoons of peanut butter.";
         var response = subject.getGPTTextResponse(input);
         assertThat(response).isNotNull();
+        assertThat(response.getBody()).isNotNull();
+        String REGEX = "^(True|False) \"\\d+\" \"\\d+\"$";
         assertThat(response.getBody().getChoices().get(0).getMessage().getContent().matches(REGEX)).isTrue();
     }
 }
