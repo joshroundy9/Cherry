@@ -60,7 +60,7 @@ function Register({ onRegister }) {
                            required
                     />
                     <input className={"Auth-form-input"}
-                           type="text"
+                           type="password"
                            placeholder="Confirm Password"
                            required
                     />
@@ -89,7 +89,7 @@ function Register({ onRegister }) {
                     />
                     <button className={"Form-button"} type="submit">Register</button>
                     <div style={{display: 'flex', justifyContent: 'center', flexDirection: 'row', fontSize: '3vh', gap: '0.1em'}}>
-                        <span>Already signed up?&#32;</span><Link className="App-link" to="/login">Sign In</Link>
+                        <span>Already signed up?&#32;</span><Link className="App-link" to="/security/Login">Sign In</Link>
                     </div>
                 </form>
             </div>

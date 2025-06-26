@@ -1,10 +1,11 @@
 // webapp/src/App.js
 import logo from './logo.svg';
-import './App.css';
+import './style/App.css';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import Login from './Login';
-import Register from "./Register";
-import Dashboard from "./Dashboard";
+import Login from './security/Login';
+import Register from "./security/Register";
+import Dashboard from "./dashboard/Dashboard";
+import PrivateRoute from "./security/PrivateRoute";
 
 function App() {
   return (
@@ -33,7 +34,12 @@ function App() {
               }/>
               <Route path="/login" element={<Login onLogin={() => {}}/>}/>
                 <Route path="/register" element={<Register onRegister={() => {}}/>}/>
-                <Route path="/dashboard" element={<Dashboard onDashboard={() => {}}/>}/>
+                {/* PROTECTED ROUTES */}
+                <Route path="/dashboard" element={
+                    <PrivateRoute>
+                    <Dashboard onDashboard={() => {}}/>
+                    </PrivateRoute>
+                    }/>
             </Routes>
         </div>
       </Router>

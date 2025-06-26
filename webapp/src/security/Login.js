@@ -15,6 +15,7 @@ function Login({ onLogin }) {
         });
         if (response.ok) {
             const data = await response.json();
+            localStorage.setItem('jwtToken', data.token);
             onLogin(data); // Pass user/token up to App
         } else {
             alert('Login failed');
