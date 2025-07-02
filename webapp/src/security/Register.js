@@ -1,6 +1,6 @@
 // webapp/src/Register.js
 import React, { useState } from 'react';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 function Register({ onRegister }) {
     const [username, setUsername] = useState('');
@@ -9,6 +9,8 @@ function Register({ onRegister }) {
     const [dateOfBirth, setDateOfBirth] = useState('');
     const [height, setHeight] = useState('');
     const [weight, setWeight] = useState('');
+
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -21,8 +23,9 @@ function Register({ onRegister }) {
         if (response.ok) {
             const data = await response.json();
             onRegister(data); // Pass user/token up to App
+            navigate('/login', { state: { message: 'Registration successful! Please log in.' } });
         } else {
-            alert('Registration failed');
+            alert('Registration failed! ' + response.status);
         }
     };
 

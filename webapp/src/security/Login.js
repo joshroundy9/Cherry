@@ -1,9 +1,14 @@
 // webapp/src/Login.js
 import React, { useState } from 'react';
+import {useLocation, useNavigate} from "react-router-dom";
 
 function Login({ onLogin }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const message = location.state?.message;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -16,7 +21,8 @@ function Login({ onLogin }) {
         if (response.ok) {
             const data = await response.json();
             localStorage.setItem('jwtToken', data.token);
-            onLogin(data); // Pass user/token up to App
+            onLogin(data);
+            navigate('/dashboard');
         } else {
             alert('Login failed');
         }
@@ -40,6 +46,7 @@ function Login({ onLogin }) {
                 required
             />
             <button type="submit">Login</button>
+            {message && <div className="info-message">{message}</div>}
         </form>
     );
 }
