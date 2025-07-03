@@ -1,6 +1,13 @@
 /*
 * GENERAL STYLES
 */
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  border: none;
+  height: 100%;
+  width: 100%;
+}
 
 .App {
   text-align: center;
@@ -35,9 +42,9 @@
     text-decoration: none;
 }
 
-/*
-* SPECIFIC STYLES
-*/
+.App-link:hover {
+  text-decoration: underline;
+}
 
 .Main-header {
   display: flex;
@@ -68,7 +75,11 @@
   margin-bottom: 0px;
 }
 
-.Register-background {
+/*
+* SPECIFIC STYLES
+*/
+
+.Auth-background {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -78,6 +89,7 @@
   font-family: 'Jomhuria', cursive;
   height: 100vh;
   min-height: 100vh;
+  padding-top: 0vh;
 }
 
 .Register-form {
@@ -97,7 +109,33 @@ form.Register-form {
   flex-direction: column;
   align-items: center;
   gap: 0.5em;
+}
 
+.Auth-form-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+
+}
+
+.Login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #2D2D2D;
+  color: white;
+  height: 50%;
+  width: 50vh;
+  align-self: center;
+}
+
+form.Login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5em;
 }
 
 .Auth-form-input {
@@ -131,25 +169,25 @@ input[type="date"] {
   width: 12em;
 }
 
-.Register-form-text {
+.Auth-form-text {
   font-size: 4.5vh;
   margin-top: 0vh;
   margin-bottom: 2vh;
 }
 
-.Register-text {
+.Auth-text {
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding-left: 30vh;
+  padding-left: 20vw;
 }
 
-.Register-text-header {
+.Auth-text-header {
   font-size: 9vh;
 }
 
-.Register-text-body {
+.Auth-text-body {
   font-size: 5vh;
 }
 
@@ -165,6 +203,29 @@ input[type="date"] {
   border: none;
   border-radius: 7px;
   margin-top: 1.5vh;
+  cursor: pointer;
+}
+
+.SignOut-button {
+  position: absolute;
+  right: 1vw;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: none;
+  font-family: 'Jomhuria', cursive;
+  font-size: 3.5vh;
+}
+
+.SignOut-button:hover {
+  text-decoration: underline;
+}
+
+.Info-message {
+  color: white;
+  font-size: 4vh;
 }
 
 @keyframes App-logo-spin {
