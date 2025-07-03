@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import {useLocation, useNavigate} from "react-router-dom";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 function Login({ onLogin }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -13,7 +15,7 @@ function Login({ onLogin }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         // Replace with your backend login endpoint
-        const response = await fetch('http://localhost:8080/auth/login', {
+        const response = await fetch(`${API_URL}/auth/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, password }),
@@ -22,7 +24,9 @@ function Login({ onLogin }) {
             const data = await response.json();
             localStorage.setItem('jwtToken', data.jwt);
             onLogin(data);
+            setTimeout(() => {
             navigate('/dashboard');
+            }, 50);
         } else {
             alert('Login failed');
         }

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 function NutritionForm() {
     const [foodEntry, setFoodEntry] = useState('');
     const [result, setResult] = useState(null);
@@ -10,7 +12,7 @@ function NutritionForm() {
         setError(null);
         setResult(null);
         try {
-            const response = await fetch('http://localhost:8080/ai/nutritiondata', {
+            const response = await fetch(`${API_URL}/ai/nutritiondata`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',

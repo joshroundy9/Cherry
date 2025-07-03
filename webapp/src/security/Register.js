@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import {Link, useNavigate} from "react-router-dom";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 function Register({ onRegister }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -15,7 +17,7 @@ function Register({ onRegister }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         // Replace with your backend login endpoint
-        const response = await fetch('http://localhost:8080/auth/register', {
+        const response = await fetch(`${API_URL}/auth/register`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, password, email, dateOfBirth, height, weight}),
@@ -92,7 +94,7 @@ function Register({ onRegister }) {
                     />
                     <button className={"Form-button"} type="submit">Register</button>
                     <div style={{display: 'flex', justifyContent: 'center', flexDirection: 'row', fontSize: '3vh', gap: '0.1em'}}>
-                        <span>Already signed up?&#32;</span><Link className="App-link" to="/security/Login">Sign In</Link>
+                        <span>Already signed up?&#32;</span><Link className="App-link" to="/login">Sign In</Link>
                     </div>
                 </form>
             </div>
