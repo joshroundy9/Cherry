@@ -34,17 +34,16 @@ public class AuthorizationService {
     }
 
     public LoginResponseDTO loginUser(LoginRequestDTO loginRequestDTO){
-        try {
-            var authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(loginRequestDTO.getUsername(), loginRequestDTO.getPassword())
-            );
+        var authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(loginRequestDTO.getUsername(), loginRequestDTO.getPassword())
+        );
 
-            var jwtToken = tokenService.generateJwt(authentication);
+        var jwtToken = tokenService.generateJwt(authentication);
 
-            return new LoginResponseDTO(userRepository.findByUsername(loginRequestDTO.getUsername()).get(), jwtToken);
+        return new LoginResponseDTO(userRepository.findByUsername(loginRequestDTO.getUsername()).get(), jwtToken);
+    }
 
-        } catch(AuthenticationException e) {
-            return new LoginResponseDTO(null, "");
-        }
+    public boolean validateToken(String jwtToken) {
+        return tokenService.validateJwt(jwtToken);
     }
 }

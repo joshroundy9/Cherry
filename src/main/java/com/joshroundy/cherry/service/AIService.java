@@ -19,7 +19,7 @@ public class AIService {
             throw new RuntimeException("Invalid response from GPT API");
         }
 
-        return aiUtil.mapGPTClientResponseToAIDataResponse(response.getBody().getChoices().get(0).getMessage().getContent());
+        return aiUtil.mapGPTClientResponseToAIDataResponse(response.getBody().getChoices().get(0).getMessage().getContent(), foodEntry);
     }
 
 }

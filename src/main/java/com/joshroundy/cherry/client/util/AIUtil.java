@@ -35,7 +35,7 @@ public class AIUtil {
                 """.formatted(TEXT_MODEL, TEXT_DEVELOPER_PROMPT, input);
     }
 
-    public AIDataResponseDTO mapGPTClientResponseToAIDataResponse(String gptResponseContent) {
+    public AIDataResponseDTO mapGPTClientResponseToAIDataResponse(String gptResponseContent, String foodEntry) {
         var parts = gptResponseContent.split(" ");
         if (parts.length != 3) {
             return AIDataResponseDTO.builder()
@@ -43,9 +43,10 @@ public class AIUtil {
                     .build();
         }
         return AIDataResponseDTO.builder()
+                .foodEntry(foodEntry)
                 .isValidEntry(parts[0].equals("True"))
-                .calories(Integer.parseInt(parts[1].replaceAll("\"", "")))
-                .protein(Integer.parseInt(parts[2].replaceAll("\"", "")))
+                .calories(Double.parseDouble(parts[1].replaceAll("\"", "")))
+                .protein(Double.parseDouble(parts[2].replaceAll("\"", "")))
                 .build();
     }
 }

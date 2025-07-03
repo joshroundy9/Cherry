@@ -8,7 +8,8 @@ import lombok.Setter;
 @Setter
 @Builder
 public class AIDataResponseDTO {
+    String foodEntry;
     Boolean isValidEntry;
-    Integer calories;
-    Integer protein;
+    Double calories;
+    Double protein;
 }
