@@ -20,7 +20,7 @@ function Login({ onLogin }) {
         });
         if (response.ok) {
             const data = await response.json();
-            localStorage.setItem('jwtToken', data.token);
+            localStorage.setItem('jwtToken', data.jwt);
             onLogin(data);
             navigate('/dashboard');
         } else {
