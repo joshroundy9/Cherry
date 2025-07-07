@@ -1,6 +1,6 @@
 // webapp/src/Register.js
 import React, { useState } from 'react';
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useNavigate, useLocation} from "react-router-dom";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -15,23 +15,26 @@ function Register({ onRegister }) {
     const [weight, setWeight] = useState('');
 
     const navigate = useNavigate();
+    const location = useLocation();
+    const message = location.state?.message;
 
     const handleSubmit = async (e) => {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 2000);
+
+        if (password !== confirmPassword || email !== confirmEmail) {
+            return;
+        }
+
         e.preventDefault();
-        if (email !== confirmEmail) {
-            navigate('/register', {state: {message: 'Emails do not match!'}});
-            return;
-        }
-        if (password !== confirmPassword) {
-            navigate('/register', {state: {message: 'Passwords do not match!'}});
-            return;
-        }
         try {
             const response = await fetch(`${API_URL}/auth/register`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({username, password, email, dateOfBirth, height, weight}),
+                signal: controller.signal,
             });
+            clearTimeout(timeoutId);
             if (response.ok) {
                 const data = await response.json();
                 onRegister(data); // Pass user/token up to App
@@ -41,7 +44,7 @@ function Register({ onRegister }) {
             }
         } catch (error) {
             console.error('Registration error:', error);
-            navigate('/register', {state: {message: 'An error occurred during registration. Please try again.'}});
+            navigate('/register', {state: {message: 'An error occurred during registration.'}});
         }
     };
 
@@ -122,11 +125,23 @@ function Register({ onRegister }) {
                     }}>
                         <span>Already signed up?&#32;</span><Link className="App-link" to="/">Sign In</Link>
                     </div>
+                    <div style={{minHeight: '3em', textAlign: 'center', color: 'red'}}>
+                        {message && <div className="Error-message">{message}</div>}
+                        {password !== confirmPassword && email !== confirmEmail && (
+                            <div className="Error-message"> Emails and Passwords do not match!</div>
+                        )}
+                        {password !== confirmPassword && email === confirmEmail && (
+                            <div className="Error-message">Passwords do not match!</div>
+                        )}
+                        {email !== confirmEmail && password === confirmPassword && (
+                            <div className="Error-message">Emails do not match!</div>
+                        )}
+                    </div>
                 </form>
-                </div>
-                <div className={"Auth-text"}>
-                    <p className={"Auth-text-header"}>Calorie tracking you can trust.</p>
-                    <p className={"Auth-text-body"}>Cherry provides everything you need for proper calorie
+            </div>
+            <div className={"Auth-text"}>
+                <p className={"Auth-text-header"}>Calorie tracking you can trust.</p>
+                <p className={"Auth-text-body"}>Cherry provides everything you need for proper calorie
                         tracking.</p>
                     <p className={"Auth-text-body"}>All online, for free.</p>
                 </div>

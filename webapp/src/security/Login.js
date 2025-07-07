@@ -13,13 +13,18 @@ function Login({ onLogin }) {
     const message = location.state?.message;
 
     const handleSubmit = async (e) => {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 2000);
         e.preventDefault();
         try {
             const response = await fetch(`${API_URL}/auth/login`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({username, password}),
+                signal: controller.signal,
             });
+
+            clearTimeout(timeoutId);
             if (response.ok) {
                 const data = await response.json();
                 localStorage.setItem('jwtToken', data.jwt);
@@ -32,7 +37,7 @@ function Login({ onLogin }) {
             }
         } catch (error) {
             console.error('Login error:', error);
-            navigate('/', { state: { message: 'An error occurred while logging in. Please try again.' } });
+            navigate('/', { state: { message: 'An error occurred while logging in.' } });
         }
     };
 
@@ -71,7 +76,9 @@ function Login({ onLogin }) {
                     }}>
                         <span>Not signed up?&#32;</span><Link className="App-link" to="/register">Sign Up</Link>
                     </div>
-                    {message && <div className="Info-message">{message}</div>}
+                    <div style={{minHeight: '1em', textAlign: 'center', color: 'red'}}>
+                        {message && <div className="Error-message">{message}</div>}
+                    </div>
                 </form>
             </div>
             <div className={"Auth-text"}>
