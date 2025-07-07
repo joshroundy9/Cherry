@@ -38,4 +38,8 @@ public class TokenService {
         return jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
     }
 
+    public boolean validateJwt(String jwtToken) {
+        jwtDecoder.decode(jwtToken);
+        return true;
+    }
 }

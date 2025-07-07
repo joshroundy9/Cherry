@@ -1,12 +1,11 @@
 package com.joshroundy.cherry.dataobject.auth;
 
-import com.joshroundy.cherry.util.AuthorizationConstants;
 import jakarta.validation.constraints.Pattern;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import static com.joshroundy.cherry.util.AuthorizationConstants.*;
+import static com.joshroundy.cherry.constant.AuthorizationConstants.*;
 
 @Getter
 @Setter

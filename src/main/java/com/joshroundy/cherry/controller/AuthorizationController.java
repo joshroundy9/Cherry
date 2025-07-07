@@ -23,4 +23,9 @@ public class AuthorizationController {
     public LoginResponseDTO loginUser(@RequestBody LoginRequestDTO body){
         return authenticationService.loginUser(body);
     }
+
+    @PostMapping("/validate")
+    public boolean loginUser(@RequestHeader("JWT-Token") String jwtToken) {
+        return authenticationService.validateToken(jwtToken);
+    }
 }

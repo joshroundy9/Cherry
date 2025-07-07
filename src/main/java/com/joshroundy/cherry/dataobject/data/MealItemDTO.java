@@ -15,4 +15,5 @@ public class MealItemDTO {
     Integer userID;
     String itemName;
     Integer itemCalories;
+    Integer itemProtein;
 }

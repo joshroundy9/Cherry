@@ -8,7 +8,7 @@ import lombok.Setter;
 
 import java.util.Date;
 
-import static com.joshroundy.cherry.util.AuthorizationConstants.*;
+import static com.joshroundy.cherry.constant.AuthorizationConstants.*;
 
 @Getter
 @Setter
