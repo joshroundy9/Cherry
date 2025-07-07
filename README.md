@@ -3,6 +3,10 @@ Cherry is a meal-tracking app designed to make it easy
 to enter your meals and track your weekly, monthly, and yearly average calorie intakes. 
 This allows its users to more accurately make dietary adjustments
 and lose weight, gain muscle, or reach their other fitness goals!
+
+## Planning
+Figma: https://www.figma.com/design/9na15WcguKcXO18PswOSYC/Untitled?node-id=0-1&t=Pqk8lEKxhM4mqeuK-1
+
 ## Backend
 Cherry's backend is made with a Spring Boot authentication and data API
 that connects with a Microsoft SQL Server database and the OpenAI API. While developing it, I
