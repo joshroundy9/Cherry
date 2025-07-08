@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
+import MealPanel from "./MealPanel";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-function NutritionForm() {
+function NutritionForm({ addMealItem }) {
     const [foodEntry, setFoodEntry] = useState('');
-    const [result, setResult] = useState(null);
     const [error, setError] = useState(null);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError(null);
-        setResult(null);
         try {
             const response = await fetch(`${API_URL}/ai/nutritiondata`, {
                 method: 'POST',
@@ -23,7 +22,7 @@ function NutritionForm() {
             });
             if (response.ok) {
                 const data = await response.json();
-                setResult(data);
+                addMealItem(data.description, data.calories, data.protein);
             } else {
                 setError('Request failed: ' + response.status + ' ' + response.statusText);
             }
@@ -33,16 +32,16 @@ function NutritionForm() {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className={"Nutrition-form"} onSubmit={handleSubmit}>
             <input
+                className={"Nutrition-form-input"}
                 type="text"
                 value={foodEntry}
                 onChange={e => setFoodEntry(e.target.value)}
-                placeholder="Enter food"
+                placeholder="Describe what you ate here, the more specific the better!"
             />
-            <button type="submit">Submit</button>
-            {error && <div style={{ color: 'red' }}>{error}</div>}
-            {result && <pre>{JSON.stringify(result, null, 2)}</pre>}
+            <button className={"Nutrition-form-button"} type="submit">Add New Item</button>
+            {error && <div className={"Error-message"}>{error}</div>}
         </form>
     );
 }

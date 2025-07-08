@@ -3,3 +3,36 @@
     max-height: 100vh;
     overflow: hidden;
 }
+
+.Nutrition-form {
+    width: 100vw;
+    background-color: #2D2D2D;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.Nutrition-form-input {
+    background-color: #1E1E1E;
+    color: white;
+    font-family: 'Jomhuria', cursive;
+    width: 85%;
+    height: 2.5em;
+    border-radius: 0.5em;
+    border: none;
+    padding-left: 0.5em;
+}
+
+.Nutrition-form-button {
+    background-color: #1E1E1E;
+    color: white;
+    font-family: 'Jomhuria', cursive;
+    width: 15%;
+    height: 2.5em;
+    border-radius: 0.5em;
+    border: none;
+    padding-left: 0.5em;
+    cursor: pointer;
+}
