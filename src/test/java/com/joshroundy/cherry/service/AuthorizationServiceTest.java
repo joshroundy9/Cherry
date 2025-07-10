@@ -19,6 +19,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
@@ -38,8 +39,10 @@ public class AuthorizationServiceTest {
     UserEntity userEntity;
     RegistrationDTO registrationDTO;
     LoginRequestDTO loginRequestDTO;
+    Integer userID;
     @BeforeEach
     void setUp() {
+        userID = 45;
         passwordHash = "passwordHash";
         registrationDTO = RegistrationDTO.builder()
                 .dateOfBirth(Date.valueOf("2024-05-06"))
@@ -49,7 +52,7 @@ public class AuthorizationServiceTest {
                 .password("password")
                 .username("username").build();
         userEntity = UserEntity.builder()
-                .userID(45)
+                .userID(userID)
                 .height(registrationDTO.getHeight())
                 .weight(registrationDTO.getWeight())
                 .username(registrationDTO.getUsername())
@@ -71,7 +74,7 @@ public class AuthorizationServiceTest {
     @Test void loginUserTest_happyPath() {
         var uuid = UUID.randomUUID().toString();
         when(authenticationManager.authenticate(any())).thenReturn(null);
-        when(tokenService.generateJwt(any())).thenReturn(uuid);
+        when(tokenService.generateJwt(any(), any())).thenReturn(uuid);
         when(userRepository.findByUsername(any())).thenReturn(Optional.ofNullable(userEntity));
         var actual = subject.loginUser(loginRequestDTO);
         assertThat(actual.getUser()).isEqualTo(userEntity);
@@ -79,9 +82,9 @@ public class AuthorizationServiceTest {
     }
     @Test void loginUserTest_sadPath_throwsAuthenticationException() {
         when(authenticationManager.authenticate(any())).thenThrow(new AuthenticationCredentialsNotFoundException(""));
-        var actual = subject.loginUser(loginRequestDTO);
-        assertThat(actual.getUser()).isNull();
-        assertThat(actual.getJwt()).isEqualTo("");
+        assertThrows(AuthenticationCredentialsNotFoundException.class, () -> {
+            subject.loginUser(loginRequestDTO);
+        });
         verifyNoInteractions(tokenService);
         verifyNoInteractions(userRepository);
     }

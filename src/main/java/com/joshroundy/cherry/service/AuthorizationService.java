@@ -38,12 +38,18 @@ public class AuthorizationService {
                 new UsernamePasswordAuthenticationToken(loginRequestDTO.getUsername(), loginRequestDTO.getPassword())
         );
 
-        var jwtToken = tokenService.generateJwt(authentication);
+        var userEntity = userRepository.findByUsername(loginRequestDTO.getUsername()).get();
 
-        return new LoginResponseDTO(userRepository.findByUsername(loginRequestDTO.getUsername()).get(), jwtToken);
+        var jwtToken = tokenService.generateJwt(authentication, userEntity.getUserID());
+
+        return new LoginResponseDTO(userEntity, jwtToken);
     }
 
     public boolean validateToken(String jwtToken) {
         return tokenService.validateJwt(jwtToken);
+    }
+
+    public boolean validateMatchingUserId(String jwtToken, Integer userId) {
+        return tokenService.validateMatchingUserId(jwtToken, userId);
     }
 }

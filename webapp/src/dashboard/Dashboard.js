@@ -8,7 +8,7 @@ function Dashboard({ onDashboard }) {
 
     return (
         <div className={"Dashboard-background"}>
-            <MealPanel />
+            <MealPanel mealId={"1"} dateId={"1"}/>
         </div>
     );
 }

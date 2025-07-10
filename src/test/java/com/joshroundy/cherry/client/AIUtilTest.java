@@ -35,11 +35,13 @@ public class AIUtilTest {
 
     @Test
     public void testMapGPTClientResponseToAIDataResponse() {
-        String gptResponseContent = "True \"450\" \"12\"";
-        var response = subject.mapGPTClientResponseToAIDataResponse(gptResponseContent);
+        var gptResponseContent = "True \"450\" \"12\"";
+        var foodEntry = "One banana and two apples with two tablespoons of peanut butter.";
+        var response = subject.mapGPTClientResponseToAIDataResponse(gptResponseContent, foodEntry);
         assertThat(response).isNotNull();
         assertThat(response.getIsValidEntry()).isTrue();
         assertThat(response.getCalories()).isEqualTo(450);
         assertThat(response.getProtein()).isEqualTo(12);
+        assertThat(response.getFoodEntry()).isEqualTo(foodEntry);
     }
 }

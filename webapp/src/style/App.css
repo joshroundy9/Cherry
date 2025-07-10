@@ -223,6 +223,18 @@ input[type="date"] {
   text-decoration: underline;
 }
 
+.Username-text {
+  position: absolute;
+  left: 1vw;
+  background: none;
+  border: none;
+  color: white;
+  padding: 0;
+  text-decoration: none;
+  font-family: 'Jomhuria', cursive;
+  font-size: 3.5vh;
+}
+
 .Info-message {
   color: white;
   font-size: 3vh;

@@ -20,7 +20,7 @@ public class TokenService {
 
     private JwtDecoder jwtDecoder;
 
-    public String generateJwt(Authentication auth){
+    public String generateJwt(Authentication auth, Integer userId) {
 
         Instant now = Instant.now();
 
@@ -33,6 +33,8 @@ public class TokenService {
                 .issuedAt(now)
                 .subject(auth.getName())
                 .claim("roles", scope)
+                .claim("userId", userId)
+                .expiresAt(now.plusSeconds(3600 * 24 * 7)) // Token valid for 1 week
                 .build();
 
         return jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
@@ -41,5 +43,11 @@ public class TokenService {
     public boolean validateJwt(String jwtToken) {
         jwtDecoder.decode(jwtToken);
         return true;
+    }
+
+    public boolean validateMatchingUserId(String jwtToken, Integer userId) {
+        var claims = jwtDecoder.decode(jwtToken).getClaims();
+        var tokenUserId = (Integer) claims.get("userId");
+        return tokenUserId != null && tokenUserId.equals(userId);
     }
 }

@@ -17,9 +17,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -188,12 +185,12 @@ public class DataServiceTest {
         assertThat(actual.getItemName()).isEqualTo(newName);
     }
     @Test
-    void updateMealItemCalories() {
+    void updateMealItemNutrition() {
         var newCalories = 450;
         when(mealItemRepository.findById(any())).thenReturn(Optional.ofNullable(mealItemEntity));
         when(mealItemRepository.save(any(MealItemEntity.class)))
                 .thenAnswer(functionCall -> functionCall.getArguments()[0]);
-        var actual = subject.updateMealItemCalories(MEAL_ITEM_ID, newCalories);
+        var actual = subject.updateMealItemNutrition(MEAL_ITEM_ID, newCalories);
         assertThat(actual).isNotNull();
         assertThat(actual.getItemCalories()).isEqualTo(newCalories);
     }

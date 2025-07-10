@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.time.ZonedDateTime;
 import java.util.List;
 
 @Service
@@ -74,6 +73,7 @@ public class DataService {
         return mealItemRepository.save(MealItemEntity.builder()
                         .userID(mealItemDTO.getUserID())
                         .itemCalories(mealItemDTO.getItemCalories())
+                        .itemProtein(mealItemDTO.getItemProtein())
                         .itemName(mealItemDTO.getItemName())
                         .dateID(mealItemDTO.getDateID())
                         .mealID(mealItemDTO.getMealID())
@@ -84,9 +84,10 @@ public class DataService {
         mealItemEntity.setItemName(mealItemName);
         return mealItemRepository.save(mealItemEntity);
     }
-    public MealItemEntity updateMealItemCalories(Integer mealItemID, Integer mealItemCalories) {
+    public MealItemEntity updateMealItemNutrition(Integer mealItemID, Double mealItemCalories, Double mealItemProtein) {
         var mealItemEntity = mealItemRepository.findById(mealItemID).get();
         mealItemEntity.setItemCalories(mealItemCalories);
+        mealItemEntity.setItemProtein(mealItemProtein);
         return mealItemRepository.save(mealItemEntity);
     }
     public void deleteMealItem(Integer mealItemID) {

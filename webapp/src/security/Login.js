@@ -28,6 +28,8 @@ function Login({ onLogin }) {
             if (response.ok) {
                 const data = await response.json();
                 localStorage.setItem('jwtToken', data.jwt);
+                localStorage.setItem('userId', data.user.userID);
+                localStorage.setItem('username', data.user.username);
                 onLogin(data);
                 setTimeout(() => {
                     navigate('/dashboard');

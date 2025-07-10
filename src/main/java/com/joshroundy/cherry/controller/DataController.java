@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.time.ZonedDateTime;
 import java.util.List;
 
 @RestController
@@ -68,6 +67,7 @@ public class DataController {
     }
     @PostMapping("/meal-item")
     public MealItemEntity createMealItem(@RequestBody MealItemDTO body) {
+
         return dataService.createMealItem(body);
     }
     @PostMapping("/meal-item/update-name")
@@ -77,8 +77,9 @@ public class DataController {
     }
     @PostMapping("/meal-item/update-calories")
     public MealItemEntity updateMealItemCalories(@RequestParam(value="mealitemid", required=true) Integer mealItemID,
-                                             @RequestParam(value="calories", required=true) Integer calories) {
-        return dataService.updateMealItemCalories(mealItemID, calories);
+                                             @RequestParam(value="calories", required=true) Double calories,
+                                                 @RequestParam(value="calories", required=true) Double protein) {
+        return dataService.updateMealItemNutrition(mealItemID, calories, protein);
     }
     @DeleteMapping("/meal-item/delete")
     public void deleteMealItem(@RequestParam(value="mealitemid", required=true) Integer mealItemID) {

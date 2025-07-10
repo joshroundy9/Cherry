@@ -22,7 +22,7 @@ function NutritionForm({ addMealItem }) {
             });
             if (response.ok) {
                 const data = await response.json();
-                addMealItem(data.description, data.calories, data.protein);
+                addMealItem(data.foodEntry, data.calories, data.protein);
             } else {
                 setError('Request failed: ' + response.status + ' ' + response.statusText);
             }

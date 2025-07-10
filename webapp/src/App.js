@@ -16,6 +16,11 @@ function App() {
   return (
     <div className="App">
         <header className="Main-header">
+            {location.pathname === "/dashboard" && (
+                <p className="Username-text" style={{color: '#FF0606'}}>
+                    {localStorage.getItem('username') || 'Guest'}
+                </p>
+            )}
             <Link className="Logo-text" to="/">
                 CHERRY
                 <img className="Logo-img" src="/logo56.png" alt="Logo"/>

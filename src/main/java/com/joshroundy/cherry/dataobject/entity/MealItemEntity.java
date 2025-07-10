@@ -18,5 +18,6 @@ public class MealItemEntity {
     Integer dateID;
     Integer userID;
     String itemName;
-    Integer itemCalories;
+    Double itemCalories;
+    Double itemProtein;
 }
