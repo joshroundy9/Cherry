@@ -25,7 +25,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
-@SpringBootTest
 public class AuthorizationServiceTest {
     @InjectMocks AuthorizationService subject;
     @Mock
