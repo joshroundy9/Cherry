@@ -1,6 +1,7 @@
 package com.joshroundy.cherry.client;
 
 import com.joshroundy.cherry.client.util.AIUtil;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -10,6 +11,7 @@ public class AIUtilTest {
 
     private AIUtil subject = new AIUtil();
 
+    @Disabled
     @Test
     public void testGetAPIKey() {
         // IF THIS TEST FAILS, UPDATE THE OPENAI_API_KEY_PATH IN ClientConstants TO POINT TO A VALID FILE

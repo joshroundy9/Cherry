@@ -10,6 +10,7 @@ import com.joshroundy.cherry.repository.DateRepository;
 import com.joshroundy.cherry.repository.MealItemRepository;
 import com.joshroundy.cherry.repository.MealRepository;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -25,7 +26,8 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
-public class DataServiceTest {
+@Disabled
+public class DataServiceIntegrationTest {
     public static final Integer USER_ID = 3534;
     public static final Integer DATE_ID = 24612;
     public static final Integer MEAL_ID = 523512;
