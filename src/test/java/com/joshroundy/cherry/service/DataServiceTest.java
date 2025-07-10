@@ -32,7 +32,7 @@ public class DataServiceTest {
     public static final Integer MEAL_ITEM_ID = 1231250;
     public static final Double DAILY_WEIGHT = 178.3;
     public static final String MEAL_ITEM_NAME = "Cheeseburger";
-    public static final Integer MEAL_ITEM_CALORIES = 550;
+    public static final Double MEAL_ITEM_CALORIES = 550.0;
     public static final Date DATE = Date.valueOf("2024-08-20");
     public static final Time TIME = Time.valueOf("09:30:00");
     private DateEntity dateEntity;
@@ -186,11 +186,12 @@ public class DataServiceTest {
     }
     @Test
     void updateMealItemNutrition() {
-        var newCalories = 450;
+        var newCalories = 450.0;
+        var newProtein = 30.0;
         when(mealItemRepository.findById(any())).thenReturn(Optional.ofNullable(mealItemEntity));
         when(mealItemRepository.save(any(MealItemEntity.class)))
                 .thenAnswer(functionCall -> functionCall.getArguments()[0]);
-        var actual = subject.updateMealItemNutrition(MEAL_ITEM_ID, newCalories);
+        var actual = subject.updateMealItemNutrition(MEAL_ITEM_ID, newCalories, newProtein);
         assertThat(actual).isNotNull();
         assertThat(actual.getItemCalories()).isEqualTo(newCalories);
     }
