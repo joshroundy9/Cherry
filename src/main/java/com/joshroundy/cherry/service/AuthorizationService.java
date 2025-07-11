@@ -48,8 +48,4 @@ public class AuthorizationService {
     public boolean validateToken(String jwtToken) {
         return tokenService.validateJwt(jwtToken);
     }
-
-    public boolean validateMatchingUserId(String jwtToken, Integer userId) {
-        return tokenService.validateMatchingUserId(jwtToken, userId);
-    }
 }

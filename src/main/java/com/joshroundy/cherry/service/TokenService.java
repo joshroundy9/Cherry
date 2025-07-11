@@ -47,7 +47,7 @@ public class TokenService {
 
     public boolean validateMatchingUserId(String jwtToken, Integer userId) {
         var claims = jwtDecoder.decode(jwtToken).getClaims();
-        var tokenUserId = (Integer) claims.get("userId");
-        return tokenUserId != null && tokenUserId.equals(userId);
+        var tokenUserId = claims.get("userId");
+        return tokenUserId != null && tokenUserId.toString().equals(userId.toString());
     }
 }

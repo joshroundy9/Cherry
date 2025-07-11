@@ -12,7 +12,6 @@ import java.sql.Date;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-@Disabled
 class AuthorizationServiceIntegrationTest {
     @Autowired AuthorizationService subject;
 

@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "8befa531-b7a3-4987-a9c9-fc6829f50ae9",
-		"name": "API Call Examples",
+		"name": "Cherry API Call Examples",
 		"description": "Here are mock calls and examples for every endpoint in the authorization and data APIs within Cherry's Spring Boot backend.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "31073360"
@@ -45,7 +45,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"username\":\"joshroundy10\",\r\n    \"email\":\"joshroundy9@gmail.com\",\r\n    \"password\":\"password\",\r\n    \"dateOfBirth\":\"2003-03-28\",\r\n    \"height\":\"70\",\r\n    \"weight\":\"178.4\"\r\n}",
+									"raw": "{\r\n    \"username\":\"joshroundy10\",\r\n    \"email\":\"joshroundy10@gmail.com\",\r\n    \"password\":\"password\",\r\n    \"dateOfBirth\":\"2003-03-28\",\r\n    \"height\":\"70\",\r\n    \"weight\":\"178.4\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -251,6 +251,32 @@
 							"body": "{\n    \"user\": {\n        \"userID\": 1,\n        \"username\": \"joshroundy9\",\n        \"email\": \"joshroundy9@gmail.com\",\n        \"passwordHash\": \"$2a$10$mwJAcIXMnQatfzsYc.oEa.FYcoUO874Ms7wSakFn2sCue/qdMtzsq\",\n        \"dateOfBirth\": \"2003-03-28T00:00:00.000+00:00\",\n        \"height\": 70,\n        \"weight\": 178.4,\n        \"password\": \"$2a$10$mwJAcIXMnQatfzsYc.oEa.FYcoUO874Ms7wSakFn2sCue/qdMtzsq\",\n        \"authorities\": [],\n        \"enabled\": true,\n        \"accountNonExpired\": true,\n        \"credentialsNonExpired\": true,\n        \"accountNonLocked\": true\n    },\n    \"jwt\": \"eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiam9zaHJvdW5keTkiLCJpYXQiOjE3MjQyOTQ0MDQsInJvbGVzIjoiIn0.YTlQpX9AmlltaOelIv7sFPSKwLPKaCfqx6DW_fcio0nmJihZYD0eIix3uU5BLtdeHLtIoEa9RYLJh_oPH8xKOCftP764BbCkPUgGEX9IwtQRmw0AtjPuqjSaEcIHESAYzPJ0mOLzxxuDUrEhntr31AvP7g5-loz3HlpWXd8SoZcGe1Ugn8V2DnEKeUfImL8LPk_S342GtndPvxTau8NsvAdrjDJbAPKcI1UVOEJnCLKh-iNQtPgwP3H-mBoqrLSfp1mmRcfj8JvdWUxsYOvMC1eXlQui-QonnKEVVBWyptCXXU9ixU8n--2Z-exZ73uSjaIr_DB4-y2O2SgSxEnBrA\"\n}"
 						}
 					]
+				},
+				{
+					"name": "ValidateUser",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "JWT-Token",
+								"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiam9zaHJvdW5keTEwIiwiaWF0IjoxNzUxNTA2MDMxLCJyb2xlcyI6IiJ9.NLSHV04vdS2jwN5aRtlanqk5hOdQuncAOBkVNXza5EU4HvEx59aovkzoH3863FA8OEiEW7Xwi_vh0DLXFarJVzr3Llo20bSVMZioPwvwgNiCkG5-zMGOSRWh3nC8rXLVML08hrYL-vR9e5YxqYE9gpf_AO4tc30m3CW-3vN1R9a9TlDR7AGcj_rdhvkXKSR-QaGbk0QXWx8smJaPdSc5Ouwh0SFLi6Kl3NVpBAEiWUCU8qQrP7Ir3DpoXwRu07XEYTTn4QMqVvCkP4ghsavga_fVPlOO_DqMuGt0ULcIJtOdNCa47zTis88qeHJvrXoxxV1h0pzjHfGt5KekA5zkaw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/auth/validate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"validate"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -271,7 +297,13 @@
 							]
 						},
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "User-ID",
+								"value": "1",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"userID\":\"2\",\r\n    \"date\":\"2024-08-21\",\r\n    \"dailyWeight\":\"175.7\"\r\n}",
@@ -396,13 +428,19 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiam9zaHJvdW5keTkiLCJpYXQiOjE3MjQyOTQ0MDQsInJvbGVzIjoiIn0.YTlQpX9AmlltaOelIv7sFPSKwLPKaCfqx6DW_fcio0nmJihZYD0eIix3uU5BLtdeHLtIoEa9RYLJh_oPH8xKOCftP764BbCkPUgGEX9IwtQRmw0AtjPuqjSaEcIHESAYzPJ0mOLzxxuDUrEhntr31AvP7g5-loz3HlpWXd8SoZcGe1Ugn8V2DnEKeUfImL8LPk_S342GtndPvxTau8NsvAdrjDJbAPKcI1UVOEJnCLKh-iNQtPgwP3H-mBoqrLSfp1mmRcfj8JvdWUxsYOvMC1eXlQui-QonnKEVVBWyptCXXU9ixU8n--2Z-exZ73uSjaIr_DB4-y2O2SgSxEnBrA",
+									"value": "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJqb3Nocm91bmR5MTAiLCJyb2xlcyI6IiIsImlzcyI6InNlbGYiLCJleHAiOjE3NTI4MDEwOTYsImlhdCI6MTc1MjE5NjI5NiwidXNlcklkIjoxfQ.Oeo6A-W_RTRm2qkGU_iDXOzhn2Wcc6Yu8p6nLpAXoRECuBhz8zmRPgC8pixw0M0uyMYmwfyoYbaoIbVb1uwe4fwN3_EEWhfHDYzgTwrVfgXydgXnh57L4NxBdBWeycMgGl1QFOsqWHtYiS13EJ2FVRhY_VDpEMaLzR-dRgunmTNSiFaP_NPBsthNvEkTErrME9qZBkZnXNiUGAHWfLEODFRY4ZfMwEy3vVnQ7k65z5bifNhUiGUvdn7zbfwceIyo1rPm6T7jPbTooARGGfpngPYm4t4LmfVZE-qcY7GOaGBCGxR2uj1tFipLWFFzQfBXstaxEejaDzX240IjKRk9Kw",
 									"type": "string"
 								}
 							]
 						},
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "User-ID",
+								"value": "1",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"userID\":\"1\",\r\n    \"dateID\":\"1\",\r\n    \"dateTime\":\"2007-12-03T10:15:30+01:00[Europe/Paris]\"\r\n}",
@@ -527,16 +565,22 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiam9zaHJvdW5keTkiLCJpYXQiOjE3MjQyOTQ0MDQsInJvbGVzIjoiIn0.YTlQpX9AmlltaOelIv7sFPSKwLPKaCfqx6DW_fcio0nmJihZYD0eIix3uU5BLtdeHLtIoEa9RYLJh_oPH8xKOCftP764BbCkPUgGEX9IwtQRmw0AtjPuqjSaEcIHESAYzPJ0mOLzxxuDUrEhntr31AvP7g5-loz3HlpWXd8SoZcGe1Ugn8V2DnEKeUfImL8LPk_S342GtndPvxTau8NsvAdrjDJbAPKcI1UVOEJnCLKh-iNQtPgwP3H-mBoqrLSfp1mmRcfj8JvdWUxsYOvMC1eXlQui-QonnKEVVBWyptCXXU9ixU8n--2Z-exZ73uSjaIr_DB4-y2O2SgSxEnBrA",
+									"value": "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJqb3Nocm91bmR5MTAiLCJyb2xlcyI6IiIsImlzcyI6InNlbGYiLCJleHAiOjE3NTI3MTM1NjMsImlhdCI6MTc1MjEwODc2MywidXNlcklkIjoxfQ.nCtlOnKbfz9qsmZsrPZpxmX1yaaMWreNcUTp8cGEM9Lp9ZN0Up9Boqx4Ti6F9gspqrYeq5KnuNZnGIcW1N_IyubkYBhvpSDmf29CZS-Fas0ltR3wEPNOM_TU2Ckc0NYBRqpvptRTO6XkSuXfGfepCeJ_ag50a_XSUzHfgF99-orCwhDNFEtoG2KVbhHIyN_6KepmUUa562f6Qlr4er70w5WiFJoyRc8XJ9fofeOpwRKFvNbDG6EH02AOdTD0xBzAieqXZpzUYCqGhuvJP7iGbqKpbHSwOBEg1_4tRhSD0F3ivCHQW1OcIaSJNFTu_xOes5o_POlDkcaRuIJesB_GuQ",
 									"type": "string"
 								}
 							]
 						},
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "User-ID",
+								"value": "1",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userID\":\"1\",\r\n    \"dateID\":\"1\",\r\n    \"mealID\":\"1\",\r\n    \"itemName\":\"Cheeseburger\",\r\n    \"itemCalories\":\"550\"\r\n}",
+							"raw": "{\r\n                \"userID\": \"1\",\r\n                \"dateID\": \"1\",\r\n                \"mealID\": \"1\",\r\n                \"itemName\": \"undefined\",\r\n                \"itemCalories\": \"303.4\",\r\n                \"itemProtein\": \"15\"\r\n            }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -667,7 +711,13 @@
 							]
 						},
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "User-ID",
+								"value": "1",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"username\":\"joshroundy9\"\r\n}",
@@ -810,7 +860,13 @@
 							]
 						},
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "User-ID",
+								"value": "1",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "http://localhost:8080/data/date?userid=1",
 							"protocol": "http",
@@ -935,7 +991,13 @@
 							]
 						},
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "User-ID",
+								"value": "1",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "http://localhost:8080/data/date/from-user-and-date?userid=1&date=2024-08-19",
 							"protocol": "http",
@@ -1073,7 +1135,13 @@
 							]
 						},
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "User-ID",
+								"value": "1",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "",
@@ -1213,13 +1281,19 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiam9zaHJvdW5keTkiLCJpYXQiOjE3MjQyOTQ0MDQsInJvbGVzIjoiIn0.YTlQpX9AmlltaOelIv7sFPSKwLPKaCfqx6DW_fcio0nmJihZYD0eIix3uU5BLtdeHLtIoEa9RYLJh_oPH8xKOCftP764BbCkPUgGEX9IwtQRmw0AtjPuqjSaEcIHESAYzPJ0mOLzxxuDUrEhntr31AvP7g5-loz3HlpWXd8SoZcGe1Ugn8V2DnEKeUfImL8LPk_S342GtndPvxTau8NsvAdrjDJbAPKcI1UVOEJnCLKh-iNQtPgwP3H-mBoqrLSfp1mmRcfj8JvdWUxsYOvMC1eXlQui-QonnKEVVBWyptCXXU9ixU8n--2Z-exZ73uSjaIr_DB4-y2O2SgSxEnBrA",
+									"value": "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJqb3Nocm91bmR5MTAiLCJyb2xlcyI6IiIsImlzcyI6InNlbGYiLCJleHAiOjE3NTI3MTM1NjMsImlhdCI6MTc1MjEwODc2MywidXNlcklkIjoxfQ.nCtlOnKbfz9qsmZsrPZpxmX1yaaMWreNcUTp8cGEM9Lp9ZN0Up9Boqx4Ti6F9gspqrYeq5KnuNZnGIcW1N_IyubkYBhvpSDmf29CZS-Fas0ltR3wEPNOM_TU2Ckc0NYBRqpvptRTO6XkSuXfGfepCeJ_ag50a_XSUzHfgF99-orCwhDNFEtoG2KVbhHIyN_6KepmUUa562f6Qlr4er70w5WiFJoyRc8XJ9fofeOpwRKFvNbDG6EH02AOdTD0xBzAieqXZpzUYCqGhuvJP7iGbqKpbHSwOBEg1_4tRhSD0F3ivCHQW1OcIaSJNFTu_xOes5o_POlDkcaRuIJesB_GuQ",
 									"type": "string"
 								}
 							]
 						},
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "User-ID",
+								"value": "1",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "",
@@ -1362,7 +1436,13 @@
 							]
 						},
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "User-ID",
+								"value": "1",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "",
@@ -1515,7 +1595,13 @@
 							]
 						},
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "User-ID",
+								"value": "1",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "",
@@ -1656,7 +1742,13 @@
 							]
 						},
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "User-ID",
+								"value": "1",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "",
@@ -1809,7 +1901,13 @@
 							]
 						},
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "User-ID",
+								"value": "1",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "",
@@ -1962,7 +2060,13 @@
 							]
 						},
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "User-ID",
+								"value": "1",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "",

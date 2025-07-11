@@ -26,7 +26,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
-@Disabled
 public class DataServiceIntegrationTest {
     public static final Integer USER_ID = 3534;
     public static final Integer DATE_ID = 24612;
