@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import '../style/Dashboard.css';
 import MealPanel from "./MealPanel";
+import {ErrorState} from "../utils/DashboardUtil";
 
 function Dashboard({ onDashboard }) {
 

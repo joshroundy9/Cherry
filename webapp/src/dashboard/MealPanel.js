@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import NutritionForm from "./FoodEntry";
 import { genericDataRequest } from "../utils/DataUtil";
+import {ErrorState, LoadingState} from "../utils/DashboardUtil";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -116,8 +117,8 @@ function MealPanel({ mealId, time, date, dateId }) {
         };
     }, [mealId]);
 
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error}</div>;
+    if (loading) return <LoadingState />;
+    if (error) return <ErrorState message={error} />;
 
     return (
         <div className="MealPanel">
