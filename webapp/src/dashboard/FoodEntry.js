@@ -6,8 +6,12 @@ const API_URL = process.env.REACT_APP_API_URL;
 function NutritionForm({ addMealItem }) {
     const [foodEntry, setFoodEntry] = useState('');
     const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e) => {
+        if (loading) return; // Prevent multiple submissions
+        setLoading(true);
+
         e.preventDefault();
         setError(null);
         try {
@@ -23,6 +27,7 @@ function NutritionForm({ addMealItem }) {
             if (response.ok) {
                 const data = await response.json();
                 addMealItem(data.foodEntry, data.calories, data.protein);
+                setFoodEntry('')
             } else {
                 setError('Request failed: ' + response.status + ' ' + response.statusText);
             }

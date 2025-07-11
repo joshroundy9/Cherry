@@ -142,9 +142,18 @@ function MealPanel({ mealId, time, date, dateId }) {
             </div>
             <div className={"MealItemList"}>
                 <ul className={"MealItemList-ul"}>
+                    <div className={"MealItemList-li"}>
+                        <p style={{marginLeft: '1vw', color: 'white'}}>Item Name</p>
+                        <p></p>
+                        <p style={{marginRight: '10vw', color: 'white'}}>Calories</p>
+                        <p style={{marginRight: '5vw', color: 'white'}}>Protein</p>
+                    </div>
+                </ul>
+                <ul className={"MealItemList-ul"}>
                     {mealItems.map(item => (
                         <li className={"MealItemList-li"} key={item.itemID}>
                             <p style={{marginLeft:'1vw'}}>{item.itemName}</p>
+                            <p></p>
                             <p style={{marginRight:'10vw'}}>{item.itemCalories}</p>
                             <p style={{marginRight:'5vw'}}>{item.itemProtein}g</p>
                             <button className={"Delete-button"} type={"button"} onClick={() => removeMealItem(item.itemID)}>
