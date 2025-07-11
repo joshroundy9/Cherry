@@ -3,7 +3,9 @@
     max-height: 100vh;
     overflow: hidden;
 }
-
+/*
+ * Nutrition Form Styles
+ */
 .Nutrition-form {
     width: 100vw;
     background-color: #2D2D2D;
@@ -19,10 +21,10 @@
     color: white;
     font-family: 'Jomhuria', cursive;
     width: 85%;
-    height: 2.5em;
     border-radius: 0.5em;
     border: none;
     padding-left: 0.5em;
+    font-size: 2vw;
 }
 
 .Nutrition-form-button {
@@ -30,9 +32,108 @@
     color: white;
     font-family: 'Jomhuria', cursive;
     width: 15%;
-    height: 2.5em;
     border-radius: 0.5em;
     border: none;
     padding-left: 0.5em;
     cursor: pointer;
+    font-size: 2vw;
+}
+/*
+ * Meal Panel Styles
+ */
+.MealPanel {
+    width: 100vw;
+    height: 100vh;
+    background-color: #2D2D2D;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.MealPanel-header {
+    color: white;
+    font-family: 'Jomhuria', cursive;
+    font-size: 3vw;
+    margin-bottom: 1em;
+}
+
+.MealPanel-date-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: 'Jomhuria', cursive;
+    font-size: 3vw;
+}
+
+.DateTime-wrapper {
+    position: absolute;
+    left: 1vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: #1E1E1E;
+    border-radius: 0.7em;
+    font-size: 2vw;
+    padding-right: 1vw;
+    padding-left: 1vw;
+}
+
+.DateTime-input {
+    border: none;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    padding: 0;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.DateTime-input::-webkit-calendar-picker-indicator {
+    height: 1.5vw;
+    width: 1.5vw;
+}
+
+.DateTime-text {
+    padding-right: 1vw;
+}
+
+.MealItemList {
+width: 100%;
+}
+
+.MealItemList-ul {
+    list-style-type: none;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.MealItemList-li {
+    width: 100%;
+    background-color: #1E1E1E;
+    color: #19A9FA;
+    font-family: 'Jomhuria', cursive;
+    border-radius: 0.5em;
+    margin-bottom: 0.5em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 2vw;
+}
+
+.Delete-button {
+    background-color: #1E1E1E;
+    color: red;
+    font-family: 'Jomhuria', cursive;
+    border-radius: 0.5em;
+    border: none;
+    cursor: pointer;
+    font-size: 2vw;
+    margin-right: 1vw;
 }

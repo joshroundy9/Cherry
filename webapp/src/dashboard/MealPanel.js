@@ -4,7 +4,7 @@ import { genericDataRequest } from "../utils/DataUtil";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-function MealPanel({ mealId, date, dateId }) {
+function MealPanel({ mealId, time, date, dateId }) {
     const [mealItems, setMealItems] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -16,7 +16,8 @@ function MealPanel({ mealId, date, dateId }) {
                 'POST',
                 {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ` + localStorage.getItem("jwtToken")
+                    'Authorization': `Bearer ` + localStorage.getItem("jwtToken"),
+                    'User-ID': localStorage.getItem("userId")
                 },
                 `{
                 "userID": "${localStorage.getItem("userId")}",
@@ -42,11 +43,31 @@ function MealPanel({ mealId, date, dateId }) {
             await genericDataRequest(
                 `${API_URL}/data/meal-item/delete?mealitemid=${itemId}`, 'DELETE', {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ` + localStorage.getItem("jwtToken")
+                    'Authorization': `Bearer ` + localStorage.getItem("jwtToken"),
+                    'User-ID': localStorage.getItem("userId")
                 },
                 null
             );
             setMealItems(prevItems => prevItems.filter(item => item.itemID !== itemId));
+            setError(null);
+        } catch (err) {
+            setError(err.message);
+        }
+    }
+
+    const updateMealTime = async (mealTime) => {
+        try {
+            const parsableTime = mealTime + ':00'; // Ensure time is in HH:mm:ss format
+            await genericDataRequest(
+                `${API_URL}/data/meal/update-time?mealid=${mealId}&time=${parsableTime}`,
+                'POST',
+                {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ` + localStorage.getItem("jwtToken"),
+                    'User-ID': localStorage.getItem("userId")
+                },
+                null
+            );
             setError(null);
         } catch (err) {
             setError(err.message);
@@ -64,7 +85,8 @@ function MealPanel({ mealId, date, dateId }) {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': `Bearer ` + localStorage.getItem("jwtToken")
+                'Authorization': `Bearer ` + localStorage.getItem("jwtToken"),
+                'User-ID': localStorage.getItem("userId")
             },
             signal: controller.signal
         })
@@ -103,18 +125,27 @@ function MealPanel({ mealId, date, dateId }) {
                 <p>Meal #{mealId}</p>
             </div>
             <div className={"MealPanel-date-header"}>
-                <input type={"datetime-local"} value={date} />
+                <div className={"DateTime-wrapper"}>
+                    <p className={"DateTime-text"}>{date}</p>
+                    <input
+                        className={"DateTime-input"}
+                        type={"time"}
+                        defaultValue={time}
+                        onBlur={e => updateMealTime(e.target.value)}
+                    />
+                </div>
+                <p>Add Meal Items</p>
             </div>
             <div className={"MealItemList-header"}>
 
             </div>
             <div className={"MealItemList"}>
-                <ul>
+                <ul className={"MealItemList-ul"}>
                     {mealItems.map(item => (
-                        <li key={item.itemID}>
-                            <p>{item.itemName}</p>
-                            <p>{item.itemCalories}</p>
-                            <p>{item.itemProtein}</p>
+                        <li className={"MealItemList-li"} key={item.itemID}>
+                            <p style={{marginLeft:'1vw'}}>{item.itemName}</p>
+                            <p style={{marginRight:'10vw'}}>{item.itemCalories}</p>
+                            <p style={{marginRight:'5vw'}}>{item.itemProtein}g</p>
                             <button className={"Delete-button"} type={"button"} onClick={() => removeMealItem(item.itemID)}>
                                 x
                             </button>
