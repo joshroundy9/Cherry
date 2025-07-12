@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import NutritionForm from "./FoodEntry";
 import { useNavigate } from 'react-router-dom';
-import {DailyWeightInput, genericDataRequest} from "../utils/DataUtil";
+import {DailyWeightInput, genericRequest, getDataHeaders} from "../utils/DataUtil";
 import {ErrorState, LoadingState} from "../utils/DashboardUtil";
 
 const API_URL = process.env.REACT_APP_API_URL;
@@ -13,6 +13,10 @@ function DatePanel({ dateId, date }) {
 
     const navigate = useNavigate();
 
+    const retrieveDateNutrition = () => {
+
+    }
+
     const numberOfMeals = () => {
         return meals.length;
     }
@@ -23,14 +27,10 @@ function DatePanel({ dateId, date }) {
 
     const addMeal = async (mealName, mealTime) => {
         try {
-            const responseBody = await genericDataRequest(
+            const responseBody = await genericRequest(
                 `${API_URL}/data/meal`,
                 'POST',
-                {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ` + localStorage.getItem("jwtToken"),
-                    'User-ID': localStorage.getItem("userId")
-                },
+                getDataHeaders(),
                 `{
                 "userID": "${localStorage.getItem("userId")}",
                 "dateID": "${dateId}",
@@ -50,12 +50,8 @@ function DatePanel({ dateId, date }) {
 
     const removeMeal = async (mealId) => {
         try {
-            await genericDataRequest(
-                `${API_URL}/data/meal/delete?mealid=${mealId}`, 'DELETE', {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ` + localStorage.getItem("jwtToken"),
-                    'User-ID': localStorage.getItem("userId")
-                },
+            await genericRequest(
+                `${API_URL}/data/meal/delete?mealid=${mealId}`, 'DELETE', getDataHeaders(),
                 null
             );
             setMeals(prevItems => prevItems.filter(item => item.mealID !== mealId));
@@ -74,11 +70,7 @@ function DatePanel({ dateId, date }) {
 
         fetch(`${API_URL}/data/meal?dateid=${dateId}`, {
             method: 'GET',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': `Bearer ` + localStorage.getItem("jwtToken"),
-                'User-ID': localStorage.getItem("userId")
-            },
+            headers: getDataHeaders(),
             signal: controller.signal
         })
             .then(res => {
@@ -157,8 +149,8 @@ function DatePanel({ dateId, date }) {
             < NutritionForm addDateItem={addMeal} numberOfDateItems={numberOfMeals} />
             <div className={"DatePanel-footer"}>
                 <div className={"DatePanel-footer-text-container"}>
-                    <div className={"DatePanel-footer-text"}>Total Calories: {meals.reduce((acc, item) => acc + item.itemCalories, 0)}</div>
-                    <div className={"DatePanel-footer-text"}>Total Protein: {meals.reduce((acc, item) => acc + item.itemProtein, 0)}g</div>
+                    <div className={"DatePanel-footer-text"}>Total Calories: {totalCalories()}</div>
+                    <div className={"DatePanel-footer-text"}>Total Protein: {totalProtein()}g</div>
                 </div>
                 <button className={"DatePanel-footer-button"} type={"button"} onClick={goBack}>Go Back</button>
             </div>

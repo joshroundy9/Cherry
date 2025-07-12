@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import NutritionForm from "./FoodEntry";
 import { useNavigate } from 'react-router-dom';
-import { genericDataRequest } from "../utils/DataUtil";
+import {genericRequest, getDataHeaders, updateDateNutrition} from "../utils/DataUtil";
 import {ErrorState, LoadingState} from "../utils/DashboardUtil";
 
 const API_URL = process.env.REACT_APP_API_URL;
@@ -17,20 +17,24 @@ function MealPanel({ mealId, time, date, dateId }) {
         return mealItems.length;
     }
 
+    const totalCalories = () => {
+        return mealItems.reduce((acc, item) => acc + item.itemCalories, 0);
+    }
+
+    const totalProtein = () => {
+        return mealItems.reduce((acc, item) => acc + item.itemProtein, 0);
+    }
+
     const goBack = () => {
         navigate('/dashboard', {state: {flex: 'date', date: {dateId}}});
     }
 
     const addMealItem = async (itemName, itemCalories, itemProtein) => {
         try {
-            const responseBody = await genericDataRequest(
+            const responseBody = await genericRequest(
                 `${API_URL}/data/meal-item`,
                 'POST',
-                {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ` + localStorage.getItem("jwtToken"),
-                    'User-ID': localStorage.getItem("userId")
-                },
+                getDataHeaders(),
                 `{
                 "userID": "${localStorage.getItem("userId")}",
                 "dateID": "${dateId}",
@@ -40,10 +44,12 @@ function MealPanel({ mealId, time, date, dateId }) {
                 "itemProtein": "${itemProtein}"
             }`
             );
-            setMealItems(prevItems => [
-                ...prevItems,
-                responseBody
-            ]);
+            const newMealItems = [...mealItems, responseBody];
+            setMealItems(newMealItems);
+            await updateDateNutrition(dateId,
+                newMealItems.reduce((acc, item) => acc + item.itemCalories, 0),
+                newMealItems.reduce((acc, item) => acc + item.itemProtein, 0),
+                setError);
             setError('');
         } catch (err) {
             setError(err.message);
@@ -52,16 +58,19 @@ function MealPanel({ mealId, time, date, dateId }) {
 
     const removeMealItem = async (itemId) => {
         try {
-            await genericDataRequest(
-                `${API_URL}/data/meal-item/delete?mealitemid=${itemId}`, 'DELETE', {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ` + localStorage.getItem("jwtToken"),
-                    'User-ID': localStorage.getItem("userId")
-                },
+            await genericRequest(
+                `${API_URL}/data/meal-item/delete?mealitemid=${itemId}`,
+                'DELETE',
+                getDataHeaders(),
                 null
             );
-            setMealItems(prevItems => prevItems.filter(item => item.itemID !== itemId));
-            setError(null);
+            const newMealItems = mealItems.filter(item => item.itemID !== itemId);
+            setMealItems(newMealItems);
+            await updateDateNutrition(dateId,
+                newMealItems.reduce((acc, item) => acc + item.itemCalories, 0),
+                newMealItems.reduce((acc, item) => acc + item.itemProtein, 0),
+                setError);
+            setError('');
         } catch (err) {
             setError(err.message);
         }
@@ -76,11 +85,7 @@ function MealPanel({ mealId, time, date, dateId }) {
 
         fetch(`${API_URL}/data/meal-item?mealid=${mealId}`, {
             method: 'GET',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': `Bearer ` + localStorage.getItem("jwtToken"),
-                'User-ID': localStorage.getItem("userId")
-            },
+            headers: getDataHeaders(),
             signal: controller.signal
         })
             .then(res => {
@@ -162,8 +167,8 @@ function MealPanel({ mealId, time, date, dateId }) {
             < NutritionForm addMealItem={addMealItem} numberOfMealItems={numberOfMealItems} />
             <div className={"MealPanel-footer"}>
                 <div className={"MealPanel-footer-text-container"}>
-                    <div className={"MealPanel-footer-text"}>Total Calories: {mealItems.reduce((acc, item) => acc + item.itemCalories, 0)}</div>
-                    <div className={"MealPanel-footer-text"}>Total Protein: {mealItems.reduce((acc, item) => acc + item.itemProtein, 0)}g</div>
+                    <div className={"MealPanel-footer-text"}>Total Calories: {totalCalories()}</div>
+                    <div className={"MealPanel-footer-text"}>Total Protein: {totalProtein()}g</div>
                 </div>
                 <button className={"MealPanel-footer-button"} type={"button"} onClick={goBack}>Go Back</button>
             </div>

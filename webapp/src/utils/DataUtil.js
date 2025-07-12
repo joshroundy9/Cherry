@@ -2,7 +2,15 @@ import {useState} from "react";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-export const genericDataRequest = async (url, method, headers, body) => {
+export const getDataHeaders = () => {
+    return {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ` + localStorage.getItem("jwtToken"),
+        'User-ID': localStorage.getItem("userId")
+    }
+}
+
+export const genericRequest = async (url, method, headers, body) => {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 8000); // 8 seconds timeout
     try {
@@ -24,17 +32,27 @@ export const genericDataRequest = async (url, method, headers, body) => {
     }
 };
 
-const updateMealTime = async (mealID, mealTime, setError) => {
+export const updateDateNutrition = async (dateID, totalCalories, totalProtein, setError) => {
+    try {
+        await genericRequest(
+            `${API_URL}/data/date/update-nutrition?dateid=${dateID}&calories=${totalCalories}&protein=${totalProtein}`,
+            'POST',
+            getDataHeaders(),
+            null
+        );
+        setError(null);
+    } catch (err) {
+        setError(err.message);
+    }
+}
+
+export const updateMealTime = async (mealID, mealTime, setError) => {
     try {
         const parsableTime = mealTime + ':00'; // Ensure time is in HH:mm:ss format
-        await genericDataRequest(
+        await genericRequest(
             `${API_URL}/data/meal/update-time?mealid=${mealID}&time=${parsableTime}`,
             'POST',
-            {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ` + localStorage.getItem("jwtToken"),
-                'User-ID': localStorage.getItem("userId")
-            },
+            getDataHeaders(),
             null
         );
         setError(null);
@@ -52,13 +70,11 @@ export function DailyWeightInput (date, setError) {
         setLoading(true);
 
         try {
-            const responseBody = await genericDataRequest(
+            const responseBody = await genericRequest(
                 `${API_URL}/data/date/from-user-and-date?userid=${localStorage.getItem("userId")}&date=${date}`,
                 'GET',
-                {
-                    'Authorization': `Bearer ` + localStorage.getItem("jwtToken"),
-                    'User-ID': localStorage.getItem("userId")
-                }, null);
+                getDataHeaders(),
+                null);
             setWeight(responseBody.dailyWeight);
             setDateId(responseBody.dateID);
         } catch (err) {
@@ -72,13 +88,11 @@ export function DailyWeightInput (date, setError) {
         setLoading(true);
 
         try {
-            await genericDataRequest(
+            await genericRequest(
                 `${API_URL}/data/date/update-weight?dateid=${dateId}&weight=${weight}`,
                 'POST',
-                {
-                    'Authorization': `Bearer ` + localStorage.getItem("jwtToken"),
-                    'User-ID': localStorage.getItem("userId")
-                }, null);
+                getDataHeaders(),
+                null);
             setWeight(weight);
         } catch (err) {
             setError('Failed to update daily weight');

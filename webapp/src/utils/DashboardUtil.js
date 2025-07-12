@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {genericDataRequest} from "./DataUtil";
+import {genericRequest} from "./DataUtil";
 
 export function LoadingState () {
     return (

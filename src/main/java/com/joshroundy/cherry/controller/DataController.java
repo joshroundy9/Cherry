@@ -32,7 +32,7 @@ public class DataController {
     @GetMapping("/date/from-user-and-date")
     public DateEntity getDateFromUserIDAndDate(@RequestParam(value="userid", required=true) Integer userID,
                                                      @RequestParam(value="date", required=true) Date date) {
-        return dataService.findDateByUserIDAndDate(userID, date);
+        return dataService.findDateFromUserIDAndDate(userID, date);
     }
     @GetMapping("/meal")
     public List<MealEntity> getMeals(@RequestParam(value="dateid", required=true) Integer dateID) {
@@ -51,6 +51,11 @@ public class DataController {
     public DateEntity updateDateWeight(@RequestParam(value="dateid", required=true) Integer dateID,
                                        @RequestParam(value="weight", required=true) Double weight) {
         return dataService.updateDateWeight(dateID, weight);
+    }
+    @PostMapping("/date/update-nutrition")
+    public DateEntity updateDateNutrition(@RequestParam(value="dateid", required=true) Integer dateID,
+                                       @RequestParam(value="calories", required=true) Double calories, @RequestParam(value="protein", required=true) Double protein) {
+        return dataService.updateDateNutrition(dateID, calories, protein);
     }
     @PostMapping("/meal")
     public MealEntity createMeal(@RequestBody MealDTO body) {

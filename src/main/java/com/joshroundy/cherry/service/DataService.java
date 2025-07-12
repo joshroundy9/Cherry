@@ -26,12 +26,25 @@ public class DataService {
     public List<DateEntity> findDatesFromUserID(Integer userID) {
         return dateRepository.findByUserID(userID);
     }
+    public DateEntity findDateFromUserIDAndDate(Integer userID, Date date) {
+        return dateRepository.findByUserIDAndDate(userID, date).orElse(
+                createDate(DateDTO.builder()
+                        .userID(userID)
+                        .date(date)
+                        .dailyWeight(0.0)
+                        .dailyCalories(0.0)
+                        .dailyProtein(0.0)
+                        .build())
+        );
+    }
     public DateEntity createDate(DateDTO dateDTO) {
         return dateRepository.save(
                 DateEntity.builder()
                         .date(dateDTO.getDate())
                         .userID(dateDTO.getUserID())
                         .dailyWeight(dateDTO.getDailyWeight())
+                        .dailyCalories(0.0)
+                        .dailyProtein(0.0)
                         .build()
         );
     }
@@ -40,10 +53,11 @@ public class DataService {
         dateEntity.setDailyWeight(weight);
         return dateRepository.save(dateEntity);
     }
-    public DateEntity findDateByUserIDAndDate(Integer userID, Date date) {
-        return findDatesFromUserID(userID).stream().filter(
-                dateEntity -> date.equals(dateEntity.getDate())
-        ).findFirst().orElse(null);
+    public DateEntity updateDateNutrition(Integer dateID, Double calories, Double protein) {
+        var dateEntity = dateRepository.findById(dateID).get();
+        dateEntity.setDailyCalories(calories);
+        dateEntity.setDailyProtein(protein);
+        return dateRepository.save(dateEntity);
     }
     /*Meal methods*/
     public List<MealEntity> findMealsFromDateID(Integer dateID) {

@@ -79,10 +79,9 @@ public class DataServiceIntegrationTest {
     }
     @Test
     void findDateByUserIDAndDate() {
-        when(dateRepository.findByUserID(USER_ID))
-                .thenReturn(List.of(dateEntity, DateEntity.builder()
-                        .date(Date.valueOf("2005-04-21")).build()));
-        var actual = subject.findDateByUserIDAndDate(USER_ID, DATE);
+        when(dateRepository.findByUserIDAndDate(USER_ID, DATE))
+                .thenReturn(Optional.of(dateEntity));
+        var actual = subject.findDateFromUserIDAndDate(USER_ID, DATE);
         assertThat(actual).isNotNull();
         assertThat(actual).isEqualTo(dateEntity);
     }

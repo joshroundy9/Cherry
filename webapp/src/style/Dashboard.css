@@ -53,12 +53,14 @@
 .Calendar-container {
     width: 25vw;
     height: 75vh;
+    min-width: 300px;
     background-color: #2D2D2D;
 }
 
 .Flex-container {
     width: 60vw;
     height: 75vh;
+    min-width: 380px;
     background-color: #2D2D2D;
     margin-left: 5vw;
 }
@@ -164,9 +166,9 @@
     background-color: #1E1E1E;
     border-radius: 0.2em;
     font-size: x-large;
-    padding-left: 0.6vw;
     padding-top: 0.1em;
     width: 26%;
+    min-width: 150px;
 }
 
 .DateTime-input {
@@ -182,12 +184,14 @@
 }
 
 .DateTime-input::-webkit-calendar-picker-indicator {
-    height: 16px;
-    width: 16px;
+    height: 0;
+    width: 0;
+    visibility: hidden;
 }
 
 .DateTime-text {
-    padding-right: 1vw;
+    padding-right: 5px;
+    padding-left: 10px;
     margin: 0;
 }
 
