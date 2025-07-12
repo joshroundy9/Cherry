@@ -7,6 +7,7 @@ import com.joshroundy.cherry.dataobject.entity.MealItemEntity;
 import com.joshroundy.cherry.dataobject.entity.UserEntity;
 import com.joshroundy.cherry.service.DataService;
 import com.joshroundy.cherry.service.UserService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -58,7 +59,7 @@ public class DataController {
         return dataService.updateDateNutrition(dateID, calories, protein);
     }
     @PostMapping("/meal")
-    public MealEntity createMeal(@RequestBody MealDTO body) {
+    public MealEntity createMeal(@RequestBody @Valid MealDTO body) {
         return dataService.createMeal(body);
     }
     @PostMapping("/meal/update-time")
@@ -71,7 +72,7 @@ public class DataController {
         dataService.deleteMeal(mealID);
     }
     @PostMapping("/meal-item")
-    public MealItemEntity createMealItem(@RequestBody MealItemDTO body) {
+    public MealItemEntity createMealItem(@RequestBody @Valid MealItemDTO body) {
 
         return dataService.createMealItem(body);
     }

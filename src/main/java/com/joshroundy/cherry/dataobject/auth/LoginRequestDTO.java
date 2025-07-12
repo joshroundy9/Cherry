@@ -11,7 +11,6 @@ import static com.joshroundy.cherry.constant.AuthorizationConstants.*;
 @Setter
 @Builder
 public class LoginRequestDTO {
-    @Pattern(regexp = USERNAME_REGEX, message = USERNAME_ERROR_MESSAGE)
     private String username;
     private String password;
 }

@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import NutritionForm from "./FoodEntry";
 import { useNavigate } from 'react-router-dom';
 import {genericRequest, getDataHeaders, updateDateNutrition} from "../utils/DataUtil";
-import {ErrorState, LoadingState} from "../utils/DashboardUtil";
+import {ErrorState, LoadingState} from "../utils/DashboardComponents";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
