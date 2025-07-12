@@ -1,4 +1,4 @@
-import {useState} from "react";
+import { format, parseISO, parse } from 'date-fns';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -46,6 +46,20 @@ export const updateDateNutrition = async (dateID, totalCalories, totalProtein, s
     }
 }
 
+export const updateMealNutrition = async (mealID, totalCalories, totalProtein, setError) => {
+    try {
+        await genericRequest(
+            `${API_URL}/data/meal/update-nutrition?mealid=${mealID}&calories=${totalCalories}&protein=${totalProtein}`,
+            'POST',
+            getDataHeaders(),
+            null
+        );
+        setError(null);
+    } catch (err) {
+        setError(err.message);
+    }
+}
+
 export const updateMealTime = async (mealID, mealTime, setError) => {
     try {
         const parsableTime = mealTime + ':00'; // Ensure time is in HH:mm:ss format
@@ -59,4 +73,15 @@ export const updateMealTime = async (mealID, mealTime, setError) => {
     } catch (err) {
         setError(err.message);
     }
+}
+
+export function formatDateWithOrdinal(dateString) {
+    const date = parseISO(dateString);
+    return format(date, "MMMM do, yyyy"); // e.g., August 20th, 2024
+}
+
+export function formatTimeTo12Hour(timeString) {
+    if (!timeString) return '';
+    const date = parse(timeString, 'HH:mm:ss', new Date());
+    return format(date, 'h:mm a'); // e.g., 2:47 PM
 }

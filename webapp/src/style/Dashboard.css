@@ -19,7 +19,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    height: 100%;
     border-radius: 8px;
     background-color: #2D2D2D;
 }
@@ -43,7 +43,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    height: 100%;
     background-color: #2D2D2D;
     color: #FF0606;
     font-size: xx-large;
@@ -285,4 +285,21 @@
     cursor: pointer;
     font-size: x-large;
     align-self: flex-end;
+}
+
+/* DatePanel Styles */
+.Meal-name-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    color: #19A9FA;
+    font-family: 'Jomhuria', cursive;
+    font-size: x-large;
+    border: none;
+    background-color: #1E1E1E;
+    cursor: pointer;
+    text-decoration: ActiveText;
+    padding-left: 0;
 }

@@ -67,6 +67,11 @@ public class DataController {
                                      @RequestParam(value="time", required=true) Time time) {
         return dataService.updateMealTime(mealID, time);
     }
+    @PostMapping("/meal/update-nutrition")
+    public MealEntity updateMealNutrition(@RequestParam(value="mealid", required=true) Integer mealID,
+                                          @RequestParam(value="calories", required=true) Double calories, @RequestParam(value="protein", required=true) Double protein) {
+        return dataService.updateMealNutrition(mealID, calories, protein);
+    }
     @DeleteMapping("/meal/delete")
     public void deleteMeal(@RequestParam(value="mealid", required=true) Integer mealID) {
         dataService.deleteMeal(mealID);

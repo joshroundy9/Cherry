@@ -31,7 +31,7 @@ public class UserEntity implements UserDetails {
     private String passwordHash;
     private Date dateOfBirth;
     @Min(value = 0, message = "Height must be a positive number")
-    @Max(value = 0, message = "Height must be a positive number")
+    @Max(value = 100, message = "Height must be less than 100 inches")
     private Double height;
     private Double weight;
 

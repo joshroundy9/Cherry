@@ -20,5 +20,7 @@ public class MealEntity {
     String mealName;
     Integer userID;
     Integer dateID;
+    Double mealCalories;
+    Double mealProtein;
     Time time;
 }

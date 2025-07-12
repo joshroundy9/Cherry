@@ -1,5 +1,5 @@
-import {useState} from "react";
-import {genericRequest, getDataHeaders} from "./DataUtil";
+import {useEffect, useState} from "react";
+import {genericRequest, getDataHeaders} from "../utils/DashboardUtil";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -61,15 +61,13 @@ export function DailyWeightInput (date, setError) {
     if (loading) return <div className={"Info-message"}>Loading...</div>;
 
     return (
-        <div className={"Daily-weight-input-container"}>
-            <input
-                className={"Daily-weight-input"}
-                type="number"
-                value={weight}
-                onChange={e => setWeight(e.target.value)}
-                onBlur={updateDailyWeight}
-                placeholder="Enter your weight here"
-            />
-        </div>
+        <input
+            className={"Daily-weight-input"}
+            type="number"
+            value={getDailyWeight}
+            onChange={e => setWeight(e.target.value)}
+            onBlur={updateDailyWeight}
+            placeholder="Enter weight in lbs"
+        />
     );
 }

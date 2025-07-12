@@ -1,32 +1,31 @@
 import {useEffect, useState} from "react";
 import NutritionForm from "./FoodEntry";
-import { useNavigate } from 'react-router-dom';
-import {genericRequest, getDataHeaders, updateDateNutrition} from "../utils/DataUtil";
-import {ErrorState, LoadingState} from "../utils/DashboardComponents";
+import {genericRequest, getDataHeaders, updateDateNutrition, updateMealNutrition} from "../utils/DashboardUtil";
+import {ErrorState, LoadingState} from "./DashboardComponents";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-function MealPanel({ mealId, time, date, dateId }) {
+function MealPanel({switchPanel, mealName, mealId, time, date, dateId }) {
     const [mealItems, setMealItems] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
-    const navigate = useNavigate();
 
     const numberOfMealItems = () => {
         return mealItems.length;
     }
 
-    const totalCalories = () => {
-        return mealItems.reduce((acc, item) => acc + item.itemCalories, 0);
+    const totalCalories = (itemList) => {
+        return itemList.reduce((acc, item) => acc + item.itemCalories, 0);
     }
 
-    const totalProtein = () => {
-        return mealItems.reduce((acc, item) => acc + item.itemProtein, 0);
+    const totalProtein = (itemList) => {
+        return itemList.reduce((acc, item) => acc + item.itemProtein, 0);
     }
 
     const goBack = () => {
-        navigate('/dashboard', {state: {flex: 'date', date: {dateId}}});
+        localStorage.setItem('dateId', dateId);
+        localStorage.setItem('date', date);
+        switchPanel('date');
     }
 
     const addMealItem = async (itemName, itemCalories, itemProtein) => {
@@ -46,9 +45,9 @@ function MealPanel({ mealId, time, date, dateId }) {
             );
             const newMealItems = [...mealItems, responseBody];
             setMealItems(newMealItems);
-            await updateDateNutrition(dateId,
-                newMealItems.reduce((acc, item) => acc + item.itemCalories, 0),
-                newMealItems.reduce((acc, item) => acc + item.itemProtein, 0),
+            await updateMealNutrition(mealId,
+                totalCalories(newMealItems),
+                totalProtein(newMealItems),
                 setError);
             setError('');
         } catch (err) {
@@ -66,9 +65,9 @@ function MealPanel({ mealId, time, date, dateId }) {
             );
             const newMealItems = mealItems.filter(item => item.itemID !== itemId);
             setMealItems(newMealItems);
-            await updateDateNutrition(dateId,
-                newMealItems.reduce((acc, item) => acc + item.itemCalories, 0),
-                newMealItems.reduce((acc, item) => acc + item.itemProtein, 0),
+            await updateMealNutrition(mealId,
+                totalCalories(newMealItems),
+                totalProtein(newMealItems),
                 setError);
             setError('');
         } catch (err) {
@@ -105,6 +104,7 @@ function MealPanel({ mealId, time, date, dateId }) {
             })
             .finally(() => {
                 clearTimeout(timeoutId);
+                setError('');
                 setLoading(false);
             });
 
@@ -120,7 +120,7 @@ function MealPanel({ mealId, time, date, dateId }) {
     return (
         <div className="MealPanel">
             <div className="MealPanel-header">
-                Meal #{mealId}
+                {mealName}
             </div>
             <div className={"MealPanel-date-header"}>
                 <div className={"DateTime-wrapper"}>
@@ -167,8 +167,8 @@ function MealPanel({ mealId, time, date, dateId }) {
             < NutritionForm addMealItem={addMealItem} numberOfMealItems={numberOfMealItems} />
             <div className={"MealPanel-footer"}>
                 <div className={"MealPanel-footer-text-container"}>
-                    <div className={"MealPanel-footer-text"}>Total Calories: {totalCalories()}</div>
-                    <div className={"MealPanel-footer-text"}>Total Protein: {totalProtein()}g</div>
+                    <div className={"MealPanel-footer-text"}>Total Calories: {totalCalories(mealItems)}</div>
+                    <div className={"MealPanel-footer-text"}>Total Protein: {totalProtein(mealItems)}g</div>
                 </div>
                 <button className={"MealPanel-footer-button"} type={"button"} onClick={goBack}>Go Back</button>
             </div>

@@ -68,11 +68,20 @@ public class DataService {
                         .userID(mealDTO.getUserID())
                         .dateID(mealDTO.getDateID())
                         .time(mealDTO.getTime())
+                        .mealName(mealDTO.getMealName())
+                        .mealCalories(0.0)
+                        .mealProtein(0.0)
                 .build());
     }
     public MealEntity updateMealTime(Integer mealID, Time time) {
         var mealEntity = mealRepository.findById(mealID).get();
         mealEntity.setTime(time);
+        return mealRepository.save(mealEntity);
+    }
+    public MealEntity updateMealNutrition(Integer mealID, Double calories, Double protein) {
+        var mealEntity = mealRepository.findById(mealID).get();
+        mealEntity.setMealCalories(calories);
+        mealEntity.setMealProtein(protein);
         return mealRepository.save(mealEntity);
     }
     public void deleteMeal(Integer mealID) {
