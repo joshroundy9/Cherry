@@ -2,6 +2,8 @@ package com.joshroundy.cherry.dataobject.entity;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,9 +26,12 @@ public class UserEntity implements UserDetails {
     private Integer userID;
     @Column(unique = true, nullable = false)
     private String username;
+    @Column(unique = true, nullable = false)
     private String email;
     private String passwordHash;
     private Date dateOfBirth;
+    @Min(value = 0, message = "Height must be a positive number")
+    @Max(value = 0, message = "Height must be a positive number")
     private Double height;
     private Double weight;
 
