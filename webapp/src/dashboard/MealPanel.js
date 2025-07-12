@@ -10,6 +10,10 @@ function MealPanel({ mealId, time, date, dateId }) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    const numberOfMealItems = () => {
+        return mealItems.length;
+    }
+
     const addMealItem = async (itemName, itemCalories, itemProtein) => {
         try {
             const responseBody = await genericDataRequest(
@@ -33,7 +37,7 @@ function MealPanel({ mealId, time, date, dateId }) {
                 ...prevItems,
                 responseBody
             ]);
-            setError(null);
+            setError('');
         } catch (err) {
             setError(err.message);
         }
@@ -123,11 +127,11 @@ function MealPanel({ mealId, time, date, dateId }) {
     return (
         <div className="MealPanel">
             <div className="MealPanel-header">
-                <p>Meal #{mealId}</p>
+                Meal #{mealId}
             </div>
             <div className={"MealPanel-date-header"}>
                 <div className={"DateTime-wrapper"}>
-                    <p className={"DateTime-text"}>{date}</p>
+                    <div className={"DateTime-text"}>{date}</div>
                     <input
                         className={"DateTime-input"}
                         type={"time"}
@@ -135,35 +139,39 @@ function MealPanel({ mealId, time, date, dateId }) {
                         onBlur={e => updateMealTime(e.target.value)}
                     />
                 </div>
-                <p>Add Meal Items</p>
+                <div className={"MealPanel-date-header-text"}>Add Meal Items</div>
             </div>
             <div className={"MealItemList-header"}>
 
             </div>
             <div className={"MealItemList"}>
                 <ul className={"MealItemList-ul"}>
-                    <div className={"MealItemList-li"}>
-                        <p style={{marginLeft: '1vw', color: 'white'}}>Item Name</p>
-                        <p></p>
-                        <p style={{marginRight: '10vw', color: 'white'}}>Calories</p>
-                        <p style={{marginRight: '5vw', color: 'white'}}>Protein</p>
-                    </div>
+                    <li className={"MealItemList-li"}>
+                        <div style={{color: 'white'}}>Food Description</div>
+                        <div/>
+                        <div style={{marginRight: '0vw', color: 'white'}}>Calories</div>
+                        <div/>
+                        <div style={{marginRight: '1.5vw', color: 'white'}}>Protein</div>
+                        <button className={"Delete-button"} style={{visibility: 'hidden'}} type={"button"}>x</button>
+                    </li>
                 </ul>
                 <ul className={"MealItemList-ul"}>
                     {mealItems.map(item => (
                         <li className={"MealItemList-li"} key={item.itemID}>
-                            <p style={{marginLeft:'1vw'}}>{item.itemName}</p>
-                            <p></p>
-                            <p style={{marginRight:'10vw'}}>{item.itemCalories}</p>
-                            <p style={{marginRight:'5vw'}}>{item.itemProtein}g</p>
-                            <button className={"Delete-button"} type={"button"} onClick={() => removeMealItem(item.itemID)}>
-                                x
+                            <div>{item.itemName}</div>
+                            <div/>
+                            <div>{item.itemCalories}</div>
+                            <div/>
+                            <div style={{marginRight: '1.5vw', color: '#19A9FA'}}>{item.itemProtein}g</div>
+                            <button className={"Delete-button"} type={"button"}
+                                    onClick={() => removeMealItem(item.itemID)}>
+                                X
                             </button>
                         </li>
                     ))}
                 </ul>
             </div>
-            < NutritionForm addMealItem={addMealItem} />
+            < NutritionForm addMealItem={addMealItem} numberOfMealItems={numberOfMealItems} />
         </div>
     );
 }

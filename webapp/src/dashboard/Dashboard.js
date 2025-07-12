@@ -9,7 +9,12 @@ function Dashboard({ onDashboard }) {
 
     return (
         <div className={"Dashboard-background"}>
-            <MealPanel mealId={"1"} dateId={"1"} date={"07/10/2025"} time={"09:00"}/>
+            <div className={"Calendar-container"}>
+
+            </div>
+            <div className={"Flex-container"}>
+                <MealPanel mealId={"1"} dateId={"1"} date={"07/10/2025"} time={"09:00"}/>
+            </div>
         </div>
     );
 }

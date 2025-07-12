@@ -2,7 +2,19 @@
     text-align: center;
     max-height: 100vh;
     overflow: hidden;
+
 }
+
+.Dashboard-background {
+    background-color: #1E1E1E;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 95vh;
+}
+
 .Loading-container {
     display: flex;
     align-items: center;
@@ -34,15 +46,28 @@
     height: 100vh;
     background-color: #2D2D2D;
     color: #FF0606;
-    font-size: 3vw;
+    font-size: xx-large;
     font-family: 'Jomhuria', cursive;
 }
+
+.Calendar-container {
+    width: 25vw;
+    height: 75vh;
+    background-color: #2D2D2D;
+}
+
+.Flex-container {
+    width: 60vw;
+    height: 75vh;
+    background-color: #2D2D2D;
+    margin-left: 5vw;
+}
+
 /*
  * Nutrition Form Styles
  */
 .Nutrition-form {
-    width: 90%;
-    margin-left: 1%;
+    width: 98.7%;
     background-color: #2D2D2D;
     display: flex;
     flex-direction: row;
@@ -56,64 +81,91 @@
     color: white;
     font-family: 'Jomhuria', cursive;
     width: 85%;
-    border-radius: 0.5em;
+    border-radius: 0.2em;
     border: none;
-    padding-left: 0.5em;
-    font-size: 2vw;
+    font-size: x-large;
+    padding-left: 1vw;
+}
+.Nutrition-form-input::placeholder {
+    color: #aeaeae;
 }
 
 .Nutrition-form-button {
     background-color: #1E1E1E;
     color: white;
     font-family: 'Jomhuria', cursive;
-    width: 15%;
-    border-radius: 0.5em;
+    width: 150px;
+    border-radius: 0.2em;
     border: none;
-    margin-left: 0.5em;
     cursor: pointer;
-    font-size: 2vw;
+    font-size: x-large;
+    margin-left: 1%;
+}
+
+.Nutrition-form-error {
+    color: #FF0606;
+    font-family: 'Jomhuria', cursive;
+    font-size: x-large;
+    padding-top: 0.5em;
+}
+
+.Nutrition-form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    width: 100%;
+    height: 5vw;
 }
 /*
  * Meal Panel Styles
  */
 .MealPanel {
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     background-color: #2D2D2D;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
+    gap: 0;
 }
 .MealPanel-header {
     color: white;
     font-family: 'Jomhuria', cursive;
-    font-size: 3vw;
-    margin-bottom: 1em;
+    font-size: xx-large;
+    line-height: 1.2;
 }
 
 .MealPanel-date-header {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
     color: white;
     font-family: 'Jomhuria', cursive;
-    font-size: 3vw;
+    font-size: xx-large;
+    margin-bottom: 0.3em;
+    width: 98.7%;
+}
+
+.MealPanel-date-header-text {
+    font-size: xx-large;
+    text-align: center;
+    width: 46%;
 }
 
 .DateTime-wrapper {
-    position: absolute;
-    left: 1vw;
+    flex: 0 0 auto;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     background-color: #1E1E1E;
-    border-radius: 0.7em;
-    font-size: 2vw;
-    padding-right: 1vw;
-    padding-left: 1vw;
+    border-radius: 0.2em;
+    font-size: x-large;
+    padding-left: 0.6vw;
+    padding-top: 0.1em;
+    width: 26%;
 }
 
 .DateTime-input {
@@ -129,25 +181,28 @@
 }
 
 .DateTime-input::-webkit-calendar-picker-indicator {
-    height: 1.5vw;
-    width: 1.5vw;
+    height: 16px;
+    width: 16px;
 }
 
 .DateTime-text {
     padding-right: 1vw;
+    margin: 0;
 }
 
 .MealItemList {
-width: 100%;
+    width: 97%;
 }
 
 .MealItemList-ul {
     list-style-type: none;
-    width: 90%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0 0 0 3%;
+    justify-content: center;
+    margin-block: 0;
+    padding-inline-start: 0;
 }
 
 .MealItemList-li {
@@ -155,13 +210,28 @@ width: 100%;
     background-color: #1E1E1E;
     color: #19A9FA;
     font-family: 'Jomhuria', cursive;
-    border-radius: 0.5em;
+    border-radius: 0.2em;
     margin-bottom: 0.1em;
     display: grid;
-    grid-template-columns: auto 2fr auto auto auto;
+    grid-template-columns: auto 2fr auto 0.1fr 0.1fr auto;
     align-items: center;
-    font-size: 2vw;
+    font-size: x-large;
     padding-left: 1vw;
+    padding-top: 0.1em;
+}
+
+.MealItemList-li > div:nth-child(4) {
+    width: 50px;
+    text-align: right;
+    margin-right: 0;
+    color: white;
+}
+
+.MealItemList-li > div:nth-child(5) {
+    width: 50px;
+    text-align: right;
+    margin-right: 0;
+    color: white;
 }
 
 .MealItemList-li p {
@@ -172,9 +242,9 @@ width: 100%;
     background-color: #1E1E1E;
     color: red;
     font-family: 'Jomhuria', cursive;
-    border-radius: 0.5em;
+    border-radius: 0.2em;
     border: none;
     cursor: pointer;
-    font-size: 2vw;
+    font-size: x-large;
     margin-right: 1vw;
 }
