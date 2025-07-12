@@ -49,13 +49,13 @@ function NutritionForm({ addMealItem, numberOfMealItems }) {
                     type="text"
                     value={foodEntry}
                     onChange={e => setFoodEntry(e.target.value)}
-                    placeholder="Describe what you ate here, the more specific the better!"
+                    placeholder="Enter what you ate here, the more specific the better!"
                 />
                 <button className={"Nutrition-form-button"} type="submit">Add New Item</button>
             </form>
             <div className={"Nutrition-form-error"}>
                 {error && <div className={"Error-message"}>{error}</div>}
-                {numberOfMealItems() >= 10 && <div className={"Error-message"}>Meal item limit reached!</div>}
+                {numberOfMealItems() >= 12 && <div className={"Error-message"}>Meal item limit reached!</div>}
             </div>
         </div>
     );

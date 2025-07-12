@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import NutritionForm from "./FoodEntry";
+import { useNavigate } from 'react-router-dom';
 import { genericDataRequest } from "../utils/DataUtil";
 import {ErrorState, LoadingState} from "../utils/DashboardUtil";
 
@@ -10,8 +11,14 @@ function MealPanel({ mealId, time, date, dateId }) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    const navigate = useNavigate();
+
     const numberOfMealItems = () => {
         return mealItems.length;
+    }
+
+    const goBack = () => {
+        navigate('/dashboard', {state: {flex: 'date', date: {dateId}}});
     }
 
     const addMealItem = async (itemName, itemCalories, itemProtein) => {
@@ -54,25 +61,6 @@ function MealPanel({ mealId, time, date, dateId }) {
                 null
             );
             setMealItems(prevItems => prevItems.filter(item => item.itemID !== itemId));
-            setError(null);
-        } catch (err) {
-            setError(err.message);
-        }
-    }
-
-    const updateMealTime = async (mealTime) => {
-        try {
-            const parsableTime = mealTime + ':00'; // Ensure time is in HH:mm:ss format
-            await genericDataRequest(
-                `${API_URL}/data/meal/update-time?mealid=${mealId}&time=${parsableTime}`,
-                'POST',
-                {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ` + localStorage.getItem("jwtToken"),
-                    'User-ID': localStorage.getItem("userId")
-                },
-                null
-            );
             setError(null);
         } catch (err) {
             setError(err.message);
@@ -136,7 +124,7 @@ function MealPanel({ mealId, time, date, dateId }) {
                         className={"DateTime-input"}
                         type={"time"}
                         defaultValue={time}
-                        onBlur={e => updateMealTime(e.target.value)}
+                        disabled={true}
                     />
                 </div>
                 <div className={"MealPanel-date-header-text"}>Add Meal Items</div>
@@ -172,6 +160,13 @@ function MealPanel({ mealId, time, date, dateId }) {
                 </ul>
             </div>
             < NutritionForm addMealItem={addMealItem} numberOfMealItems={numberOfMealItems} />
+            <div className={"MealPanel-footer"}>
+                <div className={"MealPanel-footer-text-container"}>
+                    <div className={"MealPanel-footer-text"}>Total Calories: {mealItems.reduce((acc, item) => acc + item.itemCalories, 0)}</div>
+                    <div className={"MealPanel-footer-text"}>Total Protein: {mealItems.reduce((acc, item) => acc + item.itemProtein, 0)}g</div>
+                </div>
+                <button className={"MealPanel-footer-button"} type={"button"} onClick={goBack}>Go Back</button>
+            </div>
         </div>
     );
 }
