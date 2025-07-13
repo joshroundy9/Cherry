@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.sql.Date;
@@ -80,8 +81,14 @@ public class DataServiceIntegrationTest {
     @Test
     void findDateByUserIDAndDate() {
         when(dateRepository.findByUserIDAndDate(USER_ID, DATE))
-                .thenReturn(Optional.of(dateEntity));
+                .thenReturn(Optional.empty());
+        when(dateRepository.save(any()))
+                .thenReturn(dateEntity);
         var actual = subject.findDateFromUserIDAndDate(USER_ID, DATE);
+        when(dateRepository.findByUserIDAndDate(USER_ID, DATE))
+                .thenReturn(Optional.of(dateEntity));
+        var secondCall = subject.findDateFromUserIDAndDate(USER_ID, DATE);
+        assertThat(actual.getDateID()).isEqualTo(secondCall.getDateID());
         assertThat(actual).isNotNull();
         assertThat(actual).isEqualTo(dateEntity);
     }
@@ -103,7 +110,7 @@ public class DataServiceIntegrationTest {
         when(dateRepository.findById(any())).thenReturn(Optional.ofNullable(dateEntity));
         when(dateRepository.save(any(DateEntity.class)))
                 .thenAnswer(functionCall -> functionCall.getArguments()[0]);
-        var actual = subject.updateDateWeight(DATE_ID, updatedWeight);
+        var actual = subject.updateDateWeight(DATE_ID, updatedWeight, USER_ID);
         assertThat(actual).isNotNull();
         assertThat(actual.getDailyWeight()).isEqualTo(updatedWeight);
     }
@@ -140,7 +147,7 @@ public class DataServiceIntegrationTest {
         when(mealRepository.findById(any())).thenReturn(Optional.ofNullable(mealEntity));
         when(mealRepository.save(any(MealEntity.class)))
                 .thenAnswer(functionCall -> functionCall.getArguments()[0]);
-        var actual = subject.updateMealTime(DATE_ID, newTime);
+        var actual = subject.updateMealTime(DATE_ID, newTime, USER_ID);
         assertThat(actual).isNotNull();
         assertThat(actual.getTime()).isEqualTo(newTime);
     }
@@ -180,7 +187,7 @@ public class DataServiceIntegrationTest {
         when(mealItemRepository.findById(any())).thenReturn(Optional.ofNullable(mealItemEntity));
         when(mealItemRepository.save(any(MealItemEntity.class)))
                 .thenAnswer(functionCall -> functionCall.getArguments()[0]);
-        var actual = subject.updateMealItemName(MEAL_ITEM_ID, newName);
+        var actual = subject.updateMealItemName(MEAL_ITEM_ID, newName, USER_ID);
         assertThat(actual).isNotNull();
         assertThat(actual.getItemName()).isEqualTo(newName);
     }
@@ -191,7 +198,7 @@ public class DataServiceIntegrationTest {
         when(mealItemRepository.findById(any())).thenReturn(Optional.ofNullable(mealItemEntity));
         when(mealItemRepository.save(any(MealItemEntity.class)))
                 .thenAnswer(functionCall -> functionCall.getArguments()[0]);
-        var actual = subject.updateMealItemNutrition(MEAL_ITEM_ID, newCalories, newProtein);
+        var actual = subject.updateMealItemNutrition(MEAL_ITEM_ID, newCalories, newProtein, USER_ID);
         assertThat(actual).isNotNull();
         assertThat(actual.getItemCalories()).isEqualTo(newCalories);
     }

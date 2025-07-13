@@ -136,7 +136,7 @@
 .MealPanel-header {
     color: white;
     font-family: 'Jomhuria', cursive;
-    font-size: xx-large;
+    font-size: xxx-large;
     line-height: 1.2;
 }
 
@@ -154,7 +154,7 @@
 .MealPanel-date-header-text {
     font-size: xx-large;
     text-align: center;
-    width: 46%;
+    width: 48%;
 }
 
 .DateTime-wrapper {
@@ -272,6 +272,7 @@
     display: flex;
     flex-direction: row;
     align-items: flex-end;
+    font-size: 25px;
     gap: 1em;
 }
 
@@ -302,4 +303,77 @@
     cursor: pointer;
     text-decoration: ActiveText;
     padding-left: 0;
+}
+
+.Meal-form {
+    width: 98.7%;
+    background-color: #2D2D2D;
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    justify-content: start;
+    color: white;
+}
+
+.Meal-form-input {
+    padding-left: 32px; /* Adjust for icon + spacing */
+    background: #1E1E1E url('/public/addicon.png') no-repeat 8px center;
+    background-size: 16px 16px;
+    color: white;
+    font-family: 'Jomhuria', cursive;
+    width: 80%;
+    border-radius: 0.2em;
+    border: none;
+    font-size: x-large;
+}
+
+.DateTime-meal-input {
+    font-family: 'Jomhuria', cursive;
+    font-size: x-large;
+    border: none;
+    color: inherit;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    margin-left: 1%;
+    background-color: #1E1E1E;
+    border-radius: 0.2em;
+    padding: 0 0 0 5px;
+}
+
+.DateTime-meal-input::-webkit-calendar-picker-indicator {
+    background: url('data:image/svg+xml;utf8,<svg fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11zm0-13H5V6h14v1z"/></svg>') no-repeat center;
+    filter: none;
+    height: 24px;
+    width: 24px;
+    background-size: 20px 20px;
+    vertical-align: middle;
+    padding: 0;
+}
+/* Daily Weight Styles */
+.Daily-weight-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.Daily-weight-input {
+    width: 35px;
+    font-size: x-large;
+    font-family: 'Jomhuria', cursive;
+    padding: 0;
+    background-color: #1E1E1E;
+    border: none;
+    color: #19A9FA;
+    text-decoration: underline;
+    text-align: center;
+}
+
+/* Hide native arrows */
+.Daily-weight-input::-webkit-outer-spin-button,
+.Daily-weight-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }

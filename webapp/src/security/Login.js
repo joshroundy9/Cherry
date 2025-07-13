@@ -30,6 +30,7 @@ function Login({ onLogin }) {
                 localStorage.setItem('jwtToken', data.jwt);
                 localStorage.setItem('userId', data.user.userID);
                 localStorage.setItem('username', data.user.username);
+                localStorage.setItem('weight', data.user.weight);
                 onLogin(data);
                 setTimeout(() => {
                     navigate('/dashboard');

@@ -4,10 +4,10 @@ import {
     genericRequest,
     getDataHeaders,
     updateDateNutrition,
-    updateMealNutrition
+    updateMealNutrition, validateTimeString
 } from "../utils/DashboardUtil";
 import {DailyWeightInput, ErrorState, LoadingState} from "./DashboardComponents";
-import {Link} from "react-router-dom";
+import MealEntry from "./MealEntry";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -47,8 +47,9 @@ function DatePanel({ switchPanel, dateId, date }) {
         switchPanel('meal');
     }
 
-    const addMeal = async (mealName, mealTime) => {
+    const addMeal = async (mealName, mealTime, setLocalError) => {
         try {
+            const validMealTime = validateTimeString(mealTime);
             const responseBody = await genericRequest(
                 `${API_URL}/data/meal`,
                 'POST',
@@ -57,18 +58,18 @@ function DatePanel({ switchPanel, dateId, date }) {
                 "userID": "${localStorage.getItem("userId")}",
                 "dateID": "${dateId}",
                 "mealName": "${mealName}",
-                "time": "${mealTime}"
+                "time": "${validMealTime}"
             }`
             );
             const newMeals = [...meals, responseBody];
             setMeals(newMeals);
-            await updateDateNutrition(date,
+            await updateDateNutrition(dateId,
                 totalCalories(newMeals),
                 totalProtein(newMeals),
-                setError);
-            setError('');
+                setLocalError);
+            setLocalError('');
         } catch (err) {
-            setError(err.message);
+            setLocalError(err.message);
         }
     };
 
@@ -80,7 +81,7 @@ function DatePanel({ switchPanel, dateId, date }) {
             );
             const newMeals = meals.filter(item => item.mealID !== mealId)
             setMeals(newMeals);
-            await updateDateNutrition(date,
+            await updateDateNutrition(dateId,
                 totalCalories(newMeals),
                 totalProtein(newMeals),
                 setError);
@@ -139,7 +140,7 @@ function DatePanel({ switchPanel, dateId, date }) {
             </div>
             <div className={"MealPanel-date-header"}>
                 <div className={"DateTime-wrapper"}>
-                    <DailyWeightInput date={date} setError={setError} />
+                    <DailyWeightInput date={date} dateId={dateId} setError={setError} />
                 </div>
                 <div className={"MealPanel-date-header-text"}>Add Meals</div>
             </div>
@@ -159,7 +160,7 @@ function DatePanel({ switchPanel, dateId, date }) {
                 </ul>
                 <ul className={"MealItemList-ul"}>
                     {meals.map(item => (
-                        <li className={"MealItemList-li"} key={item.mealID}>
+                        <li className={"MealItemList-li"} style={{paddingTop: '1.5vh', paddingBottom: '1.5vh'}} key={item.mealID}>
                             <button type={'button'} onClick={() => goToMealPanel(item.mealName, item.mealID, item.time)} className={'Meal-name-wrapper'}>{item.mealName} <div style={{color: 'white'}}>{formatTimeTo12Hour(item.time)}</div></button>
                             <div/>
                             <div>{item.mealCalories}</div>
@@ -173,6 +174,7 @@ function DatePanel({ switchPanel, dateId, date }) {
                     ))}
                 </ul>
             </div>
+            < MealEntry addMeal={addMeal} numberOfMeals={numberOfMeals} />
 
             <div className={"MealPanel-footer"}>
                 <div className={"MealPanel-footer-text-container"}>

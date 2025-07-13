@@ -22,7 +22,7 @@ function Dashboard({ onDashboard }) {
     } else if (selectedPanel === 'date') {
         // TODO: UNCOMMENT THIS WHEN DatePanel IS READY
         // panelComponent = <DatePanel date={localStorage.getItem('date')} dateId={localStorage.getItem('dateId')} />;
-        panelComponent = <DatePanel switchPanel={switchPanel} date={'2024-08-20'} dateId={'1'} />;
+        panelComponent = <DatePanel switchPanel={switchPanel} date={'2024-08-20'} dateId={'2'} />;
     } else {
         panelComponent = <div>generic panel</div>;
     }

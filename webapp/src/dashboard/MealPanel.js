@@ -28,7 +28,7 @@ function MealPanel({switchPanel, mealName, mealId, time, date, dateId }) {
         switchPanel('date');
     }
 
-    const addMealItem = async (itemName, itemCalories, itemProtein) => {
+    const addMealItem = async (itemName, itemCalories, itemProtein, setLocalError) => {
         try {
             const responseBody = await genericRequest(
                 `${API_URL}/data/meal-item`,
@@ -48,10 +48,10 @@ function MealPanel({switchPanel, mealName, mealId, time, date, dateId }) {
             await updateMealNutrition(mealId,
                 totalCalories(newMealItems),
                 totalProtein(newMealItems),
-                setError);
-            setError('');
+                setLocalError);
+            setLocalError('');
         } catch (err) {
-            setError(err.message);
+            setLocalError(err.message);
         }
     };
 
@@ -150,7 +150,7 @@ function MealPanel({switchPanel, mealName, mealId, time, date, dateId }) {
                 </ul>
                 <ul className={"MealItemList-ul"}>
                     {mealItems.map(item => (
-                        <li className={"MealItemList-li"} key={item.itemID}>
+                        <li className={"MealItemList-li"} style={{paddingTop: '0.4vh', paddingBottom: '0.5vh'}} key={item.itemID}>
                             <div>{item.itemName}</div>
                             <div/>
                             <div>{item.itemCalories}</div>

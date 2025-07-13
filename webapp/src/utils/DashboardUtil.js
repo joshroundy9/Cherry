@@ -85,3 +85,15 @@ export function formatTimeTo12Hour(timeString) {
     const date = parse(timeString, 'HH:mm:ss', new Date());
     return format(date, 'h:mm a'); // e.g., 2:47 PM
 }
+
+export function getCurrentDate() {
+    return format(new Date(), 'yyyy-MM-dd');
+}
+
+export function validateTimeString(timeString) {
+    const hours = timeString.split(':')[0];
+    if (parseInt(hours) < 10 && !timeString.includes('0')) {
+        timeString = '0' + timeString; // Ensure leading zero for hours < 10
+    }
+    return timeString + ':00';
+}

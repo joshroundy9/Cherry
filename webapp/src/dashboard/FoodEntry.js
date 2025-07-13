@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import MealPanel from "./MealPanel";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -9,7 +8,7 @@ function NutritionForm({ addMealItem, numberOfMealItems }) {
     const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e) => {
-        if (loading) return; // Prevent multiple submissions
+        if (loading) return;
         setLoading(true);
 
         e.preventDefault();
@@ -27,7 +26,7 @@ function NutritionForm({ addMealItem, numberOfMealItems }) {
             if (response.ok) {
                 const data = await response.json();
                 if (data.isValidEntry) {
-                    addMealItem(data.foodEntry, data.calories, data.protein);
+                    addMealItem(data.foodEntry, data.calories, data.protein, setError);
                 } else {
                     setError('Invalid food entry. Please try again with a more specific description.');
                 }
@@ -55,7 +54,7 @@ function NutritionForm({ addMealItem, numberOfMealItems }) {
             </form>
             <div className={"Nutrition-form-error"}>
                 {error && <div className={"Error-message"}>{error}</div>}
-                {numberOfMealItems() >= 12 && <div className={"Error-message"}>Meal item limit reached!</div>}
+                {numberOfMealItems() >= 10 && <div className={"Error-message"}>Meal item limit reached!</div>}
             </div>
         </div>
     );
