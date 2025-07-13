@@ -274,6 +274,11 @@
     align-items: flex-end;
     font-size: 25px;
     gap: 1em;
+    background-color: #1E1E1E;
+    border-radius: 0.2em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    padding-top: 0.1em;
 }
 
 .Panel-footer-button {
@@ -281,8 +286,9 @@
     color: white;
     font-family: 'Jomhuria', cursive;
     width: 100px;
-    border-radius: 0.1em;
+    padding-top: 0.1em;
     border: none;
+    border-radius: 0.2em;
     cursor: pointer;
     font-size: x-large;
     align-self: flex-end;
