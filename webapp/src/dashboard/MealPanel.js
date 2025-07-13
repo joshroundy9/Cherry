@@ -145,7 +145,7 @@ function MealPanel({switchPanel, mealName, mealId, time, date, dateId }) {
                         <div style={{marginRight: '0vw', color: 'white'}}>Calories</div>
                         <div/>
                         <div style={{marginRight: '1.5vw', color: 'white'}}>Protein</div>
-                        <button className={"Delete-button"} style={{visibility: 'hidden'}} type={"button"}>x</button>
+                        <button className={"Delete-button"} style={{visibility: 'hidden'}} type={"button"}>X</button>
                     </li>
                 </ul>
                 <ul className={"MealItemList-ul"}>

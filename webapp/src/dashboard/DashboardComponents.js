@@ -14,7 +14,8 @@ export function LoadingState () {
 export function ErrorState ({ message }) {
     return (
         <div className="Error-container">
-            <p>{message}</p>
+            <div>{message}</div>
+            <button className="Panel-footer-button" onClick={() => window.location.reload()}>Reload</button>
         </div>
     );
 }

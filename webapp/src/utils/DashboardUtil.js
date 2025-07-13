@@ -62,7 +62,7 @@ export const updateMealNutrition = async (mealID, totalCalories, totalProtein, s
 
 export const updateMealTime = async (mealID, mealTime, setError) => {
     try {
-        const parsableTime = mealTime + ':00'; // Ensure time is in HH:mm:ss format
+        const parsableTime = validateTimeString(mealTime); // Ensure time is in HH:mm:ss format
         await genericRequest(
             `${API_URL}/data/meal/update-time?mealid=${mealID}&time=${parsableTime}`,
             'POST',

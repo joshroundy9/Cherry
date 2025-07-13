@@ -107,6 +107,11 @@
     margin-left: 1%;
 }
 
+.Nutrition-form-button:hover {
+    background-color: white;
+    color: #1E1E1E;
+}
+
 .Nutrition-form-error {
     color: #FF0606;
     font-family: 'Jomhuria', cursive;
@@ -279,6 +284,7 @@
     padding-left: 0.5em;
     padding-right: 0.5em;
     padding-top: 0.1em;
+    white-space: nowrap;
 }
 
 .Panel-footer-button {
