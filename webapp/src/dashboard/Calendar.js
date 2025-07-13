@@ -13,7 +13,7 @@ function formatDate(year, month, day) {
 
 export function Calendar({switchPanel, setDate, setDateId, setWeight}) {
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(false);
+    const [error, setError] = useState('');
     const API_URL = process.env.REACT_APP_API_URL;
 
     const today = new Date();
@@ -49,6 +49,7 @@ export function Calendar({switchPanel, setDate, setDateId, setWeight}) {
     };
 
     const handleDayClick = (day) => {
+        if (loading) return; // Prevent multiple clicks while loading
         const selectedDate = formatDate(currentYear, currentMonth, day);
         setDate(selectedDate);
         getDateInfo(selectedDate).then(() => switchPanel('date'));
@@ -129,7 +130,7 @@ export function Calendar({switchPanel, setDate, setDateId, setWeight}) {
             </table>
             <div className="Calendar-footer">
                 {error && <div className={"Error-message"}>{error}</div>}
-                {loading && <div className={"Info-message"}>{error}</div>}
+                {loading && <div className={"Info-message"}>Loading...</div>}
             </div>
         </div>
     );
