@@ -19,10 +19,10 @@ export function ErrorState ({ message }) {
     );
 }
 
-export function DailyWeightInput ({date, dateId, setError}) {
+export function DailyWeightInput ({date, setError}) {
     const [weight, setWeight] = useState('');
     const [loading, setLoading] = useState(false);
-
+    const [dateId, setDateId] = useState(localStorage.getItem('dateId') || '');
     const incrementWeight = () => {
         setWeight((prev) => Math.min(999, parseInt(prev || 0) + 1));
     };
@@ -40,7 +40,9 @@ export function DailyWeightInput ({date, dateId, setError}) {
                 'GET',
                 getDataHeaders(),
                 null);
-            if (!responseBody || !responseBody.dailyWeight) {
+            localStorage.setItem('dateId', responseBody.dateId);
+            setDateId(responseBody.dateId);
+            if (!responseBody.dailyWeight) {
                 setWeight(localStorage.getItem('weight'));
             } else {
                 setWeight(responseBody.dailyWeight);
@@ -77,9 +79,7 @@ export function DailyWeightInput ({date, dateId, setError}) {
     }
 
     useEffect(() => {
-        if (dateId) {
-            getDailyWeight();
-        }
+        getDailyWeight();
     }, []);
 
     if (loading) return <div className={"Info-message"}>Loading...</div>;

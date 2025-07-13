@@ -4,7 +4,7 @@ import {
     genericRequest,
     getDataHeaders,
     updateDateNutrition,
-    updateMealNutrition, validateTimeString
+    validateTimeString
 } from "../utils/DashboardUtil";
 import {DailyWeightInput, ErrorState, LoadingState} from "./DashboardComponents";
 import MealEntry from "./MealEntry";
@@ -15,10 +15,6 @@ function DatePanel({ switchPanel, dateId, date }) {
     const [meals, setMeals] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
-    const retrieveDateNutrition = () => {
-
-    }
 
     const numberOfMeals = () => {
         return meals.length;
@@ -140,7 +136,7 @@ function DatePanel({ switchPanel, dateId, date }) {
             </div>
             <div className={"MealPanel-date-header"}>
                 <div className={"DateTime-wrapper"}>
-                    <DailyWeightInput date={date} dateId={dateId} setError={setError} />
+                    <DailyWeightInput date={date} setError={setError} />
                 </div>
                 <div className={"MealPanel-date-header-text"}>Add Meals</div>
             </div>
