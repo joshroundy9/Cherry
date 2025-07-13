@@ -211,26 +211,38 @@ input[type="date"] {
   right: 1vw;
   background: none;
   border: none;
-  color: white;
+  color: #FF0606;
   cursor: pointer;
   padding: 0;
   text-decoration: none;
   font-family: 'Jomhuria', cursive;
-  font-size: 3.5vh;
+  font-size: xx-large;
 }
 
 .SignOut-button:hover {
   text-decoration: underline;
 }
 
+.Username-text {
+  position: absolute;
+  left: 1vw;
+  background: none;
+  border: none;
+  color: white;
+  padding: 0;
+  text-decoration: none;
+  font-family: 'Jomhuria', cursive;
+  font-size: xx-large;
+}
+
 .Info-message {
   color: white;
-  font-size: 3vh;
+  font-size: x-large;
 }
 
 .Error-message {
   color: #FF0606;
-  font-size: 3vh;
+  font-size: xx-large;
 }
 
 @keyframes App-logo-spin {

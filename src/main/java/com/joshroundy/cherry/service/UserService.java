@@ -21,4 +21,9 @@ public class UserService implements UserDetailsService {
     public UserEntity loadUserEntityByUsername(String username) {
         return userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Username is not valid"));
     }
+    public UserEntity updateUserWeight(Integer userID, Double weight) {
+        var userEntity = userRepository.findByUserID(userID);
+        userEntity.setWeight(weight);
+        return userRepository.save(userEntity);
+    }
 }

@@ -15,4 +15,6 @@ public class DateDTO {
     Integer userID;
     Date date;
     Double dailyWeight;
+    Double dailyCalories;
+    Double dailyProtein;
 }

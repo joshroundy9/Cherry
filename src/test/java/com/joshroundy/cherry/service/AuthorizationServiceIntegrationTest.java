@@ -2,6 +2,8 @@ package com.joshroundy.cherry.service;
 
 import com.joshroundy.cherry.dataobject.auth.LoginRequestDTO;
 import com.joshroundy.cherry.dataobject.auth.RegistrationDTO;
+import com.joshroundy.cherry.repository.UserRepository;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,9 +15,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 class AuthorizationServiceIntegrationTest {
     @Autowired AuthorizationService subject;
+    @Autowired
+    UserRepository userRepository;
 
     @Test
     void registerAndLoginUser() {
+        userRepository.findByUsername("joshroundy").ifPresent(user -> {
+            userRepository.delete(user);
+        });
         var username = "joshroundy";
         var password = "password";
         var loginRequestDTO = LoginRequestDTO.builder()

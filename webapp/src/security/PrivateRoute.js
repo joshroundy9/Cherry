@@ -21,7 +21,11 @@ const PrivateRoute = ({ children }) => {
 
 async function validateToken() {
     const token = localStorage.getItem("jwtToken");
-    if (!token) return false;
+    if (!token)
+    {
+        localStorage.setItem('jwtToken', '');
+        return false;
+    }
 
     try {
         const response = await fetch(`${API_URL}/auth/validate`, {

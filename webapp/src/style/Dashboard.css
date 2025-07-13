@@ -2,4 +2,453 @@
     text-align: center;
     max-height: 100vh;
     overflow: hidden;
+
+}
+
+.Dashboard-background {
+    background-color: #1E1E1E;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 95vh;
+}
+
+.Loading-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    border-radius: 8px;
+    background-color: #2D2D2D;
+}
+
+.Spinner {
+    border: 4px solid #e0e0e0;
+    border-top: 4px solid #888;
+    border-radius: 50%;
+    width: 4vw;
+    height: 4vw;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.Error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background-color: #2D2D2D;
+    color: #FF0606;
+    font-size: xx-large;
+    font-family: 'Jomhuria', cursive;
+}
+
+.Calendar-container {
+    width: 25vw;
+    max-width: 380px;
+    height: 75vh;
+    min-width: 300px;
+    background-color: #2D2D2D;
+}
+
+.Flex-container {
+    width: 60vw;
+    height: 75vh;
+    min-width: 380px;
+    background-color: #2D2D2D;
+    margin-left: 5vw;
+}
+
+/*
+ * Nutrition Form Styles
+ */
+.Nutrition-form {
+    width: 98.7%;
+    background-color: #2D2D2D;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.Nutrition-form-input {
+    padding-left: 32px; /* Adjust for icon + spacing */
+    background: #1E1E1E url('/public/searchicon.png') no-repeat 8px center;
+    background-size: 16px 16px;
+    color: white;
+    font-family: 'Jomhuria', cursive;
+    width: 85%;
+    border-radius: 0.2em;
+    border: none;
+    font-size: x-large;
+}
+.Nutrition-form-input::placeholder {
+    color: #aeaeae;
+}
+
+.Nutrition-form-button {
+    background-color: #1E1E1E;
+    color: white;
+    font-family: 'Jomhuria', cursive;
+    width: 150px;
+    min-width: 100px;
+    border-radius: 0.2em;
+    border: none;
+    cursor: pointer;
+    font-size: x-large;
+    margin-left: 1%;
+}
+
+.Nutrition-form-button:hover {
+    background-color: white;
+    color: #1E1E1E;
+}
+
+.Nutrition-form-error {
+    color: #FF0606;
+    font-family: 'Jomhuria', cursive;
+    font-size: x-large;
+    padding-top: 0.5em;
+}
+
+.Nutrition-form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    width: 100%;
+    height: 5vw;
+}
+/*
+ * Meal Panel Styles
+ */
+.MealPanel {
+    width: 100%;
+    height: 100%;
+    background-color: #2D2D2D;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    gap: 0;
+}
+.Panel-header {
+    color: white;
+    font-family: 'Jomhuria', cursive;
+    font-size: xxx-large;
+    line-height: 1.2;
+}
+
+.MealPanel-date-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: white;
+    font-family: 'Jomhuria', cursive;
+    font-size: xx-large;
+    margin-bottom: 0.3em;
+    width: 98.7%;
+}
+
+.MealPanel-date-header-text {
+    font-size: xx-large;
+    text-align: center;
+    width: 48%;
+}
+
+.DateTime-wrapper {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: #1E1E1E;
+    border-radius: 0.2em;
+    font-size: x-large;
+    padding-top: 0.1em;
+    width: 26%;
+    min-width: 150px;
+}
+
+.DateTime-input {
+    border: none;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    padding: 0;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.DateTime-input::-webkit-calendar-picker-indicator {
+    height: 0;
+    width: 0;
+    visibility: hidden;
+}
+
+.DateTime-text {
+    padding-right: 5px;
+    padding-left: 10px;
+    margin: 0;
+}
+
+.MealItemList {
+    width: 97%;
+}
+
+.MealItemList-ul {
+    list-style-type: none;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-block: 0;
+    padding-inline-start: 0;
+}
+
+.MealItemList-li {
+    width: 100%;
+    background-color: #1E1E1E;
+    color: white;
+    font-family: 'Jomhuria', cursive;
+    border-radius: 0.2em;
+    margin-bottom: 0.1em;
+    display: grid;
+    grid-template-columns: auto 2fr auto 0.1fr 0.1fr auto;
+    align-items: center;
+    font-size: x-large;
+    padding-left: 1vw;
+    padding-top: 0.1em;
+}
+
+.MealItemList-li > div:nth-child(4) {
+    width: 50px;
+    text-align: right;
+    margin-right: 0;
+}
+
+.MealItemList-li > div:nth-child(5) {
+    width: 50px;
+    text-align: right;
+    margin-right: 0;
+}
+
+.MealItemList-li p {
+    margin: 0;
+}
+
+.Delete-button {
+    background-color: #1E1E1E;
+    color: red;
+    font-family: 'Jomhuria', cursive;
+    border-radius: 0.2em;
+    border: none;
+    cursor: pointer;
+    font-size: x-large;
+    margin-right: 1vw;
+}
+
+.MealPanel-footer {
+    width: 98.3%;
+    color: white;
+    font-size: x-large;
+    font-family: 'Jomhuria', cursive;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    box-sizing: border-box;
+    margin-top: auto;
+    padding-bottom: 0.2em;
+}
+
+.MealPanel-footer-text-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    font-size: 25px;
+    gap: 1em;
+    background-color: #1E1E1E;
+    border-radius: 0.2em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    padding-top: 0.1em;
+    white-space: nowrap;
+}
+
+.Panel-footer-button {
+    background-color: #1E1E1E;
+    color: white;
+    font-family: 'Jomhuria', cursive;
+    width: 100px;
+    padding-top: 0.1em;
+    border: none;
+    border-radius: 0.2em;
+    cursor: pointer;
+    font-size: x-large;
+    align-self: flex-end;
+}
+
+.Panel-footer-button:hover {
+    background-color: white;
+    color: #1E1E1E;
+}
+
+/* DatePanel Styles */
+.Meal-name-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    color: #FF0606;
+    font-family: 'Jomhuria', cursive;
+    font-size: x-large;
+    border: none;
+    background-color: #1E1E1E;
+    cursor: pointer;
+    padding-left: 0;
+}
+
+.Meal-form {
+    width: 98.7%;
+    background-color: #2D2D2D;
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    justify-content: start;
+    color: white;
+}
+
+.Meal-form-input {
+    padding-left: 32px; /* Adjust for icon + spacing */
+    background: #1E1E1E url('/public/addicon.png') no-repeat 8px center;
+    background-size: 16px 16px;
+    color: white;
+    font-family: 'Jomhuria', cursive;
+    width: 80%;
+    border-radius: 0.2em;
+    border: none;
+    font-size: x-large;
+}
+
+.DateTime-meal-input {
+    font-family: 'Jomhuria', cursive;
+    font-size: x-large;
+    border: none;
+    color: inherit;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    margin-left: 1%;
+    background-color: #1E1E1E;
+    border-radius: 0.2em;
+    padding: 0 0 0 5px;
+}
+
+.DateTime-meal-input::-webkit-calendar-picker-indicator {
+    background: url('data:image/svg+xml;utf8,<svg fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11zm0-13H5V6h14v1z"/></svg>') no-repeat center;
+    filter: none;
+    height: 24px;
+    width: 24px;
+    background-size: 20px 20px;
+    vertical-align: middle;
+    padding: 0;
+}
+/* Daily Weight Styles */
+.Daily-weight-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.Daily-weight-input {
+    width: 35px;
+    font-size: x-large;
+    font-family: 'Jomhuria', cursive;
+    padding: 0;
+    background-color: #1E1E1E;
+    border: none;
+    color: #FF0606;
+    text-decoration: underline;
+    text-align: center;
+}
+
+/* Hide native arrows */
+.Daily-weight-input::-webkit-outer-spin-button,
+.Daily-weight-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Calendar Styles */
+.Calendar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: 'Jomhuria', cursive;
+    font-size: xx-large;
+    padding-top: 0.25em;
+}
+
+.Calendar-arrow-button {
+    background-color: #1E1E1E;
+    color: white;
+    font-family: 'Jomhuria', cursive;
+    border-radius: 0.2em;
+    border: none;
+    cursor: pointer;
+    font-size: x-large;
+    padding: 0.15em 0.6em;
+    margin: 0.25em;
+}
+.Calendar-arrow-button:hover,
+.Calendar-button:hover {
+    background-color: white;
+    color: black;
+}
+.Calendar-button,
+.Calendar-button-disabled {
+    color: white;
+    background-color: #1E1E1E;
+    font-family: inherit;
+    font-size: x-large;
+    width: 35px;
+    height: 30px;
+    border: none;
+    border-radius: 0.2em;
+    cursor: pointer;
+}
+.Calendar-button-disabled {
+    color: #888888;
+    background-color: #2D2D2D;
+    cursor: auto;
+}
+.Calendar-month {
+    margin: 0 16px;
+    width: 120px;
+    white-space: nowrap;
+}
+.Calendar-footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50px;
 }

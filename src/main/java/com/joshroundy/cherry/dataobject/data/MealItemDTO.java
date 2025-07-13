@@ -1,5 +1,7 @@
 package com.joshroundy.cherry.dataobject.data;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,7 +15,8 @@ public class MealItemDTO {
     Integer mealID;
     Integer dateID;
     Integer userID;
+    @Size(max = 100, message = "Item name cannot exceed 100 characters")
     String itemName;
-    Integer itemCalories;
-    Integer itemProtein;
+    Double itemCalories;
+    Double itemProtein;
 }

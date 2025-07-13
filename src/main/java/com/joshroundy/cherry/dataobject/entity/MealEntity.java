@@ -1,6 +1,7 @@
 package com.joshroundy.cherry.dataobject.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
 import lombok.*;
 
 import java.sql.Time;
@@ -16,7 +17,10 @@ public class MealEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer mealID;
+    String mealName;
     Integer userID;
     Integer dateID;
+    Double mealCalories;
+    Double mealProtein;
     Time time;
 }

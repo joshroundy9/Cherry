@@ -10,11 +10,11 @@ import com.joshroundy.cherry.repository.DateRepository;
 import com.joshroundy.cherry.repository.MealItemRepository;
 import com.joshroundy.cherry.repository.MealRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.time.ZonedDateTime;
 import java.util.List;
 
 @Service
@@ -27,24 +27,59 @@ public class DataService {
     public List<DateEntity> findDatesFromUserID(Integer userID) {
         return dateRepository.findByUserID(userID);
     }
+    public DateEntity findDateFromUserIDAndDate(Integer userID, Date date) {
+        return dateRepository.findByUserIDAndDate(userID, date).orElseGet(() ->
+                createDate(DateDTO.builder()
+                        .userID(userID)
+                        .date(date)
+                        .dailyWeight(0.0)
+                        .dailyCalories(0.0)
+                        .dailyProtein(0.0)
+                        .build())
+        );
+    }
     public DateEntity createDate(DateDTO dateDTO) {
         return dateRepository.save(
                 DateEntity.builder()
                         .date(dateDTO.getDate())
                         .userID(dateDTO.getUserID())
                         .dailyWeight(dateDTO.getDailyWeight())
+                        .dailyCalories(0.0)
+                        .dailyProtein(0.0)
                         .build()
         );
     }
-    public DateEntity updateDateWeight(Integer dateID, Double weight) {
+    public DateEntity updateDateWeight(Integer dateID, Double weight, Integer userID) {
         var dateEntity = dateRepository.findById(dateID).get();
+        if (!dateEntity.getUserID().equals(userID)) {
+            throw new AccessDeniedException("User ID does not match the date owner.");
+        }
         dateEntity.setDailyWeight(weight);
         return dateRepository.save(dateEntity);
     }
-    public DateEntity findDateByUserIDAndDate(Integer userID, Date date) {
-        return findDatesFromUserID(userID).stream().filter(
-                dateEntity -> date.equals(dateEntity.getDate())
-        ).findFirst().orElse(null);
+    public DateEntity updateDateNutrition(Integer dateID, Double calories, Double protein, Integer userID) {
+        var dateEntity = dateRepository.findById(dateID).get();
+        if (!dateEntity.getUserID().equals(userID)) {
+            throw new AccessDeniedException("User ID does not match the date owner.");
+        }
+        dateEntity.setDailyCalories(calories);
+        dateEntity.setDailyProtein(protein);
+        return dateRepository.save(dateEntity);
+    }
+    public void deleteDate(Integer dateID, Integer userID) {
+        dateRepository.findById(dateID).ifPresent(
+                dateEntity -> {
+                    if (!dateEntity.getUserID().equals(userID)) {
+                        throw new AccessDeniedException("User ID does not match the date owner.");
+                    }
+                }
+        );
+        var mealsFromDateID = findMealsFromDateID(dateID);
+        mealsFromDateID.forEach(mealEntity -> {
+            mealItemRepository.deleteAll(findMealItemsFromMealID(mealEntity.getMealID()));
+        });
+        mealRepository.deleteAll(mealsFromDateID);
+        dateRepository.deleteById(dateID);
     }
     /*Meal methods*/
     public List<MealEntity> findMealsFromDateID(Integer dateID) {
@@ -55,14 +90,36 @@ public class DataService {
                         .userID(mealDTO.getUserID())
                         .dateID(mealDTO.getDateID())
                         .time(mealDTO.getTime())
+                        .mealName(mealDTO.getMealName())
+                        .mealCalories(0.0)
+                        .mealProtein(0.0)
                 .build());
     }
-    public MealEntity updateMealTime(Integer mealID, Time time) {
+    public MealEntity updateMealTime(Integer mealID, Time time, Integer userID) {
         var mealEntity = mealRepository.findById(mealID).get();
+        if (!mealEntity.getUserID().equals(userID)) {
+            throw new AccessDeniedException("User ID does not match the meal owner.");
+        }
         mealEntity.setTime(time);
         return mealRepository.save(mealEntity);
     }
-    public void deleteMeal(Integer mealID) {
+    public MealEntity updateMealNutrition(Integer mealID, Double calories, Double protein, Integer userID) {
+        var mealEntity = mealRepository.findById(mealID).get();
+        if (!mealEntity.getUserID().equals(userID)) {
+            throw new AccessDeniedException("User ID does not match the meal owner.");
+        }
+        mealEntity.setMealCalories(calories);
+        mealEntity.setMealProtein(protein);
+        return mealRepository.save(mealEntity);
+    }
+    public void deleteMeal(Integer mealID, Integer userID) {
+        mealRepository.findById(mealID).ifPresent(
+                mealEntity -> {
+                    if (!mealEntity.getUserID().equals(userID)) {
+                        throw new AccessDeniedException("User ID does not match the meal owner.");
+                    }
+                }
+        );
         mealItemRepository.deleteAll(findMealItemsFromMealID(mealID));
         mealRepository.deleteById(mealID);
     }
@@ -74,22 +131,36 @@ public class DataService {
         return mealItemRepository.save(MealItemEntity.builder()
                         .userID(mealItemDTO.getUserID())
                         .itemCalories(mealItemDTO.getItemCalories())
+                        .itemProtein(mealItemDTO.getItemProtein())
                         .itemName(mealItemDTO.getItemName())
                         .dateID(mealItemDTO.getDateID())
                         .mealID(mealItemDTO.getMealID())
                 .build());
     }
-    public MealItemEntity updateMealItemName(Integer mealItemID, String mealItemName) {
+    public MealItemEntity updateMealItemName(Integer mealItemID, String mealItemName, Integer userID) {
         var mealItemEntity = mealItemRepository.findById(mealItemID).get();
+        if (!mealItemEntity.getUserID().equals(userID)) {
+            throw new AccessDeniedException("User ID does not match the meal item owner.");
+        }
         mealItemEntity.setItemName(mealItemName);
         return mealItemRepository.save(mealItemEntity);
     }
-    public MealItemEntity updateMealItemCalories(Integer mealItemID, Integer mealItemCalories) {
+    public MealItemEntity updateMealItemNutrition(Integer mealItemID, Double mealItemCalories, Double mealItemProtein, Integer userID) {
         var mealItemEntity = mealItemRepository.findById(mealItemID).get();
+        if (!mealItemEntity.getUserID().equals(userID)) {
+            throw new AccessDeniedException("User ID does not match the meal item owner.");
+        }
         mealItemEntity.setItemCalories(mealItemCalories);
+        mealItemEntity.setItemProtein(mealItemProtein);
         return mealItemRepository.save(mealItemEntity);
     }
-    public void deleteMealItem(Integer mealItemID) {
+    public void deleteMealItem(Integer mealItemID, Integer userID) {
+        mealItemRepository.findById(mealItemID).ifPresent(mealItem -> {
+            if (!mealItem.getUserID().equals(userID)) {
+                throw new AccessDeniedException("User ID does not match the meal item owner.");
+            }
+        }
+        );
         mealItemRepository.deleteById(mealItemID);
     }
 }

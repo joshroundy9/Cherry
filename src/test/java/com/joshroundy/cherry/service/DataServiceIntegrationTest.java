@@ -10,16 +10,15 @@ import com.joshroundy.cherry.repository.DateRepository;
 import com.joshroundy.cherry.repository.MealItemRepository;
 import com.joshroundy.cherry.repository.MealRepository;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,14 +27,14 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
-public class DataServiceTest {
+public class DataServiceIntegrationTest {
     public static final Integer USER_ID = 3534;
     public static final Integer DATE_ID = 24612;
     public static final Integer MEAL_ID = 523512;
     public static final Integer MEAL_ITEM_ID = 1231250;
     public static final Double DAILY_WEIGHT = 178.3;
     public static final String MEAL_ITEM_NAME = "Cheeseburger";
-    public static final Integer MEAL_ITEM_CALORIES = 550;
+    public static final Double MEAL_ITEM_CALORIES = 550.0;
     public static final Date DATE = Date.valueOf("2024-08-20");
     public static final Time TIME = Time.valueOf("09:30:00");
     private DateEntity dateEntity;
@@ -81,10 +80,15 @@ public class DataServiceTest {
     }
     @Test
     void findDateByUserIDAndDate() {
-        when(dateRepository.findByUserID(USER_ID))
-                .thenReturn(List.of(dateEntity, DateEntity.builder()
-                        .date(Date.valueOf("2005-04-21")).build()));
-        var actual = subject.findDateByUserIDAndDate(USER_ID, DATE);
+        when(dateRepository.findByUserIDAndDate(USER_ID, DATE))
+                .thenReturn(Optional.empty());
+        when(dateRepository.save(any()))
+                .thenReturn(dateEntity);
+        var actual = subject.findDateFromUserIDAndDate(USER_ID, DATE);
+        when(dateRepository.findByUserIDAndDate(USER_ID, DATE))
+                .thenReturn(Optional.of(dateEntity));
+        var secondCall = subject.findDateFromUserIDAndDate(USER_ID, DATE);
+        assertThat(actual.getDateID()).isEqualTo(secondCall.getDateID());
         assertThat(actual).isNotNull();
         assertThat(actual).isEqualTo(dateEntity);
     }
@@ -106,7 +110,7 @@ public class DataServiceTest {
         when(dateRepository.findById(any())).thenReturn(Optional.ofNullable(dateEntity));
         when(dateRepository.save(any(DateEntity.class)))
                 .thenAnswer(functionCall -> functionCall.getArguments()[0]);
-        var actual = subject.updateDateWeight(DATE_ID, updatedWeight);
+        var actual = subject.updateDateWeight(DATE_ID, updatedWeight, USER_ID);
         assertThat(actual).isNotNull();
         assertThat(actual.getDailyWeight()).isEqualTo(updatedWeight);
     }
@@ -143,7 +147,7 @@ public class DataServiceTest {
         when(mealRepository.findById(any())).thenReturn(Optional.ofNullable(mealEntity));
         when(mealRepository.save(any(MealEntity.class)))
                 .thenAnswer(functionCall -> functionCall.getArguments()[0]);
-        var actual = subject.updateMealTime(DATE_ID, newTime);
+        var actual = subject.updateMealTime(DATE_ID, newTime, USER_ID);
         assertThat(actual).isNotNull();
         assertThat(actual.getTime()).isEqualTo(newTime);
     }
@@ -183,17 +187,18 @@ public class DataServiceTest {
         when(mealItemRepository.findById(any())).thenReturn(Optional.ofNullable(mealItemEntity));
         when(mealItemRepository.save(any(MealItemEntity.class)))
                 .thenAnswer(functionCall -> functionCall.getArguments()[0]);
-        var actual = subject.updateMealItemName(MEAL_ITEM_ID, newName);
+        var actual = subject.updateMealItemName(MEAL_ITEM_ID, newName, USER_ID);
         assertThat(actual).isNotNull();
         assertThat(actual.getItemName()).isEqualTo(newName);
     }
     @Test
-    void updateMealItemCalories() {
-        var newCalories = 450;
+    void updateMealItemNutrition() {
+        var newCalories = 450.0;
+        var newProtein = 30.0;
         when(mealItemRepository.findById(any())).thenReturn(Optional.ofNullable(mealItemEntity));
         when(mealItemRepository.save(any(MealItemEntity.class)))
                 .thenAnswer(functionCall -> functionCall.getArguments()[0]);
-        var actual = subject.updateMealItemCalories(MEAL_ITEM_ID, newCalories);
+        var actual = subject.updateMealItemNutrition(MEAL_ITEM_ID, newCalories, newProtein, USER_ID);
         assertThat(actual).isNotNull();
         assertThat(actual.getItemCalories()).isEqualTo(newCalories);
     }

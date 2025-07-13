@@ -1,5 +1,7 @@
 package com.joshroundy.cherry.dataobject.data;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,6 +14,8 @@ import java.sql.Time;
 @AllArgsConstructor
 @Builder
 public class MealDTO {
+    @Size(max = 100, message = "Meal name cannot exceed 100 characters")
+    String mealName;
     Integer userID;
     Integer dateID;
     Time time;

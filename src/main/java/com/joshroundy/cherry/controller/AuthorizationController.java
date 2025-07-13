@@ -5,6 +5,7 @@ import com.joshroundy.cherry.dataobject.auth.LoginResponseDTO;
 import com.joshroundy.cherry.dataobject.auth.RegistrationDTO;
 import com.joshroundy.cherry.dataobject.entity.UserEntity;
 import com.joshroundy.cherry.service.AuthorizationService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +16,7 @@ public class AuthorizationController {
     private AuthorizationService authenticationService;
 
     @PostMapping("/register")
-    public UserEntity registerUser(@RequestBody RegistrationDTO body){
+    public UserEntity registerUser(@RequestBody @Valid RegistrationDTO body){
         return authenticationService.registerUser(body);
     }
 

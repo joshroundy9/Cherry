@@ -10,6 +10,10 @@ name: Gradle Package
 on:
   release:
     types: [created]
+  push:
+    branches:
+      - main
+      - 'v*.*.*' # Matches version tags like v1.0.0, v2.3.4, etc.
 
 jobs:
   build:

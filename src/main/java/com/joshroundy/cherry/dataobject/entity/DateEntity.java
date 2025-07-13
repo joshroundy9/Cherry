@@ -20,4 +20,6 @@ public class DateEntity {
     Integer userID;
     Date date;
     Double dailyWeight;
+    Double dailyCalories;
+    Double dailyProtein;
 }

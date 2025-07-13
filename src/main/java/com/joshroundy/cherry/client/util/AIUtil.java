@@ -45,8 +45,12 @@ public class AIUtil {
         return AIDataResponseDTO.builder()
                 .foodEntry(foodEntry)
                 .isValidEntry(parts[0].equals("True"))
-                .calories(Double.parseDouble(parts[1].replaceAll("\"", "")))
-                .protein(Double.parseDouble(parts[2].replaceAll("\"", "")))
+                .calories(Double.parseDouble(parts[1]
+                        .replaceAll("\"", "")
+                        .replaceAll(",", "")))
+                .protein(Double.parseDouble(parts[2]
+                        .replaceAll("\"", "")
+                        .replaceAll(",", "")))
                 .build();
     }
 }

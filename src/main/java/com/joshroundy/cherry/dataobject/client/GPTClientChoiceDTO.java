@@ -1,5 +1,6 @@
 package com.joshroundy.cherry.dataobject.client;
 
+import jakarta.validation.constraints.Max;
 import lombok.Getter;
 import lombok.Setter;
 
