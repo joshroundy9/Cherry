@@ -854,7 +854,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiam9zaHJvdW5keTkiLCJpYXQiOjE3MjQyOTQ0MDQsInJvbGVzIjoiIn0.YTlQpX9AmlltaOelIv7sFPSKwLPKaCfqx6DW_fcio0nmJihZYD0eIix3uU5BLtdeHLtIoEa9RYLJh_oPH8xKOCftP764BbCkPUgGEX9IwtQRmw0AtjPuqjSaEcIHESAYzPJ0mOLzxxuDUrEhntr31AvP7g5-loz3HlpWXd8SoZcGe1Ugn8V2DnEKeUfImL8LPk_S342GtndPvxTau8NsvAdrjDJbAPKcI1UVOEJnCLKh-iNQtPgwP3H-mBoqrLSfp1mmRcfj8JvdWUxsYOvMC1eXlQui-QonnKEVVBWyptCXXU9ixU8n--2Z-exZ73uSjaIr_DB4-y2O2SgSxEnBrA",
+									"value": "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJqb3Nocm91bmR5MTAiLCJyb2xlcyI6IiIsImlzcyI6InNlbGYiLCJleHAiOjE3NTI5ODM5MjAsImlhdCI6MTc1MjM3OTEyMCwidXNlcklkIjoxfQ.hYq_OjWmr7zJh9sSKVWurN4BZKU_tD49crQhv0_ig9ieeAetPlHBR_cdrWIdT40qh8lQLDYcflsWzFDrbJ4kgi--7ofZDkglBKD8kyM4hjbpxnFzIvZZsgV-k7mcPFIKi--wCZ4K9YvQqNZ-xifzHs6BwaEX3V0bQKxCHA3ynalKzzsN5lOD7w8lRRP67_5_TORNFEbUYNFuuMa2T6y7SDTpNOnDs1KICAWXG9A1vbzjyEo5N129wjGwW68uKzBM-HAB9Ev_sG0hrnifktHnmS9V70kSCv86jz13EfDVSY7ikh4qeOxCC_97dH2RPo7veEwN3SH010nKc4z8ssdRJg",
 									"type": "string"
 								}
 							]
@@ -1627,6 +1627,153 @@
 								{
 									"key": "mealid",
 									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "DeleteMeal",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/data/meal/delete?mealid=1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"data",
+										"meal",
+										"delete"
+									],
+									"query": [
+										{
+											"key": "mealid",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "0"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 22 Aug 2024 03:11:48 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "DeleteDate",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJqb3Nocm91bmR5MTAiLCJyb2xlcyI6IiIsImlzcyI6InNlbGYiLCJleHAiOjE3NTI5Nzk5MTksImlhdCI6MTc1MjM3NTExOSwidXNlcklkIjoxfQ.aJ7n5LleBi-BVvv8FvRPQ2KQ8uOlksLOX0qUxdV3cietLQ6v4sFpMUQGT6LtHa1paxb7GvvMyOf6i5sZIcbyeuOWPxdzLJWNPlfBKoWJWO--e-oU79WGgW7blfAUDJEDwpWJywU2Ypc0DoLTbaNLpsuF2lIutX6iWjkAXmHZ3WUnxPLD-F5m4WKuRQ6feKCGdsxE2pXc0hzfBVM4A5z3Qap1EABWWlQmxioJG-xKjaf9Xq3ITU5N-oEyak8kaSTFPUH8LmVjB7pLl1OhvkvwAbaLs4jNnRfhdmg7C4L9nmoQZE_EpNMmJIDPWTdsMTgiJ20VUH0WaSI-wzpIZH7ijQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "User-ID",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/data/date/delete?dateid=2006",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"data",
+								"date",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "dateid",
+									"value": "2006"
 								}
 							]
 						}
