@@ -11,7 +11,7 @@ import MealEntry from "./MealEntry";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-function DatePanel({ switchPanel, dateId, date }) {
+function DatePanel({ switchPanel, dateId, date, weight, setWeight }) {
     const [meals, setMeals] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -131,12 +131,12 @@ function DatePanel({ switchPanel, dateId, date }) {
 
     return (
         <div className="MealPanel">
-            <div className="MealPanel-header">
+            <div className="Panel-header">
                 {formatDateWithOrdinal(date)}
             </div>
             <div className={"MealPanel-date-header"}>
                 <div className={"DateTime-wrapper"}>
-                    <DailyWeightInput date={date} setError={setError} />
+                    <DailyWeightInput date={date} dateId={dateId} weight={weight} setWeight={setWeight} setError={setError} />
                 </div>
                 <div className={"MealPanel-date-header-text"}>Add Meals</div>
             </div>
@@ -161,7 +161,7 @@ function DatePanel({ switchPanel, dateId, date }) {
                             <div/>
                             <div>{item.mealCalories}</div>
                             <div/>
-                            <div style={{marginRight: '1.5vw', color: '#19A9FA'}}>{item.mealProtein}g</div>
+                            <div style={{marginRight: '1.5vw'}}>{item.mealProtein}g</div>
                             <button className={"Delete-button"} type={"button"}
                                     onClick={() => removeMeal(item.mealID)}>
                                 X
@@ -177,7 +177,7 @@ function DatePanel({ switchPanel, dateId, date }) {
                     <div className={"MealPanel-footer-text"}>Total Calories: {totalCalories(meals)}</div>
                     <div className={"MealPanel-footer-text"}>Total Protein: {totalProtein(meals)}g</div>
                 </div>
-                <button className={"MealPanel-footer-button"} type={"button"} onClick={goBack}>Go Back</button>
+                <button className={"Panel-footer-button"} type={"button"} onClick={goBack}>Go Back</button>
             </div>
         </div>
     );

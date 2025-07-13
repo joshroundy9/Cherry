@@ -52,6 +52,7 @@
 
 .Calendar-container {
     width: 25vw;
+    max-width: 380px;
     height: 75vh;
     min-width: 300px;
     background-color: #2D2D2D;
@@ -98,6 +99,7 @@
     color: white;
     font-family: 'Jomhuria', cursive;
     width: 150px;
+    min-width: 100px;
     border-radius: 0.2em;
     border: none;
     cursor: pointer;
@@ -133,7 +135,7 @@
     justify-content: start;
     gap: 0;
 }
-.MealPanel-header {
+.Panel-header {
     color: white;
     font-family: 'Jomhuria', cursive;
     font-size: xxx-large;
@@ -213,7 +215,7 @@
 .MealItemList-li {
     width: 100%;
     background-color: #1E1E1E;
-    color: #19A9FA;
+    color: white;
     font-family: 'Jomhuria', cursive;
     border-radius: 0.2em;
     margin-bottom: 0.1em;
@@ -229,14 +231,12 @@
     width: 50px;
     text-align: right;
     margin-right: 0;
-    color: white;
 }
 
 .MealItemList-li > div:nth-child(5) {
     width: 50px;
     text-align: right;
     margin-right: 0;
-    color: white;
 }
 
 .MealItemList-li p {
@@ -276,9 +276,9 @@
     gap: 1em;
 }
 
-.MealPanel-footer-button {
-    background-color: #19A9FA;
-    color: black;
+.Panel-footer-button {
+    background-color: #1E1E1E;
+    color: white;
     font-family: 'Jomhuria', cursive;
     width: 100px;
     border-radius: 0.1em;
@@ -288,6 +288,11 @@
     align-self: flex-end;
 }
 
+.Panel-footer-button:hover {
+    background-color: white;
+    color: #1E1E1E;
+}
+
 /* DatePanel Styles */
 .Meal-name-wrapper {
     display: flex;
@@ -295,13 +300,12 @@
     align-items: center;
     justify-content: center;
     gap: 5px;
-    color: #19A9FA;
+    color: #FF0606;
     font-family: 'Jomhuria', cursive;
     font-size: x-large;
     border: none;
     background-color: #1E1E1E;
     cursor: pointer;
-    text-decoration: ActiveText;
     padding-left: 0;
 }
 
@@ -366,7 +370,7 @@
     padding: 0;
     background-color: #1E1E1E;
     border: none;
-    color: #19A9FA;
+    color: #FF0606;
     text-decoration: underline;
     text-align: center;
 }
@@ -376,4 +380,55 @@
 .Daily-weight-input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
+}
+
+/* Calendar Styles */
+.Calendar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: 'Jomhuria', cursive;
+    font-size: xx-large;
+    padding-top: 0.25em;
+}
+
+.Calendar-arrow-button {
+    background-color: #1E1E1E;
+    color: white;
+    font-family: 'Jomhuria', cursive;
+    border-radius: 0.2em;
+    border: none;
+    cursor: pointer;
+    font-size: x-large;
+    padding: 0.15em 0.6em;
+    margin: 0.25em;
+}
+.Calendar-arrow-button:hover,
+.Calendar-button:hover {
+    background-color: white;
+    color: black;
+}
+.Calendar-button,
+.Calendar-button-disabled {
+    color: white;
+    background-color: #1E1E1E;
+    font-family: inherit;
+    font-size: x-large;
+    width: 35px;
+    height: 30px;
+    border: none;
+    border-radius: 0.2em;
+    cursor: pointer;
+}
+.Calendar-button-disabled {
+    color: #888888;
+    background-color: #2D2D2D;
+    cursor: auto;
+}
+.Calendar-month {
+    margin: 0 16px;
+    width: 120px;
+    white-space: nowrap;
 }

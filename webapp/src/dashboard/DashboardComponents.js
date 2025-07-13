@@ -19,40 +19,9 @@ export function ErrorState ({ message }) {
     );
 }
 
-export function DailyWeightInput ({date, setError}) {
-    const [weight, setWeight] = useState('');
+export function DailyWeightInput ({date, dateId, weight, setWeight, setError}) {
     const [loading, setLoading] = useState(false);
-    const [dateId, setDateId] = useState(localStorage.getItem('dateId') || '');
-    const incrementWeight = () => {
-        setWeight((prev) => Math.min(999, parseInt(prev || 0) + 1));
-    };
 
-    const decrementWeight = () => {
-        setWeight((prev) => Math.max(0, parseInt(prev || 0) - 1));
-    };
-
-    const getDailyWeight = async () => {
-        setLoading(true);
-
-        try {
-            const responseBody = await genericRequest(
-                `${API_URL}/data/date/from-user-and-date?date=${date}`,
-                'GET',
-                getDataHeaders(),
-                null);
-            localStorage.setItem('dateId', responseBody.dateId);
-            setDateId(responseBody.dateId);
-            if (!responseBody.dailyWeight) {
-                setWeight(localStorage.getItem('weight'));
-            } else {
-                setWeight(responseBody.dailyWeight);
-            }
-        } catch (err) {
-            setError('Failed to fetch daily weight');
-        } finally {
-            setLoading(false);
-        }
-    }
     const updateDailyWeight = async () => {
         setLoading(true);
         try {
@@ -77,10 +46,6 @@ export function DailyWeightInput ({date, setError}) {
             setLoading(false);
         }
     }
-
-    useEffect(() => {
-        getDailyWeight();
-    }, []);
 
     if (loading) return <div className={"Info-message"}>Loading...</div>;
     return (

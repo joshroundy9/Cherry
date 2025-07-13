@@ -119,7 +119,7 @@ function MealPanel({switchPanel, mealName, mealId, time, date, dateId }) {
 
     return (
         <div className="MealPanel">
-            <div className="MealPanel-header">
+            <div className="Panel-header">
                 {mealName}
             </div>
             <div className={"MealPanel-date-header"}>
@@ -151,11 +151,11 @@ function MealPanel({switchPanel, mealName, mealId, time, date, dateId }) {
                 <ul className={"MealItemList-ul"}>
                     {mealItems.map(item => (
                         <li className={"MealItemList-li"} style={{paddingTop: '0.4vh', paddingBottom: '0.5vh'}} key={item.itemID}>
-                            <div>{item.itemName}</div>
+                            <div className={"Meal-name-wrapper"}>{item.itemName}</div>
                             <div/>
                             <div>{item.itemCalories}</div>
                             <div/>
-                            <div style={{marginRight: '1.5vw', color: '#19A9FA'}}>{item.itemProtein}g</div>
+                            <div style={{marginRight: '1.5vw'}}>{item.itemProtein}g</div>
                             <button className={"Delete-button"} type={"button"}
                                     onClick={() => removeMealItem(item.itemID)}>
                                 X
@@ -170,7 +170,7 @@ function MealPanel({switchPanel, mealName, mealId, time, date, dateId }) {
                     <div className={"MealPanel-footer-text"}>Total Calories: {totalCalories(mealItems)}</div>
                     <div className={"MealPanel-footer-text"}>Total Protein: {totalProtein(mealItems)}g</div>
                 </div>
-                <button className={"MealPanel-footer-button"} type={"button"} onClick={goBack}>Go Back</button>
+                <button className={"Panel-footer-button"} type={"button"} onClick={goBack}>Go Back</button>
             </div>
         </div>
     );
