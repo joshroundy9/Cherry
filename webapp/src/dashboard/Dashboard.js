@@ -4,6 +4,7 @@ import MealPanel from "./MealPanel";
 import DatePanel from "./DatePanel";
 import Calendar from "./Calendar";
 import {DashboardHome} from "./DashboardHome";
+import {GraphWrapper} from "../Graphs/GraphWrapper";
 
 function Dashboard({ onDashboard }) {
     const [selectedPanel, setSelectedPanel] = useState('generic');
@@ -28,7 +29,8 @@ function Dashboard({ onDashboard }) {
     } else if (selectedPanel === 'date') {
         panelComponent = <DatePanel switchPanel={switchPanel} date={date} dateId={dateId} weight={weight} setWeight={setWeight} />;
     } else {
-        panelComponent = <DashboardHome />;
+        // panelComponent = <DashboardHome />;
+        panelComponent = <GraphWrapper graphTerm={'Weekly'}/>;
     }
 
     return (
