@@ -13,6 +13,7 @@ function MealEntry({ addMeal, numberOfMeals }) {
         addMeal(mealName, mealTime, setError);
         setMealName('');
         setMealTime('');
+        setLoading(false);
     };
 
     return (

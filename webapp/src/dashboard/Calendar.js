@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {genericRequest, getDataHeaders} from "../utils/DashboardUtil";
+import {Signature} from "./DashboardComponents";
 
 const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
@@ -132,6 +133,7 @@ export function Calendar({switchPanel, setDate, setDateId, setWeight}) {
                 {error && <div className={"Error-message"}>{error}</div>}
                 {loading && <div className={"Info-message"}>Loading...</div>}
             </div>
+            <Signature />
         </div>
     );
 }
