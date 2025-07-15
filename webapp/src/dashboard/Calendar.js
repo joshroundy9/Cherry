@@ -74,6 +74,8 @@ export function Calendar({switchPanel, setDate, setDateId, setWeight}) {
             }
             localStorage.setItem('dateId', responseBody.dateID);
             localStorage.setItem('date', responseBody.date);
+            localStorage.setItem('dailyCalories', responseBody.dailyCalories);
+            localStorage.setItem('dailyProtein', responseBody.dailyProtein);
             setDateId(responseBody.dateID);
         } catch (err) {
             setError('Failed to fetch date information');
@@ -132,6 +134,14 @@ export function Calendar({switchPanel, setDate, setDateId, setWeight}) {
             <div className="Calendar-footer">
                 {error && <div className={"Error-message"}>{error}</div>}
                 {loading && <div className={"Info-message"}>Loading...</div>}
+            </div>
+            <div>
+                <div style={{fontSize: 'x-large'}}>View Calorie, Protein, and Weight Graphs For:</div>
+                <div>
+                    <button className={"Panel-footer-button"} onClick={() => switchPanel('week-graph')}>This Week</button>
+                    <button className={"Panel-footer-button"} onClick={() => switchPanel('month-graph')}>This Month</button>
+                    <button className={"Panel-footer-button"} onClick={() => switchPanel('year-graph')}>This Year</button>
+                </div>
             </div>
             <Signature />
         </div>

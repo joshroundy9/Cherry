@@ -1,7 +1,23 @@
 import Graph from "./Graph";
 import '../style/Graph.css';
+import {useEffect} from "react";
 
 export function GraphWrapper({graphTerm}) {
+
+    let daysBack = 6;
+    switch (graphTerm) {
+        case "Monthly":
+            daysBack = 30;
+            break;
+        case "Yearly":
+            daysBack = 364;
+            break;
+    }
+
+    useEffect(() => {
+
+    }, [graphTerm]);
+
     return (
         <div className={"Graph-wrapper"}>
             <div className={"Panel-header"}>{graphTerm} Nutrition and Weight Graph</div>
