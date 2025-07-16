@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.sql.Date;
 
 import static com.joshroundy.cherry.constant.AuthorizationConstants.*;
 

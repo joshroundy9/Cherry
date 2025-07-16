@@ -14,4 +14,5 @@ import java.util.Optional;
 public interface DateRepository extends JpaRepository<DateEntity, Integer> {
     List<DateEntity> findByUserID(Integer userID);
     Optional<DateEntity> findByUserIDAndDate(Integer userID, Date date);
+    List<DateEntity> findByUserIDAndDateBetween(Integer userID, Date startDate, Date endDate);
 }

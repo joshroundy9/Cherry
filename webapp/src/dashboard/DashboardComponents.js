@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {genericRequest, getCurrentDate, getDataHeaders} from "../utils/DashboardUtil";
 
 const API_URL = process.env.REACT_APP_API_URL;
@@ -68,4 +68,24 @@ export function DailyWeightInput ({date, dateId, weight, setWeight, setError}) {
             <div style={{marginLeft: '2px'}}>lbs</div>
         </div>
     );
+}
+
+export function Signature() {
+    return <div className={"Dashboard-footer-text"} style={{marginTop: "auto", marginBottom: "20px"}}>
+        <div>Built by <span className={"Red"}>Josh Roundy</span> in Summer 2025</div>
+        <div style={{marginTop: '10px'}}>
+            <a href="https://www.linkedin.com/in/joshroundy" target="_blank" rel="noopener noreferrer">
+                <img src="/linkedinicon.png" alt="LinkedIn"
+                     style={{width: 32, height: 32, marginRight: 48}}/>
+            </a>
+            <a href="https://github.com/joshroundy9" target="_blank" rel="noopener noreferrer">
+                <img src="/githubicon.png" alt="GitHub"
+                     style={{width: 32, height: 32, marginRight: 48}}/>
+            </a>
+            <a href="https://joshroundy.dev" target="_blank" rel="noopener noreferrer">
+                <img src="/portfolioicon.png" alt="Portfolio"
+                     style={{width: 32, height: 32}}/>
+            </a>
+        </div>
+    </div>
 }

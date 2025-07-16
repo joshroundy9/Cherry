@@ -20,6 +20,10 @@ html, body, #root {
   pointer-events: none;
 }
 
+.Red {
+    color: #FF0606;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -38,8 +42,9 @@ html, body, #root {
 }
 
 .App-link {
-  color: #19A9FA;
+  color: #FF0606;
     text-decoration: none;
+  cursor: pointer;
 }
 
 .App-link:hover {
@@ -180,15 +185,17 @@ input[type="date"] {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding-left: 15vw;
+  margin-left: 10%;
 }
 
 .Auth-text-header {
-  font-size: 9vh;
+  font-size: 64px;
+  white-space: nowrap;
 }
 
 .Auth-text-body {
-  font-size: 5vh;
+  font-size: 40px;
+  white-space: nowrap;
 }
 
 .Logo-red {
@@ -196,7 +203,7 @@ input[type="date"] {
 }
 
 .Form-button {
-  background-color: #19A9FA;
+  background-color: #FF0606;
   color: black;
   font-family: 'Jomhuria', cursive;
   font-size: 3.5vh;

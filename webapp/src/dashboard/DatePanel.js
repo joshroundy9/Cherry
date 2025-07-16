@@ -105,6 +105,12 @@ function DatePanel({ switchPanel, dateId, date, weight, setWeight }) {
             })
             .then(data => {
                 setMeals(data);
+                const dailyCalories = totalCalories(data);
+                const dailyProtein = totalProtein(data);
+                if (dailyCalories !== localStorage.getItem('dailyCalories') ||
+                    dailyProtein !== localStorage.getItem('dailyProtein')) {
+                    updateDateNutrition(dateId, dailyCalories, dailyProtein, setError).then();
+                }
                 setError(null);
             })
             .catch(err => {

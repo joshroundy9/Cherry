@@ -27,7 +27,8 @@ public class WebConfig {
             @Override
             public void addInterceptors(InterceptorRegistry registry) {
                 registry.addInterceptor(userIdHeaderInterceptor)
-                        .addPathPatterns("/data/**");
+                        .addPathPatterns("/data/**")
+                        .addPathPatterns("/graphs/**");
             }
         };
     }

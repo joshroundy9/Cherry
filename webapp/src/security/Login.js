@@ -85,7 +85,7 @@ function Login({ onLogin }) {
                 </form>
             </div>
             <div className={"Auth-text"}>
-                <p className={"Auth-text-header"}>Calorie tracking you can trust.</p>
+                <p className={"Auth-text-header"}>AI-powered nutrition tracking.</p>
                 <p className={"Auth-text-body"}>Cherry provides everything you need for efficient calorie tracking.</p>
                 <p className={"Auth-text-body"}>Don’t know much about nutrition?
                     We're here to help.</p>

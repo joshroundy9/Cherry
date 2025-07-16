@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {genericRequest, getDataHeaders} from "../utils/DashboardUtil";
+import {Signature} from "./DashboardComponents";
 
 const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
@@ -73,6 +74,8 @@ export function Calendar({switchPanel, setDate, setDateId, setWeight}) {
             }
             localStorage.setItem('dateId', responseBody.dateID);
             localStorage.setItem('date', responseBody.date);
+            localStorage.setItem('dailyCalories', responseBody.dailyCalories);
+            localStorage.setItem('dailyProtein', responseBody.dailyProtein);
             setDateId(responseBody.dateID);
         } catch (err) {
             setError('Failed to fetch date information');
@@ -132,6 +135,15 @@ export function Calendar({switchPanel, setDate, setDateId, setWeight}) {
                 {error && <div className={"Error-message"}>{error}</div>}
                 {loading && <div className={"Info-message"}>Loading...</div>}
             </div>
+            <div>
+                <div style={{fontSize: 'x-large'}}>View Calorie, Protein, and Weight Graphs For:</div>
+                <div>
+                    <button className={"Panel-footer-button"} onClick={() => switchPanel('weekly-graph')}>This Week</button>
+                    <button className={"Panel-footer-button"} onClick={() => switchPanel('monthly-graph')}>This Month</button>
+                    <button className={"Panel-footer-button"} onClick={() => switchPanel('yearly-graph')}>This Year</button>
+                </div>
+            </div>
+            <Signature />
         </div>
     );
 }
