@@ -24,13 +24,25 @@ function Dashboard({ onDashboard }) {
     };
 
     let panelComponent;
-    if (selectedPanel === 'meal') {
-        panelComponent = <MealPanel switchPanel={switchPanel} mealName={localStorage.getItem('mealName')} mealId={localStorage.getItem('mealId')} dateId={localStorage.getItem('dateId')} date={localStorage.getItem('date')} time={localStorage.getItem('time')}/>;
-    } else if (selectedPanel === 'date') {
-        panelComponent = <DatePanel switchPanel={switchPanel} date={date} dateId={dateId} weight={weight} setWeight={setWeight} />;
-    } else {
-        // panelComponent = <DashboardHome />;
-        panelComponent = <GraphWrapper graphTerm={'Weekly'}/>;
+    switch (selectedPanel) {
+        case 'meal':
+            panelComponent = <MealPanel switchPanel={switchPanel} mealName={localStorage.getItem('mealName')} mealId={localStorage.getItem('mealId')} dateId={localStorage.getItem('dateId')} date={localStorage.getItem('date')} time={localStorage.getItem('time')}/>;
+            break;
+        case 'date':
+            panelComponent = <DatePanel switchPanel={switchPanel} date={date} dateId={dateId} weight={weight} setWeight={setWeight} />;
+            break;
+        case 'weekly-graph':
+            panelComponent = <GraphWrapper graphTerm={'Weekly'}/>;
+            break;
+        case 'monthly-graph':
+            panelComponent = <GraphWrapper graphTerm={'Monthly'}/>;
+            break;
+        case 'yearly-graph':
+            panelComponent = <GraphWrapper graphTerm={'Yearly'}/>;
+            break;
+        default:
+            panelComponent = <DashboardHome />;
+            break;
     }
 
     return (

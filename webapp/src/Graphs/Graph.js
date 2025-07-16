@@ -2,6 +2,7 @@ import React from "react";
 import { Line } from "react-chartjs-2";
 import { Chart, LineElement, PointElement, LinearScale, TimeScale, Title, Tooltip, Legend, CategoryScale } from "chart.js";
 import "chartjs-adapter-date-fns";
+import '../style/Dashboard.css';
 
 Chart.register(LineElement, PointElement, LinearScale, TimeScale, Title, Tooltip, Legend, CategoryScale);
 
@@ -28,20 +29,59 @@ export function Graph({ dataSets, dateRange, labels }) {
     const options = {
         responsive: true,
         plugins: {
-            legend: { display: true },
+            legend: {
+                display: true,
+                labels: {
+                    font: {
+                        family: "'Jomhuria', cursive",
+                        size: 20,
+                        weight: 'normal',
+                    },
+                    color: "#fff"
+                }
+            },
             title: { display: false },
         },
         scales: {
             x: {
                 type: "time",
-                time: {
-                    unit: getTimeUnit(dateRange),
+                time: { unit: getTimeUnit(dateRange) },
+                title: {
+                    display: true,
+                    text: "Date",
+                    font: {
+                        family: "'Jomhuria', cursive",
+                        size: 22,
+                        weight: 'normal',
+                    },
                 },
-                title: { display: true, text: "Date" },
+                ticks: {
+                    font: {
+                        family: "'Jomhuria', cursive",
+                        size: 18,
+                        weight: 'normal',
+                    },
+                }
             },
             y: {
                 beginAtZero: false,
-                title: { display: true, text: "Value" },
+                title: {
+                    display: true,
+                    text: "Value",
+                    font: {
+                        family: "'Jomhuria', cursive",
+                        size: 22,
+                        weight: 'normal',
+                    },
+                    color: "#fff"
+                },
+                ticks: {
+                    font: {
+                        family: "'Jomhuria', cursive",
+                        size: 18,
+                        weight: 'normal',
+                    },
+                }
             },
         },
     };
@@ -55,7 +95,10 @@ export function Graph({ dataSets, dateRange, labels }) {
         return "year";
     }
 
-    return <Line data={data} options={options} />;
+    return (
+    <div style={{maxWidth: '1000px', width: '100%', height: '100%' }}>
+        <Line data={data} options={options} />
+    </div>);
 }
 
 export default Graph;
