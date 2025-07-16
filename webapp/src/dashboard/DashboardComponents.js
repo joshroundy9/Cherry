@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {genericRequest, getCurrentDate, getDataHeaders} from "../utils/DashboardUtil";
 
 const API_URL = process.env.REACT_APP_API_URL;

@@ -22,7 +22,7 @@ export function GraphWrapper({graphTerm}) {
             daysBack = 364;
             break;
         default:
-            daysBack = 7; // Default to weekly
+            daysBack = 6; // Default to weekly
             break;
     }
 
@@ -43,16 +43,10 @@ export function GraphWrapper({graphTerm}) {
             startDate.setDate(endDate.getDate() - daysBack);
 
             const dateList = [];
-            const numIntervals = daysBack;
-            const startTime = startDate.getTime();
-            const endTime = endDate.getTime();
-            const interval = (endTime - startTime) / (numIntervals - 1);
-
-            for (let i = 0; i < numIntervals; i++) {
-                const date = new Date(startTime + i * interval);
-                const formatted = date.getFullYear() + '-' +
-                    String(date.getMonth() + 1).padStart(2, '0') + '-' +
-                    String(date.getDate()).padStart(2, '0');
+            for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
+                const formatted = d.getFullYear() + '-' +
+                    String(d.getMonth() + 1).padStart(2, '0') + '-' +
+                    String(d.getDate()).padStart(2, '0');
                 dateList.push(formatted);
             }
             return dateList;
@@ -60,7 +54,9 @@ export function GraphWrapper({graphTerm}) {
         function buildDataSets(startDate, endDate, payload) {
             const dateList = [];
             for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
-                dateList.push(d.toISOString().split('T')[0]);
+                dateList.push(d.getFullYear() + '-' +
+                    String(d.getMonth() + 1).padStart(2, '0') + '-' +
+                    String(d.getDate()).padStart(2, '0'));
             }
 
             const findValue = (date, key) => {
