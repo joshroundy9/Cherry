@@ -1,8 +1,6 @@
 .App {
     text-align: center;
-    max-height: 100vh;
     overflow: hidden;
-
 }
 
 .Dashboard-background {
@@ -127,7 +125,7 @@
     align-items: center;
     justify-content: start;
     width: 100%;
-    height: 5vw;
+    height: 28px;
 }
 /*
  * Meal Panel Styles
@@ -533,4 +531,49 @@
     font-size: xx-large;
     margin-top: auto;
     margin-bottom: 20px;
+}
+
+/* Mobile Styles */
+@media (max-width: 750px) {
+    .Dashboard-background {
+        height: auto;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .App {
+        overflow: scroll;
+    }
+    .Flex-container {
+        margin-left: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    .Calendar-container {
+        margin-top: 10px;
+        min-width: 380px;
+    }
+    .Dashboard-home-arrow-bg {
+        visibility: hidden;
+        width: 2em;
+        height: 2em;
+    }
+    .Dashboard-home {
+        min-width: 0;
+        width: auto;
+        height: auto;
+    }
+    .Dashboard-home {
+        height: auto;
+    }
+    .Flex-container {
+        height: auto;
+    }
+    .Username-text {
+        font-size: x-large;
+    }
+    .SignOut-button {
+        font-size: x-large;
+    }
 }
