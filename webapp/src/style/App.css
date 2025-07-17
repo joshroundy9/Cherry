@@ -5,13 +5,10 @@ html, body, #root {
   margin: 0;
   padding: 0;
   border: none;
-  height: 100%;
-  width: 100%;
 }
 
 .App {
   text-align: center;
-  max-height: 100vh;
   overflow: hidden;
 }
 
@@ -94,7 +91,7 @@ html, body, #root {
   font-family: 'Jomhuria', cursive;
   height: 100vh;
   min-height: 100vh;
-  padding-top: 0vh;
+  padding-top: 0;
 }
 
 .Register-form {
@@ -185,7 +182,7 @@ input[type="date"] {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-left: 10%;
+  margin-left: 5%;
 }
 
 .Auth-text-header {
@@ -195,7 +192,6 @@ input[type="date"] {
 
 .Auth-text-body {
   font-size: 40px;
-  white-space: nowrap;
 }
 
 .Logo-red {
@@ -259,4 +255,38 @@ input[type="date"] {
   to {
     transform: rotate(360deg);
   }
+}
+/* Mobile Styles */
+@media (max-width: 750px) {
+    .Auth-background {
+      flex-direction: column;
+      align-items: center;
+      height: auto;
+    }
+    .Auth-text {
+      margin-left: 0;
+      align-items: center;
+      visibility: hidden;
+      height: 0;
+    }
+    .Auth-text-header {
+      height: 0;
+      margin: 0;
+    }
+    .Auth-text-body {
+        height: 0;
+      margin: 0;
+    }
+    .Login-form {
+      height: 60vh;
+    }
+    .Register-form {
+      height: 80vh;
+    }
+    .Auth-form-header {
+      margin-top: 30px;
+    }
+    .Error-message {
+      font-size: large;
+    }
 }
