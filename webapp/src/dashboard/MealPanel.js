@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import NutritionForm from "./FoodEntry";
+import NutritionForm from "./MealItemEntry";
 import {genericRequest, getDataHeaders, updateDateNutrition, updateMealNutrition} from "../utils/DashboardUtil";
 import {ErrorState, LoadingState} from "./DashboardComponents";
 
