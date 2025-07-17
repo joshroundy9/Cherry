@@ -536,12 +536,15 @@
 /* Mobile Styles */
 @media (max-width: 750px) {
     .Dashboard-background {
+        width: 100%;
         height: auto;
         flex-direction: column;
         gap: 10px;
     }
     .App {
         overflow: scroll;
+        max-width: 100%;
+        overflow-x: hidden;
     }
     .Flex-container {
         margin-left: 0;
@@ -552,7 +555,8 @@
     }
     .Calendar-container {
         margin-top: 10px;
-        min-width: 380px;
+        min-width: 0;
+        width: 100%;
     }
     .Dashboard-home-arrow-bg {
         visibility: hidden;
