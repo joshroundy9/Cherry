@@ -84,51 +84,23 @@ function NutritionForm({ addMealItem, numberOfMealItems }) {
     return (
         <div className={"Nutrition-form-container"}>
             <form className={"Nutrition-form"} onSubmit={handleSubmit} style={{ display: 'flex', alignItems: 'center' }}>
-                <div ref={dropdownRef} style={{ position: 'relative', marginRight: '8px' }}>
+                <div ref={dropdownRef} style={{ position: 'relative', marginRight: '0.5%' }}>
                     <button
                         type="button"
                         onClick={() => setDropdownOpen((open) => !open)}
-                        style={{
-                            background: 'white',
-                            border: '1px solid #ccc',
-                            borderRadius: '4px',
-                            width: '32px',
-                            height: '32px',
-                            fontSize: '20px',
-                            cursor: 'pointer',
-                            padding: 0,
-                        }}
+                        className={`Nutrition-form-dropdown${dropdownOpen ? ' open' : ''}`}
                         aria-label="Select input mode"
                     >
-                        ⌄
+
                     </button>
                     {dropdownOpen && (
-                        <ul style={{
-                            position: 'absolute',
-                            left: 0,
-                            top: '110%',
-                            background: 'white',
-                            border: '1px solid #ccc',
-                            borderRadius: '4px',
-                            listStyle: 'none',
-                            margin: 0,
-                            padding: 0,
-                            zIndex: 10,
-                            minWidth: '80px'
-                        }}>
+                        <ul className={"Nutrition-form-dropdown-menu"}>
                             {MODES.map(opt => (
                                 <li key={opt}>
                                     <button
                                         type="button"
                                         onClick={() => handleModeChange(opt)}
-                                        style={{
-                                            background: 'none',
-                                            border: 'none',
-                                            width: '100%',
-                                            textAlign: 'left',
-                                            padding: '8px',
-                                            cursor: 'pointer'
-                                        }}
+                                        className={"Nutrition-form-dropdown-menu-item"}
                                     >
                                         {opt}
                                     </button>
