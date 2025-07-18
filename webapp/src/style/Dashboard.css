@@ -90,6 +90,16 @@
     border: none;
     font-size: x-large;
 }
+.Nutrition-form-description-input {
+    padding-left: 32px; /* Adjust for icon + spacing */
+    background: #1E1E1E url('/public/addicon.png') no-repeat 8px center;
+    background-size: 16px 16px;
+}
+.Nutrition-form-basic-input {
+    padding-left: 8px;
+    background: #1E1E1E;
+    margin-left: 0.5%;
+}
 .Nutrition-form-input::placeholder {
     color: #aeaeae;
 }
@@ -563,6 +573,13 @@
     margin-top: auto;
 }
 
+.Hover-expand {
+    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.Hover-expand:hover {
+    transform: scale(1.07);
+}
+
 /* Graphs Styles */
 .Graph-wrapper {
     height: 100%;
@@ -599,6 +616,9 @@
         flex-direction: column;
         align-items: center;
         margin-bottom: 10px;
+    }
+    .MealPanel-footer {
+        margin-top: 100%;
     }
     .Calendar-container {
         margin-top: 10px;

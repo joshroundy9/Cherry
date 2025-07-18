@@ -163,12 +163,12 @@ function DatePanel({ switchPanel, dateId, date, weight, setWeight }) {
                 <ul className={"MealItemList-ul"}>
                     {meals.map(item => (
                         <li className={"MealItemList-li"} style={{paddingTop: '1.5vh', paddingBottom: '1.5vh'}} key={item.mealID}>
-                            <button type={'button'} onClick={() => goToMealPanel(item.mealName, item.mealID, item.time)} className={'Meal-name-wrapper'}>{item.mealName} <div style={{color: 'white'}}>{formatTimeTo12Hour(item.time)}</div></button>
+                            <button type={'button'} onClick={() => goToMealPanel(item.mealName, item.mealID, item.time)} className={'Meal-name-wrapper Hover-expand'}>{item.mealName} <div style={{color: 'white'}}>{formatTimeTo12Hour(item.time)}</div></button>
                             <div/>
                             <div>{item.mealCalories}</div>
                             <div/>
                             <div style={{marginRight: '1.5vw'}}>{item.mealProtein}g</div>
-                            <button className={"Delete-button"} type={"button"}
+                            <button className={"Delete-button Hover-expand"} type={"button"}
                                     onClick={() => removeMeal(item.mealID)}>
                                 X
                             </button>

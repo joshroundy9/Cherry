@@ -1,43 +1,23 @@
 import React, {useEffect, useState} from "react";
 import { Navigate } from "react-router-dom";
+import {LoadingState} from "../dashboard/DashboardComponents";
 
-const API_URL = process.env.REACT_APP_API_URL;
-
-const PrivateRoute = ({ children }) => {
+const AuthRoute = ({ children }) => {
     const [isValid, setIsValid] = useState(null);
 
     useEffect(() => {
-        async function checkToken() {
-            const valid = await validateToken();
-            setIsValid(valid);
+        const token = localStorage.getItem("jwtToken");
+        if (token && token !== '') {
+            setIsValid(true);
+        } else {
+            setIsValid(false);
         }
-        checkToken();
     }, []);
 
-    if (isValid === null) return null; // TODO: Add a loading spinner
+    if (isValid === null) return <LoadingState />;
+    if (isValid) return <Navigate to="/dashboard" replace />;
 
-    return isValid ? children : <Navigate to="/" replace />;
+    return children;
 };
 
-async function validateToken() {
-    const token = localStorage.getItem("jwtToken");
-    if (!token)
-    {
-        localStorage.setItem('jwtToken', '');
-        return false;
-    }
-
-    try {
-        const response = await fetch(`${API_URL}/auth/validate`, {
-            method: "POST",
-            headers: {
-                "JWT-Token": token,
-            }
-        });
-        return response.ok;
-    } catch {
-        return false;
-    }
-}
-
-export default PrivateRoute;
+export default AuthRoute;

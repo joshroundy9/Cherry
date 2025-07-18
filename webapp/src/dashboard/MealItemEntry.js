@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 const API_URL = process.env.REACT_APP_API_URL;
-const MODES = ['AI', 'Manual', 'Recents'];
+const MODES = ['AI', 'Manual'];
 
 function NutritionForm({ addMealItem, numberOfMealItems }) {
     const [foodEntry, setFoodEntry] = useState('');
+    const [calories, setCalories] = useState('');
+    const [protein, setProtein] = useState('');
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
     const [mode, setMode] = useState(localStorage.getItem('nutritionInputMode') || 'AI');
@@ -39,18 +41,14 @@ function NutritionForm({ addMealItem, numberOfMealItems }) {
         e.preventDefault();
         setError('');
         if (mode === 'Manual') {
-            const [food, calories, protein] = foodEntry.split(',');
-            if (food && calories && protein) {
-                addMealItem(food.trim(), Number(calories), Number(protein), setError);
+            if (foodEntry && calories && protein) {
+                addMealItem(foodEntry, Number(calories), Number(protein), setError);
                 setFoodEntry('');
+                setCalories('');
+                setProtein('');
             } else {
                 setError('Enter as: food,calories,protein');
             }
-            setLoading(false);
-            return;
-        }
-        if (mode === 'Recents') {
-            setError('Recents mode not implemented.');
             setLoading(false);
             return;
         }
@@ -84,7 +82,7 @@ function NutritionForm({ addMealItem, numberOfMealItems }) {
     return (
         <div className={"Nutrition-form-container"}>
             <form className={"Nutrition-form"} onSubmit={handleSubmit} style={{ display: 'flex', alignItems: 'center' }}>
-                <div ref={dropdownRef} style={{ position: 'relative', marginRight: '0.5%' }}>
+                <div ref={dropdownRef} style={{position: 'relative', marginRight: '0.5%' }}>
                     <button
                         type="button"
                         onClick={() => setDropdownOpen((open) => !open)}
@@ -110,29 +108,46 @@ function NutritionForm({ addMealItem, numberOfMealItems }) {
                     )}
                 </div>
                 {mode === 'Manual' ? (
-                    <input
-                        className={"Nutrition-form-input"}
-                        type="text"
-                        value={foodEntry}
-                        onChange={e => setFoodEntry(e.target.value)}
-                        placeholder="food,calories,protein"
-                    />
-                ) : mode === 'Recents' ? (
-                    <input
-                        className={"Nutrition-form-input"}
-                        type="text"
-                        value={foodEntry}
-                        onChange={e => setFoodEntry(e.target.value)}
-                        placeholder="(Recents mode not implemented)"
-                        disabled
-                    />
-                ) : (
-                    <input
-                        className={"Nutrition-form-input"}
+                    <div style={{ display: 'flex', flexDirection: 'row', width: '100%' }}>
+                        <input
+                            className={"Nutrition-form-input Nutrition-form-description-input"}
+                            type="text"
+                            value={foodEntry}
+                            onChange={e => setFoodEntry(e.target.value)}
+                            placeholder="Enter what you ate here"
+                            maxLength={100}
+                            required={true}
+                        />
+                        <input
+                            className={"Nutrition-form-input Nutrition-form-basic-input"}
+                            type="number"
+                            value={calories}
+                            onChange={e => setCalories(e.target.value)}
+                            placeholder="Calories"
+                            min={0}
+                            max={10000}
+                            required={true}
+                        />
+                        <input
+                            className={"Nutrition-form-input Nutrition-form-basic-input"}
+                            type="number"
+                            value={protein}
+                            onChange={e => setProtein(e.target.value)}
+                            placeholder="Protein"
+                            min={0}
+                            max={1000}
+                            required={true}
+                        />
+                    </div>
+            ) : (
+            <input
+                className={"Nutrition-form-input"}
                         type="text"
                         value={foodEntry}
                         onChange={e => setFoodEntry(e.target.value)}
                         placeholder="Enter what you ate here, the more specific the better!"
+                        maxLength={100}
+                        required={true}
                     />
                 )}
                 <button className={"Nutrition-form-button"} type="submit">Add New Item</button>

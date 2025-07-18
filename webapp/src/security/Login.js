@@ -46,7 +46,7 @@ function Login({ onLogin }) {
 
     return (
         <div className={"Auth-background"}>
-            <div className={"Login-form"}>
+            <div className={"Login-container"}>
                 <div className={"Auth-form-header"}>
                     <p className={"Auth-form-text"}>Welcome back!</p>
                     <p className={"Auth-form-text"}>Meeting your goals starts today.</p>
@@ -69,7 +69,7 @@ function Login({ onLogin }) {
                         onChange={e => setPassword(e.target.value)}
                         required
                     />
-                    <button className={"Form-button"} type="submit">Login</button>
+                    <button className={"Form-button Hover-expand"} type="submit">Login</button>
                     <div style={{
                         display: 'flex',
                         justifyContent: 'center',
@@ -86,9 +86,9 @@ function Login({ onLogin }) {
             </div>
             <div className={"Auth-text"}>
                 <p className={"Auth-text-header"}>AI-powered nutrition tracking.</p>
-                <p className={"Auth-text-body"}>Cherry provides everything you need for efficient calorie tracking.</p>
-                <p className={"Auth-text-body"}>Don’t know much about nutrition?
-                    We're here to help.</p>
+                <p className={"Auth-text-body"}>Cherry removes the hassle of calorie, protein, and weight
+                    tracking and gives you the tools you need to meet your goals.</p>
+                <p className={"Auth-text-body"}>All online, for free.</p>
             </div>
         </div>
 

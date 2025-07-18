@@ -94,19 +94,20 @@ html, body, #root {
   padding-top: 0;
 }
 
-.Register-form {
+.Register-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   background-color: #2D2D2D;
   color: white;
-  height: 70%;
-  width: 50vh;
+  height: auto;
+  width: auto;
+  min-width: 380px;
   align-self: center;
 }
 
-form.Register-form {
+.Register-form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -118,22 +119,23 @@ form.Register-form {
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
-
+    margin-top: 20px;
 }
 
-.Login-form {
+.Login-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   background-color: #2D2D2D;
   color: white;
-  height: 50%;
-  width: 50vh;
+  height: auto;
+  width: 45vh;
+  min-width: 380px;
   align-self: center;
 }
 
-form.Login-form {
+.Login-form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -148,8 +150,9 @@ form.Login-form {
   border: none;
   outline: none;
   box-shadow: none;
-  width: 12em;
-  font-size: 3vh;
+  width: 10em;
+  font-size: 28px;
+  margin-top: 5px;
 }
 
 input:-webkit-autofill,
@@ -167,14 +170,14 @@ input:-webkit-autofill:active {
 }
 
 input[type="date"] {
-  font-size: 3vh;
-  width: 12em;
+  font-size: 28px;
+  width: 10.15em;
 }
 
 .Auth-form-text {
-  font-size: 4.5vh;
+  font-size: 40px;
   margin-top: 0vh;
-  margin-bottom: 2vh;
+  margin-bottom: 18px;
 }
 
 .Auth-text {
@@ -182,16 +185,23 @@ input[type="date"] {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-left: 5%;
+  margin-left: 10%;
+  max-width: 670px;
 }
 
 .Auth-text-header {
   font-size: 64px;
   white-space: nowrap;
+  background: linear-gradient(180deg, #FF0606 0%, #ff8686 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
 }
 
 .Auth-text-body {
   font-size: 40px;
+  text-align: start;
 }
 
 .Logo-red {
@@ -202,10 +212,10 @@ input[type="date"] {
   background-color: #FF0606;
   color: black;
   font-family: 'Jomhuria', cursive;
-  font-size: 3.5vh;
+  font-size: x-large;
   border: none;
   border-radius: 7px;
-  margin-top: 1.5vh;
+  margin-top: 10px;
   cursor: pointer;
 }
 
@@ -256,12 +266,63 @@ input[type="date"] {
     transform: rotate(360deg);
   }
 }
+
+/* Home Page Styles */
+.HomePage-background {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  color: white;
+  font-family: 'Jomhuria', cursive;
+  font-size: xx-large;
+  height: auto;
+  min-height: 95vh;
+  background: linear-gradient(180deg, #1E1E1E 0%, #291111 100%);
+}
+.HomePage-body-container {
+  margin-top: 5vh;
+  width: 90%;
+}
+.HomePage-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 10vh;
+}
+.HomePage-title {
+
+}
+.HomePage-text {
+  text-align: start;
+}
+.HomePage-video-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5vh;
+  margin-bottom: 3vh;
+}
+.Homepage-content-text {
+  display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+.HomePage-content-image-left {
+  margin-left: 5vw;
+}
+.HomePage-content-image-right {
+  margin-right: 5vw;
+}
 /* Mobile Styles */
-@media (max-width: 750px) {
+@media (max-width: 800px) {
     .Auth-background {
       flex-direction: column;
       align-items: center;
-      height: auto;
+      height: 100%;
     }
     .Auth-text {
       margin-left: 0;
@@ -274,19 +335,51 @@ input[type="date"] {
       margin: 0;
     }
     .Auth-text-body {
-        height: 0;
+      height: 0;
       margin: 0;
     }
-    .Login-form {
-      height: 60vh;
+    .Login-container {
+      display: flex;
+      justify-content: flex-end;
+      max-height: 440px;
     }
-    .Register-form {
-      height: 80vh;
+    .Login-form {
+      margin-top: auto;
+    }
+    .Register-container {
+        margin: 0;
     }
     .Auth-form-header {
       margin-top: 30px;
     }
     .Error-message {
       font-size: large;
+    }
+    .Auth-form-text {
+      font-size: xx-large;
+    }
+    .Homepage-content-text {
+      align-items: center;
+    }
+    .HomePage-content {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+    }
+    .HomePage-content-reverse {
+      flex-direction: column-reverse;
+    }
+    .HomePage-content-image-left {
+        margin-left: 0;
+      max-width: 95%;
+      display: flex;
+        justify-content: center;
+    }
+    .HomePage-content-image-right {
+        margin-right: 0;
+    }
+    .HomePage-body-container {
+      margin: 0;
     }
 }
