@@ -53,7 +53,7 @@ export function DailyWeightInput ({date, dateId, weight, setWeight, setError}) {
         <div className={"Daily-weight-container"}>
             <div style={{marginRight: '2px'}}>Daily Weight:</div>
             <input
-                className={"Daily-weight-input"}
+                className={"Daily-weight-input Hover-expand"}
                 type="number"
                 value={weight}
                 onChange={e => setWeight(e.target.value)}
@@ -75,15 +75,15 @@ export function Signature() {
         <div>Built by <span className={"Red"}>Josh Roundy</span> in Summer 2025</div>
         <div style={{marginTop: '10px'}}>
             <a href="https://www.linkedin.com/in/joshroundy" target="_blank" rel="noopener noreferrer">
-                <img src="/linkedinicon.png" alt="LinkedIn"
+                <img className={"Hover-expand"} src="/linkedinicon.png" alt="LinkedIn"
                      style={{width: 32, height: 32, marginRight: 48}}/>
             </a>
             <a href="https://github.com/joshroundy9" target="_blank" rel="noopener noreferrer">
-                <img src="/githubicon.png" alt="GitHub"
+                <img className={"Hover-expand"} src="/githubicon.png" alt="GitHub"
                      style={{width: 32, height: 32, marginRight: 48}}/>
             </a>
             <a href="https://joshroundy.dev" target="_blank" rel="noopener noreferrer">
-                <img src="/portfolioicon.png" alt="Portfolio"
+                <img className={"Hover-expand"} src="/portfolioicon.png" alt="Portfolio"
                      style={{width: 32, height: 32}}/>
             </a>
         </div>

@@ -50,10 +50,9 @@ function Register({ onRegister }) {
 
     return (
         <div className={"Auth-background"}>
-            <div className={"Register-form"}>
+            <div className={"Register-container"}>
                 <div className={"Auth-form-header"}>
-                    <p className={"Auth-form-text"}>Welcome to <span className={"Logo-red"}>CHERRY</span>!</p>
-                    <p className={"Auth-form-text"}>Meeting your goals starts today.</p>
+                    <div className={"Auth-form-text"}>Welcome to <span className={"Logo-red"}>CHERRY</span>!</div>
                 </div>
                 <form style={{marginTop: 0 + 'em'}} className={"Register-form"} onSubmit={handleSubmit}>
                     <p className={"Auth-form-text"}>Register</p>
@@ -115,15 +114,15 @@ function Register({ onRegister }) {
                            onChange={e => setWeight(e.target.value)}
                            required
                     />
-                    <button className={"Form-button"} type="submit">Register</button>
+                    <button className={"Form-button Hover-expand"} type="submit">Register</button>
                     <div style={{
                         display: 'flex',
                         justifyContent: 'center',
                         flexDirection: 'row',
-                        fontSize: '3vh',
+                        fontSize: 'x-large',
                         gap: '0.1em'
                     }}>
-                        <span>Already signed up?&#32;</span><Link className="App-link" to="/">Sign In</Link>
+                        <span>Already signed up?&#32;</span><Link className="App-link" to="/login">Sign In</Link>
                     </div>
                     <div style={{minHeight: '3em', textAlign: 'center', color: 'red'}}>
                         {message && <div className="Error-message">{message}</div>}
@@ -140,13 +139,13 @@ function Register({ onRegister }) {
                 </form>
             </div>
             <div className={"Auth-text"}>
-                <p className={"Auth-text-header"}>Calorie tracking you can trust.</p>
-                <p className={"Auth-text-body"}>Cherry provides everything you need for proper calorie
-                        tracking.</p>
-                    <p className={"Auth-text-body"}>All online, for free.</p>
-                </div>
+                <p className={"Auth-text-header"}>AI-powered nutrition tracking.</p>
+                <p className={"Auth-text-body"}>Cherry removes the hassle of calorie, protein, and weight
+                    tracking and gives you the tools you need to meet your goals.</p>
+                <p className={"Auth-text-body"}>All online, for free.</p>
             </div>
-            );
-            }
+        </div>
+    );
+}
 
             export default Register;

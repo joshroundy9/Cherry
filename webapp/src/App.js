@@ -5,12 +5,14 @@ import Login from './security/Login';
 import Register from "./security/Register";
 import Dashboard from "./dashboard/Dashboard";
 import PrivateRoute from "./security/PrivateRoute";
+import HomePage from "./HomePage/HomePage";
+import AuthRoute from "./security/AuthRoute";
 
 function App() {
     const navigate = useNavigate()
     const location = useLocation()
     const onSignOut = () => {
-        localStorage.removeItem('jwtToken');
+        localStorage.setItem('jwtToken', '');
         navigate('/');
     };
   return (
@@ -25,6 +27,7 @@ function App() {
                 CHERRY
                 <img className="Logo-img" src="/logo56.png" alt="Logo"/>
             </Link>
+            {location.pathname === "/" && (<Link className="SignOut-button" to="/login">Sign In</Link>)}
             {location.pathname === "/dashboard" && (
                 <button className="SignOut-button" onClick={onSignOut}>
                     Sign Out
@@ -32,9 +35,19 @@ function App() {
             )}
         </header>
         <Routes>
-            {/* PUBLIC ROUTES */}
-            <Route path="/" element={<Login onLogin={() => {}}/>}/>
-            <Route path="/register" element={<Register onRegister={() => {}}/>}/>
+            {/* HOME ROUTE */}
+            <Route path="/" element={<HomePage onHomePage={() => {}}/>}/>
+            {/* AUTH ROUTES */}
+            <Route path="/login" element={
+                <AuthRoute>
+                <Login onLogin={() => {}}/>
+                </AuthRoute>
+            }/>
+            <Route path="/register" element={
+                <AuthRoute>
+                    <Register onRegister={() => {}}/>
+                </AuthRoute>
+            }/>
 
             {/* PROTECTED ROUTES */}
             <Route path="/dashboard" element={

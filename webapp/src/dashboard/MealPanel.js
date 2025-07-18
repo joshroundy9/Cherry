@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import NutritionForm from "./FoodEntry";
+import NutritionForm from "./MealItemEntry";
 import {genericRequest, getDataHeaders, updateDateNutrition, updateMealNutrition} from "../utils/DashboardUtil";
 import {ErrorState, LoadingState} from "./DashboardComponents";
 
@@ -151,12 +151,12 @@ function MealPanel({switchPanel, mealName, mealId, time, date, dateId }) {
                 <ul className={"MealItemList-ul"}>
                     {mealItems.map(item => (
                         <li className={"MealItemList-li"} style={{paddingTop: '0.4vh', paddingBottom: '0.5vh'}} key={item.itemID}>
-                            <div className={"Meal-name-wrapper"}>{item.itemName}</div>
+                            <div className={"Meal-name-wrapper Hover-expand"}>{item.itemName}</div>
                             <div/>
                             <div>{item.itemCalories}</div>
                             <div/>
                             <div style={{marginRight: '1.5vw'}}>{item.itemProtein}g</div>
-                            <button className={"Delete-button"} type={"button"}
+                            <button className={"Delete-button Hover-expand"} type={"button"}
                                     onClick={() => removeMealItem(item.itemID)}>
                                 X
                             </button>
