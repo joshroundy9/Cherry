@@ -13,15 +13,6 @@ import static com.joshroundy.cherry.constant.ClientConstants.TEXT_MODEL;
 
 @Component
 public class AIUtil {
-
-    public String getAPIKey() {
-        try {
-        return Files.readString(Paths.get(ClientConstants.OPENAI_API_KEY_PATH)).trim();
-        } catch (IOException e) {
-            return "";
-        }
-    }
-
     public String createTextRequestBody(String input) {
         return """
                 {

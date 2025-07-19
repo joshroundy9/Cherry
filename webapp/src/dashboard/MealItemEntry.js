@@ -47,7 +47,7 @@ function NutritionForm({ addMealItem, numberOfMealItems }) {
                 setCalories('');
                 setProtein('');
             } else {
-                setError('Enter as: food,calories,protein');
+                setError('All fields are required in Manual mode.');
             }
             setLoading(false);
             return;
@@ -77,6 +77,7 @@ function NutritionForm({ addMealItem, numberOfMealItems }) {
         } catch (err) {
             setError('Network error: ' + err.message);
         }
+        setLoading(false);
     };
 
     return (

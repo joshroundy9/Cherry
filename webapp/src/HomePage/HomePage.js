@@ -7,9 +7,6 @@ const HomePage = ({ onHomePage }) => {
     const navigateToRegister = () => {
         navigate('/register');
     }
-    const navigateToLogin = () => {
-        navigate('/login');
-    }
     return (
         <div className="HomePage-background">
             <div className="HomePage-body-container">
@@ -44,10 +41,11 @@ const HomePage = ({ onHomePage }) => {
                             transform your health journey!</p>
                     </div>
                     <div className={"HomePage-content-image-left"}>
-                    <iframe style={{marginLeft: '5vw'}} width="560" height="315" src="https://www.youtube.com/embed/-GoDxL0FQ5U?si=SwsP4Herq345mLOF"
-                            title="YouTube video player" frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+                        <iframe style={{marginLeft: '5vw'}} width="560" height="315"
+                                src="https://www.youtube.com/embed/IligeviHT-M?si=oKzm2xXBKMJVPNNm"
+                                title="YouTube video player" frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
                     </div>
                 </div>
                 <div className="HomePage-content" style={{textAlign: 'center'}}>

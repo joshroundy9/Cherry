@@ -12,14 +12,6 @@ public class AIUtilTest {
     private AIUtil subject = new AIUtil();
 
     @Test
-    public void testGetAPIKey() {
-        // IF THIS TEST FAILS, UPDATE THE OPENAI_API_KEY_PATH IN ClientConstants TO POINT TO A VALID FILE
-        String apiKey = subject.getAPIKey();
-        assertNotNull(apiKey);
-        assertNotEquals("", apiKey);
-    }
-
-    @Test
     public void testCreateTextRequestBody() {
         String input = "One banana and two apples with two tablespoons of peanut butter.";
         String requestBody = subject.createTextRequestBody(input);
