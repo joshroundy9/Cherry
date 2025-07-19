@@ -17,7 +17,7 @@ public class WebConfig {
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
-            @Value("${cors.allowed-origins}")
+            @Value("#{'${cors.allowed-origins}'.split(',')}")
             private String[] allowedOrigins;
 
             @Override
@@ -27,6 +27,9 @@ public class WebConfig {
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
                         .allowCredentials(true);
+                for(String origin : allowedOrigins) {
+                    System.out.println("Allowed CORS origin: " + origin);
+                }
             }
 
             @Override
