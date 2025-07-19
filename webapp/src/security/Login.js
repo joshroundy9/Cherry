@@ -36,11 +36,11 @@ function Login({ onLogin }) {
                     navigate('/dashboard');
                 }, 50);
             } else {
-                navigate('/', { state: { message: 'Login failed!' } });
+                navigate('/login', { state: { message: 'Login failed!' } });
             }
         } catch (error) {
             console.error('Login error:', error);
-            navigate('/', { state: { message: 'An error occurred while logging in.' } });
+            navigate('/login', { state: { message: 'An error occurred while logging in.' } });
         }
     };
 

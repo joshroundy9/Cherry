@@ -17,7 +17,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\":\"joshroundy10\",\r\n    \"email\":\"joshroundy9@gmail.com\",\r\n    \"password\":\"password\",\r\n    \"dateOfBirth\":\"2003-03-28\",\r\n    \"height\":\"70\",\r\n    \"weight\":\"178.4\"\r\n}",
+							"raw": "{\r\n    \"username\":\"joshroundy11\",\r\n    \"email\":\"joshroundy11@gmail.com\",\r\n    \"password\":\"{{PASSWORD}}\",\r\n    \"dateOfBirth\":\"2003-03-28\",\r\n    \"height\":\"70\",\r\n    \"weight\":\"178.4\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -25,12 +25,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/auth/register",
+							"raw": "http://{{API_URL}}/auth/register",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"{{API_URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"auth",
 								"register"
@@ -138,7 +137,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\":\"joshroundy9\",\r\n    \"password\":\"password\"\r\n}",
+							"raw": "{\r\n    \"username\":\"joshroundy10\",\r\n    \"password\":\"{{PASSWORD}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -146,12 +145,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/auth/login",
+							"raw": "http://{{API_URL}}/auth/login",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"{{API_URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"auth",
 								"login"
@@ -264,12 +262,11 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8080/auth/validate",
+							"raw": "http://{{API_URL}}/auth/validate",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"{{API_URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"auth",
 								"validate"
@@ -314,12 +311,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/data/date",
+							"raw": "http://{{API_URL}}/data/date",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"{{API_URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"data",
 								"date"
@@ -428,7 +424,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJqb3Nocm91bmR5MTAiLCJyb2xlcyI6IiIsImlzcyI6InNlbGYiLCJleHAiOjE3NTI4MDEwOTYsImlhdCI6MTc1MjE5NjI5NiwidXNlcklkIjoxfQ.Oeo6A-W_RTRm2qkGU_iDXOzhn2Wcc6Yu8p6nLpAXoRECuBhz8zmRPgC8pixw0M0uyMYmwfyoYbaoIbVb1uwe4fwN3_EEWhfHDYzgTwrVfgXydgXnh57L4NxBdBWeycMgGl1QFOsqWHtYiS13EJ2FVRhY_VDpEMaLzR-dRgunmTNSiFaP_NPBsthNvEkTErrME9qZBkZnXNiUGAHWfLEODFRY4ZfMwEy3vVnQ7k65z5bifNhUiGUvdn7zbfwceIyo1rPm6T7jPbTooARGGfpngPYm4t4LmfVZE-qcY7GOaGBCGxR2uj1tFipLWFFzQfBXstaxEejaDzX240IjKRk9Kw",
+									"value": "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJqb3Nocm91bmR5MTAiLCJyb2xlcyI6IiIsImlzcyI6InNlbGYiLCJleHAiOjE3NTI5NDc5OTgsImlhdCI6MTc1MjM0MzE5OCwidXNlcklkIjoxfQ.NTt3JjWlHhnfGZfXljMdOTzez-Kme0Z_iTnEnPPW-UXNmccePEKIVV6ZEs02_2wQQH4BRa6GcvdZEOXqsXij0IRNBmVXeREBlgrnY8A_a2MFVTeZs0vAX9YNws0BNcwrAbZm_JpeAc4vY2P5v5VzgGDPb8ImOZ2j_IEv9IU2KdgZtl2yC53mHrORKWnRa7-Inxj7ej5jAPuykHOqsi9vhdLen6RlAN2aECUdauZZAmUogbTp1SCt6MxxoA7dTp9O5fjwL4jz2XzqGc3euu94FRn4zCXGiIdW1S1r6SATcfP4d68Vw8fBow5zswRulmay6uwMbFHZqC7LSUtZInkxXA",
 									"type": "string"
 								}
 							]
@@ -443,7 +439,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userID\":\"1\",\r\n    \"dateID\":\"1\",\r\n    \"dateTime\":\"2007-12-03T10:15:30+01:00[Europe/Paris]\"\r\n}",
+							"raw": "{\r\n    \"userID\":\"1\",\r\n    \"dateID\":\"1\",\r\n    \"mealName\": \"Lunch\",\r\n    \"time\":\"14:47:00\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -451,12 +447,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/data/meal",
+							"raw": "http://{{API_URL}}/data/meal",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"{{API_URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"data",
 								"meal"
@@ -565,7 +560,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJqb3Nocm91bmR5MTAiLCJyb2xlcyI6IiIsImlzcyI6InNlbGYiLCJleHAiOjE3NTI3MTM1NjMsImlhdCI6MTc1MjEwODc2MywidXNlcklkIjoxfQ.nCtlOnKbfz9qsmZsrPZpxmX1yaaMWreNcUTp8cGEM9Lp9ZN0Up9Boqx4Ti6F9gspqrYeq5KnuNZnGIcW1N_IyubkYBhvpSDmf29CZS-Fas0ltR3wEPNOM_TU2Ckc0NYBRqpvptRTO6XkSuXfGfepCeJ_ag50a_XSUzHfgF99-orCwhDNFEtoG2KVbhHIyN_6KepmUUa562f6Qlr4er70w5WiFJoyRc8XJ9fofeOpwRKFvNbDG6EH02AOdTD0xBzAieqXZpzUYCqGhuvJP7iGbqKpbHSwOBEg1_4tRhSD0F3ivCHQW1OcIaSJNFTu_xOes5o_POlDkcaRuIJesB_GuQ",
+									"value": "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJqb3Nocm91bmR5MTAiLCJyb2xlcyI6IiIsImlzcyI6InNlbGYiLCJleHAiOjE3NTI5NDc5OTgsImlhdCI6MTc1MjM0MzE5OCwidXNlcklkIjoxfQ.NTt3JjWlHhnfGZfXljMdOTzez-Kme0Z_iTnEnPPW-UXNmccePEKIVV6ZEs02_2wQQH4BRa6GcvdZEOXqsXij0IRNBmVXeREBlgrnY8A_a2MFVTeZs0vAX9YNws0BNcwrAbZm_JpeAc4vY2P5v5VzgGDPb8ImOZ2j_IEv9IU2KdgZtl2yC53mHrORKWnRa7-Inxj7ej5jAPuykHOqsi9vhdLen6RlAN2aECUdauZZAmUogbTp1SCt6MxxoA7dTp9O5fjwL4jz2XzqGc3euu94FRn4zCXGiIdW1S1r6SATcfP4d68Vw8fBow5zswRulmay6uwMbFHZqC7LSUtZInkxXA",
 									"type": "string"
 								}
 							]
@@ -580,7 +575,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n                \"userID\": \"1\",\r\n                \"dateID\": \"1\",\r\n                \"mealID\": \"1\",\r\n                \"itemName\": \"undefined\",\r\n                \"itemCalories\": \"303.4\",\r\n                \"itemProtein\": \"15\"\r\n            }",
+							"raw": "{\r\n                \"userID\": \"1\",\r\n                \"dateID\": \"1\",\r\n                \"mealID\": \"1\",\r\n                \"itemName\": \"A burger\",\r\n                \"itemCalories\": \"303.4\",\r\n                \"itemProtein\": \"15\"\r\n            }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -588,12 +583,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/data/meal-item",
+							"raw": "http://{{API_URL}}/data/meal-item",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"{{API_URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"data",
 								"meal-item"
@@ -728,12 +722,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/data/user?username=joshroundy9",
+							"raw": "http://{{API_URL}}/data/user?username=joshroundy101",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"{{API_URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"data",
 								"user"
@@ -741,7 +734,7 @@
 							"query": [
 								{
 									"key": "username",
-									"value": "joshroundy9"
+									"value": "joshroundy101"
 								}
 							]
 						}
@@ -868,12 +861,11 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8080/data/date?userid=1",
+							"raw": "http://{{API_URL}}/data/date?userid=1",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"{{API_URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"data",
 								"date"
@@ -985,7 +977,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiam9zaHJvdW5keTkiLCJpYXQiOjE3MjQyOTQ0MDQsInJvbGVzIjoiIn0.YTlQpX9AmlltaOelIv7sFPSKwLPKaCfqx6DW_fcio0nmJihZYD0eIix3uU5BLtdeHLtIoEa9RYLJh_oPH8xKOCftP764BbCkPUgGEX9IwtQRmw0AtjPuqjSaEcIHESAYzPJ0mOLzxxuDUrEhntr31AvP7g5-loz3HlpWXd8SoZcGe1Ugn8V2DnEKeUfImL8LPk_S342GtndPvxTau8NsvAdrjDJbAPKcI1UVOEJnCLKh-iNQtPgwP3H-mBoqrLSfp1mmRcfj8JvdWUxsYOvMC1eXlQui-QonnKEVVBWyptCXXU9ixU8n--2Z-exZ73uSjaIr_DB4-y2O2SgSxEnBrA",
+									"value": "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJqb3Nocm91bmR5MTAiLCJyb2xlcyI6IiIsImlzcyI6InNlbGYiLCJleHAiOjE3NTI5Nzk5MTksImlhdCI6MTc1MjM3NTExOSwidXNlcklkIjoxfQ.aJ7n5LleBi-BVvv8FvRPQ2KQ8uOlksLOX0qUxdV3cietLQ6v4sFpMUQGT6LtHa1paxb7GvvMyOf6i5sZIcbyeuOWPxdzLJWNPlfBKoWJWO--e-oU79WGgW7blfAUDJEDwpWJywU2Ypc0DoLTbaNLpsuF2lIutX6iWjkAXmHZ3WUnxPLD-F5m4WKuRQ6feKCGdsxE2pXc0hzfBVM4A5z3Qap1EABWWlQmxioJG-xKjaf9Xq3ITU5N-oEyak8kaSTFPUH8LmVjB7pLl1OhvkvwAbaLs4jNnRfhdmg7C4L9nmoQZE_EpNMmJIDPWTdsMTgiJ20VUH0WaSI-wzpIZH7ijQ",
 									"type": "string"
 								}
 							]
@@ -999,12 +991,11 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8080/data/date/from-user-and-date?userid=1&date=2024-08-19",
+							"raw": "http://{{API_URL}}/data/date/from-user-and-date?userid=1&date=2024-08-21",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"{{API_URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"data",
 								"date",
@@ -1017,7 +1008,7 @@
 								},
 								{
 									"key": "date",
-									"value": "2024-08-19"
+									"value": "2024-08-21"
 								}
 							]
 						}
@@ -1129,7 +1120,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiam9zaHJvdW5keTkiLCJpYXQiOjE3MjQyOTQ0MDQsInJvbGVzIjoiIn0.YTlQpX9AmlltaOelIv7sFPSKwLPKaCfqx6DW_fcio0nmJihZYD0eIix3uU5BLtdeHLtIoEa9RYLJh_oPH8xKOCftP764BbCkPUgGEX9IwtQRmw0AtjPuqjSaEcIHESAYzPJ0mOLzxxuDUrEhntr31AvP7g5-loz3HlpWXd8SoZcGe1Ugn8V2DnEKeUfImL8LPk_S342GtndPvxTau8NsvAdrjDJbAPKcI1UVOEJnCLKh-iNQtPgwP3H-mBoqrLSfp1mmRcfj8JvdWUxsYOvMC1eXlQui-QonnKEVVBWyptCXXU9ixU8n--2Z-exZ73uSjaIr_DB4-y2O2SgSxEnBrA",
+									"value": "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJqb3Nocm91bmR5MTAiLCJyb2xlcyI6IiIsImlzcyI6InNlbGYiLCJleHAiOjE3NTI5NzQwMTksImlhdCI6MTc1MjM2OTIxOSwidXNlcklkIjoxfQ.P3J42pjKV76HWkYKzlen5BraQ562xJ-Wf3s-YUaP1yn_nVeeSesc86PJfR-51JffwLWDOsFWN5WJYBwLrf02wlTaxU7A1LG_b8s2DX41EYohkTpleR3Ql5Ub1YxedmQJkCj59t6xivQK5sroyArt3a_knyMxgrfllsxYhxUVLxJ2axo0kq6cfYr29ULFIQkVWD5XdYrNNQ4cFmW_REcnvfghtWusUJbmFzLMZnWlse0dTbOa_f2qEm_EWZnXuTVsUOYGqVvg3B9G-FVi3d0459Fq9YXGw9U40QbH_zOEtCX45XdLHKoMkroQf61qP4Qs5mhzXrsx8SuzabFNFuwDTA",
 									"type": "string"
 								}
 							]
@@ -1152,12 +1143,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/data/meal?dateid=1",
+							"raw": "http://{{API_URL}}/data/meal?dateid=1",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"{{API_URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"data",
 								"meal"
@@ -1272,6 +1262,157 @@
 				},
 				{
 					"name": "GetMealItemsFromMeal",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJqb3Nocm91bmR5MTAiLCJyb2xlcyI6IiIsImlzcyI6InNlbGYiLCJleHAiOjE3NTI3MTM1NjMsImlhdCI6MTc1MjEwODc2MywidXNlcklkIjoxfQ.nCtlOnKbfz9qsmZsrPZpxmX1yaaMWreNcUTp8cGEM9Lp9ZN0Up9Boqx4Ti6F9gspqrYeq5KnuNZnGIcW1N_IyubkYBhvpSDmf29CZS-Fas0ltR3wEPNOM_TU2Ckc0NYBRqpvptRTO6XkSuXfGfepCeJ_ag50a_XSUzHfgF99-orCwhDNFEtoG2KVbhHIyN_6KepmUUa562f6Qlr4er70w5WiFJoyRc8XJ9fofeOpwRKFvNbDG6EH02AOdTD0xBzAieqXZpzUYCqGhuvJP7iGbqKpbHSwOBEg1_4tRhSD0F3ivCHQW1OcIaSJNFTu_xOes5o_POlDkcaRuIJesB_GuQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "User-ID",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{API_URL}}/data/meal-item?mealid=1",
+							"protocol": "http",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"data",
+								"meal-item"
+							],
+							"query": [
+								{
+									"key": "mealid",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GetMealItemsFromMeal",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/data/meal-item?mealid=1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"data",
+										"meal-item"
+									],
+									"query": [
+										{
+											"key": "mealid",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 22 Aug 2024 02:48:29 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"itemID\": 1,\n        \"mealID\": 1,\n        \"dateID\": 1,\n        \"userID\": 1,\n        \"itemName\": \"Cheeseburger\",\n        \"itemCalories\": 550\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "GetGraphData",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -1430,7 +1571,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiam9zaHJvdW5keTkiLCJpYXQiOjE3MjQyOTQ0MDQsInJvbGVzIjoiIn0.YTlQpX9AmlltaOelIv7sFPSKwLPKaCfqx6DW_fcio0nmJihZYD0eIix3uU5BLtdeHLtIoEa9RYLJh_oPH8xKOCftP764BbCkPUgGEX9IwtQRmw0AtjPuqjSaEcIHESAYzPJ0mOLzxxuDUrEhntr31AvP7g5-loz3HlpWXd8SoZcGe1Ugn8V2DnEKeUfImL8LPk_S342GtndPvxTau8NsvAdrjDJbAPKcI1UVOEJnCLKh-iNQtPgwP3H-mBoqrLSfp1mmRcfj8JvdWUxsYOvMC1eXlQui-QonnKEVVBWyptCXXU9ixU8n--2Z-exZ73uSjaIr_DB4-y2O2SgSxEnBrA",
+									"value": "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJqb3Nocm91bmR5MTAiLCJyb2xlcyI6IiIsImlzcyI6InNlbGYiLCJleHAiOjE3NTI4MDY4NTQsImlhdCI6MTc1MjIwMjA1NCwidXNlcklkIjoxfQ.aygd5CCalqO7U9ck1ifnjX45OaOdpslqHTWVJ8sU1KILdDJoqCaEDs1RBsv4cqVK_2liqU-GVbJSAQlk4yIJwHEx5Nnlj3651h-NSnLZLeIf_TgvvV2O9QMOn3g78pln4kQQPoLskAW3VqdsKBVp7mjOSEcuOqLFrHmnUa-orkEKL6Ar7EEi_TI-2Y0o3StEwI3sRbjvRKCctgn4aQnICf0QViGBMfgL0tCZyA1it9EQOFqh9RcIT0Nt9f6_EFaH8PYBnIBCke4AJde_U6KiMdo54qdzNTtDhTWemJW1OIL03oG7ut_ulhpYayiSUcikk1oIuz5fORDlt28LttoIEw",
 									"type": "string"
 								}
 							]
@@ -1453,12 +1594,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/data/meal/update-time?mealid=1&datetime=2008-12-03T09:15:30Z",
+							"raw": "http://{{API_URL}}/data/meal/update-time?mealid=2&time=09:00:00",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"{{API_URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"data",
 								"meal",
@@ -1467,11 +1607,11 @@
 							"query": [
 								{
 									"key": "mealid",
-									"value": "1"
+									"value": "2"
 								},
 								{
-									"key": "datetime",
-									"value": "2008-12-03T09:15:30Z"
+									"key": "time",
+									"value": "09:00:00"
 								}
 							]
 						}
@@ -1612,12 +1752,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/data/meal/delete?mealid=1",
+							"raw": "http://{{API_URL}}/data/meal/delete?mealid=1",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"{{API_URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"data",
 								"meal",
@@ -1736,7 +1875,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJqb3Nocm91bmR5MTAiLCJyb2xlcyI6IiIsImlzcyI6InNlbGYiLCJleHAiOjE3NTI5Nzk5MTksImlhdCI6MTc1MjM3NTExOSwidXNlcklkIjoxfQ.aJ7n5LleBi-BVvv8FvRPQ2KQ8uOlksLOX0qUxdV3cietLQ6v4sFpMUQGT6LtHa1paxb7GvvMyOf6i5sZIcbyeuOWPxdzLJWNPlfBKoWJWO--e-oU79WGgW7blfAUDJEDwpWJywU2Ypc0DoLTbaNLpsuF2lIutX6iWjkAXmHZ3WUnxPLD-F5m4WKuRQ6feKCGdsxE2pXc0hzfBVM4A5z3Qap1EABWWlQmxioJG-xKjaf9Xq3ITU5N-oEyak8kaSTFPUH8LmVjB7pLl1OhvkvwAbaLs4jNnRfhdmg7C4L9nmoQZE_EpNMmJIDPWTdsMTgiJ20VUH0WaSI-wzpIZH7ijQ",
+									"value": "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJqb3Nocm91bmR5MTAiLCJyb2xlcyI6IiIsImlzcyI6InNlbGYiLCJleHAiOjE3NTI5ODM5MjAsImlhdCI6MTc1MjM3OTEyMCwidXNlcklkIjoxfQ.hYq_OjWmr7zJh9sSKVWurN4BZKU_tD49crQhv0_ig9ieeAetPlHBR_cdrWIdT40qh8lQLDYcflsWzFDrbJ4kgi--7ofZDkglBKD8kyM4hjbpxnFzIvZZsgV-k7mcPFIKi--wCZ4K9YvQqNZ-xifzHs6BwaEX3V0bQKxCHA3ynalKzzsN5lOD7w8lRRP67_5_TORNFEbUYNFuuMa2T6y7SDTpNOnDs1KICAWXG9A1vbzjyEo5N129wjGwW68uKzBM-HAB9Ev_sG0hrnifktHnmS9V70kSCv86jz13EfDVSY7ikh4qeOxCC_97dH2RPo7veEwN3SH010nKc4z8ssdRJg",
 									"type": "string"
 								}
 							]
@@ -1759,12 +1898,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/data/date/delete?dateid=2006",
+							"raw": "http://{{API_URL}}/data/date/delete?dateid=3004",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"{{API_URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"data",
 								"date",
@@ -1773,7 +1911,7 @@
 							"query": [
 								{
 									"key": "dateid",
-									"value": "2006"
+									"value": "3004"
 								}
 							]
 						}
@@ -1883,7 +2021,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiam9zaHJvdW5keTkiLCJpYXQiOjE3MjQyOTQ0MDQsInJvbGVzIjoiIn0.YTlQpX9AmlltaOelIv7sFPSKwLPKaCfqx6DW_fcio0nmJihZYD0eIix3uU5BLtdeHLtIoEa9RYLJh_oPH8xKOCftP764BbCkPUgGEX9IwtQRmw0AtjPuqjSaEcIHESAYzPJ0mOLzxxuDUrEhntr31AvP7g5-loz3HlpWXd8SoZcGe1Ugn8V2DnEKeUfImL8LPk_S342GtndPvxTau8NsvAdrjDJbAPKcI1UVOEJnCLKh-iNQtPgwP3H-mBoqrLSfp1mmRcfj8JvdWUxsYOvMC1eXlQui-QonnKEVVBWyptCXXU9ixU8n--2Z-exZ73uSjaIr_DB4-y2O2SgSxEnBrA",
+									"value": "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJqb3Nocm91bmR5MTAiLCJyb2xlcyI6IiIsImlzcyI6InNlbGYiLCJleHAiOjE3NTI5NDU0MTAsImlhdCI6MTc1MjM0MDYxMCwidXNlcklkIjoxfQ.siUR5DCw1quReJKaXTTMONTembJ5Id9Ocr56_XS-nD41_il_36kcGxaXFCL8lvxOGNT3Xeoucgt5ml-HEVYblIDRQ6ibCPGaRS7bh3ZNNazLF7lWAIwLlTQpk7yFIgRio9L9Kxnrx4cUDOU4BicdMhoTowKy-HF42EXwGXKZK4CIH_2DvQFciT6YT0lNk1bfa417v7g8jE4JUX6cn7SuHEl45iuKtODSj5mci26Xgc2HVXkl2p4FbMIP8Cm0bv3ooPmz6qaKfaJkDErWhWv8TQUbKHBVz8plM5QIVxnN5RKNtZUP9gnYNwXLw4gw6QYUgZrPWgZCTCGd9W_OKOUfxw",
 									"type": "string"
 								}
 							]
@@ -1906,12 +2044,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/data/meal-item/update-name?mealitemid=2&name=hamburger",
+							"raw": "http://{{API_URL}}/data/meal-item/update-name?mealitemid=2&name=hamburger",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"{{API_URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"data",
 								"meal-item",
@@ -2065,12 +2202,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/data/meal-item/update-calories?mealitemid=2&calories=400",
+							"raw": "http://{{API_URL}}/data/meal-item/update-calories?mealitemid=2&calories=400",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"{{API_URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"data",
 								"meal-item",
@@ -2224,12 +2360,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/data/meal-item/delete?mealitemid=2",
+							"raw": "http://{{API_URL}}/data/meal-item/delete?mealitemid=2",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"{{API_URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"data",
 								"meal-item",
