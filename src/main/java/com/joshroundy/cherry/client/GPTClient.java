@@ -15,7 +15,7 @@ import static com.joshroundy.cherry.constant.ClientConstants.OPENAI_API_URL;
 @Component
 public class GPTClient {
     private final AIUtil aiUtil = new AIUtil();
-    @Value("${OPENAI_API_KEY}")
+    @Value("${openai_api_key}")
     private String apiKey;
 
     public ResponseEntity<GPTClientResponseDTO> getGPTTextResponse(String input) {

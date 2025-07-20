@@ -5,11 +5,13 @@ html, body, #root {
   margin: 0;
   padding: 0;
   border: none;
+  min-height: 100%;
 }
 
 .App {
   text-align: center;
   overflow: hidden;
+  min-height: 100%;
 }
 
 .App-logo {

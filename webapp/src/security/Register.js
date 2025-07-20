@@ -37,7 +37,7 @@ function Register({ onRegister }) {
             if (response.ok) {
                 const data = await response.json();
                 onRegister(data); // Pass user/token up to App
-                navigate('/', {state: {message: 'Registration successful! Please log in.'}});
+                navigate('/login', {state: {message: 'Registration successful! Please log in.'}});
             } else {
                 navigate('/register', {state: {message: 'Registration failed!'}});
             }

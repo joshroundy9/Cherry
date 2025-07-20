@@ -58,7 +58,11 @@ public class DataService {
         return dateRepository.save(dateEntity);
     }
     public DateEntity updateDateNutrition(Integer dateID, Double calories, Double protein, Integer userID) {
-        var dateEntity = dateRepository.findById(dateID).get();
+        var optionalDateEntity = dateRepository.findById(dateID);
+        if (optionalDateEntity.isEmpty()) {
+            return DateEntity.builder().build();
+        }
+        var dateEntity = optionalDateEntity.get();
         if (!dateEntity.getUserID().equals(userID)) {
             throw new AccessDeniedException("User ID does not match the date owner.");
         }
