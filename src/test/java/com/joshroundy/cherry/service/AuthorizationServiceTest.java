@@ -50,13 +50,11 @@ public class AuthorizationServiceTest {
         registrationDTO = RegistrationDTO.builder()
                 .dateOfBirth(Date.valueOf("2024-05-06"))
                 .email("randomemail@gmail.com")
-                .height(34.98)
                 .weight(450.5)
                 .password("password")
                 .username("username").build();
         userEntity = UserEntity.builder()
                 .userID(userID)
-                .height(registrationDTO.getHeight())
                 .weight(registrationDTO.getWeight())
                 .username(registrationDTO.getUsername())
                 .passwordHash(passwordHash)

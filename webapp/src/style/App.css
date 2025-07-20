@@ -111,14 +111,14 @@ html, body, #root {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5em;
+  gap: 1em;
 }
 
 .Auth-form-header {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  text-align: left;
+  text-align: center;
     margin-top: 20px;
 }
 
@@ -130,7 +130,6 @@ html, body, #root {
   background-color: #2D2D2D;
   color: white;
   height: auto;
-  width: 45vh;
   min-width: 380px;
   align-self: center;
 }
@@ -139,7 +138,8 @@ html, body, #root {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5em;
+  gap: 1em;
+  margin-top: 10px;
 }
 
 .Auth-form-input {
@@ -150,9 +150,21 @@ html, body, #root {
   border: none;
   outline: none;
   box-shadow: none;
+  padding: 0.2em 0.5em 0.2em 0.5em;
   width: 10em;
   font-size: 28px;
   margin-top: 5px;
+  caret-color: white;
+}
+input[type="text"]::selection {
+  background-color: #3297fd;
+  color: white;
+}
+
+/* For Firefox compatibility */
+input[type="text"]::-moz-selection {
+  background-color: #3297fd;
+  color: white;
 }
 
 input:-webkit-autofill,
@@ -177,7 +189,7 @@ input[type="date"] {
 .Auth-form-text {
   font-size: 40px;
   margin-top: 0vh;
-  margin-bottom: 18px;
+  margin-bottom: 0px;
 }
 
 .Auth-text {
@@ -212,7 +224,7 @@ input[type="date"] {
   background-color: #FF0606;
   color: black;
   font-family: 'Jomhuria', cursive;
-  font-size: x-large;
+  font-size: xx-large;
   border: none;
   border-radius: 7px;
   margin-top: 10px;

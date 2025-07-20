@@ -48,8 +48,7 @@ function Login({ onLogin }) {
         <div className={"Auth-background"}>
             <div className={"Login-container"}>
                 <div className={"Auth-form-header"}>
-                    <p className={"Auth-form-text"}>Welcome back!</p>
-                    <p className={"Auth-form-text"}>Meeting your goals starts today.</p>
+                    <div className={"Auth-form-text"}>Welcome back to <span className={"Logo-red"}>CHERRY</span>!</div>
                 </div>
                 <form style={{}} className={"Login-form"} onSubmit={handleSubmit}>
                     <p className={"Auth-form-text"}>Login</p>

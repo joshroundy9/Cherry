@@ -22,7 +22,6 @@ public class RegistrationDTO {
     @Pattern (regexp = PASSWORD_REGEX, message = PASSWORD_ERROR_MESSAGE)
     private String password;
     private Date dateOfBirth;
-    private Double height;
     private Double weight;
 
     public String toString(){

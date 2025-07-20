@@ -11,7 +11,6 @@ function Register({ onRegister }) {
     const [email, setEmail] = useState('');
     const [confirmEmail, setConfirmEmail] = useState('');
     const [dateOfBirth, setDateOfBirth] = useState('');
-    const [height, setHeight] = useState('');
     const [weight, setWeight] = useState('');
 
     const navigate = useNavigate();
@@ -31,7 +30,7 @@ function Register({ onRegister }) {
             const response = await fetch(`${API_URL}/auth/register`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({username, password, email, dateOfBirth, height, weight}),
+                body: JSON.stringify({username, password, email, dateOfBirth, weight}),
                 signal: controller.signal,
             });
             clearTimeout(timeoutId);
@@ -100,16 +99,7 @@ function Register({ onRegister }) {
                     />
                     <input className={"Auth-form-input"}
                            type="number"
-                           placeholder="Height (IN)"
-                           value={height}
-                           onChange={e => setHeight(e.target.value)}
-                           min="0"
-                           max="100"
-                           required
-                    />
-                    <input className={"Auth-form-input"}
-                           type="number"
-                           placeholder="Weight (LBS)"
+                           placeholder="Body Weight (LBS)"
                            value={weight}
                            onChange={e => setWeight(e.target.value)}
                            required

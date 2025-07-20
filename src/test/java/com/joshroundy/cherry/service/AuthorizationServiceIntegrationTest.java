@@ -31,13 +31,11 @@ class AuthorizationServiceIntegrationTest {
                 .build();
         var email = "joshroundy@gmail.com";
         var weight = 196.3;
-        var height = 69.7;
         var DOB = Date.valueOf("2003-02-28");
         var registrationDTO = RegistrationDTO.builder()
                 .username(username)
                 .password(password)
                 .email(email)
-                .height(height)
                 .weight(weight)
                 .dateOfBirth(DOB)
                 .build();
