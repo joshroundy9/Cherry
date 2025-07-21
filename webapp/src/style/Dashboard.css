@@ -160,7 +160,7 @@
     top: 110%;
     background: #1E1E1E;
     border: none;
-    border-radius: 4px;
+    border-radius: 0.2em;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -184,6 +184,39 @@
     background-color: white;
     color: #1E1E1E;
 }
+.Nutrition-form-recents {
+    width: 99%;
+    background-color: #2D2D2D;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+}
+.Nutrition-form-recents-header {
+    background: #1E1E1E;
+    color: white;
+    font-family: 'Jomhuria', cursive;
+    width: 100%;
+    border-radius: 0.2em;
+    border: none;
+    font-size: x-large;
+    padding: 0.08em 8px 0 0;
+}
+.Nutrition-form-recents-item {
+    width: 100%;
+    background-color: #1E1E1E;
+    color: white;
+    font-family: 'Jomhuria', cursive;
+    border-radius: 0.2em;
+    margin-bottom: 0.1em;
+    display: grid;
+    grid-template-columns: auto 2fr auto 0.1fr 0.1fr auto;
+    align-items: center;
+    font-size: x-large;
+    padding-left: 1vw;
+    padding-top: 0.1em;
+}
+
 /*
  * Meal Panel Styles
  */

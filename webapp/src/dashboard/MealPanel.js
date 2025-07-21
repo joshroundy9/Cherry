@@ -28,7 +28,7 @@ function MealPanel({switchPanel, mealName, mealId, time, date, dateId }) {
         switchPanel('date');
     }
 
-    const addMealItem = async (itemName, itemCalories, itemProtein, setLocalError) => {
+    const addMealItem = async (itemName, itemCalories, itemProtein, aiGenerated, setLocalError) => {
         try {
             const responseBody = await genericRequest(
                 `${API_URL}/data/meal-item`,
@@ -40,7 +40,8 @@ function MealPanel({switchPanel, mealName, mealId, time, date, dateId }) {
                 "mealID": "${mealId}",
                 "itemName": "${itemName}",
                 "itemCalories": "${itemCalories}",
-                "itemProtein": "${itemProtein}"
+                "itemProtein": "${itemProtein}",
+                "aiGenerated": "${aiGenerated}"
             }`
             );
             const newMealItems = [...mealItems, responseBody];
@@ -110,7 +111,6 @@ function MealPanel({switchPanel, mealName, mealId, time, date, dateId }) {
 
         return () => {
             clearTimeout(timeoutId);
-            controller.abort();
         };
     }, [mealId]);
 

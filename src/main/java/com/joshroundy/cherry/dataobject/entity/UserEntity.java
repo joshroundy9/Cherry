@@ -14,7 +14,7 @@ import java.sql.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "[User]")
+@Table(name = "app_user")
 @Getter
 @Setter
 @NoArgsConstructor

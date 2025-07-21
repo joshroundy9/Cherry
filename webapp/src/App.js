@@ -12,7 +12,7 @@ function App() {
     const navigate = useNavigate()
     const location = useLocation()
     const onSignOut = () => {
-        localStorage.setItem('jwtToken', '');
+        localStorage.removeItem('jwtToken');
         navigate('/');
     };
   return (

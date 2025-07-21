@@ -1,5 +1,6 @@
 package com.joshroundy.cherry.service;
 
+import com.joshroundy.cherry.annotation.IntegrationTest;
 import com.joshroundy.cherry.dataobject.data.DateDTO;
 import com.joshroundy.cherry.dataobject.data.MealDTO;
 import com.joshroundy.cherry.dataobject.data.MealItemDTO;
@@ -26,7 +27,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-@SpringBootTest
+@IntegrationTest
 public class DataServiceIntegrationTest {
     public static final Integer USER_ID = 3534;
     public static final Integer DATE_ID = 24612;

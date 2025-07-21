@@ -3,6 +3,8 @@ package com.joshroundy.cherry.dataobject.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.sql.Timestamp;
+
 @Entity
 @Getter
 @Setter
@@ -20,4 +22,6 @@ public class MealItemEntity {
     String itemName;
     Double itemCalories;
     Double itemProtein;
+    Boolean aiGenerated;
+    Timestamp createdTS;
 }

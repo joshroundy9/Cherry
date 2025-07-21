@@ -11,4 +11,5 @@ import java.util.Optional;
 @Repository
 public interface MealItemRepository extends JpaRepository<MealItemEntity, Integer> {
     List<MealItemEntity> findByMealID(Integer mealID);
+    List<MealItemEntity> findTop5ByUserIDAndAiGeneratedOrderByCreatedTSDesc(Integer userId, Boolean aiGenerated);
 }

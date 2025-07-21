@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -131,6 +132,9 @@ public class DataService {
     public List<MealItemEntity> findMealItemsFromMealID(Integer mealID) {
         return mealItemRepository.findByMealID(mealID);
     }
+    public List<MealItemEntity> getMealItemRecents(Integer userID, Boolean aiGenerated) {
+        return mealItemRepository.findTop5ByUserIDAndAiGeneratedOrderByCreatedTSDesc(userID, aiGenerated);
+    }
     public MealItemEntity createMealItem(MealItemDTO mealItemDTO) {
         return mealItemRepository.save(MealItemEntity.builder()
                         .userID(mealItemDTO.getUserID())
@@ -139,6 +143,8 @@ public class DataService {
                         .itemName(mealItemDTO.getItemName())
                         .dateID(mealItemDTO.getDateID())
                         .mealID(mealItemDTO.getMealID())
+                        .aiGenerated(mealItemDTO.getAiGenerated())
+                        .createdTS(new Timestamp(System.currentTimeMillis()))
                 .build());
     }
     public MealItemEntity updateMealItemName(Integer mealItemID, String mealItemName, Integer userID) {

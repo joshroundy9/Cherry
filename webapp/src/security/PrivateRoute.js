@@ -24,7 +24,7 @@ async function validateToken() {
     const token = localStorage.getItem("jwtToken");
     if (!token)
     {
-        localStorage.setItem('jwtToken', '');
+        localStorage.removeItem('jwtToken');
         return false;
     }
 
@@ -37,6 +37,7 @@ async function validateToken() {
         });
         return response.ok;
     } catch {
+        localStorage.removeItem('jwtToken');
         return false;
     }
 }

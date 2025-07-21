@@ -1,9 +1,9 @@
 package com.joshroundy.cherry;
 
+import com.joshroundy.cherry.annotation.IntegrationTest;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+@IntegrationTest
 class CherryApplicationTests {
 
 	@Test

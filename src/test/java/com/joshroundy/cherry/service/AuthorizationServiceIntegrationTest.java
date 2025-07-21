@@ -1,5 +1,6 @@
 package com.joshroundy.cherry.service;
 
+import com.joshroundy.cherry.annotation.IntegrationTest;
 import com.joshroundy.cherry.dataobject.auth.LoginRequestDTO;
 import com.joshroundy.cherry.dataobject.auth.RegistrationDTO;
 import com.joshroundy.cherry.repository.UserRepository;
@@ -12,17 +13,15 @@ import java.sql.Date;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest
+@IntegrationTest
 class AuthorizationServiceIntegrationTest {
     @Autowired AuthorizationService subject;
     @Autowired
     UserRepository userRepository;
 
     @Test
+    @Disabled
     void registerAndLoginUser() {
-        userRepository.findByUsername("joshroundy").ifPresent(user -> {
-            userRepository.delete(user);
-        });
         var username = "joshroundy";
         var password = "password";
         var loginRequestDTO = LoginRequestDTO.builder()

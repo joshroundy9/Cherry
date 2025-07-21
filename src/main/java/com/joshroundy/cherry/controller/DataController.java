@@ -78,6 +78,11 @@ public class DataController {
         return mealItemEntityList;
     }
 
+    @GetMapping("/meal-item/recents")
+    public List<MealItemEntity> getRecentMealItems(@RequestHeader(value="user-id", required=true) Integer userID) {
+        return dataService.getMealItemRecents(userID, false);
+    }
+
     @PostMapping("/date")
     public DateEntity createDate(@RequestBody DateDTO body,
                                  @RequestHeader(value="user-id", required=true) Integer userID) {

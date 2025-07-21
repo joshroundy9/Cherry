@@ -1,4 +1,5 @@
 import { format, parseISO, parse } from 'date-fns';
+import {isArray} from "chart.js/helpers";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -60,18 +61,23 @@ export const updateMealNutrition = async (mealID, totalCalories, totalProtein, s
     }
 }
 
-export const updateMealTime = async (mealID, mealTime, setError) => {
+export const getMealItemRecents = async (setLoading, setError) => {
     try {
-        const parsableTime = validateTimeString(mealTime); // Ensure time is in HH:mm:ss format
-        await genericRequest(
-            `${API_URL}/data/meal/update-time?mealid=${mealID}&time=${parsableTime}`,
-            'POST',
+        setLoading(true);
+        const response = await genericRequest(
+            `${API_URL}/data/meal-item/recents`,
+            'GET',
             getDataHeaders(),
             null
         );
-        setError(null);
+        if (response) {
+            return response;
+        }
+        setError("Failed to retrieve meal item recents");
     } catch (err) {
         setError(err.message);
+    } finally {
+        setLoading(false);
     }
 }
 
