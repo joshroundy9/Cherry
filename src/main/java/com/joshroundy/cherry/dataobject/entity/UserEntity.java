@@ -31,6 +31,8 @@ public class UserEntity implements UserDetails {
     private String passwordHash;
     private Date dateOfBirth;
     private Double weight;
+    private Boolean isEmailVerified;
+    private String emailVerificationToken;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

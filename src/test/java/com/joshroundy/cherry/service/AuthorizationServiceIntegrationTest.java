@@ -21,7 +21,7 @@ class AuthorizationServiceIntegrationTest {
 
     @Test
     @Disabled
-    void registerAndLoginUser() {
+    void registerAndLoginUser() throws Exception {
         var username = "joshroundy";
         var password = "password";
         var loginRequestDTO = LoginRequestDTO.builder()

@@ -7,6 +7,7 @@ import com.joshroundy.cherry.dataobject.entity.UserEntity;
 import com.joshroundy.cherry.service.AuthorizationService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,12 +22,21 @@ public class AuthorizationController {
     }
 
     @PostMapping("/login")
-    public LoginResponseDTO loginUser(@RequestBody LoginRequestDTO body){
+    public LoginResponseDTO loginUser(@RequestBody LoginRequestDTO body) throws Exception {
         return authenticationService.loginUser(body);
     }
 
     @PostMapping("/validate")
     public boolean loginUser(@RequestHeader("JWT-Token") String jwtToken) {
         return authenticationService.validateToken(jwtToken);
+    }
+    @PostMapping("/email/validate")
+    public ResponseEntity<String> validateEmail(@RequestParam("email") String email) {
+        if (authenticationService.validateEmail(email)) {
+            return ResponseEntity.ok("Email verified successfully");
+        } else {
+            return ResponseEntity.badRequest().body("Invalid token");
+        }
+
     }
 }

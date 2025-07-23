@@ -4,6 +4,7 @@ import com.joshroundy.cherry.dataobject.auth.LoginRequestDTO;
 import com.joshroundy.cherry.dataobject.auth.RegistrationDTO;
 import com.joshroundy.cherry.dataobject.entity.UserEntity;
 import com.joshroundy.cherry.repository.UserRepository;
+import jakarta.mail.internet.MimeMessage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,8 +26,7 @@ import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verifyNoInteractions;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class AuthorizationServiceTest {
@@ -38,6 +39,9 @@ public class AuthorizationServiceTest {
     AuthenticationManager authenticationManager;
     @Mock
     TokenService tokenService;
+    @Mock
+    JavaMailSender mailSender;
+    MimeMessage mimeMessage;
     String passwordHash;
     UserEntity userEntity;
     RegistrationDTO registrationDTO;
@@ -60,22 +64,27 @@ public class AuthorizationServiceTest {
                 .passwordHash(passwordHash)
                 .dateOfBirth(registrationDTO.getDateOfBirth())
                 .email(registrationDTO.getEmail())
+                .isEmailVerified(false)
                 .build();
         loginRequestDTO = LoginRequestDTO.builder()
                 .username("username")
                 .password("password")
                 .build();
+        mimeMessage = mock(MimeMessage.class);
     }
     @Test
     void registerUserTest() {
         when(passwordEncoder.encode(any())).thenReturn(passwordHash);
         when(userRepository.save(any())).thenReturn(userEntity);
-        assertThat(subject.registerUser(registrationDTO)).isEqualTo(userEntity);
+        when(mailSender.createMimeMessage()).thenReturn(mimeMessage);
+        assertThat(subject.registerUser(registrationDTO)).usingRecursiveComparison()
+                .ignoringFields("emailVerificationToken", "userID").isEqualTo(userEntity);
     }
-    @Test void loginUserTest_happyPath() {
+    @Test void loginUserTest_happyPath() throws Exception {
         var uuid = UUID.randomUUID().toString();
         when(authenticationManager.authenticate(any())).thenReturn(null);
         when(tokenService.generateJwt(any(), any())).thenReturn(uuid);
+        userEntity.setIsEmailVerified(true);
         when(userRepository.findByUsername(any())).thenReturn(Optional.ofNullable(userEntity));
         var actual = subject.loginUser(loginRequestDTO);
         assertThat(actual.getUser()).isEqualTo(userEntity);
