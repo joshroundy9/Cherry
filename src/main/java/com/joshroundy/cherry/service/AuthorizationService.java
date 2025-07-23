@@ -7,6 +7,7 @@ import com.joshroundy.cherry.dataobject.auth.RegistrationDTO;
 import com.joshroundy.cherry.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -26,10 +27,15 @@ import java.util.UUID;
 @Transactional
 @RequiredArgsConstructor
 public class AuthorizationService {
+    @Autowired
     private UserRepository userRepository;
+    @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
     private AuthenticationManager authenticationManager;
+    @Autowired
     private TokenService tokenService;
+    @Autowired
     private JavaMailSender mailSender;
 
     @Value("${frontend.url}")
@@ -79,6 +85,7 @@ public class AuthorizationService {
             helper.setTo(toEmail);
             helper.setSubject(subject);
             helper.setText(body, true);
+            helper.setFrom("cherry@joshroundy.dev");
             mailSender.send(message);
         } catch (MessagingException e) {
             throw new RuntimeException("Failed to send verification email", e);
