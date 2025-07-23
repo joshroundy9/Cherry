@@ -70,7 +70,7 @@
  * Nutrition Form Styles
  */
 .Nutrition-form {
-    width: 98.7%;
+    width: 100%;
     background-color: #2D2D2D;
     display: flex;
     flex-direction: row;
@@ -185,7 +185,8 @@
     color: #1E1E1E;
 }
 .Nutrition-form-recents {
-    width: 99%;
+    width: 100%;
+    margin-top: 0.15em;
     background-color: #2D2D2D;
     display: flex;
     flex-direction: column;
@@ -217,6 +218,10 @@
     padding-top: 0.1em;
 }
 
+.Nutrition-form-recents-item:hover {
+    color: #ff0606;
+}
+
 /*
  * Meal Panel Styles
  */
@@ -229,6 +234,11 @@
     align-items: center;
     justify-content: start;
     gap: 0;
+    overflow-y: auto;
+}
+.MealPanel-container {
+    width: 98%;
+    height: 50vh;
 }
 .Panel-header {
     color: white;
@@ -245,7 +255,7 @@
     font-family: 'Jomhuria', cursive;
     font-size: xx-large;
     margin-bottom: 0.3em;
-    width: 98.7%;
+    width: 100%;
 }
 
 .MealPanel-date-header-text {
@@ -293,7 +303,7 @@
 }
 
 .MealItemList {
-    width: 97%;
+    width: 100%;
 }
 
 .MealItemList-ul {
@@ -301,14 +311,15 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: start;
+    justify-content: start;
     margin-block: 0;
     padding-inline-start: 0;
+
 }
 
 .MealItemList-li {
-    width: 100%;
+    width: 98.7%;
     background-color: #1E1E1E;
     color: white;
     font-family: 'Jomhuria', cursive;
@@ -318,8 +329,9 @@
     grid-template-columns: auto 2fr auto 0.1fr 0.1fr auto;
     align-items: center;
     font-size: x-large;
-    padding-left: 1vw;
     padding-top: 0.1em;
+    padding-left: 0.2em;
+    padding-right: 0.2em;
 }
 
 .MealItemList-li > div:nth-child(4) {
@@ -349,9 +361,18 @@
     margin-right: 1vw;
 }
 
+.MealPanel-footer-container {
+    margin-top: auto;
+    width: 98%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 .MealPanel-footer {
-    width: 98.3%;
     color: white;
+    width: 100%;
     font-size: x-large;
     font-family: 'Jomhuria', cursive;
     display: flex;
@@ -359,7 +380,6 @@
     align-items: flex-end;
     justify-content: space-between;
     box-sizing: border-box;
-    margin-top: auto;
     padding-bottom: 0.2em;
 }
 
@@ -412,7 +432,7 @@
 }
 
 .Meal-form {
-    width: 98.7%;
+    width: 100%;
     background-color: #2D2D2D;
     display: flex;
     flex-direction: row;
@@ -493,8 +513,8 @@
     color: white;
     font-family: 'Jomhuria', cursive;
     font-size: xx-large;
-    padding-top: 0.25em;
     height: 100%;
+    padding: 0.5em;
 }
 
 .Calendar-arrow-button {
@@ -649,9 +669,17 @@
         flex-direction: column;
         align-items: center;
         margin-bottom: 10px;
+        height: 100%;
     }
-    .MealPanel-footer {
-        margin-top: 100%;
+    .MealPanel {
+        height: auto;
+        width: 95%;
+    }
+    .MealPanel-container {
+        height: auto;
+    }
+    .Nutrition-form-container {
+        margin-bottom: 5em;
     }
     .Calendar-container {
         margin-top: 10px;
@@ -679,5 +707,8 @@
     }
     .SignOut-button {
         font-size: x-large;
+    }
+    .MealPanel-footer-container {
+        margin-top: auto;
     }
 }

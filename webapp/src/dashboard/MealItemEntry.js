@@ -4,12 +4,11 @@ import {getMealItemRecents} from "../utils/DashboardUtil";
 const API_URL = process.env.REACT_APP_API_URL;
 const MODES = ['AI', 'Manual', 'Recents'];
 
-function NutritionForm({ addMealItem, numberOfMealItems }) {
+function NutritionForm({ addMealItem, setError }) {
     const [foodEntry, setFoodEntry] = useState('');
     const [calories, setCalories] = useState('');
     const [protein, setProtein] = useState('');
     const [recents, setRecents] = useState([]);
-    const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
     const [mode, setMode] = useState(localStorage.getItem('nutritionInputMode') || 'AI');
     const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -172,9 +171,15 @@ function NutritionForm({ addMealItem, numberOfMealItems }) {
                     />
                 )}
             {mode === 'Recents' && (
+                recents.length > 0 ? (
                 <div className={"Nutrition-form-recents-header"}>
-                    Select a recent manual meal item to add to the list:
+                    Select a recent manual meal item to add
                 </div>
+                ) : (
+                    <div className={"Nutrition-form-recents-header"}>
+                        No recent meal items found. Please add some manually first.
+                    </div>
+                )
             )}
 
                 {mode !== 'Recents' &&   (
@@ -186,17 +191,17 @@ function NutritionForm({ addMealItem, numberOfMealItems }) {
                     {loading ? (
                         <div className={"Info-message"}>Loading recents...</div>
                     ) : (
-                        recents.length > 0 ? (
+
                             recents.map(item => (
-                                <button className={"MealItemList-li Hover-expand"}
-                                        style={{paddingTop: '0.4vh', paddingBottom: '0.5vh', border: 'none', cursor: 'pointer'}}
+                                <button className={"MealItemList-li Meal-form-input Nutrition-form-recents-item"}
+                                        style={{paddingTop: '0.4vh', paddingBottom: '0.5vh', border: 'none', cursor: 'pointer', width: '100%'}}
                                         key={item.itemID}
                                         onClick={() => {
                                             addMealItem(item.itemName, item.itemCalories, item.itemProtein, true, setError);
                                             setFoodEntry('');
                                         }}
                                 >
-                                    <div className={"Meal-name-wrapper"} style={{color: 'white'}}>{item.itemName}</div>
+                                    <div className={"Meal-name-wrapper"} style={{color: 'inherit'}}>{item.itemName}</div>
                                     <div/>
                                     <div>{item.itemCalories}</div>
                                     <div/>
@@ -207,16 +212,9 @@ function NutritionForm({ addMealItem, numberOfMealItems }) {
                                     </div>
                                 </button>
                             ))
-                        ) : (
-                            <div className={"Info-message"}>No recent meal items found.</div>
-                        )
                     )}
                 </div>
             )}
-            <div className={"Nutrition-form-error"}>
-                {error && <div className={"Error-message"}>{error}</div>}
-                {numberOfMealItems() >= 10 && <div className={"Error-message"}>Meal item limit reached!</div>}
-            </div>
         </div>
     );
 }
