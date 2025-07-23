@@ -137,53 +137,60 @@ function DatePanel({ switchPanel, dateId, date, weight, setWeight }) {
 
     return (
         <div className="MealPanel">
-            <div className="Panel-header">
-                {formatDateWithOrdinal(date)}
-            </div>
-            <div className={"MealPanel-date-header"}>
-                <div className={"DateTime-wrapper"}>
-                    <DailyWeightInput date={date} dateId={dateId} weight={weight} setWeight={setWeight} setError={setError} />
+            <div className={"MealPanel-container"}>
+                <div className="Panel-header">
+                    {formatDateWithOrdinal(date)}
                 </div>
-                <div className={"MealPanel-date-header-text"}>Add Meals</div>
-            </div>
-            <div className={"DateItemList-header"}>
-
-            </div>
-            <div className={"MealItemList"}>
-                <ul className={"MealItemList-ul"}>
-                    <li className={"MealItemList-li"}>
-                        <div style={{color: 'white'}}>Meal Name</div>
-                        <div/>
-                        <div style={{marginRight: '0vw', color: 'white'}}>Calories</div>
-                        <div/>
-                        <div style={{marginRight: '1.5vw', color: 'white'}}>Protein</div>
-                        <button className={"Delete-button"} style={{visibility: 'hidden'}} type={"button"}>X</button>
-                    </li>
-                </ul>
-                <ul className={"MealItemList-ul"}>
-                    {meals.map(item => (
-                        <li className={"MealItemList-li"} style={{paddingTop: '1.5vh', paddingBottom: '1.5vh'}} key={item.mealID}>
-                            <button type={'button'} onClick={() => goToMealPanel(item.mealName, item.mealID, item.time)} className={'Meal-name-wrapper Hover-expand'}>{item.mealName} <div style={{color: 'white'}}>{formatTimeTo12Hour(item.time)}</div></button>
+                <div className={"MealPanel-date-header"}>
+                    <div className={"DateTime-wrapper"}>
+                        <DailyWeightInput date={date} dateId={dateId} weight={weight} setWeight={setWeight}
+                                          setError={setError}/>
+                    </div>
+                    <div className={"MealPanel-date-header-text"}>Add Meals</div>
+                </div>
+                <div className={"MealItemList"}>
+                    <ul className={"MealItemList-ul"}>
+                        <li className={"MealItemList-li"}>
+                            <div style={{color: 'white'}}>Meal Name</div>
                             <div/>
-                            <div>{item.mealCalories}</div>
+                            <div style={{marginRight: '0vw', color: 'white'}}>Calories</div>
                             <div/>
-                            <div style={{marginRight: '1.5vw'}}>{item.mealProtein}g</div>
-                            <button className={"Delete-button Hover-expand"} type={"button"}
-                                    onClick={() => removeMeal(item.mealID)}>
-                                X
+                            <div style={{marginRight: '1.5vw', color: 'white'}}>Protein</div>
+                            <button className={"Delete-button"} style={{visibility: 'hidden'}} type={"button"}>X
                             </button>
                         </li>
-                    ))}
-                </ul>
-            </div>
-            < MealEntry addMeal={addMeal} numberOfMeals={numberOfMeals} />
-
-            <div className={"MealPanel-footer"}>
-                <div className={"MealPanel-footer-text-container"}>
-                    <div className={"MealPanel-footer-text"}>Total Calories: {totalCalories(meals)}</div>
-                    <div className={"MealPanel-footer-text"}>Total Protein: {totalProtein(meals)}g</div>
+                    </ul>
+                    <ul className={"MealItemList-ul"}>
+                        {meals.map(item => (
+                            <li className={"MealItemList-li"} style={{paddingTop: '1.5vh', paddingBottom: '1.5vh'}}
+                                key={item.mealID}>
+                                <button type={'button'}
+                                        onClick={() => goToMealPanel(item.mealName, item.mealID, item.time)}
+                                        className={'Meal-name-wrapper Hover-expand'}>{item.mealName}
+                                    <div style={{color: 'white'}}>{formatTimeTo12Hour(item.time)}</div>
+                                </button>
+                                <div/>
+                                <div>{item.mealCalories}</div>
+                                <div/>
+                                <div style={{marginRight: '1.5vw'}}>{item.mealProtein}g</div>
+                                <button className={"Delete-button Hover-expand"} type={"button"}
+                                        onClick={() => removeMeal(item.mealID)}>
+                                    X
+                                </button>
+                            </li>
+                        ))}
+                    </ul>
                 </div>
-                <button className={"Panel-footer-button"} type={"button"} onClick={goBack}>Go Back</button>
+                < MealEntry addMeal={addMeal} numberOfMeals={numberOfMeals}/>
+            </div>
+            <div className={"MealPanel-footer-container"}>
+                <div className={"MealPanel-footer"}>
+                    <div className={"MealPanel-footer-text-container"}>
+                        <div className={"MealPanel-footer-text"}>Total Calories: {totalCalories(meals)}</div>
+                        <div className={"MealPanel-footer-text"}>Total Protein: {totalProtein(meals)}g</div>
+                    </div>
+                    <button className={"Panel-footer-button"} type={"button"} onClick={goBack}>Go Back</button>
+                </div>
             </div>
         </div>
     );

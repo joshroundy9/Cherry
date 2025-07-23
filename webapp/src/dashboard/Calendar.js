@@ -135,9 +135,9 @@ export function Calendar({switchPanel, setDate, setDateId, setWeight}) {
                 {error && <div className={"Error-message"}>{error}</div>}
                 {loading && <div className={"Info-message"}>Loading...</div>}
             </div>
-            <div>
+            <div style={{width: '100%'}}>
                 <div style={{fontSize: 'x-large'}}>View Calorie, Protein, and Weight Graphs For:</div>
-                <div>
+                <div style={{width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: '10px'}}>
                     <button className={"Panel-footer-button"} onClick={() => switchPanel('weekly-graph')}>This Week</button>
                     <button className={"Panel-footer-button"} onClick={() => switchPanel('monthly-graph')}>This Month</button>
                     <button className={"Panel-footer-button"} onClick={() => switchPanel('yearly-graph')}>This Year</button>

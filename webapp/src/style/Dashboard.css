@@ -51,7 +51,7 @@
 .Calendar-container {
     width: 25vw;
     max-width: 380px;
-    min-width: 300px;
+    min-width: 360px;
     height: 75vh;
     min-height: 500px;
     background-color: #2D2D2D;
@@ -672,8 +672,9 @@
         height: 100%;
     }
     .MealPanel {
-        height: auto;
+        height: 600px;
         width: 95%;
+        overflow: hidden;
     }
     .MealPanel-container {
         height: auto;
