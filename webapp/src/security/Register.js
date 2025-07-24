@@ -19,7 +19,7 @@ function Register({ onRegister }) {
 
     const handleSubmit = async (e) => {
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 2000);
+        const timeoutId = setTimeout(() => controller.abort(), 10000);
 
         if (password !== confirmPassword || email !== confirmEmail) {
             return;
@@ -37,7 +37,10 @@ function Register({ onRegister }) {
             if (response.ok) {
                 const data = await response.json();
                 onRegister(data); // Pass user/token up to App
-                navigate('/login', {state: {message: 'Registration successful! Please log in.'}});
+                navigate('/login', {state: {message: 'Registration successful! Please verify your email to login, a link was sent to your inbox.'}});
+            } else if (response.status === 400) {
+                const errorText = await response.text();
+                navigate('/register', {state: {message: errorText}});
             } else {
                 navigate('/register', {state: {message: 'Registration failed!'}});
             }

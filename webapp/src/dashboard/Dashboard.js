@@ -7,7 +7,7 @@ import {DashboardHome} from "./DashboardHome";
 import {GraphWrapper} from "../Graphs/GraphWrapper";
 
 function Dashboard({ onDashboard }) {
-    const [selectedPanel, setSelectedPanel] = useState('generic');
+    const [selectedPanel, setSelectedPanel] = useState('');
 
     const [dateId, setDateId] = useState(localStorage.getItem('dateId') || '');
     const [date, setDate] = useState(localStorage.getItem('date') || '');

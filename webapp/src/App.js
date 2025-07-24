@@ -7,6 +7,7 @@ import Dashboard from "./dashboard/Dashboard";
 import PrivateRoute from "./security/PrivateRoute";
 import HomePage from "./HomePage/HomePage";
 import AuthRoute from "./security/AuthRoute";
+import {EmailVerify} from "./security/EmailVerify";
 
 function App() {
     const navigate = useNavigate()
@@ -48,6 +49,7 @@ function App() {
                     <Register onRegister={() => {}}/>
                 </AuthRoute>
             }/>
+            <Route path="/verify" element={<EmailVerify onEmailVerify={() => {}}/>}/>
 
             {/* PROTECTED ROUTES */}
             <Route path="/dashboard" element={

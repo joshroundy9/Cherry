@@ -1,5 +1,4 @@
 import { format, parseISO, parse } from 'date-fns';
-import {isArray} from "chart.js/helpers";
 
 const API_URL = process.env.REACT_APP_API_URL;
 

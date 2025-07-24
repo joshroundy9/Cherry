@@ -1,5 +1,6 @@
 package com.joshroundy.cherry.dataobject.auth;
 
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,6 +23,7 @@ public class RegistrationDTO {
     @Pattern (regexp = PASSWORD_REGEX, message = PASSWORD_ERROR_MESSAGE)
     private String password;
     private Date dateOfBirth;
+    @Max(value = WEIGHT_MAX, message = WEIGHT_ERROR_MESSAGE)
     private Double weight;
 
     public String toString(){

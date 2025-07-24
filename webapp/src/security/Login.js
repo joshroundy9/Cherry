@@ -60,25 +60,41 @@ function Login({ onLogin }) {
                         onChange={e => setUsername(e.target.value)}
                         required
                     />
-                    <input
-                        className={"Auth-form-input"}
-                        type="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={e => setPassword(e.target.value)}
-                        required
-                    />
+                    <div style={{position: 'relative'}}>
+                        <input
+                            className={"Auth-form-input"}
+                            type="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={e => setPassword(e.target.value)}
+                            required
+                        />
+                        <Link
+                            to="/forgot-password"
+                            className={"App-link"}
+                            style={{
+                                position: 'absolute',
+                                left: 1.5,
+                                bottom: '-1.2em',
+                                fontSize: '1.3em',
+                                color: '#ff0606',
+                                cursor: 'pointer',
+                            }}
+                        >
+                            Forgot your password?
+                        </Link>
+                    </div>
                     <button className={"Form-button Hover-expand"} type="submit">Login</button>
                     <div style={{
                         display: 'flex',
                         justifyContent: 'center',
                         flexDirection: 'row',
-                        fontSize: '3vh',
+                        fontSize: 'x-large',
                         gap: '0.1em'
                     }}>
                         <span>Not signed up?&#32;</span><Link className="App-link" to="/register">Sign Up</Link>
                     </div>
-                    <div style={{minHeight: '1em', textAlign: 'center', color: 'red'}}>
+                    <div style={{minHeight: '1em', textAlign: 'center', color: 'red', maxWidth: '90%'}}>
                         {message && <div className="Error-message">{message}</div>}
                     </div>
                 </form>
