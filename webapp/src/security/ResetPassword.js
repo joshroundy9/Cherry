@@ -51,7 +51,8 @@ export function ResetPassword({ onResetPassword }) {
                     navigate('/login', { state: { message: 'Password reset successful! Please login.' } });
                 }, 50);
             } else if (response.status === 400) {
-                setMessage(response.text());
+                const errorText = await response.text();
+                setMessage(errorText);
             } else {
                 setMessage('Password reset failed!');
 

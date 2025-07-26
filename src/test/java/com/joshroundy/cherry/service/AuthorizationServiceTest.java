@@ -2,6 +2,7 @@ package com.joshroundy.cherry.service;
 
 import com.joshroundy.cherry.dataobject.auth.LoginRequestDTO;
 import com.joshroundy.cherry.dataobject.auth.RegistrationDTO;
+import com.joshroundy.cherry.dataobject.auth.UserResponseDTO;
 import com.joshroundy.cherry.dataobject.entity.UserEntity;
 import com.joshroundy.cherry.repository.UserRepository;
 import jakarta.mail.internet.MimeMessage;
@@ -44,6 +45,7 @@ public class AuthorizationServiceTest {
     MimeMessage mimeMessage;
     String passwordHash;
     UserEntity userEntity;
+    UserResponseDTO userResponseDTO;
     RegistrationDTO registrationDTO;
     LoginRequestDTO loginRequestDTO;
     Integer userID;
@@ -66,6 +68,14 @@ public class AuthorizationServiceTest {
                 .email(registrationDTO.getEmail())
                 .isEmailVerified(false)
                 .build();
+        userResponseDTO = UserResponseDTO.builder()
+                .userID(userEntity.getUserID())
+                .username(userEntity.getUsername())
+                .email(userEntity.getEmail())
+                .dateOfBirth(userEntity.getDateOfBirth())
+                .isEmailVerified(true)
+                .weight(userEntity.getWeight())
+                .build();
         loginRequestDTO = LoginRequestDTO.builder()
                 .username("username")
                 .password("password")
@@ -87,7 +97,7 @@ public class AuthorizationServiceTest {
         userEntity.setIsEmailVerified(true);
         when(userRepository.findByUsername(any())).thenReturn(Optional.ofNullable(userEntity));
         var actual = subject.loginUser(loginRequestDTO);
-        assertThat(actual.getUser()).isEqualTo(userEntity);
+        assertThat(actual.getUser()).usingRecursiveComparison().isEqualTo(userResponseDTO);
         assertThat(actual.getJwt()).isEqualTo(uuid);
     }
     @Test void loginUserTest_sadPath_throwsAuthenticationException() {

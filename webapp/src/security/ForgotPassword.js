@@ -38,7 +38,8 @@ export function ForgotPassword({ onForgotPassword }) {
                     navigate('/login', { state: { message: 'Password reset email sent! If you have an account with this email, you will be receiving an link shortly.' } });
                 }, 50);
             } else if (response.status === 400) {
-                navigate('/forgot-password', { state: { message: response.text() } });
+                const errorText = await response.text();
+                navigate('/forgot-password', { state: { message: errorText } });
             }
         } catch (error) {
             console.error('Password reset error:', error);

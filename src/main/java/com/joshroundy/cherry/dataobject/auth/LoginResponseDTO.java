@@ -9,6 +9,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class LoginResponseDTO {
-    private UserEntity user;
+    private UserResponseDTO user;
     private String jwt;
 }

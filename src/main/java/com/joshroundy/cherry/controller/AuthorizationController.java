@@ -47,8 +47,12 @@ public class AuthorizationController {
     }
 
     @PostMapping("/login")
-    public LoginResponseDTO loginUser(@RequestBody LoginRequestDTO body) throws Exception {
-        return authenticationService.loginUser(body);
+    public ResponseEntity<?> loginUser(@RequestBody LoginRequestDTO body) throws Exception {
+        try {
+            return ResponseEntity.ok(authenticationService.loginUser(body));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @PostMapping("/validate")

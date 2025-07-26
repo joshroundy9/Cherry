@@ -1,6 +1,7 @@
 package com.joshroundy.cherry.service;
 
 import com.joshroundy.cherry.dataobject.auth.LoginRequestDTO;
+import com.joshroundy.cherry.dataobject.auth.UserResponseDTO;
 import com.joshroundy.cherry.dataobject.entity.UserEntity;
 import com.joshroundy.cherry.dataobject.auth.LoginResponseDTO;
 import com.joshroundy.cherry.dataobject.auth.RegistrationDTO;
@@ -40,7 +41,7 @@ public class AuthorizationService {
     @Value("${frontend.url}")
     private String frontendUrl;
 
-    public UserEntity registerUser(RegistrationDTO registrationDTO){
+    public UserResponseDTO registerUser(RegistrationDTO registrationDTO){
         var emailVerificationToken = UUID.randomUUID().toString();
         var userEntity = UserEntity.builder()
                 .username(registrationDTO.getUsername())
@@ -55,8 +56,15 @@ public class AuthorizationService {
         userRepository.save(userEntity);
 
         sendVerificationEmail(userEntity.getEmail(), emailVerificationToken);
-
-        return userEntity;
+        // Return without sensitive information
+        return UserResponseDTO.builder()
+                .userID(userEntity.getUserID())
+                .username(userEntity.getUsername())
+                .email(userEntity.getEmail())
+                .dateOfBirth(userEntity.getDateOfBirth())
+                .isEmailVerified(userEntity.getIsEmailVerified())
+                .weight(userEntity.getWeight())
+                .build();
     }
 
     public LoginResponseDTO loginUser(LoginRequestDTO loginRequestDTO) throws Exception {
@@ -66,12 +74,20 @@ public class AuthorizationService {
 
         var userEntity = userRepository.findByUsername(loginRequestDTO.getUsername()).get();
         if (!userEntity.getIsEmailVerified()) {
-            throw new AccessDeniedException("Email not verified");
+            throw new AccessDeniedException("Email not verified, please check your spam folder.");
         }
 
         var jwtToken = tokenService.generateJwt(authentication, userEntity.getUserID());
-
-        return new LoginResponseDTO(userEntity, jwtToken);
+        // Only return non-sensitive user information
+        return new LoginResponseDTO(UserResponseDTO.builder()
+                .userID(userEntity.getUserID())
+                .username(userEntity.getUsername())
+                .email(userEntity.getEmail())
+                .dateOfBirth(userEntity.getDateOfBirth())
+                .isEmailVerified(userEntity.getIsEmailVerified())
+                .weight(userEntity.getWeight())
+                .build(),
+                jwtToken);
     }
 
     private void sendVerificationEmail(String toEmail, String token) {

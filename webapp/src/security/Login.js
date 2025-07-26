@@ -35,6 +35,9 @@ function Login({ onLogin }) {
                 setTimeout(() => {
                     navigate('/dashboard');
                 }, 50);
+            } else if (response.status === 400) {
+                const errorText = await response.text();
+                navigate('/login', { state: { message: errorText } });
             } else {
                 navigate('/login', { state: { message: 'Login failed!' } });
             }
