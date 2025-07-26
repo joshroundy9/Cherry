@@ -45,10 +45,10 @@ public class AuthorizationService {
     public UserResponseDTO registerUser(RegistrationDTO registrationDTO){
         var emailVerificationToken = UUID.randomUUID().toString();
         var userEntity = UserEntity.builder()
-                .username(registrationDTO.getUsername())
+                .username(registrationDTO.getUsername().toLowerCase())
                 .passwordHash(passwordEncoder.encode(registrationDTO.getPassword()))
                 .dateOfBirth(registrationDTO.getDateOfBirth())
-                .email(registrationDTO.getEmail())
+                .email(registrationDTO.getEmail().toLowerCase())
                 .weight(registrationDTO.getWeight())
                 .isEmailVerified(false)
                 .emailVerificationToken(emailVerificationToken)
@@ -82,11 +82,12 @@ public class AuthorizationService {
     }
 
     public LoginResponseDTO loginUser(LoginRequestDTO loginRequestDTO) throws Exception {
+        var username = loginRequestDTO.getUsername().toLowerCase();
         var authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequestDTO.getUsername(), loginRequestDTO.getPassword())
+                new UsernamePasswordAuthenticationToken(username, loginRequestDTO.getPassword())
         );
 
-        var userEntity = userRepository.findByUsername(loginRequestDTO.getUsername()).get();
+        var userEntity = userRepository.findByUsername(username).get();
         if (!userEntity.getIsEmailVerified()) {
             throw new AccessDeniedException("Email not verified, please check your spam folder.");
         }
@@ -123,7 +124,7 @@ public class AuthorizationService {
     }
 
     public void userPasswordReset(String email) {
-        var user = userRepository.findByEmail(email);
+        var user = userRepository.findByEmail(email.toLowerCase());
         if (user.isEmpty()) {
             return; // Do not disclose whether the email exists
         }
