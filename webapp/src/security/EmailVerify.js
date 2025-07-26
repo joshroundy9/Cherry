@@ -9,8 +9,6 @@ export function EmailVerify({onEmailVerify}) {
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
 
-
-
     useEffect(() => {
         const verifyEmail = async (token) => {
             const controller = new AbortController();

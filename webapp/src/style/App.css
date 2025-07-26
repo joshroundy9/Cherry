@@ -104,9 +104,8 @@ html, body, #root {
   background-color: #2D2D2D;
   color: white;
   height: auto;
-  width: auto;
+  width: 380px;
   min-width: 380px;
-  max-width: 420px;
   align-self: center;
 }
 
@@ -133,8 +132,8 @@ html, body, #root {
   background-color: #2D2D2D;
   color: white;
   height: auto;
+  width: 380px;
   min-width: 380px;
-  max-width: 420px;
   min-height: 420px;
   align-self: center;
 }
@@ -309,9 +308,6 @@ input[type="date"] {
   justify-content: center;
   width: 100%;
   margin-top: 10vh;
-}
-.HomePage-title {
-
 }
 .HomePage-text {
   text-align: start;

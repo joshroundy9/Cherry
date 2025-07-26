@@ -5,13 +5,11 @@ import com.joshroundy.cherry.dataobject.entity.UserEntity;
 import com.joshroundy.cherry.dataobject.auth.LoginResponseDTO;
 import com.joshroundy.cherry.dataobject.auth.RegistrationDTO;
 import com.joshroundy.cherry.repository.UserRepository;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +19,7 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 
 import java.nio.file.AccessDeniedException;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Service
@@ -50,7 +49,8 @@ public class AuthorizationService {
                 .email(registrationDTO.getEmail())
                 .weight(registrationDTO.getWeight())
                 .isEmailVerified(false)
-                .emailVerificationToken(emailVerificationToken).build();
+                .emailVerificationToken(emailVerificationToken)
+                .emailVerificationTokenCreatedTS(LocalDateTime.now()).build();
 
         userRepository.save(userEntity);
 
@@ -92,14 +92,72 @@ public class AuthorizationService {
         }
     }
 
+    public void userPasswordReset(String email) {
+        var user = userRepository.findByEmail(email);
+        if (user.isEmpty()) {
+            return; // Do not disclose whether the email exists
+        }
+        var userEntity = user.get();
+        String resetToken = UUID.randomUUID().toString();
+        userEntity.setResetPasswordToken(resetToken);
+        userEntity.setResetPasswordTokenCreatedTS(LocalDateTime.now());
+        userRepository.save(userEntity);
+
+        sendPasswordResetEmail(email, userEntity.getUsername(), resetToken);
+    }
+
+    private void sendPasswordResetEmail(String toEmail, String username, String token) {
+        String subject = "Password Reset Request for " + username;
+        String verificationUrl = String.format("%s/reset-password?token=%s", frontendUrl, token);
+        String body = String.format("<p>Click the link to reset your password: %s</p> <p>NOTE: this link expires in one hour.</p>", verificationUrl);
+
+        MimeMessage message = mailSender.createMimeMessage();
+        try {
+            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+            helper.setTo(toEmail);
+            helper.setSubject(subject);
+            helper.setText(body, true);
+            helper.setFrom("cherry@joshroundy.dev");
+            mailSender.send(message);
+        } catch (MessagingException e) {
+            throw new RuntimeException("Failed to send password reset email", e);
+        }
+    }
+
+    public boolean resetPassword(String token, String newPassword) throws RuntimeException {
+        var user = userRepository.findByResetPasswordToken(token);
+        if (user.isEmpty()) {
+            throw new RuntimeException("Invalid token");
+        }
+        var userEntity = user.get();
+        var passwordHash = passwordEncoder.encode(newPassword);
+        if (userEntity.getResetPasswordTokenCreatedTS() == null ||
+            userEntity.getResetPasswordTokenCreatedTS().isBefore(LocalDateTime.now().minusHours(1))) {
+            throw new RuntimeException("Token expired");
+        }
+        if (passwordHash.equals(userEntity.getPasswordHash())) {
+            throw new RuntimeException("New password cannot be the same as the old password");
+        }
+        userEntity.setPasswordHash(passwordHash);
+        userEntity.setResetPasswordToken(null);
+        userRepository.save(userEntity);
+        return true;
+    }
+
     public boolean validateEmail(String token) {
         var user = userRepository.findByEmailVerificationToken(token);
-        if (user == null) {
+        if (user.isEmpty()) {
             return false;
         }
-        user.setIsEmailVerified(true);
-        user.setEmailVerificationToken(null);
-        userRepository.save(user);
+        var userEntity = user.get();
+        if (userEntity.getEmailVerificationTokenCreatedTS() == null ||
+                userEntity.getEmailVerificationTokenCreatedTS().isBefore(LocalDateTime.now().minusDays(1))) {
+            return false; // Token expired
+        }
+        userEntity.setIsEmailVerified(true);
+        userEntity.setEmailVerificationToken(null);
+        userEntity.setEmailVerificationTokenCreatedTS(null);
+        userRepository.save(userEntity);
         return true;
     }
 

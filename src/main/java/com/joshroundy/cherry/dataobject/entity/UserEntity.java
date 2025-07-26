@@ -8,6 +8,7 @@ import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.sql.Date;
@@ -33,6 +34,9 @@ public class UserEntity implements UserDetails {
     private Double weight;
     private Boolean isEmailVerified;
     private String emailVerificationToken;
+    private LocalDateTime emailVerificationTokenCreatedTS;
+    private String resetPasswordToken;
+    private LocalDateTime resetPasswordTokenCreatedTS;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

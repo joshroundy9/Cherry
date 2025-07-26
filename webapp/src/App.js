@@ -8,6 +8,8 @@ import PrivateRoute from "./security/PrivateRoute";
 import HomePage from "./HomePage/HomePage";
 import AuthRoute from "./security/AuthRoute";
 import {EmailVerify} from "./security/EmailVerify";
+import {ForgotPassword} from "./security/ForgotPassword";
+import ResetPassword from "./security/ResetPassword";
 
 function App() {
     const navigate = useNavigate()
@@ -50,6 +52,8 @@ function App() {
                 </AuthRoute>
             }/>
             <Route path="/verify" element={<EmailVerify onEmailVerify={() => {}}/>}/>
+            <Route path="/forgot-password" element={<ForgotPassword onForgotPassword={() => {}}/>}/>
+            <Route path="/reset-password" element={<ResetPassword onResetPassword={() => {}}/>}/>
 
             {/* PROTECTED ROUTES */}
             <Route path="/dashboard" element={
