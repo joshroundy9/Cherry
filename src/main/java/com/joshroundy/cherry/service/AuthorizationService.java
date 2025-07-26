@@ -9,6 +9,7 @@ import com.joshroundy.cherry.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -53,7 +54,20 @@ public class AuthorizationService {
                 .emailVerificationToken(emailVerificationToken)
                 .emailVerificationTokenCreatedTS(LocalDateTime.now()).build();
 
-        userRepository.save(userEntity);
+        var existingUser = userRepository.findByEmail(userEntity.getEmail());
+        if (existingUser.isPresent()) {
+            var existingUserEntity = existingUser.get();
+            if (!existingUserEntity.getIsEmailVerified() &&
+                existingUserEntity.getEmailVerificationTokenCreatedTS().isBefore(LocalDateTime.now().minusDays(1))) {
+                // If the account exists but is not verified and the token is expired, overwrite it
+                userRepository.delete(existingUserEntity);
+                userRepository.save(userEntity);
+            } else {
+                throw new DataIntegrityViolationException("Account already exists with the requested email");
+            }
+        } else {
+            userRepository.save(userEntity);
+        }
 
         sendVerificationEmail(userEntity.getEmail(), emailVerificationToken);
         // Return without sensitive information
@@ -91,7 +105,7 @@ public class AuthorizationService {
     }
 
     private void sendVerificationEmail(String toEmail, String token) {
-        String subject = "Verify your email";
+        String subject = "Welcome to Cherry! Please verify your email";
         String verificationUrl = String.format("%s/verify?token=%s", frontendUrl, token);
         String body = "Click the link to verify your email: " + verificationUrl;
 
@@ -172,7 +186,6 @@ public class AuthorizationService {
         }
         userEntity.setIsEmailVerified(true);
         userEntity.setEmailVerificationToken(null);
-        userEntity.setEmailVerificationTokenCreatedTS(null);
         userRepository.save(userEntity);
         return true;
     }

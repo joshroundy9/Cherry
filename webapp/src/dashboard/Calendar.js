@@ -121,16 +121,18 @@ export function Calendar({switchPanel, setDate, setDateId, setWeight}) {
                 <span className={"Calendar-month"}>{monthLabel}</span>
                 <button className={"Calendar-arrow-button"} onClick={handleNextMonth}>&gt;</button>
             </div>
-            <table>
-                <thead>
-                <tr>
-                    {daysOfWeek.map(d => <th key={d}>{d}</th>)}
-                </tr>
-                </thead>
-                <tbody>
-                {weeks}
-                </tbody>
-            </table>
+            <div style={{minHeight:'260px'}}>
+                <table>
+                    <thead>
+                    <tr>
+                        {daysOfWeek.map(d => <th key={d}>{d}</th>)}
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {weeks}
+                    </tbody>
+                </table>
+            </div>
             <div className="Calendar-footer">
                 {error && <div className={"Error-message"}>{error}</div>}
                 {loading && <div className={"Info-message"}>Loading...</div>}

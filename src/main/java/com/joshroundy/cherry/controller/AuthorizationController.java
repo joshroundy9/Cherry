@@ -60,8 +60,8 @@ public class AuthorizationController {
         return authenticationService.validateToken(jwtToken);
     }
     @PostMapping("/email/validate")
-    public ResponseEntity<String> validateEmail(@RequestHeader("Email") String email) {
-        if (authenticationService.validateEmail(email)) {
+    public ResponseEntity<String> validateEmail(@RequestHeader("Token") String token) {
+        if (authenticationService.validateEmail(token)) {
             return ResponseEntity.ok("Email verified successfully");
         } else {
             return ResponseEntity.badRequest().body("Cannot verify email: Invalid token");

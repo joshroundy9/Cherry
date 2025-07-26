@@ -18,13 +18,13 @@ const HomePage = ({ onHomePage }) => {
                             weight, and view your progress with ease.</p>
                     </div>
                     <div className={"HomePage-content-image-left"}>
-                        <img className={"Hover-expand"} src="/cherrydemo.gif" alt="demo"
+                        <img src="/cherrydemo.gif" alt="demo"
                              style={{maxWidth: '100%', width: '573px', height: 'auto'}}/>
                     </div>
                 </div>
                 <div className="HomePage-content HomePage-content-reverse">
                     <div className={"HomePage-content-image-right"}>
-                        <img className={"Hover-expand"} src="/graphimage.png" alt="graph"
+                        <img src="/graphimage.png" alt="graph"
                              style={{maxWidth: '100%', width: '573px', height: 'auto'}}/>
                     </div>
                     <div className={"Homepage-content-text"}>
