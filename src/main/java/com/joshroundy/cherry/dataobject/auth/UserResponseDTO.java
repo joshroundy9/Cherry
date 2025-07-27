@@ -13,7 +13,6 @@ public class UserResponseDTO {
     private Integer userID;
     private String username;
     private String email;
-    private Date dateOfBirth;
     private Boolean isEmailVerified;
     private Double weight;
 }

@@ -42,7 +42,7 @@ public class AuthorizationController {
         } catch (DataIntegrityViolationException e) {
             return ResponseEntity.badRequest().body("Username or email already exists");
         } catch (Exception e) {
-            return ResponseEntity.status(500).body("An unexpected error occurred");
+            return ResponseEntity.status(500).body(e.getMessage());
         }
     }
 
@@ -69,9 +69,9 @@ public class AuthorizationController {
     }
 
     @PostMapping("/forgot-password")
-    public ResponseEntity<?> forgotPassword(@RequestHeader("Email") String email) {
+    public ResponseEntity<?> forgotPassword(@RequestHeader("Email") String email, @RequestHeader("Captcha-Token") String captchaToken) {
         try {
-            authenticationService.userPasswordReset(email);
+            authenticationService.userPasswordReset(email, captchaToken);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

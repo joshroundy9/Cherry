@@ -1,6 +1,6 @@
 package com.joshroundy.cherry.client;
 
-import com.joshroundy.cherry.client.util.AIUtil;
+import com.joshroundy.cherry.client.util.ClientUtil;
 import com.joshroundy.cherry.dataobject.client.GPTClientResponseDTO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -14,7 +14,7 @@ import static com.joshroundy.cherry.constant.ClientConstants.OPENAI_API_URL;
 
 @Component
 public class GPTClient {
-    private final AIUtil aiUtil = new AIUtil();
+    private final ClientUtil clientUtil = new ClientUtil();
     @Value("${openai_api_key}")
     private String apiKey;
 
@@ -25,7 +25,7 @@ public class GPTClient {
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setBearerAuth(apiKey);
 
-        var body = aiUtil.createTextRequestBody(input);
+        var body = clientUtil.createAIClientTextRequestBody(input);
 
         var entity = new HttpEntity<>(body, headers);
 

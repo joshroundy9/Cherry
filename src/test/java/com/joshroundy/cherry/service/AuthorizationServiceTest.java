@@ -1,8 +1,10 @@
 package com.joshroundy.cherry.service;
 
+import com.joshroundy.cherry.client.CaptchaClient;
 import com.joshroundy.cherry.dataobject.auth.LoginRequestDTO;
 import com.joshroundy.cherry.dataobject.auth.RegistrationDTO;
 import com.joshroundy.cherry.dataobject.auth.UserResponseDTO;
+import com.joshroundy.cherry.dataobject.client.CaptchaClientResponseDTO;
 import com.joshroundy.cherry.dataobject.entity.UserEntity;
 import com.joshroundy.cherry.repository.UserRepository;
 import jakarta.mail.internet.MimeMessage;
@@ -14,6 +16,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -41,6 +44,8 @@ public class AuthorizationServiceTest {
     @Mock
     TokenService tokenService;
     @Mock
+    CaptchaClient captchaClient;
+    @Mock
     JavaMailSender mailSender;
     MimeMessage mimeMessage;
     String passwordHash;
@@ -54,7 +59,6 @@ public class AuthorizationServiceTest {
         userID = 45;
         passwordHash = "passwordHash";
         registrationDTO = RegistrationDTO.builder()
-                .dateOfBirth(Date.valueOf("2024-05-06"))
                 .email("randomemail@gmail.com")
                 .weight(450.5)
                 .password("password")
@@ -64,7 +68,6 @@ public class AuthorizationServiceTest {
                 .weight(registrationDTO.getWeight())
                 .username(registrationDTO.getUsername())
                 .passwordHash(passwordHash)
-                .dateOfBirth(registrationDTO.getDateOfBirth())
                 .email(registrationDTO.getEmail())
                 .isEmailVerified(false)
                 .build();
@@ -72,7 +75,6 @@ public class AuthorizationServiceTest {
                 .userID(userEntity.getUserID())
                 .username(userEntity.getUsername())
                 .email(userEntity.getEmail())
-                .dateOfBirth(userEntity.getDateOfBirth())
                 .isEmailVerified(true)
                 .weight(userEntity.getWeight())
                 .build();
@@ -87,6 +89,11 @@ public class AuthorizationServiceTest {
         when(passwordEncoder.encode(any())).thenReturn(passwordHash);
         when(userRepository.save(any())).thenReturn(userEntity);
         when(mailSender.createMimeMessage()).thenReturn(mimeMessage);
+        when(captchaClient.getCaptchaVerificationResponse(any())).thenReturn(
+                ResponseEntity.ok(
+                        CaptchaClientResponseDTO.builder().success(true).build()
+                ));
+        when(userRepository.findByEmail(any())).thenReturn(Optional.empty());
         assertThat(subject.registerUser(registrationDTO)).usingRecursiveComparison()
                 .ignoringFields("emailVerificationToken", "emailVerificationTokenCreatedTS", "userID").isEqualTo(userEntity);
     }

@@ -158,10 +158,10 @@ function NutritionForm({ addMealItem, setError }) {
                             required={true}
                         />
                     </div>
-            )}
-            {mode === 'AI' && (
-                <input
-                className={"Nutrition-form-input"}
+                )}
+                {mode === 'AI' && (
+                    <input
+                        className={"Nutrition-form-input"}
                         type="text"
                         value={foodEntry}
                         onChange={e => setFoodEntry(e.target.value)}

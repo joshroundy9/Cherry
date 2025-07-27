@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import TimePicker from "react-time-picker";
 
 function MealEntry({ addMeal, numberOfMeals }) {
     const [mealName, setMealName] = useState('');
-    const [mealTime, setMealTime] = useState('');
+    const [mealTime, setMealTime] = useState('12:30');
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
 
@@ -12,7 +13,7 @@ function MealEntry({ addMeal, numberOfMeals }) {
         e.preventDefault();
         addMeal(mealName, mealTime, setError);
         setMealName('');
-        setMealTime('');
+        setMealTime('12:30');
         setLoading(false);
     };
 
@@ -27,12 +28,12 @@ function MealEntry({ addMeal, numberOfMeals }) {
                     placeholder="Enter meal name here"
                     required={true}
                 />
-                <input
+                <TimePicker
                     className={"DateTime-meal-input"}
-                    type="time"
+                    onChange={setMealTime}
                     value={mealTime}
-                    onChange={e => setMealTime(e.target.value)}
-                    placeholder=""
+                    disableClock={true}
+                    clearIcon={null}
                     required={true}
                 />
                 <button className={"Nutrition-form-button"} type="submit">Add New Meal</button>

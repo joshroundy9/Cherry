@@ -30,7 +30,6 @@ public class UserEntity implements UserDetails {
     @Column(unique = true, nullable = false)
     private String email;
     private String passwordHash;
-    private Date dateOfBirth;
     private Double weight;
     private Boolean isEmailVerified;
     private String emailVerificationToken;

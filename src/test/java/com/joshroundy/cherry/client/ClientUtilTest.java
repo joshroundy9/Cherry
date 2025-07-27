@@ -1,20 +1,19 @@
 package com.joshroundy.cherry.client;
 
-import com.joshroundy.cherry.client.util.AIUtil;
-import org.junit.jupiter.api.Disabled;
+import com.joshroundy.cherry.client.util.ClientUtil;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class AIUtilTest {
+public class ClientUtilTest {
 
-    private AIUtil subject = new AIUtil();
+    private ClientUtil subject = new ClientUtil();
 
     @Test
     public void testCreateTextRequestBody() {
         String input = "One banana and two apples with two tablespoons of peanut butter.";
-        String requestBody = subject.createTextRequestBody(input);
+        String requestBody = subject.createAIClientTextRequestBody(input);
         assertNotNull(requestBody);
         assertEquals(("{\n" +
                 "  \"model\": \"gpt-4o-mini\",\n" +

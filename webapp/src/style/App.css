@@ -295,21 +295,20 @@ input[type="date"] {
   font-size: xx-large;
   height: auto;
   min-height: 95vh;
-  background: linear-gradient(180deg, #1E1E1E 0%, #291111 100%);
+  background-color: #1E1E1E;
 }
 .HomePage-body-container {
   margin-top: 5vh;
   width: 90%;
+  max-width: 1500px;
 }
 .HomePage-content {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   width: 100%;
   margin-top: 10vh;
-}
-.HomePage-text {
   text-align: start;
 }
 .HomePage-video-container {
@@ -330,6 +329,12 @@ input[type="date"] {
 }
 .HomePage-content-image-right {
   margin-right: 5vw;
+}
+.Homepage-footer {
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
 }
 /* Mobile Styles */
 @media (max-width: 800px) {
@@ -380,6 +385,7 @@ input[type="date"] {
       align-items: center;
       justify-content: center;
       margin: 0;
+      text-align: center;
     }
     .HomePage-content-reverse {
       flex-direction: column-reverse;
@@ -396,4 +402,13 @@ input[type="date"] {
     .HomePage-body-container {
       margin: 0;
     }
+  .Homepage-footer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    text-align: center;
+  }
 }

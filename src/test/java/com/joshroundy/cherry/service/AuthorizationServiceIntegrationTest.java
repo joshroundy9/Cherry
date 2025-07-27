@@ -30,17 +30,15 @@ class AuthorizationServiceIntegrationTest {
                 .build();
         var email = "joshroundy@gmail.com";
         var weight = 196.3;
-        var DOB = Date.valueOf("2003-02-28");
         var registrationDTO = RegistrationDTO.builder()
                 .username(username)
                 .password(password)
                 .email(email)
                 .weight(weight)
-                .dateOfBirth(DOB)
                 .build();
         var userEntity = subject.registerUser(registrationDTO);
         assertThat(userEntity).isEqualToIgnoringGivenFields(userEntity, "password","passwordHash", "userID");
         var loginResponse = subject.loginUser(loginRequestDTO);
-        assertThat(loginResponse.getUser()).isEqualToIgnoringGivenFields(userEntity, "dateOfBirth");
+        assertThat(loginResponse.getUser()).isEqualTo(userEntity);
     }
 }

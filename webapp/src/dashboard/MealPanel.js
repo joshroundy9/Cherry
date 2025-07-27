@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import NutritionForm from "./MealItemEntry";
 import {genericRequest, getDataHeaders, updateMealNutrition} from "../utils/DashboardUtil";
-import {ErrorState, LoadingState} from "./DashboardComponents";
+import {LoadingState} from "./DashboardComponents";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -143,8 +143,7 @@ function MealPanel({switchPanel, mealName, mealId, time, date, dateId }) {
                         <div style={{marginRight: '0vw', color: 'white'}}>Calories</div>
                         <div/>
                         <div style={{marginRight: '1.5vw', color: 'white'}}>Protein</div>
-                        <button className={"Delete-button"} style={{visibility: 'hidden'}} type={"button"}>X
-                        </button>
+                        <button className={"Delete-button"} style={{visibility: 'hidden'}} type={"button"}>X</button>
                     </li>
                 </ul>
                 <div style={{width: '100%', height: '100%', overflowY: 'auto', overflowX: 'hidden', paddingBottom: '1em'}}>

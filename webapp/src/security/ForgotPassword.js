@@ -1,11 +1,13 @@
 // webapp/src/ForgotPassword.js
 import React, { useState } from 'react';
 import {Link, useLocation, useNavigate} from "react-router-dom";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
 export function ForgotPassword({ onForgotPassword }) {
     const [email, setEmail] = useState('');
+    const [captchaToken, setCaptchaToken] = useState('');
     const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
@@ -26,7 +28,8 @@ export function ForgotPassword({ onForgotPassword }) {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Email': email
+                    'Email': email,
+                    'Captcha-Token': captchaToken
                 },
                 body: null,
                 signal: controller.signal,
@@ -63,6 +66,10 @@ export function ForgotPassword({ onForgotPassword }) {
                         value={email}
                         onChange={e => setEmail(e.target.value)}
                         required
+                    />
+                    <ReCAPTCHA
+                        sitekey="6Lcy4JArAAAAAA3lKAEzvS36ijPRDnrzJiR_m5zw"
+                        onChange={setCaptchaToken}
                     />
                     <button className={"Form-button Hover-expand"} type="submit">Send Reset Link</button>
                     <div style={{

@@ -1,6 +1,7 @@
 // webapp/src/Register.js
 import React, { useState } from 'react';
 import {Link, useNavigate, useLocation} from "react-router-dom";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -10,8 +11,9 @@ function Register({ onRegister }) {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [email, setEmail] = useState('');
     const [confirmEmail, setConfirmEmail] = useState('');
-    const [dateOfBirth, setDateOfBirth] = useState('');
     const [weight, setWeight] = useState('');
+    const [captchaToken, setCaptchaToken] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -21,6 +23,11 @@ function Register({ onRegister }) {
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 10000);
 
+        if (loading) {
+            return; // Prevent multiple submissions
+        } else {
+            setLoading(true);
+        }
         if (password !== confirmPassword || email !== confirmEmail) {
             return;
         }
@@ -30,7 +37,7 @@ function Register({ onRegister }) {
             const response = await fetch(`${API_URL}/auth/register`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({username, password, email, dateOfBirth, weight}),
+                body: JSON.stringify({username, password, email, weight, captchaToken}),
                 signal: controller.signal,
             });
             clearTimeout(timeoutId);
@@ -48,6 +55,7 @@ function Register({ onRegister }) {
             console.error('Registration error:', error);
             navigate('/register', {state: {message: 'An error occurred during registration.'}});
         }
+        setLoading(false);
     };
 
     return (
@@ -94,18 +102,15 @@ function Register({ onRegister }) {
                            required
                     />
                     <input className={"Auth-form-input"}
-                           type="date"
-                           placeholder="Date of Birth"
-                           value={dateOfBirth}
-                           onChange={e => setDateOfBirth(e.target.value)}
-                           required
-                    />
-                    <input className={"Auth-form-input"}
                            type="number"
                            placeholder="Body Weight (LBS)"
                            value={weight}
                            onChange={e => setWeight(e.target.value)}
                            required
+                    />
+                    <ReCAPTCHA
+                        sitekey="6Lcy4JArAAAAAA3lKAEzvS36ijPRDnrzJiR_m5zw"
+                        onChange={setCaptchaToken}
                     />
                     <button className={"Form-button Hover-expand"} type="submit">Register</button>
                     <div style={{

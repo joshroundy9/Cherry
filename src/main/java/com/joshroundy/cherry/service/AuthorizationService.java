@@ -1,5 +1,6 @@
 package com.joshroundy.cherry.service;
 
+import com.joshroundy.cherry.client.CaptchaClient;
 import com.joshroundy.cherry.dataobject.auth.LoginRequestDTO;
 import com.joshroundy.cherry.dataobject.auth.UserResponseDTO;
 import com.joshroundy.cherry.dataobject.entity.UserEntity;
@@ -37,17 +38,25 @@ public class AuthorizationService {
     @Autowired
     private TokenService tokenService;
     @Autowired
+    private CaptchaClient captchaClient;
+    @Autowired
     private JavaMailSender mailSender;
 
     @Value("${frontend.url}")
     private String frontendUrl;
 
     public UserResponseDTO registerUser(RegistrationDTO registrationDTO){
+        var captchaResponse = captchaClient.getCaptchaVerificationResponse(registrationDTO.getCaptchaToken());
+        if (captchaResponse.getBody() == null || !captchaResponse.getBody().isSuccess()) {
+            System.out.println("Captcha verification failed: " + captchaResponse.getBody().isSuccess() +
+                    ", Score: " + captchaResponse.getBody().getErrorCodes());
+            throw new RuntimeException("Captcha verification failed.");
+        }
+
         var emailVerificationToken = UUID.randomUUID().toString();
         var userEntity = UserEntity.builder()
                 .username(registrationDTO.getUsername().toLowerCase())
                 .passwordHash(passwordEncoder.encode(registrationDTO.getPassword()))
-                .dateOfBirth(registrationDTO.getDateOfBirth())
                 .email(registrationDTO.getEmail().toLowerCase())
                 .weight(registrationDTO.getWeight())
                 .isEmailVerified(false)
@@ -75,7 +84,6 @@ public class AuthorizationService {
                 .userID(userEntity.getUserID())
                 .username(userEntity.getUsername())
                 .email(userEntity.getEmail())
-                .dateOfBirth(userEntity.getDateOfBirth())
                 .isEmailVerified(userEntity.getIsEmailVerified())
                 .weight(userEntity.getWeight())
                 .build();
@@ -98,7 +106,6 @@ public class AuthorizationService {
                 .userID(userEntity.getUserID())
                 .username(userEntity.getUsername())
                 .email(userEntity.getEmail())
-                .dateOfBirth(userEntity.getDateOfBirth())
                 .isEmailVerified(userEntity.getIsEmailVerified())
                 .weight(userEntity.getWeight())
                 .build(),
@@ -123,7 +130,14 @@ public class AuthorizationService {
         }
     }
 
-    public void userPasswordReset(String email) {
+    public void userPasswordReset(String email, String captchaToken) {
+        var captchaResponse = captchaClient.getCaptchaVerificationResponse(captchaToken);
+        if (captchaResponse.getBody() == null || !captchaResponse.getBody().isSuccess()) {
+            System.out.println("Captcha verification failed: " + captchaResponse.getBody().isSuccess() +
+                    ", Score: " + captchaResponse.getBody().getErrorCodes());
+            throw new RuntimeException("Captcha verification failed.");
+        }
+
         var user = userRepository.findByEmail(email.toLowerCase());
         if (user.isEmpty()) {
             return; // Do not disclose whether the email exists
