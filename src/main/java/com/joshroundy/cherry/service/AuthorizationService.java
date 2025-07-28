@@ -78,7 +78,7 @@ public class AuthorizationService {
             userRepository.save(userEntity);
         }
 
-        sendVerificationEmail(userEntity.getEmail(), emailVerificationToken);
+        sendVerificationEmail(userEntity.getEmail(), userEntity.getUsername(), emailVerificationToken);
         // Return without sensitive information
         return UserResponseDTO.builder()
                 .userID(userEntity.getUserID())
@@ -112,8 +112,8 @@ public class AuthorizationService {
                 jwtToken);
     }
 
-    private void sendVerificationEmail(String toEmail, String token) {
-        String subject = "Welcome to Cherry! Please verify your email";
+    private void sendVerificationEmail(String toEmail, String username, String token) {
+        String subject = String.format("Welcome to Cherry %s! Please verify your email", username);
         String verificationUrl = String.format("%s/verify?token=%s", frontendUrl, token);
         String body = "Click the link to verify your email: " + verificationUrl;
 

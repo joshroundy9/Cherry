@@ -9,7 +9,7 @@ export function DashboardHome() {
                 <div style={{marginTop: '10px', textAlign: 'start', width: '100%'}}>Seamlessly track your meals, weight, and nutrition data with <span className={"Red"}>CHERRY</span>.</div>
                 <div style={{marginTop: '50px', textAlign: 'start'}}><span className={"Red"}>AI-powered</span> meal-entry effortlessly delivers
                     accurate nutritional insights for your meals, eliminating the
-                    hassle of complicated search menus and makes your tracking experience faster, easier, and more enjoyable.</div>
+                    hassle of complicated search menus, making your tracking experience faster, easier, and more enjoyable.</div>
             </div>
             <div className={"Dashboard-home-footer"}>
                 <div className={"Dashboard-home-text"} style={{marginBottom: '80px', marginLeft: '5%'}}>
