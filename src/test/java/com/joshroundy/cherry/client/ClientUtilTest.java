@@ -1,28 +1,19 @@
 package com.joshroundy.cherry.client;
 
-import com.joshroundy.cherry.client.util.AIUtil;
-import org.junit.jupiter.api.Disabled;
+import com.joshroundy.cherry.client.util.ClientUtil;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class AIUtilTest {
+public class ClientUtilTest {
 
-    private AIUtil subject = new AIUtil();
-
-    @Test
-    public void testGetAPIKey() {
-        // IF THIS TEST FAILS, UPDATE THE OPENAI_API_KEY_PATH IN ClientConstants TO POINT TO A VALID FILE
-        String apiKey = subject.getAPIKey();
-        assertNotNull(apiKey);
-        assertNotEquals("", apiKey);
-    }
+    private ClientUtil subject = new ClientUtil();
 
     @Test
     public void testCreateTextRequestBody() {
         String input = "One banana and two apples with two tablespoons of peanut butter.";
-        String requestBody = subject.createTextRequestBody(input);
+        String requestBody = subject.createAIClientTextRequestBody(input);
         assertNotNull(requestBody);
         assertEquals(("{\n" +
                 "  \"model\": \"gpt-4o-mini\",\n" +

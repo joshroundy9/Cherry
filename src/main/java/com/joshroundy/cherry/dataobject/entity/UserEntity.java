@@ -8,13 +8,14 @@ import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.sql.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "[User]")
+@Table(name = "app_user")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -29,11 +30,12 @@ public class UserEntity implements UserDetails {
     @Column(unique = true, nullable = false)
     private String email;
     private String passwordHash;
-    private Date dateOfBirth;
-    @Min(value = 0, message = "Height must be a positive number")
-    @Max(value = 100, message = "Height must be less than 100 inches")
-    private Double height;
     private Double weight;
+    private Boolean isEmailVerified;
+    private String emailVerificationToken;
+    private LocalDateTime emailVerificationTokenCreatedTS;
+    private String resetPasswordToken;
+    private LocalDateTime resetPasswordTokenCreatedTS;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

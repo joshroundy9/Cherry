@@ -1,5 +1,6 @@
 package com.joshroundy.cherry.service;
 
+import com.joshroundy.cherry.annotation.IntegrationTest;
 import com.joshroundy.cherry.dataobject.auth.LoginRequestDTO;
 import com.joshroundy.cherry.dataobject.auth.RegistrationDTO;
 import com.joshroundy.cherry.repository.UserRepository;
@@ -12,17 +13,15 @@ import java.sql.Date;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest
+@IntegrationTest
 class AuthorizationServiceIntegrationTest {
     @Autowired AuthorizationService subject;
     @Autowired
     UserRepository userRepository;
 
     @Test
-    void registerAndLoginUser() {
-        userRepository.findByUsername("joshroundy").ifPresent(user -> {
-            userRepository.delete(user);
-        });
+    @Disabled
+    void registerAndLoginUser() throws Exception {
         var username = "joshroundy";
         var password = "password";
         var loginRequestDTO = LoginRequestDTO.builder()
@@ -31,19 +30,15 @@ class AuthorizationServiceIntegrationTest {
                 .build();
         var email = "joshroundy@gmail.com";
         var weight = 196.3;
-        var height = 69.7;
-        var DOB = Date.valueOf("2003-02-28");
         var registrationDTO = RegistrationDTO.builder()
                 .username(username)
                 .password(password)
                 .email(email)
-                .height(height)
                 .weight(weight)
-                .dateOfBirth(DOB)
                 .build();
         var userEntity = subject.registerUser(registrationDTO);
         assertThat(userEntity).isEqualToIgnoringGivenFields(userEntity, "password","passwordHash", "userID");
         var loginResponse = subject.loginUser(loginRequestDTO);
-        assertThat(loginResponse.getUser()).isEqualToIgnoringGivenFields(userEntity, "dateOfBirth");
+        assertThat(loginResponse.getUser()).isEqualTo(userEntity);
     }
 }

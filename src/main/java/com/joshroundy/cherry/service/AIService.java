@@ -1,7 +1,7 @@
 package com.joshroundy.cherry.service;
 
 import com.joshroundy.cherry.client.GPTClient;
-import com.joshroundy.cherry.client.util.AIUtil;
+import com.joshroundy.cherry.client.util.ClientUtil;
 import com.joshroundy.cherry.dataobject.client.AIDataResponseDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 public class AIService {
 
     private GPTClient gptClient;
-    private AIUtil aiUtil;
+    private ClientUtil clientUtil;
 
     public AIDataResponseDTO getNutritionData(String foodEntry) {
         var response = gptClient.getGPTTextResponse(foodEntry);
@@ -19,7 +19,7 @@ public class AIService {
             throw new RuntimeException("Invalid response from GPT API");
         }
 
-        return aiUtil.mapGPTClientResponseToAIDataResponse(response.getBody().getChoices().get(0).getMessage().getContent(), foodEntry);
+        return clientUtil.mapGPTClientResponseToAIDataResponse(response.getBody().getChoices().get(0).getMessage().getContent(), foodEntry);
     }
 
 }

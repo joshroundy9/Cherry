@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.joshroundy'
-version = '0.0.1-SNAPSHOT'
+version = '1.0.0-RELEASE'
 
 java {
 	toolchain {
@@ -29,8 +29,11 @@ dependencies {
 	implementation 'org.springframework.data:spring-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+	implementation 'com.h2database:h2'
+	implementation 'org.postgresql:postgresql:42.7.3'
 	implementation 'jakarta.validation:jakarta.validation-api:3.0.2'
 	implementation 'org.hibernate.validator:hibernate-validator:8.0.1.Final'
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
 	runtimeOnly("com.microsoft.sqlserver:mssql-jdbc")

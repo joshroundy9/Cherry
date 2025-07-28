@@ -121,23 +121,25 @@ export function Calendar({switchPanel, setDate, setDateId, setWeight}) {
                 <span className={"Calendar-month"}>{monthLabel}</span>
                 <button className={"Calendar-arrow-button"} onClick={handleNextMonth}>&gt;</button>
             </div>
-            <table>
-                <thead>
-                <tr>
-                    {daysOfWeek.map(d => <th key={d}>{d}</th>)}
-                </tr>
-                </thead>
-                <tbody>
-                {weeks}
-                </tbody>
-            </table>
+            <div style={{minHeight:'260px'}}>
+                <table>
+                    <thead>
+                    <tr>
+                        {daysOfWeek.map(d => <th key={d}>{d}</th>)}
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {weeks}
+                    </tbody>
+                </table>
+            </div>
             <div className="Calendar-footer">
                 {error && <div className={"Error-message"}>{error}</div>}
                 {loading && <div className={"Info-message"}>Loading...</div>}
             </div>
-            <div>
+            <div style={{width: '100%', marginBottom: '10px'}}>
                 <div style={{fontSize: 'x-large'}}>View Calorie, Protein, and Weight Graphs For:</div>
-                <div>
+                <div style={{width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: '10px'}}>
                     <button className={"Panel-footer-button"} onClick={() => switchPanel('weekly-graph')}>This Week</button>
                     <button className={"Panel-footer-button"} onClick={() => switchPanel('monthly-graph')}>This Month</button>
                     <button className={"Panel-footer-button"} onClick={() => switchPanel('yearly-graph')}>This Year</button>

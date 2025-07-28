@@ -1,28 +1,14 @@
 package com.joshroundy.cherry.client.util;
 
-import com.joshroundy.cherry.constant.ClientConstants;
 import com.joshroundy.cherry.dataobject.client.AIDataResponseDTO;
 import org.springframework.stereotype.Component;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 import static com.joshroundy.cherry.constant.ClientConstants.TEXT_DEVELOPER_PROMPT;
 import static com.joshroundy.cherry.constant.ClientConstants.TEXT_MODEL;
 
 @Component
-public class AIUtil {
-
-    public String getAPIKey() {
-        try {
-        return Files.readString(Paths.get(ClientConstants.OPENAI_API_KEY_PATH)).trim();
-        } catch (IOException e) {
-            return "";
-        }
-    }
-
-    public String createTextRequestBody(String input) {
+public class ClientUtil {
+    public String createAIClientTextRequestBody(String input) {
         return """
                 {
                   "model": "%s",

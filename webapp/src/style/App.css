@@ -5,11 +5,13 @@ html, body, #root {
   margin: 0;
   padding: 0;
   border: none;
+  min-height: 100%;
 }
 
 .App {
   text-align: center;
   overflow: hidden;
+  min-height: 100%;
 }
 
 .App-logo {
@@ -102,7 +104,7 @@ html, body, #root {
   background-color: #2D2D2D;
   color: white;
   height: auto;
-  width: auto;
+  width: 380px;
   min-width: 380px;
   align-self: center;
 }
@@ -111,14 +113,14 @@ html, body, #root {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5em;
+  gap: 1em;
 }
 
 .Auth-form-header {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  text-align: left;
+  text-align: center;
     margin-top: 20px;
 }
 
@@ -130,8 +132,9 @@ html, body, #root {
   background-color: #2D2D2D;
   color: white;
   height: auto;
-  width: 45vh;
+  width: 380px;
   min-width: 380px;
+  min-height: 420px;
   align-self: center;
 }
 
@@ -139,7 +142,8 @@ html, body, #root {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5em;
+  gap: 1em;
+  margin-top: 10px;
 }
 
 .Auth-form-input {
@@ -150,9 +154,21 @@ html, body, #root {
   border: none;
   outline: none;
   box-shadow: none;
+  padding: 0.2em 0.5em 0.2em 0.5em;
   width: 10em;
   font-size: 28px;
   margin-top: 5px;
+  caret-color: white;
+}
+input[type="text"]::selection {
+  background-color: #3297fd;
+  color: white;
+}
+
+/* For Firefox compatibility */
+input[type="text"]::-moz-selection {
+  background-color: #3297fd;
+  color: white;
 }
 
 input:-webkit-autofill,
@@ -177,7 +193,7 @@ input[type="date"] {
 .Auth-form-text {
   font-size: 40px;
   margin-top: 0vh;
-  margin-bottom: 18px;
+  margin-bottom: 0px;
 }
 
 .Auth-text {
@@ -212,7 +228,7 @@ input[type="date"] {
   background-color: #FF0606;
   color: black;
   font-family: 'Jomhuria', cursive;
-  font-size: x-large;
+  font-size: xx-large;
   border: none;
   border-radius: 7px;
   margin-top: 10px;
@@ -256,6 +272,7 @@ input[type="date"] {
 .Error-message {
   color: #FF0606;
   font-size: xx-large;
+  text-wrap: auto;
 }
 
 @keyframes App-logo-spin {
@@ -278,24 +295,20 @@ input[type="date"] {
   font-size: xx-large;
   height: auto;
   min-height: 95vh;
-  background: linear-gradient(180deg, #1E1E1E 0%, #291111 100%);
+  background-color: #1E1E1E;
 }
 .HomePage-body-container {
   margin-top: 5vh;
   width: 90%;
+  max-width: 1500px;
 }
 .HomePage-content {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   width: 100%;
   margin-top: 10vh;
-}
-.HomePage-title {
-
-}
-.HomePage-text {
   text-align: start;
 }
 .HomePage-video-container {
@@ -316,6 +329,12 @@ input[type="date"] {
 }
 .HomePage-content-image-right {
   margin-right: 5vw;
+}
+.Homepage-footer {
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
 }
 /* Mobile Styles */
 @media (max-width: 800px) {
@@ -347,13 +366,13 @@ input[type="date"] {
       margin-top: auto;
     }
     .Register-container {
-        margin: 0;
+      margin-top: 4em;
     }
     .Auth-form-header {
       margin-top: 30px;
     }
     .Error-message {
-      font-size: large;
+      font-size: x-large;
     }
     .Auth-form-text {
       font-size: xx-large;
@@ -366,6 +385,7 @@ input[type="date"] {
       align-items: center;
       justify-content: center;
       margin: 0;
+      text-align: center;
     }
     .HomePage-content-reverse {
       flex-direction: column-reverse;
@@ -382,4 +402,13 @@ input[type="date"] {
     .HomePage-body-container {
       margin: 0;
     }
+  .Homepage-footer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    text-align: center;
+  }
 }

@@ -1,6 +1,5 @@
 package com.joshroundy.cherry.dataobject.data;
 
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,4 +18,5 @@ public class MealItemDTO {
     String itemName;
     Double itemCalories;
     Double itemProtein;
+    Boolean aiGenerated;
 }

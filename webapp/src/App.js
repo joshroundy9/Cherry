@@ -7,12 +7,15 @@ import Dashboard from "./dashboard/Dashboard";
 import PrivateRoute from "./security/PrivateRoute";
 import HomePage from "./HomePage/HomePage";
 import AuthRoute from "./security/AuthRoute";
+import {EmailVerify} from "./security/EmailVerify";
+import {ForgotPassword} from "./security/ForgotPassword";
+import ResetPassword from "./security/ResetPassword";
 
 function App() {
     const navigate = useNavigate()
     const location = useLocation()
     const onSignOut = () => {
-        localStorage.setItem('jwtToken', '');
+        localStorage.removeItem('jwtToken');
         navigate('/');
     };
   return (
@@ -48,6 +51,9 @@ function App() {
                     <Register onRegister={() => {}}/>
                 </AuthRoute>
             }/>
+            <Route path="/verify" element={<EmailVerify onEmailVerify={() => {}}/>}/>
+            <Route path="/forgot-password" element={<ForgotPassword onForgotPassword={() => {}}/>}/>
+            <Route path="/reset-password" element={<ResetPassword onResetPassword={() => {}}/>}/>
 
             {/* PROTECTED ROUTES */}
             <Route path="/dashboard" element={

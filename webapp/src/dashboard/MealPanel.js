@@ -1,7 +1,7 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import NutritionForm from "./MealItemEntry";
-import {genericRequest, getDataHeaders, updateDateNutrition, updateMealNutrition} from "../utils/DashboardUtil";
-import {ErrorState, LoadingState} from "./DashboardComponents";
+import {genericRequest, getDataHeaders, updateMealNutrition} from "../utils/DashboardUtil";
+import {LoadingState} from "./DashboardComponents";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -28,7 +28,8 @@ function MealPanel({switchPanel, mealName, mealId, time, date, dateId }) {
         switchPanel('date');
     }
 
-    const addMealItem = async (itemName, itemCalories, itemProtein, setLocalError) => {
+    const addMealItem = async (itemName, itemCalories, itemProtein, aiGenerated, setLocalError) => {
+        if (mealItems.length >= 8) return;
         try {
             const responseBody = await genericRequest(
                 `${API_URL}/data/meal-item`,
@@ -40,7 +41,8 @@ function MealPanel({switchPanel, mealName, mealId, time, date, dateId }) {
                 "mealID": "${mealId}",
                 "itemName": "${itemName}",
                 "itemCalories": "${itemCalories}",
-                "itemProtein": "${itemProtein}"
+                "itemProtein": "${itemProtein}",
+                "aiGenerated": "${aiGenerated}"
             }`
             );
             const newMealItems = [...mealItems, responseBody];
@@ -110,34 +112,30 @@ function MealPanel({switchPanel, mealName, mealId, time, date, dateId }) {
 
         return () => {
             clearTimeout(timeoutId);
-            controller.abort();
         };
     }, [mealId]);
 
     if (loading) return <LoadingState />;
-    if (error) return <ErrorState message={error} />;
-
     return (
         <div className="MealPanel">
-            <div className="Panel-header">
-                {mealName}
-            </div>
-            <div className={"MealPanel-date-header"}>
-                <div className={"DateTime-wrapper"}>
-                    <div className={"DateTime-text"}>{date}</div>
-                    <input
-                        className={"DateTime-input"}
-                        type={"time"}
-                        defaultValue={time}
-                        disabled={true}
-                    />
+            <div className={"MealPanel-container"}>
+                <div className="Panel-header">
+                    {mealName}
                 </div>
-                <div className={"MealPanel-date-header-text"}>Add Meal Items</div>
-            </div>
-            <div className={"MealItemList-header"}>
+                <div className={"MealPanel-date-header"}>
+                    <div className={"DateTime-wrapper"}>
+                        <div className={"DateTime-text"}>{date}</div>
+                        <input
+                            className={"DateTime-input"}
+                            type={"time"}
+                            defaultValue={time}
+                            disabled={true}
+                        />
+                    </div>
+                    <div className={"MealPanel-date-header-text"}>Add Meal Items</div>
+                </div>
 
-            </div>
-            <div className={"MealItemList"}>
+
                 <ul className={"MealItemList-ul"}>
                     <li className={"MealItemList-li"}>
                         <div style={{color: 'white'}}>Food Description</div>
@@ -148,31 +146,43 @@ function MealPanel({switchPanel, mealName, mealId, time, date, dateId }) {
                         <button className={"Delete-button"} style={{visibility: 'hidden'}} type={"button"}>X</button>
                     </li>
                 </ul>
-                <ul className={"MealItemList-ul"}>
-                    {mealItems.map(item => (
-                        <li className={"MealItemList-li"} style={{paddingTop: '0.4vh', paddingBottom: '0.5vh'}} key={item.itemID}>
-                            <div className={"Meal-name-wrapper Hover-expand"}>{item.itemName}</div>
-                            <div/>
-                            <div>{item.itemCalories}</div>
-                            <div/>
-                            <div style={{marginRight: '1.5vw'}}>{item.itemProtein}g</div>
-                            <button className={"Delete-button Hover-expand"} type={"button"}
-                                    onClick={() => removeMealItem(item.itemID)}>
-                                X
-                            </button>
-                        </li>
-                    ))}
-                </ul>
-            </div>
-            < NutritionForm addMealItem={addMealItem} numberOfMealItems={numberOfMealItems} />
-            <div className={"MealPanel-footer"}>
-                <div className={"MealPanel-footer-text-container"}>
-                    <div className={"MealPanel-footer-text"}>Total Calories: {totalCalories(mealItems)}</div>
-                    <div className={"MealPanel-footer-text"}>Total Protein: {totalProtein(mealItems)}g</div>
+                <div style={{width: '100%', height: '100%', overflowY: 'auto', overflowX: 'hidden', paddingBottom: '1em'}}>
+                    <div className={"MealItemList"}>
+                        <ul className={"MealItemList-ul"}>
+                            {mealItems.map(item => (
+                                <li className={"MealItemList-li"} style={{paddingTop: '0.4vh', paddingBottom: '0.5vh'}}
+                                    key={item.itemID}>
+                                    <div className={"Meal-name-wrapper Hover-expand"}>{item.itemName}</div>
+                                    <div/>
+                                    <div>{item.itemCalories}</div>
+                                    <div/>
+                                    <div style={{marginRight: '1.5vw'}}>{item.itemProtein}g</div>
+                                    <button className={"Delete-button Hover-expand"} type={"button"}
+                                            onClick={() => removeMealItem(item.itemID)}>
+                                        X
+                                    </button>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                    < NutritionForm addMealItem={addMealItem} setError={setError}/>
                 </div>
-                <button className={"Panel-footer-button"} type={"button"} onClick={goBack}>Go Back</button>
+            </div>
+            <div className={"MealPanel-footer-container"}>
+                <div className={"Nutrition-form-error"}>
+                    {error && <div className={"Error-message"}>{error}</div>}
+                    {numberOfMealItems() >= 8 && <div className={"Error-message"}>Meal item limit reached!</div>}
+                </div>
+                <div className={"MealPanel-footer"}>
+                    <div className={"MealPanel-footer-text-container"}>
+                        <div className={"MealPanel-footer-text"}>Total Calories: {totalCalories(mealItems)}</div>
+                        <div className={"MealPanel-footer-text"}>Total Protein: {totalProtein(mealItems)}g</div>
+                    </div>
+                    <button className={"Panel-footer-button"} type={"button"} onClick={goBack}>Go Back</button>
+                </div>
             </div>
         </div>
+
     );
 }
 

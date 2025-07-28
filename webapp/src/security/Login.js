@@ -35,12 +35,15 @@ function Login({ onLogin }) {
                 setTimeout(() => {
                     navigate('/dashboard');
                 }, 50);
+            } else if (response.status === 400) {
+                const errorText = await response.text();
+                navigate('/login', { state: { message: errorText } });
             } else {
-                navigate('/', { state: { message: 'Login failed!' } });
+                navigate('/login', { state: { message: 'Login failed!' } });
             }
         } catch (error) {
             console.error('Login error:', error);
-            navigate('/', { state: { message: 'An error occurred while logging in.' } });
+            navigate('/login', { state: { message: 'An error occurred while logging in.' } });
         }
     };
 
@@ -48,8 +51,7 @@ function Login({ onLogin }) {
         <div className={"Auth-background"}>
             <div className={"Login-container"}>
                 <div className={"Auth-form-header"}>
-                    <p className={"Auth-form-text"}>Welcome back!</p>
-                    <p className={"Auth-form-text"}>Meeting your goals starts today.</p>
+                    <div className={"Auth-form-text"}>Welcome back to <span className={"Logo-red"}>CHERRY</span>!</div>
                 </div>
                 <form style={{}} className={"Login-form"} onSubmit={handleSubmit}>
                     <p className={"Auth-form-text"}>Login</p>
@@ -61,25 +63,41 @@ function Login({ onLogin }) {
                         onChange={e => setUsername(e.target.value)}
                         required
                     />
-                    <input
-                        className={"Auth-form-input"}
-                        type="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={e => setPassword(e.target.value)}
-                        required
-                    />
+                    <div style={{position: 'relative'}}>
+                        <input
+                            className={"Auth-form-input"}
+                            type="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={e => setPassword(e.target.value)}
+                            required
+                        />
+                        <Link
+                            to="/forgot-password"
+                            className={"App-link"}
+                            style={{
+                                position: 'absolute',
+                                left: 1.5,
+                                bottom: '-1.2em',
+                                fontSize: '1.3em',
+                                color: '#ff0606',
+                                cursor: 'pointer',
+                            }}
+                        >
+                            Forgot your password?
+                        </Link>
+                    </div>
                     <button className={"Form-button Hover-expand"} type="submit">Login</button>
                     <div style={{
                         display: 'flex',
                         justifyContent: 'center',
                         flexDirection: 'row',
-                        fontSize: '3vh',
+                        fontSize: 'x-large',
                         gap: '0.1em'
                     }}>
                         <span>Not signed up?&#32;</span><Link className="App-link" to="/register">Sign Up</Link>
                     </div>
-                    <div style={{minHeight: '1em', textAlign: 'center', color: 'red'}}>
+                    <div style={{minHeight: '1em', textAlign: 'center', color: 'red', maxWidth: '90%'}}>
                         {message && <div className="Error-message">{message}</div>}
                     </div>
                 </form>

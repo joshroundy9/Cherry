@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -58,7 +59,11 @@ public class DataService {
         return dateRepository.save(dateEntity);
     }
     public DateEntity updateDateNutrition(Integer dateID, Double calories, Double protein, Integer userID) {
-        var dateEntity = dateRepository.findById(dateID).get();
+        var optionalDateEntity = dateRepository.findById(dateID);
+        if (optionalDateEntity.isEmpty()) {
+            return DateEntity.builder().build();
+        }
+        var dateEntity = optionalDateEntity.get();
         if (!dateEntity.getUserID().equals(userID)) {
             throw new AccessDeniedException("User ID does not match the date owner.");
         }
@@ -127,6 +132,9 @@ public class DataService {
     public List<MealItemEntity> findMealItemsFromMealID(Integer mealID) {
         return mealItemRepository.findByMealID(mealID);
     }
+    public List<MealItemEntity> getMealItemRecents(Integer userID, Boolean aiGenerated) {
+        return mealItemRepository.findTop5ByUserIDAndAiGeneratedOrderByCreatedTSDesc(userID, aiGenerated);
+    }
     public MealItemEntity createMealItem(MealItemDTO mealItemDTO) {
         return mealItemRepository.save(MealItemEntity.builder()
                         .userID(mealItemDTO.getUserID())
@@ -135,6 +143,8 @@ public class DataService {
                         .itemName(mealItemDTO.getItemName())
                         .dateID(mealItemDTO.getDateID())
                         .mealID(mealItemDTO.getMealID())
+                        .aiGenerated(mealItemDTO.getAiGenerated())
+                        .createdTS(new Timestamp(System.currentTimeMillis()))
                 .build());
     }
     public MealItemEntity updateMealItemName(Integer mealItemID, String mealItemName, Integer userID) {
