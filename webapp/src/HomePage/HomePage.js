@@ -46,9 +46,9 @@ const HomePage = ({ onHomePage }) => {
                     </div>
                 </div>
                 <div className="HomePage-content HomePage-content-reverse">
-                    <div className={"HomePage-content-image-right"}>
+                    <div className={"HomePage-content-image-right"} style={{width: '100%', maxWidth: '560px'}}>
                         <iframe style={{marginRight: '5vw', maxWidth: '560px'}} width="100%" height="315"
-                                src="https://www.youtube.com/embed/IligeviHT-M?si=oKzm2xXBKMJVPNNm"
+                                src="https://www.youtube.com/embed/fkjwlnVtwew?si=A0yH5IKWcIQTT1ym"
                                 title="YouTube video player" frameBorder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                 referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
