@@ -15,6 +15,9 @@ NOTE: Figma was used as a rough draft and several design changes were made after
 <br><br>
 Figma: https://www.figma.com/design/9na15WcguKcXO18PswOSYC/Untitled?node-id=0-1&t=Pqk8lEKxhM4mqeuK-1
 
+## Security
+All data is transmitted with HTTPS and securely stored on an AWS RDS PostgreSQL database. The data API requires bearer auth, only allowing a user to access their own data.
+
 ## Backend
 Cherry's backend is made with a Spring Boot authentication and data API
 that connects with a Microsoft SQL Server database and the OpenAI API. 
@@ -25,7 +28,7 @@ The Spring Boot web server is deployed to an AWS EC2 instance and the database u
 Cherry's front end consists of a React JS web app that makes HTTP requests
 to the back end, getting the authorization and data it needs.
 <br><br>
-The front-end is deployed to an AWS S3 bucket.
+The front-end is deployed to an AWS S3 bucket and deployed on a cloudfront distribution.
 
 ## Conclusion
 Cherry was designed to make calorie tracking easy by making food entry simpler. <br> 
