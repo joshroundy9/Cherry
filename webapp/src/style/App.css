@@ -377,6 +377,9 @@ input[type="date"] {
     .Auth-form-text {
       font-size: xx-large;
     }
+    .Auth-form-text::placeholder {
+      font-size: xx-large;
+    }
     .Homepage-content-text {
       align-items: center;
     }
