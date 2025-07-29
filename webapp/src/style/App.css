@@ -182,7 +182,7 @@ input:-webkit-autofill:active {
 
 .Auth-form-input::placeholder {
   color: white;
-  font-size: 3vh;
+  font-size: 28px;
 }
 
 input[type="date"] {
