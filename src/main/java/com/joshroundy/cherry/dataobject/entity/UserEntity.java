@@ -2,16 +2,13 @@ package com.joshroundy.cherry.dataobject.entity;
 
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.sql.Date;
 import java.util.List;
 
 @Entity
@@ -31,11 +28,15 @@ public class UserEntity implements UserDetails {
     private String email;
     private String passwordHash;
     private Double weight;
+    private Double startingWeight;
     private Boolean isEmailVerified;
     private String emailVerificationToken;
     private LocalDateTime emailVerificationTokenCreatedTS;
     private String resetPasswordToken;
     private LocalDateTime resetPasswordTokenCreatedTS;
+    private Timestamp createdTS;
+    private String googleLoginToken;
+    private Boolean googleRegistrationComplete;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
