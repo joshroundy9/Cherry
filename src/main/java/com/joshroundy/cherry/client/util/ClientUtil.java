@@ -3,8 +3,7 @@ package com.joshroundy.cherry.client.util;
 import com.joshroundy.cherry.dataobject.client.AIDataResponseDTO;
 import org.springframework.stereotype.Component;
 
-import static com.joshroundy.cherry.constant.ClientConstants.TEXT_DEVELOPER_PROMPT;
-import static com.joshroundy.cherry.constant.ClientConstants.TEXT_MODEL;
+import static com.joshroundy.cherry.constant.ClientConstants.*;
 
 @Component
 public class ClientUtil {
@@ -18,7 +17,32 @@ public class ClientUtil {
                      {"role": "user", "content": "%s"}
                    ]
                 }
-                """.formatted(TEXT_MODEL, TEXT_DEVELOPER_PROMPT, input);
+                """.formatted(AI_MODEL, TEXT_DEVELOPER_PROMPT, input);
+    }
+
+    public String createAIClientImageRequestBody(String imageBase64) {
+        return """
+        {
+          "model": "%s",
+          "messages": [
+             {
+                "role": "user",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "%s"
+                    },
+                    {
+                        "type": "image_url",
+                        "image_url": {
+                            "url": "data:image/jpeg;base64,%s"
+                        }
+                    }
+                ]
+             }
+           ]
+        }
+        """.formatted(AI_MODEL, IMAGE_DEVELOPER_PROMPT, imageBase64);
     }
 
     public AIDataResponseDTO mapGPTClientResponseToAIDataResponse(String gptResponseContent, String foodEntry) {

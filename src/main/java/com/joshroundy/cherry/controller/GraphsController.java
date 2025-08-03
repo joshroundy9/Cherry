@@ -7,7 +7,9 @@ import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/graphs")
@@ -24,4 +26,17 @@ public class GraphsController {
         return graphsService.getGraphData(userID, daysBack);
     }
 
+    @GetMapping("/heatmap")
+    public Map<Date, String> getHeatMapData(
+            @RequestHeader(value = "user-id") Integer userID,
+            @RequestParam(value = "daysback", required = false, defaultValue = "30")
+            @Min(value = 0)
+            @Max(value = 365) Long daysBack) {
+        return graphsService.getHeatMapData(userID, daysBack);
+    }
+
+    @GetMapping("/average")
+    public Map<String, Double> getAverageData(@RequestHeader(value = "user-id") Integer userID) {
+        return graphsService.getAverageData(userID);
+    }
 }

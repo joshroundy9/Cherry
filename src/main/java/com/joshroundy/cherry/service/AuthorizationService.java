@@ -91,6 +91,8 @@ public class AuthorizationService {
                 .email(userEntity.getEmail())
                 .isEmailVerified(userEntity.getIsEmailVerified())
                 .weight(userEntity.getWeight())
+                .startingWeight(userEntity.getStartingWeight())
+                .createdTS(userEntity.getCreatedTS())
                 .build();
     }
 
@@ -113,6 +115,8 @@ public class AuthorizationService {
                 .email(userEntity.getEmail())
                 .isEmailVerified(userEntity.getIsEmailVerified())
                 .weight(userEntity.getWeight())
+                .startingWeight(userEntity.getStartingWeight())
+                .createdTS(userEntity.getCreatedTS())
                 .build(),
                 jwtToken);
     }
