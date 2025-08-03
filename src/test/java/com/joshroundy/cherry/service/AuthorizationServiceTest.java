@@ -95,7 +95,7 @@ public class AuthorizationServiceTest {
                 ));
         when(userRepository.findByEmail(any())).thenReturn(Optional.empty());
         assertThat(subject.registerUser(registrationDTO)).usingRecursiveComparison()
-                .ignoringFields("emailVerificationToken", "emailVerificationTokenCreatedTS", "userID").isEqualTo(userEntity);
+                .ignoringFields("emailVerificationToken", "emailVerificationTokenCreatedTS", "userID", "createdTS", "startingWeight").isEqualTo(userEntity);
     }
     @Test void loginUserTest_happyPath() throws Exception {
         var uuid = UUID.randomUUID().toString();

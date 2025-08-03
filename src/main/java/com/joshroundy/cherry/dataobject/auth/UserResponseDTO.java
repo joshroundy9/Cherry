@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 @Getter
 @Setter
@@ -15,4 +16,6 @@ public class UserResponseDTO {
     private String email;
     private Boolean isEmailVerified;
     private Double weight;
+    private Double startingWeight;
+    private Timestamp createdTS;
 }

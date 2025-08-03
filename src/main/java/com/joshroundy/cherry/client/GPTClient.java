@@ -31,4 +31,18 @@ public class GPTClient {
 
         return restTemplate.postForEntity(OPENAI_API_URL, entity, GPTClientResponseDTO.class);
     }
+
+    public ResponseEntity<GPTClientResponseDTO> getGPTImageResponse(String imageBase64) {
+        var restTemplate = new RestTemplate();
+
+        var headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(apiKey);
+
+        var body = clientUtil.createAIClientImageRequestBody(imageBase64);
+
+        var entity = new HttpEntity<>(body, headers);
+
+        return restTemplate.postForEntity(OPENAI_API_URL, entity, GPTClientResponseDTO.class);
+    }
 }

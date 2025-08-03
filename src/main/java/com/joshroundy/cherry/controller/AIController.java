@@ -5,10 +5,7 @@ import com.joshroundy.cherry.service.AIService;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Size;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/ai")
@@ -23,5 +20,11 @@ public class AIController {
             @Size(max = 100, message = "Entry text cannot exceed 100 characters")
             String foodEntry) {
         return aiService.getNutritionData(foodEntry);
+    }
+
+    @PostMapping("/imagenutritiondata")
+    public AIDataResponseDTO getImageNutritionData(
+            @RequestBody String imageBase64) {
+        return aiService.getImageNutritionData(imageBase64);
     }
 }

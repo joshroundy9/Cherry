@@ -22,6 +22,7 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 
 import java.nio.file.AccessDeniedException;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -59,9 +60,13 @@ public class AuthorizationService {
                 .passwordHash(passwordEncoder.encode(registrationDTO.getPassword()))
                 .email(registrationDTO.getEmail().toLowerCase())
                 .weight(registrationDTO.getWeight())
+                .startingWeight(registrationDTO.getWeight())
                 .isEmailVerified(false)
                 .emailVerificationToken(emailVerificationToken)
-                .emailVerificationTokenCreatedTS(LocalDateTime.now()).build();
+                .emailVerificationTokenCreatedTS(LocalDateTime.now())
+                .createdTS(Timestamp.valueOf(LocalDateTime.now()))
+                .googleLoginToken(null)
+                .googleRegistrationComplete(true).build();
 
         var existingUser = userRepository.findByEmail(userEntity.getEmail());
         if (existingUser.isPresent()) {
@@ -86,6 +91,8 @@ public class AuthorizationService {
                 .email(userEntity.getEmail())
                 .isEmailVerified(userEntity.getIsEmailVerified())
                 .weight(userEntity.getWeight())
+                .startingWeight(userEntity.getStartingWeight())
+                .createdTS(userEntity.getCreatedTS())
                 .build();
     }
 
@@ -108,6 +115,8 @@ public class AuthorizationService {
                 .email(userEntity.getEmail())
                 .isEmailVerified(userEntity.getIsEmailVerified())
                 .weight(userEntity.getWeight())
+                .startingWeight(userEntity.getStartingWeight())
+                .createdTS(userEntity.getCreatedTS())
                 .build(),
                 jwtToken);
     }
