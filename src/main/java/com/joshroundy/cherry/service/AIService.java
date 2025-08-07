@@ -28,7 +28,7 @@ public class AIService {
             throw new RuntimeException("Invalid response from OpenAI IMAGE API");
         }
 
-        return clientUtil.mapGPTClientResponseToAIDataResponse(response.getBody().getChoices().get(0).getMessage().getContent(), imageBase64);
+        return clientUtil.mapGPTClientImageResponseToAIDataResponse(response.getBody().getChoices().get(0).getMessage().getContent());
     }
 
 }

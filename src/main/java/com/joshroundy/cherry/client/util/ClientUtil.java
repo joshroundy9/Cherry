@@ -63,4 +63,20 @@ public class ClientUtil {
                         .replaceAll(",", "")))
                 .build();
     }
+
+    public AIDataResponseDTO mapGPTClientImageResponseToAIDataResponse(String gptResponseContent) {
+        var parts = gptResponseContent.split("\"");
+        return AIDataResponseDTO.builder()
+                .foodEntry(parts[1]
+                        .replaceAll("\"", "")
+                        .replaceAll(",", ""))
+                .isValidEntry(parts[0].equals("True "))
+                .calories(Double.parseDouble(parts[3]
+                        .replaceAll("\"", "")
+                        .replaceAll(",", "")))
+                .protein(Double.parseDouble(parts[5]
+                        .replaceAll("\"", "")
+                        .replaceAll(",", "")))
+                .build();
+    }
 }
