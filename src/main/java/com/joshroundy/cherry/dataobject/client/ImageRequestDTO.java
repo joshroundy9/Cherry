@@ -1,12 +1,12 @@
 package com.joshroundy.cherry.dataobject.client;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ImageRequestDTO {
     private String imageBase64;
 }
