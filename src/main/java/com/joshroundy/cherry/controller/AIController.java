@@ -1,6 +1,7 @@
 package com.joshroundy.cherry.controller;
 
 import com.joshroundy.cherry.dataobject.client.AIDataResponseDTO;
+import com.joshroundy.cherry.dataobject.client.ImageRequestDTO;
 import com.joshroundy.cherry.service.AIService;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Size;
@@ -24,7 +25,7 @@ public class AIController {
 
     @PostMapping("/imagenutritiondata")
     public AIDataResponseDTO getImageNutritionData(
-            @RequestBody String imageBase64) {
-        return aiService.getImageNutritionData(imageBase64);
+            @RequestBody ImageRequestDTO body) {
+        return aiService.getImageNutritionData(body.getImageBase64());
     }
 }
