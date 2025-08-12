@@ -13,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
 import static com.joshroundy.cherry.constant.ClientConstants.OPENAI_API_URL;
 
 @Component
-public class GPTClient {
+public class AIClient {
     private final ClientUtil clientUtil = new ClientUtil();
     @Value("${openai_api_key}")
     private String apiKey;
