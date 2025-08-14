@@ -4,11 +4,12 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
+import java.sql.Date;
 
 @Getter
 @Setter
 @Builder
-public class HeatMapDataDTO {
-    private List<HeatMapItem> heatMapData;
+public class HeatMapItem {
+    private Date date;
+    private String value;
 }
