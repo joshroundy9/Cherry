@@ -56,18 +56,25 @@ public class GraphsService {
         double totalCalories = 0.0;
         double totalProtein = 0.0;
         double totalWeight = 0.0;
-        int count = graphData.size();
+        int weightCount = 0;
+        int nutritionCount = 0;
 
         for (DateEntity dateEntity : graphData) {
-            totalCalories += dateEntity.getDailyCalories();
-            totalProtein += dateEntity.getDailyProtein();
-            totalWeight += dateEntity.getDailyWeight();
+            if (dateEntity.getDailyCalories() > 0 || dateEntity.getDailyProtein() > 0) {
+                nutritionCount++;
+                totalCalories += dateEntity.getDailyCalories();
+                totalProtein += dateEntity.getDailyProtein();
+            }
+            if (dateEntity.getDailyWeight() > 0) {
+                weightCount++;
+                totalWeight += dateEntity.getDailyWeight();
+            }
         }
 
         return Map.of(
-                "averageCalories", count > 0 ? totalCalories / count : 0.0,
-                "averageProtein", count > 0 ? totalProtein / count : 0.0,
-                "averageWeight", count > 0 ? totalWeight / count : 0.0
+                "averageCalories", nutritionCount > 0 ? totalCalories / nutritionCount : 0.0,
+                "averageProtein", nutritionCount > 0 ? totalProtein / nutritionCount : 0.0,
+                "averageWeight", weightCount > 0 ? totalWeight / weightCount : 0.0
         );
     }
 }
