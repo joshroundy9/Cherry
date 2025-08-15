@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+
 @Service
 @AllArgsConstructor
 public class UserService implements UserDetailsService {
@@ -34,6 +36,12 @@ public class UserService implements UserDetailsService {
     public UserResponseDTO updateUserWeight(Integer userID, Double weight) {
         var userEntity = userRepository.findByUserID(userID);
         userEntity.setWeight(weight);
+        if (userEntity.getStartingWeight() == null) {
+            userEntity.setStartingWeight(weight);
+        }
+        if (userEntity.getCreatedTS() == null) {
+            userEntity.setCreatedTS(new Timestamp(System.currentTimeMillis()));
+        }
         userRepository.save(userEntity);
         return UserResponseDTO.builder()
                 .userID(userEntity.getUserID())
