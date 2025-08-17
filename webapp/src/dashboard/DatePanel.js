@@ -3,7 +3,6 @@ import {
     formatDateWithOrdinal, formatTimeTo12Hour,
     genericRequest,
     getDataHeaders,
-    updateDateNutrition,
     validateTimeString
 } from "../utils/DashboardUtil";
 import {DailyWeightInput, ErrorState, LoadingState} from "./DashboardComponents";
@@ -59,10 +58,6 @@ function DatePanel({ switchPanel, dateId, date, weight, setWeight }) {
             );
             const newMeals = [...meals, responseBody];
             setMeals(newMeals);
-            await updateDateNutrition(dateId,
-                totalCalories(newMeals),
-                totalProtein(newMeals),
-                setLocalError);
             setLocalError('');
         } catch (err) {
             setLocalError(err.message);
@@ -77,10 +72,6 @@ function DatePanel({ switchPanel, dateId, date, weight, setWeight }) {
             );
             const newMeals = meals.filter(item => item.mealID !== mealId)
             setMeals(newMeals);
-            await updateDateNutrition(dateId,
-                totalCalories(newMeals),
-                totalProtein(newMeals),
-                setError);
             setError(null);
         } catch (err) {
             setError(err.message);
@@ -105,12 +96,6 @@ function DatePanel({ switchPanel, dateId, date, weight, setWeight }) {
             })
             .then(data => {
                 setMeals(data);
-                const dailyCalories = totalCalories(data);
-                const dailyProtein = totalProtein(data);
-                if (dailyCalories !== localStorage.getItem('dailyCalories') ||
-                    dailyProtein !== localStorage.getItem('dailyProtein')) {
-                    updateDateNutrition(dateId, dailyCalories, dailyProtein, setError).then();
-                }
                 setError(null);
             })
             .catch(err => {

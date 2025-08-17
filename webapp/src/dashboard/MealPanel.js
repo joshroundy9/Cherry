@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import NutritionForm from "./MealItemEntry";
-import {genericRequest, getDataHeaders, updateMealNutrition} from "../utils/DashboardUtil";
+import {genericRequest, getDataHeaders} from "../utils/DashboardUtil";
 import {LoadingState} from "./DashboardComponents";
 
 const API_URL = process.env.REACT_APP_API_URL;
@@ -47,10 +47,6 @@ function MealPanel({switchPanel, mealName, mealId, time, date, dateId }) {
             );
             const newMealItems = [...mealItems, responseBody];
             setMealItems(newMealItems);
-            await updateMealNutrition(mealId,
-                totalCalories(newMealItems),
-                totalProtein(newMealItems),
-                setLocalError);
             setLocalError('');
         } catch (err) {
             setLocalError(err.message);
@@ -67,10 +63,6 @@ function MealPanel({switchPanel, mealName, mealId, time, date, dateId }) {
             );
             const newMealItems = mealItems.filter(item => item.itemID !== itemId);
             setMealItems(newMealItems);
-            await updateMealNutrition(mealId,
-                totalCalories(newMealItems),
-                totalProtein(newMealItems),
-                setError);
             setError('');
         } catch (err) {
             setError(err.message);
