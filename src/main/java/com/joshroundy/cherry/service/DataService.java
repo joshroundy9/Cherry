@@ -136,7 +136,7 @@ public class DataService {
         return mealItemRepository.findTop5ByUserIDAndAiGeneratedOrderByCreatedTSDesc(userID, aiGenerated);
     }
     public MealItemEntity createMealItem(MealItemDTO mealItemDTO) {
-        return mealItemRepository.save(MealItemEntity.builder()
+        var mealItem = mealItemRepository.save(MealItemEntity.builder()
                         .userID(mealItemDTO.getUserID())
                         .itemCalories(mealItemDTO.getItemCalories())
                         .itemProtein(mealItemDTO.getItemProtein())
@@ -146,6 +146,9 @@ public class DataService {
                         .aiGenerated(mealItemDTO.getAiGenerated())
                         .createdTS(new Timestamp(System.currentTimeMillis()))
                 .build());
+        mealRepository.updateMealTotalsByMealID(mealItemDTO.getMealID());
+        dateRepository.updateDailyTotalsByDateID(mealItemDTO.getDateID());
+        return mealItem;
     }
     public MealItemEntity updateMealItemName(Integer mealItemID, String mealItemName, Integer userID) {
         var mealItemEntity = mealItemRepository.findById(mealItemID).get();
@@ -165,12 +168,16 @@ public class DataService {
         return mealItemRepository.save(mealItemEntity);
     }
     public void deleteMealItem(Integer mealItemID, Integer userID) {
-        mealItemRepository.findById(mealItemID).ifPresent(mealItem -> {
-            if (!mealItem.getUserID().equals(userID)) {
-                throw new AccessDeniedException("User ID does not match the meal item owner.");
-            }
-        }
+        var mealItemOptional = mealItemRepository.findById(mealItemID);
+        mealItemOptional.ifPresent(mealItem -> {
+                    if (!mealItem.getUserID().equals(userID)) {
+                        throw new AccessDeniedException("User ID does not match the meal item owner.");
+                    }
+                }
         );
+        var mealItem = mealItemOptional.get();
         mealItemRepository.deleteById(mealItemID);
+        mealRepository.updateMealTotalsByMealID(mealItem.getMealID());
+        dateRepository.updateDailyTotalsByDateID(mealItem.getDateID());
     }
 }

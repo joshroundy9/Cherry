@@ -31,35 +31,6 @@ export const genericRequest = async (url, method, headers, body) => {
         clearTimeout(timeoutId);
     }
 };
-
-export const updateDateNutrition = async (dateID, totalCalories, totalProtein, setError) => {
-    try {
-        await genericRequest(
-            `${API_URL}/data/date/update-nutrition?dateid=${dateID}&calories=${totalCalories}&protein=${totalProtein}`,
-            'POST',
-            getDataHeaders(),
-            null
-        );
-        setError(null);
-    } catch (err) {
-        setError(err.message);
-    }
-}
-
-export const updateMealNutrition = async (mealID, totalCalories, totalProtein, setError) => {
-    try {
-        await genericRequest(
-            `${API_URL}/data/meal/update-nutrition?mealid=${mealID}&calories=${totalCalories}&protein=${totalProtein}`,
-            'POST',
-            getDataHeaders(),
-            null
-        );
-        setError(null);
-    } catch (err) {
-        setError(err.message);
-    }
-}
-
 export const getMealItemRecents = async (setLoading, setError) => {
     try {
         setLoading(true);
