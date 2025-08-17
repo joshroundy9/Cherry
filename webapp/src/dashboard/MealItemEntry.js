@@ -101,7 +101,7 @@ function NutritionForm({ addMealItem, setError }) {
     return (
         <div className={"Nutrition-form-container"}>
             <form className={"Nutrition-form"} onSubmit={handleSubmit} style={{ display: 'flex', alignItems: 'center' }}>
-                <div ref={dropdownRef} style={{position: 'relative', marginRight: '0.5%' }}>
+                <div ref={dropdownRef} style={{position: 'relative', marginRight: '5px' }}>
                     <button
                         type="button"
                         onClick={() => setDropdownOpen((open) => !open)}

@@ -1,11 +1,13 @@
 package com.joshroundy.cherry.service;
 
 import com.joshroundy.cherry.dataobject.entity.DateEntity;
+import com.joshroundy.cherry.dataobject.graphs.HeatMapItem;
 import com.joshroundy.cherry.repository.DateRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -26,25 +28,27 @@ public class GraphsService {
      * The heat map data is a Map of Date to String representing the tracking history.
      * @return Map of Date to String representing the heat map data.
      */
-    public Map<Date, String> getHeatMapData(Integer userID, Long daysBack) {
+    public List<HeatMapItem> getHeatMapData(Integer userID, Long daysBack) {
         return getGraphData(userID, daysBack).stream()
-                .collect(Collectors.toMap(
-                        DateEntity::getDate,
-                        dateEntity -> {
-                            var trackingStatus = "NONE";
-                            if (dateEntity.getDailyCalories() > 0 || dateEntity.getDailyProtein() > 0) {
-                                trackingStatus = "NUTRITION";
-                            }
-                            if (dateEntity.getDailyWeight() > 0) {
-                                if (trackingStatus.equals("NUTRITION")) {
-                                    trackingStatus = "BOTH";
-                                } else {
-                                    trackingStatus = "WEIGHT";
-                                }
-                            }
-                            return trackingStatus;
+                .map(dateEntity -> {
+                    var trackingStatus = "NONE";
+                    if (dateEntity.getDailyCalories() > 0 || dateEntity.getDailyProtein() > 0) {
+                        trackingStatus = "NUTRITION";
+                    }
+                    if (dateEntity.getDailyWeight() > 0) {
+                        if (trackingStatus.equals("NUTRITION")) {
+                            trackingStatus = "BOTH";
+                        } else {
+                            trackingStatus = "WEIGHT";
                         }
-                ));
+                    }
+                    return HeatMapItem.builder()
+                            .date(dateEntity.getDate())
+                            .value(trackingStatus)
+                            .build();
+                })
+                .sorted(Comparator.comparing(HeatMapItem::getDate))
+                .collect(Collectors.toList());
     }
 
     public Map<String, Double> getAverageData(Integer userID) {
@@ -52,18 +56,25 @@ public class GraphsService {
         double totalCalories = 0.0;
         double totalProtein = 0.0;
         double totalWeight = 0.0;
-        int count = graphData.size();
+        int weightCount = 0;
+        int nutritionCount = 0;
 
         for (DateEntity dateEntity : graphData) {
-            totalCalories += dateEntity.getDailyCalories();
-            totalProtein += dateEntity.getDailyProtein();
-            totalWeight += dateEntity.getDailyWeight();
+            if (dateEntity.getDailyCalories() > 0 || dateEntity.getDailyProtein() > 0) {
+                nutritionCount++;
+                totalCalories += dateEntity.getDailyCalories();
+                totalProtein += dateEntity.getDailyProtein();
+            }
+            if (dateEntity.getDailyWeight() > 0) {
+                weightCount++;
+                totalWeight += dateEntity.getDailyWeight();
+            }
         }
 
         return Map.of(
-                "averageCalories", count > 0 ? totalCalories / count : 0.0,
-                "averageProtein", count > 0 ? totalProtein / count : 0.0,
-                "averageWeight", count > 0 ? totalWeight / count : 0.0
+                "averageCalories", nutritionCount > 0 ? totalCalories / nutritionCount : 0.0,
+                "averageProtein", nutritionCount > 0 ? totalProtein / nutritionCount : 0.0,
+                "averageWeight", weightCount > 0 ? totalWeight / weightCount : 0.0
         );
     }
 }

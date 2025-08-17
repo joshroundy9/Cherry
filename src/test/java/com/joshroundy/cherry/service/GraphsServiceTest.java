@@ -62,9 +62,9 @@ class GraphsServiceTest {
         when(dateRepository.findByUserIDAndDateBetween(eq(userId), any(Date.class), any(Date.class)))
                 .thenReturn(List.of(entity));
 
-        Map<Date, String> result = graphsService.getHeatMapData(userId, daysBack);
+        var result = graphsService.getHeatMapData(userId, daysBack);
 
         assertEquals(1, result.size());
-        assertEquals("NUTRITION", result.get(today));
+        assertEquals("NUTRITION", result.get(0).getValue());
     }
 }

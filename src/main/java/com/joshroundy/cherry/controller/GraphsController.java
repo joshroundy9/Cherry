@@ -1,6 +1,8 @@
 package com.joshroundy.cherry.controller;
 
 import com.joshroundy.cherry.dataobject.entity.DateEntity;
+import com.joshroundy.cherry.dataobject.graphs.AverageDataDTO;
+import com.joshroundy.cherry.dataobject.graphs.HeatMapDataDTO;
 import com.joshroundy.cherry.service.GraphsService;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -27,16 +29,20 @@ public class GraphsController {
     }
 
     @GetMapping("/heatmap")
-    public Map<Date, String> getHeatMapData(
+    public HeatMapDataDTO getHeatMapData(
             @RequestHeader(value = "user-id") Integer userID,
             @RequestParam(value = "daysback", required = false, defaultValue = "30")
             @Min(value = 0)
             @Max(value = 365) Long daysBack) {
-        return graphsService.getHeatMapData(userID, daysBack);
+        return HeatMapDataDTO.builder()
+                .heatMapData(graphsService.getHeatMapData(userID, daysBack))
+                .build();
     }
 
     @GetMapping("/average")
-    public Map<String, Double> getAverageData(@RequestHeader(value = "user-id") Integer userID) {
-        return graphsService.getAverageData(userID);
+    public AverageDataDTO getAverageData(@RequestHeader(value = "user-id") Integer userID) {
+        return AverageDataDTO.builder()
+                .averageData(graphsService.getAverageData(userID))
+                .build();
     }
 }

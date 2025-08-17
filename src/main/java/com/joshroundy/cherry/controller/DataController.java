@@ -1,5 +1,6 @@
 package com.joshroundy.cherry.controller;
 
+import com.joshroundy.cherry.dataobject.auth.UserResponseDTO;
 import com.joshroundy.cherry.dataobject.data.*;
 import com.joshroundy.cherry.dataobject.entity.DateEntity;
 import com.joshroundy.cherry.dataobject.entity.MealEntity;
@@ -8,6 +9,8 @@ import com.joshroundy.cherry.dataobject.entity.UserEntity;
 import com.joshroundy.cherry.service.DataService;
 import com.joshroundy.cherry.service.UserService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +27,7 @@ public class DataController {
     private UserService userService;
 
     @GetMapping("/user")
-    public UserEntity getUser(
+    public UserResponseDTO getUser(
             @RequestParam(value="username", required=true) String username,
             @RequestHeader(value="user-id", required=true) Integer userID) {
         var userEntity =  userService.loadUserEntityByUsername(username);
@@ -35,8 +38,8 @@ public class DataController {
     }
 
     @PostMapping("/user/update-weight")
-    public UserEntity updateUserWeight(
-            @RequestParam(value="weight", required=true) Double weight,
+    public UserResponseDTO updateUserWeight(
+            @RequestParam(value="weight", required=true) @Min(0) @Max(999) Double weight,
             @RequestHeader(value="user-id", required=true) Integer userID) {
         return userService.updateUserWeight(userID, weight);
     }
@@ -94,7 +97,7 @@ public class DataController {
 
     @PostMapping("/date/update-weight")
     public DateEntity updateDateWeight(@RequestParam(value="dateid", required=true) Integer dateID,
-                                       @RequestParam(value="weight", required=true) Double weight,
+                                       @RequestParam(value="weight", required=true) @Min(0) @Max(999) Double weight,
                                        @RequestHeader(value="user-id", required=true) Integer userID) {
         return dataService.updateDateWeight(dateID, weight, userID);
     }
@@ -162,7 +165,7 @@ public class DataController {
     @PostMapping("/meal-item/update-calories")
     public MealItemEntity updateMealItemCalories(@RequestParam(value="mealitemid", required=true) Integer mealItemID,
                                              @RequestParam(value="calories", required=true) Double calories,
-                                                 @RequestParam(value="calories", required=true) Double protein,
+                                                 @RequestParam(value="protein", required=true) Double protein,
                                                  @RequestHeader(value="user-id", required=true) Integer userID) {
         return dataService.updateMealItemNutrition(mealItemID, calories, protein, userID);
     }

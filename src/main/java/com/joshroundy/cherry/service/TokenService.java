@@ -34,7 +34,6 @@ public class TokenService {
                 .subject(auth.getName())
                 .claim("roles", scope)
                 .claim("userId", userId)
-                .expiresAt(now.plusSeconds(3600 * 24 * 7)) // Token valid for 1 week
                 .build();
 
         return jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();

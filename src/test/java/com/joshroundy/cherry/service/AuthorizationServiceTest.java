@@ -89,10 +89,6 @@ public class AuthorizationServiceTest {
         when(passwordEncoder.encode(any())).thenReturn(passwordHash);
         when(userRepository.save(any())).thenReturn(userEntity);
         when(mailSender.createMimeMessage()).thenReturn(mimeMessage);
-        when(captchaClient.getCaptchaVerificationResponse(any())).thenReturn(
-                ResponseEntity.ok(
-                        CaptchaClientResponseDTO.builder().success(true).build()
-                ));
         when(userRepository.findByEmail(any())).thenReturn(Optional.empty());
         assertThat(subject.registerUser(registrationDTO)).usingRecursiveComparison()
                 .ignoringFields("emailVerificationToken", "emailVerificationTokenCreatedTS", "userID", "createdTS", "startingWeight").isEqualTo(userEntity);

@@ -38,7 +38,7 @@ export function ForgotPassword({ onForgotPassword }) {
             clearTimeout(timeoutId);
             if (response.ok) {
                 setTimeout(() => {
-                    navigate('/login', { state: { message: 'Password reset email sent! If you have an account with this email, you will be receiving an link shortly.' } });
+                    navigate('/forgot-password', { state: { message: 'Password reset email sent! If you have an account with this email, you will be receiving an link shortly.' } });
                 }, 50);
             } else if (response.status === 400) {
                 const errorText = await response.text();

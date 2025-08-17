@@ -36,4 +36,15 @@ public class ClientUtilTest {
         assertThat(response.getProtein()).isEqualTo(12);
         assertThat(response.getFoodEntry()).isEqualTo(foodEntry);
     }
+
+    @Test
+    public void testMapGPTClientImageResponseToAIDataResponse() {
+        var gptResponseContent = "True \"A banana and two apples\" \"450\" \"12\"";
+        var response = subject.mapGPTClientImageResponseToAIDataResponse(gptResponseContent);
+        assertThat(response).isNotNull();
+        assertThat(response.getIsValidEntry()).isTrue();
+        assertThat(response.getCalories()).isEqualTo(450);
+        assertThat(response.getProtein()).isEqualTo(12);
+        assertThat(response.getFoodEntry()).isEqualTo("A banana and two apples");
+    }
 }

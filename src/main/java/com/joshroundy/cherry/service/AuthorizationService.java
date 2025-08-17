@@ -47,12 +47,15 @@ public class AuthorizationService {
     private String frontendUrl;
 
     public UserResponseDTO registerUser(RegistrationDTO registrationDTO){
-        var captchaResponse = captchaClient.getCaptchaVerificationResponse(registrationDTO.getCaptchaToken());
-        if (captchaResponse.getBody() == null || !captchaResponse.getBody().isSuccess()) {
-            System.out.println("Captcha verification failed: " + captchaResponse.getBody().isSuccess() +
-                    ", Score: " + captchaResponse.getBody().getErrorCodes());
-            throw new RuntimeException("Captcha verification failed.");
-        }
+// Disable captcha for mobile app registration. In hindsight, I should have used phone number verification instead
+// because it has full mobile support and is more secure.
+//        var captchaResponse = captchaClient.getCaptchaVerificationResponse(registrationDTO.getCaptchaToken());
+//
+//        if (captchaResponse.getBody() == null || !captchaResponse.getBody().isSuccess()) {
+//            System.out.println("Captcha verification failed: " + captchaResponse.getBody().isSuccess() +
+//                    ", Score: " + captchaResponse.getBody().getErrorCodes());
+//            throw new RuntimeException("Captcha verification failed.");
+//        }
 
         var emailVerificationToken = UUID.randomUUID().toString();
         var userEntity = UserEntity.builder()
@@ -140,6 +143,8 @@ public class AuthorizationService {
     }
 
     public void userPasswordReset(String email, String captchaToken) {
+        // In the case of forgot password, we simply redirect the user to the web app to ensure
+        // bot protection with captcha.
         var captchaResponse = captchaClient.getCaptchaVerificationResponse(captchaToken);
         if (captchaResponse.getBody() == null || !captchaResponse.getBody().isSuccess()) {
             System.out.println("Captcha verification failed: " + captchaResponse.getBody().isSuccess() +
