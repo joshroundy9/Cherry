@@ -97,7 +97,7 @@
 .Nutrition-form-basic-input {
     padding-left: 8px;
     background: #1E1E1E;
-    margin-left: 0.5%;
+    margin-left: 2px;
 }
 .Nutrition-form-input::placeholder {
     color: #aeaeae;
@@ -113,7 +113,7 @@
     border: none;
     cursor: pointer;
     font-size: x-large;
-    margin-left: 0.5%;
+    margin-left: 2px;
 }
 
 .Nutrition-form-button:hover {
@@ -461,7 +461,7 @@
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    margin-left: 0.5%;
+    margin-left: 2px;
     background-color: #1E1E1E;
     border-radius: 0.2em;
     padding: 0 0 0 5px;
