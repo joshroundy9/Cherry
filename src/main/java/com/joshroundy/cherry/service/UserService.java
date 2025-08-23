@@ -2,6 +2,9 @@ package com.joshroundy.cherry.service;
 
 import com.joshroundy.cherry.dataobject.auth.UserResponseDTO;
 import com.joshroundy.cherry.dataobject.entity.UserEntity;
+import com.joshroundy.cherry.repository.DateRepository;
+import com.joshroundy.cherry.repository.MealItemRepository;
+import com.joshroundy.cherry.repository.MealRepository;
 import com.joshroundy.cherry.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,9 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 public class UserService implements UserDetailsService {
 
+    private final DateRepository dateRepository;
+    private final MealRepository mealRepository;
+    private final MealItemRepository mealItemRepository;
     private UserRepository userRepository;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -59,5 +65,8 @@ public class UserService implements UserDetailsService {
             throw new RuntimeException("User not found");
         }
         userRepository.delete(userEntity);
+        dateRepository.deleteByUserID(userID);
+        mealRepository.deleteByUserID(userID);
+        mealItemRepository.deleteByUserID(userID);
     }
 }

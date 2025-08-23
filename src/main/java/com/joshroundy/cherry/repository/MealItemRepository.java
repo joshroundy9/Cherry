@@ -10,4 +10,5 @@ import java.util.List;
 public interface MealItemRepository extends JpaRepository<MealItemEntity, Integer> {
     List<MealItemEntity> findByMealID(Integer mealID);
     List<MealItemEntity> findTop5ByUserIDAndAiGeneratedOrderByCreatedTSDesc(Integer userId, Boolean aiGenerated);
+    void deleteByUserID(Integer userID);
 }
