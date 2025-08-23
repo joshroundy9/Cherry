@@ -1,6 +1,7 @@
 import {useNavigate} from "react-router-dom";
 import '../style/Dashboard.css';
 import {Signature} from "../dashboard/DashboardComponents";
+import React from "react";
 
 const HomePage = ({ onHomePage }) => {
     const navigate = useNavigate();
