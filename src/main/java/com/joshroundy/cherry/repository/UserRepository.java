@@ -16,7 +16,8 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer> {
     Optional<UserEntity> findByEmailVerificationToken(String emailVerificationToken);
     Optional<UserEntity> findByResetPasswordToken(String passwordResetToken);
     Optional<UserEntity> findByEmail(String email);
-
+    Optional<UserEntity> findByDeleteAccountToken(String deleteAccountToken);
+    void deleteByUserID(Integer userID);
     @Modifying
     @Query("DELETE FROM UserEntity u WHERE u.isEmailVerified = false AND u.emailVerificationTokenCreatedTS < :cutoff")
     void deleteUnverifiedWithExpiredToken(LocalDateTime cutoff);

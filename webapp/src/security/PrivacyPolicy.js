@@ -59,7 +59,7 @@ function PrivacyPolicy({onPrivacyPolicy}) {
                         <li>Export your data</li>
                         <li>Withdraw consent at any time</li>
                     </ul>
-                    <p className="content-text">To exercise these rights, contact us through our in-app support or email us at <a href="mailto:cherry@joshroundy.dev" className="link">cherry@joshroundy.dev</a>.</p>
+                    <p className="content-text">To exercise these rights, email us at <a href="mailto:cherry@joshroundy.dev" className="link">cherry@joshroundy.dev</a>.</p>
                 </section>
 
                 <section className="policy-section">

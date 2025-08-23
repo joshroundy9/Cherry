@@ -170,17 +170,7 @@ public class AuthorizationService {
         String verificationUrl = String.format("%s/reset-password?token=%s", frontendUrl, token);
         String body = String.format("<p>Click the link to reset your password: %s</p> <p>NOTE: this link expires in one hour.</p>", verificationUrl);
 
-        MimeMessage message = mailSender.createMimeMessage();
-        try {
-            MimeMessageHelper helper = new MimeMessageHelper(message, true);
-            helper.setTo(toEmail);
-            helper.setSubject(subject);
-            helper.setText(body, true);
-            helper.setFrom("cherry@joshroundy.dev");
-            mailSender.send(message);
-        } catch (MessagingException e) {
-            throw new RuntimeException("Failed to send password reset email", e);
-        }
+        sendEmail(toEmail, subject, body);
     }
 
     public boolean resetPassword(String token, String newPassword) throws RuntimeException {
@@ -203,6 +193,51 @@ public class AuthorizationService {
         return true;
     }
 
+    public void userDeleteAccount(String email, String captchaToken) {
+        // In the case of delete account, we simply redirect the user to the web app to ensure
+        // bot protection with captcha.
+        var captchaResponse = captchaClient.getCaptchaVerificationResponse(captchaToken);
+        if (captchaResponse.getBody() == null || !captchaResponse.getBody().isSuccess()) {
+            System.out.println("Captcha verification failed for delete account: " + captchaResponse.getBody().isSuccess() +
+                    ", Score: " + captchaResponse.getBody().getErrorCodes());
+            throw new RuntimeException("Captcha verification failed.");
+        }
+
+        var user = userRepository.findByEmail(email.toLowerCase());
+        if (user.isEmpty()) {
+            return; // Do not disclose whether the email exists
+        }
+        var userEntity = user.get();
+        var deleteToken = UUID.randomUUID().toString();
+        userEntity.setDeleteAccountToken(deleteToken);
+        userEntity.setDeleteAccountTokenCreatedTS(LocalDateTime.now());
+        userRepository.save(userEntity);
+
+        sendDeleteAccountEmail(email, userEntity.getUsername(), deleteToken);
+    }
+
+    private void sendDeleteAccountEmail(String toEmail, String username, String token) {
+        String subject = "Delete Account Request for " + username;
+        String verificationUrl = String.format("%s/delete-account?token=%s", frontendUrl, token);
+        String body = String.format("<p>Click the link to delete your account: %s</p> <p>NOTE: this link expires in one hour.</p>", verificationUrl);
+
+        sendEmail(toEmail, subject, body);
+    }
+
+    public boolean deleteAccount(String token) throws RuntimeException {
+        var user = userRepository.findByDeleteAccountToken(token);
+        if (user.isEmpty()) {
+            throw new RuntimeException("Invalid token");
+        }
+        var userEntity = user.get();
+        if (userEntity.getDeleteAccountTokenCreatedTS() == null ||
+                userEntity.getDeleteAccountTokenCreatedTS().isBefore(LocalDateTime.now().minusHours(1))) {
+            throw new RuntimeException("Token expired");
+        }
+        userRepository.deleteByUserID(userEntity.getUserID());
+        return true;
+    }
+
     public boolean validateEmail(String token) {
         var user = userRepository.findByEmailVerificationToken(token);
         if (user.isEmpty()) {
@@ -221,5 +256,19 @@ public class AuthorizationService {
 
     public boolean validateToken(String jwtToken) {
         return tokenService.validateJwt(jwtToken);
+    }
+
+    private void sendEmail(String toEmail, String subject, String body) {
+        MimeMessage message = mailSender.createMimeMessage();
+        try {
+            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+            helper.setTo(toEmail);
+            helper.setSubject(subject);
+            helper.setText(body, true);
+            helper.setFrom("cherry@joshroundy.dev");
+            mailSender.send(message);
+        } catch (MessagingException e) {
+            throw new RuntimeException("Failed to send password reset email", e);
+        }
     }
 }

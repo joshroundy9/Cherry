@@ -53,4 +53,11 @@ public class UserService implements UserDetailsService {
                 .createdTS(userEntity.getCreatedTS())
                 .build();
     }
+    public void deleteUserAccount(Integer userID) {
+        var userEntity = userRepository.findByUserID(userID);
+        if (userEntity == null) {
+            throw new RuntimeException("User not found");
+        }
+        userRepository.delete(userEntity);
+    }
 }
