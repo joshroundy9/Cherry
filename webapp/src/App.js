@@ -10,6 +10,7 @@ import AuthRoute from "./security/AuthRoute";
 import {EmailVerify} from "./security/EmailVerify";
 import {ForgotPassword} from "./security/ForgotPassword";
 import ResetPassword from "./security/ResetPassword";
+import PrivacyPolicy from "./security/PrivacyPolicy";
 
 function App() {
     const navigate = useNavigate()
@@ -54,6 +55,7 @@ function App() {
             <Route path="/verify" element={<EmailVerify onEmailVerify={() => {}}/>}/>
             <Route path="/forgot-password" element={<ForgotPassword onForgotPassword={() => {}}/>}/>
             <Route path="/reset-password" element={<ResetPassword onResetPassword={() => {}}/>}/>
+            <Route path="/privacy" element={<PrivacyPolicy onPrivacyPolicy={() => {}}/>}/>
 
             {/* PROTECTED ROUTES */}
             <Route path="/dashboard" element={

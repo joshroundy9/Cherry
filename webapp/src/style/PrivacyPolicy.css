@@ -1,0 +1,84 @@
+.privacy-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.privacy-card {
+    font-family: 'Jomhuria', cursive;
+    font-size: x-large;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    background-color: #2D2D2D;
+}
+
+.section-title {
+    color: #ff0606;
+    font-size: xxx-large;
+    font-weight: 700;
+    text-align: center;
+    font-family: 'Jomhuria', cursive;
+}
+
+.policy-section {
+    margin-bottom: 2rem;
+}
+
+.subsection-title {
+    font-size: xx-large;
+    color: white;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.content-text {
+    color: white;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    text-align: start;
+}
+
+.policy-list {
+    list-style-type: disc;
+    padding-left: 2rem;
+    line-height: 1.6;
+    text-align: start;
+    color: white;
+}
+
+.policy-list li {
+    margin-bottom: 0.5rem;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.primary-button {
+    background-color: #ff0606;
+    color: black;
+    border: none;
+    border-radius: 50px;
+    padding: 0.75rem 2rem;
+    font-size: x-large;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.primary-button:hover {
+    background-color: #ff0606;
+}
+
+.link {
+    color: #ff0606;
+    text-decoration: none;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
