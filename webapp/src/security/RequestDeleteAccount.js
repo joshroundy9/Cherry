@@ -24,7 +24,7 @@ export function RequestDeleteAccount({ onRequestDeleteAccount }) {
             setLoading(true);
         }
         try {
-            const response = await fetch(`${API_URL}/auth/forgot-password`, {
+            const response = await fetch(`${API_URL}/auth/request-delete-account`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -38,15 +38,15 @@ export function RequestDeleteAccount({ onRequestDeleteAccount }) {
             clearTimeout(timeoutId);
             if (response.ok) {
                 setTimeout(() => {
-                    navigate('/forgot-password', { state: { message: 'Password reset email sent! If you have an account with this email, you will be receiving an link shortly.' } });
+                    navigate('/request-delete-account', { state: { message: 'Account deletion email sent! If you have an account with this email, you will be receiving an link shortly.' } });
                 }, 50);
             } else if (response.status === 400) {
                 const errorText = await response.text();
-                navigate('/forgot-password', { state: { message: errorText } });
+                navigate('/request-delete-account', { state: { message: errorText } });
             }
         } catch (error) {
-            console.error('Password reset error:', error);
-            navigate('/forgot-password', { state: { message: 'An error occurred while sending the password reset request.' } });
+            console.error('Account deletion error:', error);
+            navigate('/request-delete-account', { state: { message: 'An error occurred while sending the account deletion request.' } });
         }
         setLoading(false);
     };
@@ -58,7 +58,7 @@ export function RequestDeleteAccount({ onRequestDeleteAccount }) {
                     <div className={"Auth-form-text"}>Welcome back to <span className={"Logo-red"}>CHERRY</span>!</div>
                 </div>
                 <form style={{paddingTop: '1em'}} className={"Login-form"} onSubmit={handleSubmit}>
-                    <p className={"Auth-form-text"}>Reset Password</p>
+                    <p className={"Auth-form-text"}>Delete Account</p>
                     <input
                         className={"Auth-form-input"}
                         type="text"
@@ -71,7 +71,7 @@ export function RequestDeleteAccount({ onRequestDeleteAccount }) {
                         sitekey="6Lcy4JArAAAAAA3lKAEzvS36ijPRDnrzJiR_m5zw"
                         onChange={setCaptchaToken}
                     />
-                    <button className={"Form-button Hover-expand"} type="submit">Send Reset Link</button>
+                    <button className={"Form-button Hover-expand"} type="submit">Send Deletion Link</button>
                     <div style={{
                         display: 'flex',
                         justifyContent: 'center',
@@ -79,7 +79,7 @@ export function RequestDeleteAccount({ onRequestDeleteAccount }) {
                         fontSize: 'x-large',
                         gap: '0.1em'
                     }}>
-                        <span>Remember your password?&#32;</span><Link className="App-link" to="/login">Login</Link>
+                        <span>Changed your mind?&#32;</span><Link className="App-link" to="/login">Login</Link>
                     </div>
                     <div style={{minHeight: '1em', textAlign: 'center', color: 'red', maxWidth: '90%'}}>
                         {message && <div className="Error-message">{message}</div>}

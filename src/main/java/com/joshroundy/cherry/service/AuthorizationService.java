@@ -227,6 +227,7 @@ public class AuthorizationService {
     public boolean deleteAccount(String token) throws RuntimeException {
         var user = userRepository.findByDeleteAccountToken(token);
         if (user.isEmpty()) {
+            System.out.println("No user found with reset token: " + token);
             throw new RuntimeException("Invalid token");
         }
         var userEntity = user.get();
@@ -268,7 +269,7 @@ public class AuthorizationService {
             helper.setFrom("cherry@joshroundy.dev");
             mailSender.send(message);
         } catch (MessagingException e) {
-            throw new RuntimeException("Failed to send password reset email", e);
+            throw new RuntimeException("Failed to send request email", e);
         }
     }
 }
