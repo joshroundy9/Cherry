@@ -38,7 +38,7 @@ public class DataController {
         return userEntity;
     }
 
-    @GetMapping("/user/delete-account")
+    @PostMapping("/user/delete-account")
     public ResponseEntity<?> deleteUserAccount(
             @RequestHeader(value="user-id", required=true) Integer userID) {
         try {
