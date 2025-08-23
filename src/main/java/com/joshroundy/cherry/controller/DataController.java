@@ -12,6 +12,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,6 +36,17 @@ public class DataController {
             throw new AccessDeniedException("User ID does not match the requested username");
         }
         return userEntity;
+    }
+
+    @PostMapping("/user/delete-account")
+    public ResponseEntity<?> deleteUserAccount(
+            @RequestHeader(value="user-id", required=true) Integer userID) {
+        try {
+            userService.deleteUserAccount(userID);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(500).body("Error deleting user account: " + e.getMessage());
+        }
+        return ResponseEntity.ok("User account deleted successfully");
     }
 
     @PostMapping("/user/update-weight")

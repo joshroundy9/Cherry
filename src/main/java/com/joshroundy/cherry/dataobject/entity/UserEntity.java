@@ -37,6 +37,8 @@ public class UserEntity implements UserDetails {
     private Timestamp createdTS;
     private String googleLoginToken;
     private Boolean googleRegistrationComplete;
+    private String deleteAccountToken;
+    private LocalDateTime deleteAccountTokenCreatedTS;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

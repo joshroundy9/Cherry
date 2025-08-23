@@ -1,7 +1,6 @@
 // webapp/src/Register.js
 import React, { useState } from 'react';
 import {Link, useNavigate, useLocation} from "react-router-dom";
-import ReCAPTCHA from "react-google-recaptcha";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -12,8 +11,9 @@ function Register({ onRegister }) {
     const [email, setEmail] = useState('');
     const [confirmEmail, setConfirmEmail] = useState('');
     const [weight, setWeight] = useState('');
-    const [captchaToken, setCaptchaToken] = useState(null);
+    const [captchaToken] = useState('temporary token');
     const [loading, setLoading] = useState(false);
+    const [agreeToPolicy, setAgreeToPolicy] = useState(false);
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -29,6 +29,11 @@ function Register({ onRegister }) {
             setLoading(true);
         }
         if (password !== confirmPassword || email !== confirmEmail) {
+            return;
+        }
+        if (!agreeToPolicy) {
+            navigate('/register', {state: {message: 'You must agree to the Privacy Policy to register.'}});
+            setLoading(false);
             return;
         }
 
@@ -108,10 +113,18 @@ function Register({ onRegister }) {
                            onChange={e => setWeight(e.target.value)}
                            required
                     />
-                    <ReCAPTCHA
-                        sitekey="6Lcy4JArAAAAAA3lKAEzvS36ijPRDnrzJiR_m5zw"
-                        onChange={setCaptchaToken}
-                    />
+                    <div style={{fontSize: 'x-large'}}>
+                        <input
+                            type="checkbox"
+                            id="policy-checkbox"
+                            checked={agreeToPolicy}
+                            onChange={e => setAgreeToPolicy(e.target.checked)}
+                            required
+                        />
+                        <label htmlFor="policy-checkbox">
+                            I agree to the <Link className="App-link" to="/privacy">Privacy Policy</Link>
+                        </label>
+                    </div>
                     <button className={"Form-button Hover-expand"} type="submit">Register</button>
                     <div style={{
                         display: 'flex',

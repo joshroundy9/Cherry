@@ -1,12 +1,9 @@
 package com.joshroundy.cherry.controller;
 
 import com.joshroundy.cherry.dataobject.auth.LoginRequestDTO;
-import com.joshroundy.cherry.dataobject.auth.LoginResponseDTO;
 import com.joshroundy.cherry.dataobject.auth.RegistrationDTO;
 import com.joshroundy.cherry.service.AuthorizationService;
-import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -92,6 +89,32 @@ public class AuthorizationController {
                 return ResponseEntity.ok("Password successfully updated");
             }
             return ResponseEntity.badRequest().body("Password reset failed");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PostMapping("/request-delete-account")
+    public ResponseEntity<?> requestDeleteAccount(@RequestHeader("Email") String email, @RequestHeader("Captcha-Token") String captchaToken) {
+        try {
+            authenticationService.userDeleteAccount(email, captchaToken);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+        return ResponseEntity.ok("Account deletion link sent");
+    }
+
+    @PostMapping("/delete-account")
+    public ResponseEntity<?> deleteAccount(@RequestHeader("Token") String token) {
+        if (token == null || token.isEmpty()) {
+            return ResponseEntity.badRequest().body("Invalid token");
+        }
+        try {
+            var success = authenticationService.deleteAccount(token);
+            if (success) {
+                return ResponseEntity.ok("Account successfully deleted");
+            }
+            return ResponseEntity.badRequest().body("Account deletion failed");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
