@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public interface MealRepository extends JpaRepository<MealEntity, Integer> {
     List<MealEntity> findByDateID(Integer dateID);
+    void deleteByUserID(Integer dateID);
 
     @Modifying
     @Transactional

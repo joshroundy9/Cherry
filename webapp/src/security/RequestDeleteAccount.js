@@ -54,11 +54,12 @@ export function RequestDeleteAccount({ onRequestDeleteAccount }) {
     return (
         <div className={"Auth-background"}>
             <div className={"Login-container"}>
-                <div className={"Auth-form-header"}>
-                    <div className={"Auth-form-text"}>Welcome back to <span className={"Logo-red"}>CHERRY</span>!</div>
-                </div>
                 <form style={{paddingTop: '1em'}} className={"Login-form"} onSubmit={handleSubmit}>
                     <p className={"Auth-form-text"}>Delete Account</p>
+                    <p style={{fontSize: 'x-large', paddingInline: '2.5rem', textAlign: 'start'}}>
+                        Instructions: To delete your CHERRY and CHERRY MOBILE account, enter your email below, complete the CAPTCHA, press 'Send Deletion Link', and we will send a link to your email to delete your account. This action is
+                        irreversible and will delete ALL user data.
+                    </p>
                     <input
                         className={"Auth-form-input"}
                         type="text"

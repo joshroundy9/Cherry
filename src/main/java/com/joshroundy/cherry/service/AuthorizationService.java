@@ -6,6 +6,9 @@ import com.joshroundy.cherry.dataobject.auth.UserResponseDTO;
 import com.joshroundy.cherry.dataobject.entity.UserEntity;
 import com.joshroundy.cherry.dataobject.auth.LoginResponseDTO;
 import com.joshroundy.cherry.dataobject.auth.RegistrationDTO;
+import com.joshroundy.cherry.repository.DateRepository;
+import com.joshroundy.cherry.repository.MealItemRepository;
+import com.joshroundy.cherry.repository.MealRepository;
 import com.joshroundy.cherry.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +48,12 @@ public class AuthorizationService {
 
     @Value("${frontend.url}")
     private String frontendUrl;
+    @Autowired
+    private DateRepository dateRepository;
+    @Autowired
+    private MealRepository mealRepository;
+    @Autowired
+    private MealItemRepository mealItemRepository;
 
     public UserResponseDTO registerUser(RegistrationDTO registrationDTO){
 // Disable captcha for mobile app registration. In hindsight, I should have used phone number verification instead
@@ -236,6 +245,9 @@ public class AuthorizationService {
             throw new RuntimeException("Token expired");
         }
         userRepository.deleteByUserID(userEntity.getUserID());
+        dateRepository.deleteByUserID(userEntity.getUserID());
+        mealRepository.deleteByUserID(userEntity.getUserID());
+        mealItemRepository.deleteByUserID(userEntity.getUserID());
         return true;
     }
 
